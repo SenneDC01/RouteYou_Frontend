@@ -1,5 +1,8 @@
-tags: 
-  - atpRunnerFrontend
+default:
+  image: ubuntu
+  tags:
+    - atpRunnerFrontend
+
 stages:
   - build
 
