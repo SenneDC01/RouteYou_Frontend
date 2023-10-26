@@ -24,9 +24,16 @@ build_site:
       - ".next"
 
 
-build_docker_image:
+ocker-container:
   stage: buildDockerImage
-  image : $NGINX_IMAGE
+  stage: docker-install
+  image: docker
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_DRIVER: overlay
+    DOCKER_TLS_CERTDIR: ""
+  services:
+    - docker:dind
   script: 
     - cp -r .next /usr/share/nginx/html/
     - touch dockerFile
