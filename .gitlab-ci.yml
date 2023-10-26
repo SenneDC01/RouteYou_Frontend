@@ -7,7 +7,7 @@ stages:
   - build
 
 variables:
-  NODE_IMAGE: "node:14"  # Set the Node.js image version you want to use
+  NODE_IMAGE: "node:18"  # Set the Node.js image version you want to use
 
 build:
   stage: build
