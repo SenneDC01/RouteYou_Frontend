@@ -6,6 +6,7 @@ default:
 stages:
   - buildSite
   - buildImage
+  # - push_to_registry
 
 variables:
   NODE_IMAGE: "node:18"  # Set the Node.js image version you want to use
@@ -30,9 +31,20 @@ build_image:
     - ls -all
     - echo "FROM nginx:latest" > Dockerfile  
     - echo "COPY .next /usr/share/nginx/html/" >> Dockerfile  
-    - docker build -t registry.gitlab.com/ikdoeict/vakken/opo_agile_team_project/projecten/2324_atp_routeyou_1/2324_atp_routeyou_1_frontend .
+    - docker build -t registry.gitlab.com/ikdoeict/vakken/opo_agile_team_project/projecten/2324_atp_routeyou_1/2324_atp_routeyou_1_frontend ./
     - docker login registry.gitlab.com -u $USER -p $PASSWORD
     - docker push registry.gitlab.com/ikdoeict/vakken/opo_agile_team_project/projecten/2324_atp_routeyou_1/2324_atp_routeyou_1_frontend
+
+# push_to_registry:
+#   stage: push_to_registry
+#   only:
+#     - main  # Adjust the branch name to trigger the pipeline
+#   script:
+#     - echo "Pushing your Docker image to Google Cloud Artifact Registry"
+#     - echo $GOOGLE_SERVICE_KEY | base64 --decode > /tmp/key.json  # Store your GCP service key as a secret variable in GitLab
+#     - docker login -u _json_key -p "$(cat /tmp/key.json)" https://gcr.io
+#     - docker tag $IMAGE_NAME:$IMAGE_TAG gcr.io/$GOOGLE_PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG
+#     - docker push gcr.io/$GOOGLE_PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG
 
 
 
