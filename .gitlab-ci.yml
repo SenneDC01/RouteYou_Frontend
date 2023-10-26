@@ -23,15 +23,10 @@ build_site:
     paths:
       - ".next"
 
-
-docker-container:
-  stage: buildDockerImage
-  image: Alpine Linux
-  script: 
-    - apk update
-    - apk add docker
-    - rc-update add docker boot /etc/init.d/docker start
-    - docker --version
+build_image:
+  stage: build
+  image: docker:20.10
+  script:
     - ls -all
     - echo "FROM nginx:latest" > Dockerfile  
     - echo "COPY .next /usr/share/nginx/html/" >> Dockerfile  
