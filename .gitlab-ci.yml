@@ -1,7 +1,7 @@
 default:
   image: ubuntu
   tags:
-    - atpRunnerFrontend
+    - aptRunnerFrontend
 
 stages:
   - build
