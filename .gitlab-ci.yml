@@ -5,7 +5,7 @@ default:
 
 stages:
   - buildSite
-  - buildDockerImage
+  - buildImage
 
 variables:
   NODE_IMAGE: "node:18"  # Set the Node.js image version you want to use
@@ -24,7 +24,7 @@ build_site:
       - ".next"
 
 build_image:
-  stage: build
+  stage: buildImage
   image: docker:20.10
   script:
     - ls -all
