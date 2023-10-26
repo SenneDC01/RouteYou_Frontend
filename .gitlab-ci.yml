@@ -29,5 +29,12 @@ build_docker_image:
   image : $NGINX_IMAGE
   script: 
     - cp -r .next /usr/share/nginx/html/
-    - ls -al /usr/share/nginx/html
+    - touch dockerFile
+    - echo "FROM nginx:latest >> dockerFile"
+    - echo "COPY .next /usr/share/nginx/html/ >> dockerFile"
+    - docker login registry.gitlab.com -u $USER -p $PASSWORD
+    - docker build -t registry.gitlab.com/ikdoeict/vakken/opo_agile_team_project/projecten/2324_atp_routeyou_1/2324_atp_routeyou_1_frontend .
+    - docker push registry.gitlab.com/ikdoeict/vakken/opo_agile_team_project/projecten/2324_atp_routeyou_1/2324_atp_routeyou_1_frontend
+
+
 
