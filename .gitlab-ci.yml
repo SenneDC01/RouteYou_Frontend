@@ -1,15 +1,50 @@
-tags: 
-  - atpRunnerFrontend
+default:
+  image: ubuntu
+  tags:
+    - atpfrontendRunner
+
 stages:
-  - build
+  - buildSite
+  - buildImage
+  # - push_to_registry
 
-variables:
-  NODE_IMAGE: "node:14"  # Set the Node.js image version you want to use
-
-build:
-  stage: build
+build_site:
+  stage: buildSite
+  only:
+    - ci-cd  # Adjust the branch name to trigger the pipeline
   image: $NODE_IMAGE
   script:
     - ls -al
     - npm install
-    - npm run build
+    - npm run build 
+    - ls -al
+  artifacts: 
+    paths:
+      - ".next"
+
+build_image:
+  stage: buildImage
+  only:
+    - ci-cd  # Adjust the branch name to trigger the pipeline
+  image: docker:20.10
+  script:
+    - ls -all
+    - echo "FROM nginx:latest > Dockerfile "
+    - echo "COPY .next /usr/share/nginx/html/" >> Dockerfile"  
+    - echo "COPY ./nginx /etc/nginx/conf.d"
+
+
+# push_to_registry:
+#   stage: push_to_registry
+#   only:
+#     - ci-cd  # Adjust the branch name to trigger the pipeline
+#   script:
+#     - echo "Pushing your Docker image to Google Cloud Artifact Registry"
+#     - echo $GOOGLE_SERVICE_KEY | base64 --decode > /tmp/key.json  # Store your GCP service key as a secret variable in GitLab
+#     - docker login -u _json_key -p "$(cat /tmp/key.json)" https://gcr.io
+#     - docker tag $IMAGE_NAME:$IMAGE_TAG gcr.io/$GOOGLE_PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG
+#     - docker push gcr.io/$GOOGLE_PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG
+
+
+
+
