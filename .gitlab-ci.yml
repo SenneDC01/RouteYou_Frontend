@@ -1,0 +1,15 @@
+tags: 
+  - atpRunnerFrontend
+stages:
+  - build
+
+variables:
+  NODE_IMAGE: "node:14"  # Set the Node.js image version you want to use
+
+build:
+  stage: build
+  image: $NODE_IMAGE
+  script:
+    - ls -al
+    - npm install
+    - npm run build
