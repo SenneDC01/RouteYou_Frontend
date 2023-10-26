@@ -6,7 +6,6 @@ default:
 stages:
   - buildSite
   - buildImage
-  # - push_to_registry
 
 build_site:
   stage: buildSite
