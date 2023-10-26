@@ -34,7 +34,7 @@ ocker-container:
   services:
     - docker:dind
   script: 
-    - cp -r .next /usr/share/nginx/html/
+    - cp -r .next ./
     - touch dockerFile
     - echo "FROM nginx:latest >> dockerFile"
     - echo "COPY .next /usr/share/nginx/html/ >> dockerFile"
