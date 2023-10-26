@@ -21,13 +21,13 @@ build_site:
     - ls -al
   artifacts: 
     paths:
-      - "~/.next"
+      - ".next"
 
 
 build_docker_image:
   stage: buildDockerImage
   image : $NGINX_IMAGE
   script: 
-    - cp -r ~/.next /usr/share/nginx/html/
+    - cp -r .next /usr/share/nginx/html/
     - ls -al /usr/share/nginx/html
 
