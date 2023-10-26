@@ -24,7 +24,7 @@ build_site:
       - ".next"
 
 
-ocker-container:
+docker-container:
   stage: buildDockerImage
   image: docker
   variables:
@@ -34,13 +34,13 @@ ocker-container:
   services:
     - docker:dind
   script: 
-    - cp -r .next ./
-    - touch dockerFile
-    - echo "FROM nginx:latest >> dockerFile"
-    - echo "COPY .next /usr/share/nginx/html/ >> dockerFile"
-    - docker login registry.gitlab.com -u $USER -p $PASSWORD
+    - ls -all
+    - echo "FROM nginx:latest" > Dockerfile  
+    - echo "COPY .next /usr/share/nginx/html/" >> Dockerfile  
     - docker build -t registry.gitlab.com/ikdoeict/vakken/opo_agile_team_project/projecten/2324_atp_routeyou_1/2324_atp_routeyou_1_frontend .
+    - docker login registry.gitlab.com -u $USER -p $PASSWORD
     - docker push registry.gitlab.com/ikdoeict/vakken/opo_agile_team_project/projecten/2324_atp_routeyou_1/2324_atp_routeyou_1_frontend
+
 
 
 
