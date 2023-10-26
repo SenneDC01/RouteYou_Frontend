@@ -1,19 +1,32 @@
 default:
   image: ubuntu
   tags:
-    - atpfrontendRunner
+    - atpRunnerFrontend
 
 stages:
-  - build
+  - buildSite
+  - buildDockerImage
 
 variables:
   NODE_IMAGE: "node:18"  # Set the Node.js image version you want to use
+  NGINX_IMAGE: "nginx:latest"
 
-build:
-  stage: build
+build_site:
+  stage: buildSite
   image: $NODE_IMAGE
   script:
     - ls -al
     - npm install
-    - npm run build
+    - npm run build 
     - ls -al
+  artifacts: 
+    - ~/.next
+
+
+build_docker_image:
+  stage: buildDockerImage
+  image : $NGINX_IMAGE
+  script: 
+    - cp -r ~/.next /usr/share/nginx/html/
+    - ls -al /usr/share/nginx/html
+
