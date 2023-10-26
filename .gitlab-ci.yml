@@ -11,7 +11,7 @@ stages:
 build_site:
   stage: buildSite
   only:
-    - ci/cd  # Adjust the branch name to trigger the pipeline
+    - ci-cd  # Adjust the branch name to trigger the pipeline
   image: $NODE_IMAGE
   script:
     - ls -al
@@ -25,23 +25,20 @@ build_site:
 build_image:
   stage: buildImage
   only:
-    - ci/cd  # Adjust the branch name to trigger the pipeline
-  image: docker:20.10
+    - ci-cd  # Adjust the branch name to trigger the pipeline
+  image: $DOCKER_IMAGE
   script:
     - ls -all
-    - echo "FROM nginx:latest > Dockerfile "
-    - echo "COPY .next /usr/share/nginx/html/.next >> Dockerfile"  
-    - echo "COPY custom.conf /etc/nginx/conf.d/custom.conf >> Dockerfile"
-    - echo "RUN rm /etc/nginx/conf.d/default.conf >> Dockerfile"
+    - echo "FROM nginx:latest" > Dockerfile  # Corrected the syntax here
+    - echo "COPY .next /usr/share/nginx/html/.next" >> Dockerfile  # Corrected the syntax here
+    - echo "COPY custom.conf /etc/nginx/conf.d/custom.conf" >> Dockerfile  # Corrected the syntax here
+    - echo "RUN rm /etc/nginx/conf.d/default.conf" >> Dockerfile  # Corrected the syntax here
     - cat Dockerfile
-
-
-
 
 # push_to_registry:
 #   stage: push_to_registry
 #   only:
-#     - ci/cd  # Adjust the branch name to trigger the pipeline
+#     - ci-cd  # Adjust the branch name to trigger the pipeline
 #   script:
 #     - echo "Pushing your Docker image to Google Cloud Artifact Registry"
 #     - echo $GOOGLE_SERVICE_KEY | base64 --decode > /tmp/key.json  # Store your GCP service key as a secret variable in GitLab
