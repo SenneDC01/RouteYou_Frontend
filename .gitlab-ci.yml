@@ -20,7 +20,8 @@ build_site:
     - npm run build 
     - ls -al
   artifacts: 
-    - ~/.next
+    paths:
+      - "~/.next"
 
 
 build_docker_image:
