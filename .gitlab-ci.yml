@@ -1,7 +1,7 @@
 default:
   image: ubuntu
   tags:
-    - aptRunnerFrontend
+    - atpfrontendRunner
 
 stages:
   - build
@@ -16,3 +16,4 @@ build:
     - ls -al
     - npm install
     - npm run build
+    - ls -al
