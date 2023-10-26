@@ -26,14 +26,12 @@ build_site:
 
 docker-container:
   stage: buildDockerImage
-  image: docker
-  variables:
-    DOCKER_HOST: tcp://docker:2375
-    DOCKER_DRIVER: overlay
-    DOCKER_TLS_CERTDIR: ""
-  services:
-    - docker:dind
+  image: Alpine Linux
   script: 
+    - apk update
+    - apk add docker
+    - rc-update add docker boot /etc/init.d/docker start
+    - docker --version
     - ls -all
     - echo "FROM nginx:latest" > Dockerfile  
     - echo "COPY .next /usr/share/nginx/html/" >> Dockerfile  
