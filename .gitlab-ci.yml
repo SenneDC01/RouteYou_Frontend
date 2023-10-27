@@ -9,8 +9,6 @@ stages:
 
 build_site:
   stage: buildSite
-  only:
-    - ci-cd  # Adjust the branch name to trigger the pipeline
   image: $NODE_IMAGE
   script:
     - ls -al
@@ -23,8 +21,6 @@ build_site:
 
 build_image:
   stage: buildImage
-  only:
-    - ci-cd  # Adjust the branch name to trigger the pipeline
   image: $DOCKER_IMAGE
   script:
     - ls -all
@@ -34,7 +30,7 @@ build_image:
     - echo "RUN rm /etc/nginx/conf.d/default.conf" >> Dockerfile  
     - cat Dockerfile
     
-    
+
     
 
 
