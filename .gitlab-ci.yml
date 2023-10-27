@@ -6,6 +6,7 @@ default:
 stages:
   - buildSite
   - buildImage
+  - pushImage 
 
 build_site:
   stage: buildSite
@@ -29,8 +30,22 @@ build_image:
     - echo "COPY custom.conf /etc/nginx/conf.d/custom.conf" >> Dockerfile  
     - echo "RUN rm /etc/nginx/conf.d/default.conf" >> Dockerfile  
     - cat Dockerfile
-    
+  only: 
+    - buildSite
+  artifacts: 
+    paths:
+      - "Dockerfile"
 
+push_image:
+  stage: pushImage
+  script:
+    - echo $GCLOUD_SERVICE_KEY | base64 -d > gcloud-service-key.json
+    - gcloud auth activate-service-account --key-file=gcloud-service-key.json
+    - gcloud config set project $PROJECT_ID
+    - gcloud auth configure-docker
+    - docker push $BACKEND_REPO
+  only:
+    - buildImage  # This stage depends on the build_image stage
     
 
 
