@@ -43,8 +43,3 @@ push_image:
     - docker push $BACKEND_REPO
 
     
-
-
-
-
-
