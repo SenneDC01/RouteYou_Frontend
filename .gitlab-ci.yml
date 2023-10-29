@@ -25,7 +25,6 @@ build_image:
   image: $DOCKER_IMAGE
   script:
     - docker --version
-    - docker status 
     - echo "FROM nginx:latest" > Dockerfile  
     # - echo "COPY .next /usr/share/nginx/html/.next" >> Dockerfile  
     - echo "COPY custom.conf /etc/nginx/conf.d/default.conf" >> Dockerfile  
