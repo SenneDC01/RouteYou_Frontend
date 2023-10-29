@@ -20,18 +20,26 @@ stages:
 #     paths:
 #       - ".next"
 
-build_image:
+stages:
+  - buildImage
+
+buildImage:
   stage: buildImage
   image: $DOCKER_IMAGE
+  services:
+    - name: docker:dind
+      entrypoint: ["bash", "-c"]
+      command: ["dockerd-entrypoint.sh --host tcp://docker:2375"]
   script:
     - docker --version
-    - echo "FROM nginx:latest" > Dockerfile  
+    - echo "FROM nginx:latest" > Dockerfile
     # - echo "COPY .next /usr/share/nginx/html/.next" >> Dockerfile  
-    - echo "COPY custom.conf /etc/nginx/conf.d/default.conf" >> Dockerfile  
-    - echo "RUN rm /etc/nginx/conf.d/default.conf" >> Dockerfile  
+    - echo "COPY custom.conf /etc/nginx/conf.d/default.conf" >> Dockerfile
+    - echo "RUN rm /etc/nginx/conf.d/default.conf" >> Dockerfile
     - cat Dockerfile
-    - docker build -t "$BACKEND_REPO" .
+    - docker build -t $BACKEND_REPO .
     - ls -all
+
 
 push_image:
   stage: pushImage
