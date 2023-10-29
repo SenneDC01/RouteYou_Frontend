@@ -23,11 +23,9 @@ stages:
 
 buildImage:
   stage: buildImage
-  image: docker:24.0.6
+  image: docker:latest
   services:
     - name: docker:dind
-      entrypoint: ["dockerd-entrypoint.sh"]
-      command: ["--host", "tcp://docker:2375"]
   script:
     - docker --version
     - echo "FROM nginx:latest" > Dockerfile
@@ -35,7 +33,7 @@ buildImage:
     - echo "COPY custom.conf /etc/nginx/conf.d/default.conf" >> Dockerfile
     - echo "RUN rm /etc/nginx/conf.d/default.conf" >> Dockerfile
     - cat Dockerfile
-    - docker build -t "$BACKEND_REPO" .
+    - docker build -t $BACKEND_REPO .
     - ls -all
 
 
