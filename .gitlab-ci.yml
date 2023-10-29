@@ -27,9 +27,8 @@ build_image:
     - echo "FROM nginx:latest" > Dockerfile  
     - echo "COPY .next /usr/share/nginx/html/.next" >> Dockerfile  
     - echo "COPY custom.conf /etc/nginx/conf.d/default.conf" >> Dockerfile  
-    - echo "RUN rm /etc/nginx/conf.d/default.conf" >> Dockerfile  
     - cat Dockerfile
-    - docker build -t europe-west1-docker.pkg.dev/project-atp-routeyou1/dev-frontend:latest  .
+    - docker build -t europe-west1-docker.pkg.dev/project-atp-routeyou1/dev-frontend:latest  ./Dockerfile
     - ls -all
 
 push_image:
