@@ -35,7 +35,7 @@ buildImage:
     - echo "COPY custom.conf /etc/nginx/conf.d/default.conf" >> Dockerfile
     - echo "RUN rm /etc/nginx/conf.d/default.conf" >> Dockerfile
     - cat Dockerfile
-    - docker build -t $BACKEND_REPO .
+    - docker build -t "$BACKEND_REPO" .
     - ls -all
 
 
