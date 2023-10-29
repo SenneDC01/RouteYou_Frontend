@@ -47,7 +47,7 @@ push_image:
     - gcloud auth activate-service-account --key-file=gcloud-service-key.json
     - gcloud config set project $PROJECT_ID
     - gcloud auth configure-docker
-    - docker push $BACKEND_REPO
+    - docker push europe-west1-docker.pkg.dev/project-atp-routeyou1/dev-frontend:latest
 
 
     
