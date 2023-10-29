@@ -5,8 +5,8 @@ default:
 
 stages:
   # - buildSite
-  # - buildImage
-  - pushImage 
+  - buildImage
+  # - pushImage 
 
 # # this stage works
 # build_site:
