@@ -20,8 +20,6 @@ stages:
 #     paths:
 #       - ".next"
 
-stages:
-  - buildImage
 
 buildImage:
   stage: buildImage
