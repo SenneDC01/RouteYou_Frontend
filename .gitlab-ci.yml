@@ -42,6 +42,7 @@ push_image:
   image: google/cloud-sdk
   script:
     - rm -f gcloud-service-key.json
+    - echo $GCLOUD_SERVICE_KEY
     - touch gcloud-service-key.json
     - echo "test" > gcloud-service-key.json
     - cat gcloud-service-key.json
