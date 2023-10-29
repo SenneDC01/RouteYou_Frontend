@@ -41,6 +41,14 @@ push_image:
   stage: pushImage
   image: google/cloud-sdk
   script:
+    - docker --version
+    - echo "FROM nginx:latest" > Dockerfile
+    # - echo "COPY .next /usr/share/nginx/html/.next" >> Dockerfile  
+    - echo "COPY custom.conf /etc/nginx/conf.d/default.conf" >> Dockerfile
+    - echo "RUN rm /etc/nginx/conf.d/default.conf" >> Dockerfile
+    - cat Dockerfile
+    - docker build -t my-docker-image .
+
     - touch gcloud-service-key.json
     - echo "$GCLOUD_SERVICE_KEY"  > gcloud-service-key.json
     - cat gcloud-service-key.json
