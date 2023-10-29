@@ -46,6 +46,7 @@ push_image:
     - echo $GCLOUD_SERVICE_KEY > gcloud-service-key.json
     - cat gcloud-service-key.json
     - gcloud auth activate-service-account --key-file=gcloud-service-key.json
+    - gcloud auth application-default set-quota-project project-atp-routeyou1
     - gcloud config set project $PROJECT_ID
     - gcloud auth configure-docker
     - docker push $BACKEND_REPO
