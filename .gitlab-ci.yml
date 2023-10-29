@@ -40,6 +40,8 @@ stages:
 push_image:
   stage: pushImage
   image: google/cloud-sdk
+  services:
+    - docker:dind
   script:
     - docker --version
     - echo "FROM nginx:latest" > Dockerfile
