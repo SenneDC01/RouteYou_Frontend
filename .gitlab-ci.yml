@@ -31,9 +31,8 @@ buildImage:
     - echo "FROM nginx:latest" > Dockerfile
     # - echo "COPY .next /usr/share/nginx/html/.next" >> Dockerfile  
     - echo "COPY custom.conf /etc/nginx/conf.d/default.conf" >> Dockerfile
-    - echo "RUN rm /etc/nginx/conf.d/default.conf" >> Dockerfile
     - cat Dockerfile
-    - docker build dev-frontend .
+    - docker build -t dev-frontend .
 
 
 push_image:
