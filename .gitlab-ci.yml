@@ -41,16 +41,12 @@ push_image:
   stage: pushImage
   image: google/cloud-sdk
   script:
-    - rm -f gcloud-service-key.json
-    - touch gcloud-service-key.json
-    - echo $GCLOUD_SERVICE_KEY > gcloud-service-key.json
-    - cat gcloud-service-key.json
     - gcloud auth activate-service-account --key-file=gcloud-service-key.json
-    - gcloud auth application-default login  # Add this line to set up application default credentials
-    - gcloud auth application-default set-quota-project project-atp-routeyou1
+    - gcloud auth application-default set-quota-project $PROJECT_ID
     - gcloud config set project $PROJECT_ID
     - gcloud auth configure-docker
     - docker push $BACKEND_REPO
+
 
     
     
