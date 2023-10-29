@@ -8,6 +8,7 @@ stages:
   # - buildImage
   - pushImage 
 
+# # this stage works
 # build_site:
 #   stage: buildSite
 #   image: $NODE_IMAGE
@@ -21,11 +22,31 @@ stages:
 #       - ".next"
 
 
-# buildImage:
-#   stage: buildImage
-#   image: docker:latest
+buildImage:
+  stage: buildImage
+  image: docker:latest
+  services:
+    - name: docker:dind
+  script:
+    - docker --version
+    - echo "$GCLOUD_SERVICE_KEY" > gcloud-service-key.json  # Assuming you have a GCLOUD_SERVICE_KEY variable.
+    - docker login -u _json_key --password-stdin https://europe-west1-docker.pkg.dev < gcloud-service-key.json
+    - gcloud auth configure-docker europe-west1-docker.pkg.dev  # Configure Docker to work with GCR.
+    - echo "FROM nginx:latest" > Dockerfile
+    - echo "COPY custom.conf /etc/nginx/conf.d/default.conf" >> Dockerfile
+    - echo "RUN rm /etc/nginx/conf.d/default.conf" >> Dockerfile
+    - cat Dockerfile
+    - docker build -t europe-west1-docker.pkg.dev/project-atp-routeyou1/dev-frontend:latest .
+    - docker push europe-west1-docker.pkg.dev/project-atp-routeyou1/dev-frontend:latest
+    - ls -all
+
+
+
+# push_image:
+#   stage: pushImage
+#   image: google/cloud-sdk
 #   services:
-#     - name: docker:dind
+#     - docker:dind
 #   script:
 #     - docker --version
 #     - echo "FROM nginx:latest" > Dockerfile
@@ -33,31 +54,15 @@ stages:
 #     - echo "COPY custom.conf /etc/nginx/conf.d/default.conf" >> Dockerfile
 #     - echo "RUN rm /etc/nginx/conf.d/default.conf" >> Dockerfile
 #     - cat Dockerfile
-#     - docker build -t europe-west1-docker.pkg.dev/project-atp-routeyou1/dev-frontend:latest .
-#     - ls -all
+#     - docker build -t my-docker-image .
 
-
-push_image:
-  stage: pushImage
-  image: google/cloud-sdk
-  services:
-    - docker:dind
-  script:
-    - docker --version
-    - echo "FROM nginx:latest" > Dockerfile
-    # - echo "COPY .next /usr/share/nginx/html/.next" >> Dockerfile  
-    - echo "COPY custom.conf /etc/nginx/conf.d/default.conf" >> Dockerfile
-    - echo "RUN rm /etc/nginx/conf.d/default.conf" >> Dockerfile
-    - cat Dockerfile
-    - docker build -t my-docker-image .
-
-    - touch gcloud-service-key.json
-    - echo "$GCLOUD_SERVICE_KEY"  > gcloud-service-key.json
-    - cat gcloud-service-key.json
-    - gcloud auth activate-service-account --key-file=gcloud-service-key.json
-    - gcloud config set project $PROJECT_ID
-    - gcloud auth configure-docker
-    - docker push europe-west1-docker.pkg.dev/project-atp-routeyou1/dev-frontend:latest
+#     - touch gcloud-service-key.json
+#     - echo "$GCLOUD_SERVICE_KEY"  > gcloud-service-key.json
+#     - cat gcloud-service-key.json
+#     - gcloud auth activate-service-account --key-file=gcloud-service-key.json
+#     - gcloud config set project $PROJECT_ID
+#     - gcloud auth configure-docker
+#     - docker push europe-west1-docker.pkg.dev/project-atp-routeyou1/dev-frontend:latest
 
 
     
