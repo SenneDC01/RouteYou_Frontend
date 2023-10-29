@@ -5,8 +5,9 @@ default:
 
 stages:
   # - buildSite
-  - buildImage
-  - pushImage 
+  # - buildImage
+  # - pushImage 
+  - build
 
 # build_site:
 #   stage: buildSite
@@ -21,33 +22,46 @@ stages:
 #       - ".next"
 
 
-buildImage:
-  stage: buildImage
-  image: docker:latest
-  services:
-    - name: docker:dind
+# buildImage:
+#   stage: buildImage
+#   image: docker:latest
+#   services:
+#     - name: docker:dind
+#   script:
+#     - docker --version
+#     - echo "FROM nginx:latest" > Dockerfile
+#     # - echo "COPY .next /usr/share/nginx/html/.next" >> Dockerfile  
+#     - echo "COPY custom.conf /etc/nginx/conf.d/default.conf" >> Dockerfile
+#     - echo "RUN rm /etc/nginx/conf.d/default.conf" >> Dockerfile
+#     - cat Dockerfile
+#     - docker build -t europe-west1-docker.pkg.dev/project-atp-routeyou1/dev-frontend:latest .
+#     - ls -all
+
+
+# push_image:
+#   stage: pushImage
+#   image: google/cloud-sdk
+#   script:
+#     - echo $GCLOUD_SERVICE_KEY | base64 -d > gcloud-service-key.json
+#     - gcloud auth activate-service-account --key-file=gcloud-service-key.json
+#     - gcloud config set project $PROJECT_ID
+#     - gcloud auth configure-docker
+#     - docker push $BACKEND_REPO
+
+build:
+  stage: build
+  image: docker:19.03.12
   script:
-    - docker --version
+    - echo $GCLOUD_SERVICE_KEY | base64 -d > gcloud-service-key.json
+    - gcloud auth activate-service-account --key-file=gcloud-service-key.json
     - echo "FROM nginx:latest" > Dockerfile
     # - echo "COPY .next /usr/share/nginx/html/.next" >> Dockerfile  
     - echo "COPY custom.conf /etc/nginx/conf.d/default.conf" >> Dockerfile
     - echo "RUN rm /etc/nginx/conf.d/default.conf" >> Dockerfile
     - cat Dockerfile
-    - docker build -t europe-west1-docker.pkg.dev/project-atp-routeyou1/dev-frontend:latest .
-    - ls -all
-
-
-push_image:
-  stage: pushImage
-  image: google/cloud-sdk
-  script:
-    - echo $GCLOUD_SERVICE_KEY | base64 -d > gcloud-service-key.json
-    - gcloud auth activate-service-account --key-file=gcloud-service-key.json
-    - gcloud config set project $PROJECT_ID
-    - gcloud auth configure-docker
-    - docker push $BACKEND_REPO
-
-    
+    - docker build -t frontend .
+    - docker tag $frontend gcr.io/$PROJECT_ID/$IMAGE_NAME
+    - docker push gcr.io/$PROJECT_ID/$IMAGE_NAME
 
 
 
