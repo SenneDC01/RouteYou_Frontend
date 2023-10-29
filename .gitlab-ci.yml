@@ -4,30 +4,30 @@ default:
     - atpFrontendRunnertest
 
 stages:
-  - buildSite
+  # - buildSite
   - buildImage
   - pushImage 
 
-build_site:
-  stage: buildSite
-  image: $NODE_IMAGE
-  script:
-    - ls -al
-    - npm install
-    - npm run build 
-    - ls -al
-  artifacts: 
-    paths:
-      - ".next"
+# build_site:
+#   stage: buildSite
+#   image: $NODE_IMAGE
+#   script:
+#     - ls -al
+#     - npm install
+#     - npm run build 
+#     - ls -al
+#   artifacts: 
+#     paths:
+#       - ".next"
 
 build_image:
   stage: buildImage
   image: $DOCKER_IMAGE
   script:
-    - systemctl status docker
-    - systemctl start docker
+    - docker --version
+    - docker status 
     - echo "FROM nginx:latest" > Dockerfile  
-    - echo "COPY .next /usr/share/nginx/html/.next" >> Dockerfile  
+    # - echo "COPY .next /usr/share/nginx/html/.next" >> Dockerfile  
     - echo "COPY custom.conf /etc/nginx/conf.d/default.conf" >> Dockerfile  
     - echo "RUN rm /etc/nginx/conf.d/default.conf" >> Dockerfile  
     - cat Dockerfile
