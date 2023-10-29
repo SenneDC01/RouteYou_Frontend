@@ -52,6 +52,7 @@ push_image:
     - gcloud auth configure-docker
     - docker push $BACKEND_REPO
     
+    
 
     
 
