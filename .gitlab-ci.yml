@@ -23,11 +23,11 @@ stages:
 
 buildImage:
   stage: buildImage
-  image: $DOCKER_IMAGE
+  image: docker:24.0.6
   services:
     - name: docker:dind
-      entrypoint: ["bash", "-c"]
-      command: ["dockerd-entrypoint.sh --host tcp://docker:2375"]
+    - entrypoint: ["dockerd-entrypoint.sh"]
+    - command: ["--host", "tcp://docker:2375"]
   script:
     - docker --version
     - echo "FROM nginx:latest" > Dockerfile
