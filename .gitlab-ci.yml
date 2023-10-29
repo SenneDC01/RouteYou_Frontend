@@ -29,9 +29,10 @@ buildImage:
     - name: docker:dind
   script:
     - docker --version
-    - echo "$GCLOUD_SERVICE_KEY" > gcloud-service-key.json  # Assuming you have a GCLOUD_SERVICE_KEY variable.
+    - export DOCKER_HOST=tcp://docker:2375
+    - echo "$GCLOUD_SERVICE_KEY" > gcloud-service-key.json
     - docker login -u _json_key --password-stdin https://europe-west1-docker.pkg.dev < gcloud-service-key.json
-    - gcloud auth configure-docker europe-west1-docker.pkg.dev  # Configure Docker to work with GCR.
+    - gcloud auth configure-docker europe-west1-docker.pkg.dev
     - echo "FROM nginx:latest" > Dockerfile
     - echo "COPY custom.conf /etc/nginx/conf.d/default.conf" >> Dockerfile
     - echo "RUN rm /etc/nginx/conf.d/default.conf" >> Dockerfile
@@ -39,6 +40,7 @@ buildImage:
     - docker build -t europe-west1-docker.pkg.dev/project-atp-routeyou1/dev-frontend:latest .
     - docker push europe-west1-docker.pkg.dev/project-atp-routeyou1/dev-frontend:latest
     - ls -all
+
 
 
 
