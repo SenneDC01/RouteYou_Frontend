@@ -51,10 +51,11 @@ pushImage:
     - gcloud auth activate-service-account --key-file=gcloud-service-key.json
     - gcloud config set project $PROJECT_ID
     - gcloud auth configure-docker europe-west1-docker.pkg.dev
-    #docker push
-    - docker load -i dev-frontend-image.tar  # Load the Docker image from the tarball
-    - docker tag dev-frontend-image europe-west1-docker.pkg.dev/project-atp-routeyou1/dev-frontend:latest
-    - docker push europe-west1-docker.pkg.dev/project-atp-routeyou1/dev-frontend/dev-frontend-image:latest
+    # Load the Docker image from the tarball
+    - docker load -i dev-frontend-image.tar
+    # Push the Docker image to the specified repository
+    - docker push europe-west1-docker.pkg.dev/project-atp-routeyou1/dev-frontend
+
 
 
 
