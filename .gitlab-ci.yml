@@ -8,17 +8,17 @@ stages:
   - buildImage
   - pushImage 
 
-# build_site:
-#   stage: buildSite
-#   image: $NODE_IMAGE
-#   script:
-#     - ls -al
-#     - npm install
-#     - npm run build 
-#     - ls -al
-#   artifacts: 
-#     paths:
-#       - ".next"
+build_site:
+  stage: buildSite
+  image: $NODE_IMAGE
+  script:
+    - ls -al
+    - npm install
+    - npm run build 
+    - ls -al
+  artifacts: 
+    paths:
+      - ".next"
 
 
 buildImage:
@@ -31,12 +31,11 @@ buildImage:
     - docker --version
     - echo "FROM nginx:latest" > Dockerfile
     - echo "COPY ./.next /usr/share/nginx/html" >> Dockerfile
-    - echo "RUN rm /etc/nginx/conf.d/default.conf">> Dockerfile
+    - echo "RUN rm /etc/nginx/conf.d/default.conf" >> Dockerfile
     - echo "COPY custom.conf /etc/nginx/conf.d/default.conf" >> Dockerfile
     - cat Dockerfile
     - docker build -t dev-frontend-image .
     - docker save -o dev-frontend-image.tar dev-frontend-image
-    - ls -all
   artifacts:
     paths:
     - dev-frontend-image.tar  
