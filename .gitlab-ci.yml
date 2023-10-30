@@ -24,15 +24,14 @@ stages:
 buildImage:
   stage: buildImage
   image: docker:latest
-  variables:
-    DOCKER_HOST: tcp://127.0.0.1:2375
+  services:
+    - docker:latest-dind
   script:
     - docker --version
     - echo "FROM nginx:latest" > Dockerfile
     - echo "COPY custom.conf /etc/nginx/conf.d/default.conf" >> Dockerfile
     - cat Dockerfile
     - docker build -t dev-frontend .
-
 
 
 push_image:
