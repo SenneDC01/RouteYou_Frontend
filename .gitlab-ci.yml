@@ -4,21 +4,21 @@ default:
     - docker-runner-frontend
 
 stages:
-  - buildSite
+  # - buildSite
   - buildImage
   - pushImage 
 
-build_site:
-  stage: buildSite
-  image: $NODE_IMAGE
-  script:
-    - ls -al
-    - npm install
-    - npm run build 
-    - ls -al
-  artifacts: 
-    paths:
-      - ".next"
+# build_site:
+#   stage: buildSite
+#   image: $NODE_IMAGE
+#   script:
+#     - ls -al
+#     - npm install
+#     - npm run build 
+#     - ls -al
+#   artifacts: 
+#     paths:
+#       - ".next"
 
 
 buildImage:
@@ -30,7 +30,7 @@ buildImage:
   script:
     - docker --version
     - echo "FROM nginx:latest" > Dockerfile
-    - echo "COPY ./.next /usr/share/nginx/html" >> Dockerfile
+    # - echo "COPY ./.next /usr/share/nginx/html" >> Dockerfile
     - echo "RUN rm /etc/nginx/conf.d/default.conf" >> Dockerfile
     - echo "COPY custom.conf /etc/nginx/conf.d/default.conf" >> Dockerfile
     - cat Dockerfile
@@ -50,13 +50,11 @@ pushImage:
     - echo "$GCLOUD_SERVICE_KEY" > gcloud-service-key.json
     - cat gcloud-service-key.json
     - gcloud auth activate-service-account --key-file=gcloud-service-key.json
-    - gcloud config set project $PROJECT_ID
     - gcloud auth configure-docker europe-west1-docker.pkg.dev
-    
     # Load the Docker image from the tarball
     - docker load -i dev-frontend-image.tar
     # Push the Docker image to the specified repository
-    - docker tag dev-frontend-image:latest europe-west1-docker.pkg.dev/[MASKED]/dev-frontend/dev-frontend-image:latest
+    -  docker tag dev-frontend-image:latest europe-west1-docker.pkg.dev/project-atp-routeyou1/dev-frontend/dev-frontend-image:latest
     - docker push europe-west1-docker.pkg.dev/project-atp-routeyou1/dev-frontend/dev-frontend-image:latest
 
 
