@@ -23,9 +23,9 @@ stages:
 
 buildImage:
   stage: buildImage
-  image: docker:latest
+  image: docker:18.09
   services:
-    - docker:latest-dind
+    - docker:19-dind
   script:
     - docker --version
     - echo "FROM nginx:latest" > Dockerfile
