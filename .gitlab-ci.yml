@@ -23,9 +23,13 @@ stages:
 
 buildImage:
   stage: buildImage
-  image: docker:18.09
+  image: docker
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_DRIVER: overlay
+    DOCKER_TLS_CERTDIR: ""
   services:
-    - docker:18.09-dind
+    - docker:dind
   script:
     - docker --version
     - echo "FROM nginx:latest" > Dockerfile
