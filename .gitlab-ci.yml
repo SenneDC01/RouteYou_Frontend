@@ -46,6 +46,7 @@ push_image:
     - gcloud config set project $PROJECT_ID
     - gcloud auth configure-docker
     
+    
 
 
     
