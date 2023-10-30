@@ -56,8 +56,7 @@ pushImage:
     # Load the Docker image from the tarball
     - docker load -i dev-frontend-image.tar
     # Push the Docker image to the specified repository
-    - docker tag dev-frontend-image:latest \
-      europe-west1-docker.pkg.dev/project-atp-routeyou1/dev-frontend/dev-frontend-image:latest
+    - docker tag dev-frontend-image:latest europe-west1-docker.pkg.dev/[MASKED]/dev-frontend/dev-frontend-image:latest
     - docker push europe-west1-docker.pkg.dev/project-atp-routeyou1/dev-frontend/dev-frontend-image:latest
 
 
