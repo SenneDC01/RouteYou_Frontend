@@ -32,7 +32,10 @@ buildImage:
     - echo "FROM nginx:latest" > Dockerfile
     - echo "COPY custom.conf /etc/nginx/conf.d/default.conf" >> Dockerfile
     - cat Dockerfile
-    - docker build -t dev-frontend .
+    - docker build -t dev-frontend-image .
+  artifacts:
+    paths:
+    - dev-frontend-image.tar  
 
 
 
@@ -46,6 +49,8 @@ push_image:
     - gcloud auth activate-service-account --key-file=gcloud-service-key.json
     - gcloud config set project $PROJECT_ID
     - gcloud auth configure-docker
+    - docker load -i dev-frontend-image.tar  # Load the Docker image from the tarball
+    - docker push dev-frontend-image:latest  # Push the Docker image to a container registry
 
     
 
