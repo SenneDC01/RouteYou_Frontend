@@ -23,13 +23,14 @@ stages:
 
 buildImage:
   stage: buildImage
-  image: docker
+  image: docker:latest
+  services:
+    - name: docker:20-dind
+      alias: docker
+      command: [ "--tls=false" ]
   variables:
     DOCKER_HOST: tcp://docker:2375
-    DOCKER_DRIVER: overlay
-    DOCKER_TLS_CERTDIR: ""
-  services:
-    - docker:dind
+
   script:
     - docker --version
     - echo "FROM nginx:latest" > Dockerfile
