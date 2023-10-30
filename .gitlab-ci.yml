@@ -41,18 +41,20 @@ buildImage:
 
 
 
-# push_image:
-#   stage: pushImage
-#   image: google/cloud-sdk
-#   script:
-#     - touch gcloud-service-key.json
-#     - echo "$GCLOUD_SERVICE_KEY" > gcloud-service-key.json
-#     - cat gcloud-service-key.json
-#     - gcloud auth activate-service-account --key-file=gcloud-service-key.json
-#     - gcloud config set project $PROJECT_ID
-#     - gcloud auth configure-docker
-#     - docker load -i dev-frontend-image.tar  # Load the Docker image from the tarball
-#     - docker push europe-west1-docker.pkg.dev/project-atp-routeyou1/       dev-frontend\dev-frontend-image:latest  # Push the Docker image to a container registry
+push_image:
+  stage: pushImage
+  image: google/cloud-sdk
+  script:
+    - touch gcloud-service-key.json
+    - echo "$GCLOUD_SERVICE_KEY" > gcloud-service-key.json
+    - cat gcloud-service-key.json
+    - gcloud auth activate-service-account --key-file=gcloud-service-key.json
+    - gcloud config set project $PROJECT_ID
+    - gcloud auth configure-docker
+
+    - docker --version
+    - docker load -i dev-frontend-image.tar  # Load the Docker image from the tarball
+    - docker push europe-west1-docker.pkg.dev/project-atp-routeyou1/       dev-frontend\dev-frontend-image:latest  # Push the Docker image to a container registry
 
     
 
