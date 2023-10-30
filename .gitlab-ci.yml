@@ -23,13 +23,7 @@ stages:
 
 buildImage:
   stage: buildImage
-  image: docker:latest
-  services:
-    - name: docker:20-dind
-      alias: docker
-      command: [ "--tls=false" ]
-  variables:
-    DOCKER_HOST: tcp://docker:2375
+  image: docker:24.0.7
 
   script:
     - docker --version
