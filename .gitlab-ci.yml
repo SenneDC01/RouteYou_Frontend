@@ -33,7 +33,7 @@ buildImage:
     - echo "COPY custom.conf /etc/nginx/conf.d/default.conf" >> Dockerfile
     - cat Dockerfile
     - docker build -t dev-frontend-image .
-    - ls - all
+    - ls -all
   artifacts:
     paths:
     - dev-frontend-image.tar  
