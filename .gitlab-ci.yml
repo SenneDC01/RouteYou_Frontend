@@ -50,11 +50,12 @@ pushImage:
     - cat gcloud-service-key.json
     - gcloud auth activate-service-account --key-file=gcloud-service-key.json
     - gcloud config set project $PROJECT_ID
-    - gcloud auth configure-docker
-    
+    - gcloud auth configure-docker europe-west1-docker.pkg.dev
+    #docker push
     - docker load -i dev-frontend-image.tar  # Load the Docker image from the tarball
-    - docker tag dev-frontend-image gcr.io/europe-west1-docker.pkg.dev/project-atp-routeyou1/dev-frontend:latest
-    - docker push gcr.io/europe-west1-docker.pkg.dev/project-atp-routeyou1/dev-frontend:latest
+    - docker tag dev-frontend-image europe-west1-docker.pkg.dev/project-atp-routeyou1/dev-frontend:latest
+    - docker push europe-west1-docker.pkg.dev/project-atp-routeyou1/dev-frontend:latest
+
 
 
     
