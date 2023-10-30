@@ -1,7 +1,7 @@
 default:
   image: ubuntu
   tags:
-    - atpFrontendRunnertest
+    - docker-runner-frontend
 
 stages:
   # - buildSite
