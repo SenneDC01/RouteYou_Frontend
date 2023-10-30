@@ -24,8 +24,6 @@ stages:
 buildImage:
   stage: buildImage
   image: docker:latest
-  services:
-    - name: docker:dind
   script:
     - docker --version
     - echo "FROM nginx:latest" > Dockerfile
@@ -45,7 +43,7 @@ push_image:
     - gcloud auth activate-service-account --key-file=gcloud-service-key.json
     - gcloud config set project $PROJECT_ID
     - gcloud auth configure-docker
-    
+
     
 
 
