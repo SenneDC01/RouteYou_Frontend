@@ -42,3 +42,4 @@ pushImage:
     # Push the Docker image to the specified repository
     -  docker tag dev-frontend-image:latest $FRONTEND_REPO
     - docker push $FRONTEND_REPO
+    
