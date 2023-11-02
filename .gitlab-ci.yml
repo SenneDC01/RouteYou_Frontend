@@ -1,13 +1,47 @@
+Skip to content
+GitLab
+5
+Help
+Arne Hebbrecht
+2
+2324_ATP_routeyou_1_Frontend
+Project information
+Repository
+Issues37
+Merge requests0
+CI/CD
+Security and Compliance
+Deployments
+Packages and registries
+Infrastructure
+Monitor
+Analytics
+Wiki
+Snippets
+Settings
+ikdoeictikdoeict
+
+2324_ATP_routeyou_1
+2324_ATP_routeyou_1_Frontend
+Repository
+
+Update .gitlab-ci.yml file
+Arne Hebbrecht authored 1 day ago
+2c03f7c4
+ Code owners
+Assign users and groups as approvers for specific file changes. Learn more.
+2324_atp_routeyou_1_frontend
+.gitlab-ci.yml
+.gitlab-ci.yml
+1.48 KiB
 default:
   image: ubuntu
   tags:
     - docker-runner-frontend
-
 stages:
   - buildSite
   - buildImage
   - pushImage 
-
 build_site:
   stage: buildSite
   image: $NODE_IMAGE
@@ -19,24 +53,23 @@ build_site:
   artifacts: 
     paths:
       - ".next"
-
-
 buildImage:
   stage: buildImage
   image: docker:24.0.7
   services:
     - docker:dind  # Use the Docker-in-Docker service to access the Docker socket
-
   script:
-    - cd ./docker
+    - docker --version
+    - echo "FROM nginx:latest" > Dockerfile
+    - echo "COPY ./.next /usr/share/nginx/html" >> Dockerfile
+    - echo "RUN rm /etc/nginx/conf.d/default.conf" >> Dockerfile
+    - echo "COPY custom.conf /etc/nginx/conf.d/default.conf" >> Dockerfile
+    - cat Dockerfile
     - docker build -t dev-frontend-image .
     - docker save -o dev-frontend-image.tar dev-frontend-image
   artifacts:
     paths:
-    - ./docker/dev-frontend-image.tar  
-
-
-
+    - dev-frontend-image.tar  
 pushImage:
   stage: pushImage
   image: google/cloud-sdk
@@ -49,5 +82,21 @@ pushImage:
     # Load the Docker image from the tarball
     - docker load -i dev-frontend-image.tar
     # Push the Docker image to the specified repository
-    - docker tag dev-frontend-image:latest $FRONTEND_REPO
+    -  docker tag dev-frontend-image:latest $FRONTEND_REPO
     - docker push $FRONTEND_REPO
+    
+    
+    
+    
+71
+72
+73
+74
+75
+76
+77
+    
+
+
+
+
