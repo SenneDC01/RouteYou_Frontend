@@ -1,17 +1,15 @@
 default:
   image: ubuntu
   tags:
-    - atpfrontendRunner
+    - docker-runner-frontend
 
 stages:
   - buildSite
   - buildImage
-  # - push_to_registry
+  - pushImage 
 
 build_site:
   stage: buildSite
-  only:
-    - ci-cd  # Adjust the branch name to trigger the pipeline
   image: $NODE_IMAGE
   script:
     - ls -al
@@ -22,33 +20,34 @@ build_site:
     paths:
       - ".next"
 
-build_image:
+
+buildImage:
   stage: buildImage
-  only:
-    - ci-cd  # Adjust the branch name to trigger the pipeline
-  image: docker:20.10
+  image: docker:24.0.7
+  services:
+    - docker:dind  # Use the Docker-in-Docker service to access the Docker socket
+
   script:
-    - ls -all
-    - echo "FROM nginx:latest > Dockerfile "
-    - echo "COPY .next /usr/share/nginx/html/.next >> Dockerfile"  
-    - echo "COPY custom.conf /etc/nginx/conf.d/custom.conf >> Dockerfile"
-    - echo "RUN rm /etc/nginx/conf.d/default.conf >> Dockerfile"
-    - cat Dockerfile
+    - cd ./docker
+    - docker build -t dev-frontend-image .
+    - docker save -o dev-frontend-image.tar dev-frontend-image
+  artifacts:
+    paths:
+    - ./docker/dev-frontend-image.tar  
 
 
 
-
-# push_to_registry:
-#   stage: push_to_registry
-#   only:
-#     - ci-cd  # Adjust the branch name to trigger the pipeline
-#   script:
-#     - echo "Pushing your Docker image to Google Cloud Artifact Registry"
-#     - echo $GOOGLE_SERVICE_KEY | base64 --decode > /tmp/key.json  # Store your GCP service key as a secret variable in GitLab
-#     - docker login -u _json_key -p "$(cat /tmp/key.json)" https://gcr.io
-#     - docker tag $IMAGE_NAME:$IMAGE_TAG gcr.io/$GOOGLE_PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG
-#     - docker push gcr.io/$GOOGLE_PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG
-
-
-
-
+pushImage:
+  stage: pushImage
+  image: google/cloud-sdk
+  script:
+    - touch gcloud-service-key.json
+    - echo "$GCLOUD_SERVICE_KEY" > gcloud-service-key.json
+    - cat gcloud-service-key.json
+    - gcloud auth activate-service-account --key-file=gcloud-service-key.json
+    - gcloud auth configure-docker europe-west1-docker.pkg.dev
+    # Load the Docker image from the tarball
+    - docker load -i dev-frontend-image.tar
+    # Push the Docker image to the specified repository
+    - docker tag dev-frontend-image:latest $FRONTEND_REPO
+    - docker push $FRONTEND_REPO
