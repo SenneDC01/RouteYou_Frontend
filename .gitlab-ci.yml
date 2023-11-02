@@ -24,7 +24,7 @@ buildImage:
     - docker:dind  # Use the Docker-in-Docker service to access the Docker socket
   script:
     - docker build -t dev-frontend-image .
-    - docker save -o dev-frontend-image.tar dev-backend-image
+    - docker save -o dev-frontend-image.tar dev-frontend-image
   artifacts:
     paths:
     - dev-frontend-image.tar  
