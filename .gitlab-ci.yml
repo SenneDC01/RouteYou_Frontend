@@ -2,9 +2,6 @@ default:
   image: ubuntu
   tags:
     - docker-runner-frontend
-variables:
-  CUSTOM_ENV: ""
-  REPO: ""
 
 stages:
   - checkBranch
@@ -16,16 +13,14 @@ devUnitTest:
   script:
     - echo "Running unit tests for $CUSTOM_ENV branch"
     # do unit tests
-    - export CUSTOM_ENV="dev"
-    - export REPO=$DEV_FRONTEND_REPO
-    - echo "$CUSTOM_ENV" > artifacts/CUSTOM_ENV.txt
-    - echo "$REPO" > artifacts/REPO.txt
-  only:
-    - ci/cd
+    - echo "dev" > CUSTOM_ENV.txt
+    - echo "$DEV_FRONTEND_REPO" > REPO.txt
   artifacts:
     paths:
-      - artifacts/CUSTOM_ENV.txt
-      - artifacts/REPO.txt
+      - CUSTOM_ENV.txt
+      - REPO.txt
+  only:
+    - ci/cd
 
 buildImage:
   stage: buildImage
@@ -34,12 +29,11 @@ buildImage:
     - docker:dind
   script:
     - |
-      if [ -z "$CUSTOM_ENV" ]; then
-        echo "CUSTOM_ENV is empty. Exiting the buildImage job."
+      if [ ! -s "artifacts/CUSTOM_ENV.txt" ]; then
+        echo "CUSTOM_ENV.txt is empty. Exiting the buildImage job."
         exit 1
       fi
-      echo "$CUSTOM_ENV" > artifacts/CUSTOM_ENV.txt
-      echo "$REPO" > artifacts/REPO.txt
+      CUSTOM_ENV=$(cat artifacts/CUSTOM_ENV.txt)  # Read the value from CUSTOM_ENV.txt
       docker build -t $CUSTOM_ENV-frontend-image .
       docker save -o $CUSTOM_ENV-frontend-image.tar $CUSTOM_ENV-frontend-image
   dependencies:
