@@ -48,14 +48,16 @@ buildImage:
   services:
     - docker:dind
   script:
-    - docker build -t $CUSTOM_ENV-frontend-image .
-    - docker save -o $CUSTOM_ENV-frontend-image.tar $CUSTOM_ENV-frontend-image
+    - |
+      if [ -z "$CUSTOM_ENV" ]; then
+        echo "CUSTOM_ENV is empty. Exiting the buildImage job."
+        exit 0
+      fi
+      docker build -t $CUSTOM_ENV-frontend-image .
+      docker save -o $CUSTOM_ENV-frontend-image.tar $CUSTOM_ENV-frontend-image
   artifacts:
     paths:
       - $CUSTOM_ENV-frontend-image.tar
-  only:
-    variables:
-      - $CUSTOM_ENV !=""
 
 pushImage:
   stage: pushImage
@@ -71,7 +73,5 @@ pushImage:
     # Push the Docker image to the specified repository
     -  docker tag dev-frontend-image:latest $REPO
     - docker push $REPO
-  only:
-    variables:
-      - $CUSTOM_ENV !=""
+ 
       
