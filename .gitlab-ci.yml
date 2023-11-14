@@ -1,4 +1,3 @@
-
 default:
   image: ubuntu
   tags:
@@ -7,6 +6,7 @@ stages:
   - checkBranch
   - buildImage
   - pushImage 
+
 
 variables:
   CUSTOM_ENV: ""
@@ -21,6 +21,9 @@ devUnitTest:
     - export REPO=$DEV_FRONTEND_REPO
   only:
     - ci/cd
+  artifacts:
+    paths:
+      - artifacts/
 
 stagingUnitTest:
   stage: checkBranch
@@ -31,6 +34,9 @@ stagingUnitTest:
     - export REPO=$STAGING_FRONTEND_REPO
   only:
     - staging
+  artifacts:
+    paths:
+      - artifacts/
 
 prodUnitTest:
   stage: checkBranch
@@ -41,6 +47,9 @@ prodUnitTest:
     - export REPO=$PROD_FRONTEND_REPO
   only:
     - prod
+  artifacts:
+    paths:
+      - artifacts/
 
 buildImage:
   stage: buildImage
@@ -51,10 +60,15 @@ buildImage:
     - |
       if [ -z "$CUSTOM_ENV" ]; then
         echo "CUSTOM_ENV is empty. Exiting the buildImage job."
-        exit 0
+        exit 1
       fi
+      echo "$CUSTOM_ENV" > artifacts/custom_env.txt
       docker build -t $CUSTOM_ENV-frontend-image .
       docker save -o $CUSTOM_ENV-frontend-image.tar $CUSTOM_ENV-frontend-image
+  dependencies:
+    - devUnitTest
+    - stagingUnitTest
+    - prodUnitTest
   artifacts:
     paths:
       - $CUSTOM_ENV-frontend-image.tar
