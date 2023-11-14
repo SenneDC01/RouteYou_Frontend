@@ -12,7 +12,7 @@ devUnitTest:
   stage: checkBranch
   script:
     - echo "Running unit tests for development branch"
-    # do unit tests
+    # do unit tests if all good do the rest else return 1
     - export BRANCH="dev"
     - export REPO=$DEV_FRONTEND_REPO
   only:
@@ -24,6 +24,8 @@ buildImage:
   services:
     - docker:dind
   script:
+    - echo $BRANCH
+    - echo $REPO
     - docker build -t $BRANCH-frontend-image .
     - docker save -o $BRANCH-frontend-image.tar $BRANCH_ENV-frontend-image
   dependencies:
@@ -36,6 +38,8 @@ pushImage:
   stage: pushImage
   image: google/cloud-sdk
   script:
+    - echo $BRANCH
+    - echo $REPO
     - touch gcloud-service-key.json
     - echo "$GCLOUD_SERVICE_KEY" > gcloud-service-key.json
     - cat gcloud-service-key.json
