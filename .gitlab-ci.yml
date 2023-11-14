@@ -1,3 +1,7 @@
+variables:
+  BRANCH: ""
+  REPO: ""
+
 default:
   image: ubuntu
   tags:
