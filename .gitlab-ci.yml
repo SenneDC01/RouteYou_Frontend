@@ -1,3 +1,4 @@
+
 default:
   image: ubuntu
   tags:
@@ -11,31 +12,35 @@ variables:
   CUSTOM_ENV: ""
   REPO: ""
 
-devUnitTest: 
+devUnitTest:
   stage: checkBranch
   script:
     - echo "Running unit tests for $CUSTOM_ENV branch"
-    #doe unit testen
+    #do unit tests
     - export CUSTOM_ENV="dev"
-    - export REPO= $DEV_FRONTEND_REPO
+    - export REPO=$DEV_FRONTEND_REPO
+  only:
+    - ci-cd
 
-
-stagingUnitTest: 
+stagingUnitTest:
   stage: checkBranch
   script:
     - echo "Running unit tests for $CUSTOM_ENV branch"
-    #doe unit testen
+    #do unit tests
     - export CUSTOM_ENV="staging"
-    - export REPO= $STAGING_FRONTEND_REPO
-  
+    - export REPO=$STAGING_FRONTEND_REPO
+  only:
+    - staging
 
-prodUnitTest: 
+prodUnitTest:
   stage: checkBranch
   script:
     - echo "Running unit tests for $CUSTOM_ENV branch"
-    #doe unit testen
+    #do unit tests
     - export CUSTOM_ENV="prod"
-    - export REPO= $PROD_FRONTEND_REPO
+    - export REPO=$PROD_FRONTEND_REPO
+  only:
+    - prod
 
 buildImage:
   stage: buildImage
@@ -50,7 +55,7 @@ buildImage:
       - $CUSTOM_ENV-frontend-image.tar
   only:
     variables:
-      - $CUSTOM_ENV != ""
+      - $CUSTOM_ENV !=""
 
 pushImage:
   stage: pushImage
@@ -68,5 +73,4 @@ pushImage:
     - docker push $REPO
   only:
     variables:
-      - $CUSTOM_ENV != ""
-
+      - $CUSTOM_ENV !=""
