@@ -1,6 +1,6 @@
 variables:
-  BRANCH: $BRANCH
-  REPO: $REPO
+  BRANCH: ""
+  REPO: ""
 
 default:
   image: ubuntu
@@ -36,21 +36,19 @@ buildImage:
     - devUnitTest
   artifacts:
     paths:
-      - $BRANCH_ENV-frontend-image.tar
+      - $BRANCH-frontend-image.tar
 
 pushImage:
   stage: pushImage
   image: google/cloud-sdk
   script:
-    - echo $BRANCH
-    - echo $REPO
     - touch gcloud-service-key.json
     - echo "$GCLOUD_SERVICE_KEY" > gcloud-service-key.json
     - cat gcloud-service-key.json
     - gcloud auth activate-service-account --key-file=gcloud-service-key.json
     - gcloud auth configure-docker europe-west1-docker.pkg.dev
     # Load the Docker image from the tarball
-    - docker load -i $BRANCH_ENV-frontend-image.tar
+    - docker load -i $$BRANCH-frontend-image.tar
     # Push the Docker image to the specified repository
     - docker tag $BRANCH-frontend-image:latest $REPO
     - docker push $REPO
