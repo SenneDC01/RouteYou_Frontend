@@ -15,6 +15,8 @@ devUnitTest:
     # do unit tests
     - echo "dev" > CUSTOM_ENV.txt
     - echo "$DEV_FRONTEND_REPO" > REPO.txt
+    - cat CUSTOM_ENV.txt
+    - cat REPO.txt
   artifacts:
     paths:
       - CUSTOM_ENV.txt
@@ -36,15 +38,14 @@ stagingUnitTest:
   only:
     - staging
 
-stagingUnitTest:
+prodUnitTest:
   stage: checkBranch
   script:
     - echo "Running unit tests for $CUSTOM_ENV branch"
     # do unit tests
     - echo "prod" > CUSTOM_ENV.txt
     - echo "$PROD_FRONTEND_REPO" > REPO.txt
-    - cat CUSTOM_ENV.txt
-    - cat REPO.txt
+
   artifacts:
     paths:
       - CUSTOM_ENV.txt
