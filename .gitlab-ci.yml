@@ -1,47 +1,30 @@
-variables:
-  CUSTOM_ENV: ""
-  REPO: ""
-  
 default:
   image: ubuntu
   tags:
     - docker-runner-frontend
+variables:
+  CUSTOM_ENV: ""
+  REPO: ""
+
 stages:
   - checkBranch
   - buildImage
-  - pushImage 
-
-
-stagingUnitTest:
-  stage: checkBranch
-  script:
-    - echo "Running unit tests for $CUSTOM_ENV branch"
-    #do unit tests
-    - export CUSTOM_ENV="staging"
-    - export REPO=$STAGING_FRONTEND_REPO
-  only:
-    - staging
-
-prodUnitTest:
-  stage: checkBranch
-  script:
-    - echo "Running unit tests for $CUSTOM_ENV branch"
-    #do unit tests
-    - export CUSTOM_ENV="prod"
-    - export REPO=$PROD_FRONTEND_REPO
-  only:
-    - prod
+  - pushImage
 
 devUnitTest:
   stage: checkBranch
   script:
     - echo "Running unit tests for $CUSTOM_ENV branch"
-    #do unit tests
+    # do unit tests
     - export CUSTOM_ENV="dev"
     - export REPO=$DEV_FRONTEND_REPO
   only:
     - ci/cd
- 
+  artifacts:
+    paths:
+      - artifacts/CUSTOM_ENV.txt
+      - artifacts/REPO.txt
+
 buildImage:
   stage: buildImage
   image: docker:24.0.7
@@ -53,13 +36,12 @@ buildImage:
         echo "CUSTOM_ENV is empty. Exiting the buildImage job."
         exit 1
       fi
-      echo "$CUSTOM_ENV" > artifacts/custom_env.txt
+      echo "$CUSTOM_ENV" > artifacts/CUSTOM_ENV.txt
+      echo "$REPO" > artifacts/REPO.txt
       docker build -t $CUSTOM_ENV-frontend-image .
       docker save -o $CUSTOM_ENV-frontend-image.tar $CUSTOM_ENV-frontend-image
   dependencies:
     - devUnitTest
-    - stagingUnitTest
-    - prodUnitTest
   artifacts:
     paths:
       - $CUSTOM_ENV-frontend-image.tar
@@ -76,7 +58,9 @@ pushImage:
     # Load the Docker image from the tarball
     - docker load -i $CUSTOM_ENV-frontend-image.tar
     # Push the Docker image to the specified repository
-    -  docker tag dev-frontend-image:latest $REPO
+    - docker tag dev-frontend-image:latest $REPO
     - docker push $REPO
+
+
  
       
