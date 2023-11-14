@@ -43,6 +43,8 @@ stagingUnitTest:
     # do unit tests
     - echo "prod" > CUSTOM_ENV.txt
     - echo "$PROD_FRONTEND_REPO" > REPO.txt
+    - cat CUSTOM_ENV.txt
+    - cat REPO.txt
   artifacts:
     paths:
       - CUSTOM_ENV.txt
