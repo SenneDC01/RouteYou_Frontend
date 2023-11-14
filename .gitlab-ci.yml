@@ -18,6 +18,8 @@ devUnitTest:
     # do unit tests
     - export CUSTOM_ENV="dev"
     - export REPO=$DEV_FRONTEND_REPO
+    - echo "$CUSTOM_ENV" > artifacts/CUSTOM_ENV.txt
+    - echo "$REPO" > artifacts/REPO.txt
   only:
     - ci/cd
   artifacts:
@@ -60,7 +62,3 @@ pushImage:
     # Push the Docker image to the specified repository
     - docker tag dev-frontend-image:latest $REPO
     - docker push $REPO
-
-
- 
-      
