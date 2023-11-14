@@ -20,7 +20,7 @@ devUnitTest:
     - export CUSTOM_ENV="dev"
     - export REPO=$DEV_FRONTEND_REPO
   only:
-    - ci-cd
+    - ci/cd
 
 stagingUnitTest:
   stage: checkBranch
