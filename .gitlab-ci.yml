@@ -74,3 +74,4 @@ pushImage:
   only:
     variables:
       - $CUSTOM_ENV !=""
+      
