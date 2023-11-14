@@ -1,6 +1,6 @@
 variables:
-  BRANCH: ""
-  REPO: ""
+  BRANCH: $BRANCH
+  REPO: $REPO
 
 default:
   image: ubuntu
