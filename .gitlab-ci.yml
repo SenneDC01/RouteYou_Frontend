@@ -3,31 +3,55 @@ default:
   tags:
     - docker-runner-frontend
 stages:
-  # - buildSite
+  - checkBranch
   - buildImage
   - pushImage 
-# build_site:
-#   stage: buildSite
-#   image: $NODE_IMAGE
-#   script:
-#     - ls -al
-#     - npm install
-#     - npm run build 
-#     - ls -al
-#   artifacts: 
-#     paths:
-#       - ".next"
+
+variables:
+  CUSTOM_ENV: ""
+  REPO: ""
+
+devUnitTest: 
+  stage: checkBranch
+  script:
+    - echo "Running unit tests for $CUSTOM_ENV branch"
+    #doe unit testen
+    - export CUSTOM_ENV="dev"
+    - export REPO= $DEV_FRONTEND_REPO
+
+
+stagingUnitTest: 
+  stage: checkBranch
+  script:
+    - echo "Running unit tests for $CUSTOM_ENV branch"
+    #doe unit testen
+    - export CUSTOM_ENV="staging"
+    - export REPO= $STAGING_FRONTEND_REPO
+  
+
+prodUnitTest: 
+  stage: checkBranch
+  script:
+    - echo "Running unit tests for $CUSTOM_ENV branch"
+    #doe unit testen
+    - export CUSTOM_ENV="prod"
+    - export REPO= $PROD_FRONTEND_REPO
+
 buildImage:
   stage: buildImage
   image: docker:24.0.7
   services:
-    - docker:dind  # Use the Docker-in-Docker service to access the Docker socket
+    - docker:dind
   script:
-    - docker build -t dev-frontend-image .
-    - docker save -o dev-frontend-image.tar dev-frontend-image
+    - docker build -t $CUSTOM_ENV-frontend-image .
+    - docker save -o $CUSTOM_ENV-frontend-image.tar $CUSTOM_ENV-frontend-image
   artifacts:
     paths:
-    - dev-frontend-image.tar  
+      - $CUSTOM_ENV-frontend-image.tar
+  only:
+    variables:
+      - $CUSTOM_ENV != ""
+
 pushImage:
   stage: pushImage
   image: google/cloud-sdk
@@ -38,8 +62,11 @@ pushImage:
     - gcloud auth activate-service-account --key-file=gcloud-service-key.json
     - gcloud auth configure-docker europe-west1-docker.pkg.dev
     # Load the Docker image from the tarball
-    - docker load -i dev-frontend-image.tar
+    - docker load -i $CUSTOM_ENV-frontend-image.tar
     # Push the Docker image to the specified repository
-    -  docker tag dev-frontend-image:latest $FRONTEND_REPO
-    - docker push $FRONTEND_REPO
-    
+    -  docker tag dev-frontend-image:latest $REPO
+    - docker push $REPO
+  only:
+    variables:
+      - $CUSTOM_ENV != ""
+
