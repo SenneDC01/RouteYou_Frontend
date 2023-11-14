@@ -29,7 +29,7 @@ buildImage:
     - docker:dind
   script:
     - |
-      if [ ! -s "artifacts/CUSTOM_ENV.txt" ]; then
+      if [ ! -s "CUSTOM_ENV.txt" ]; then
         echo "CUSTOM_ENV.txt is empty. Exiting the buildImage job."
         exit 1
       fi
@@ -46,6 +46,8 @@ pushImage:
   stage: pushImage
   image: google/cloud-sdk
   script:
+    - CUSTOM_ENV=$(cat artifacts/CUSTOM_ENV.txt)  # Read the value from CUSTOM_ENV.txt
+    - REPO=$(cat artifacts/REPO.txt)  # Read the value from CUSTOM_ENV.txt
     - touch gcloud-service-key.json
     - echo "$GCLOUD_SERVICE_KEY" > gcloud-service-key.json
     - cat gcloud-service-key.json
