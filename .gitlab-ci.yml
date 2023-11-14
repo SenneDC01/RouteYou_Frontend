@@ -12,6 +12,26 @@ stages:
   - buildImage
   - pushImage
 
+prodUnitTest:
+  stage: checkBranch
+  script:
+    - echo "Running unit tests for production branch"
+    # do unit tests if all good do the rest else return 1
+    - export BRANCH="prod"
+    - export REPO=$PROD_FRONTEND_REPO
+  only:
+    - prod
+
+stagingUnitTest:
+  stage: checkBranch
+  script:
+    - echo "Running unit tests for development branch"
+    # do unit tests if all good do the rest else return 1
+    - export BRANCH="staging"
+    - export REPO=$STAGING_FRONTEND_REPO
+  only:
+    - staging
+
 devUnitTest:
   stage: checkBranch
   script:
