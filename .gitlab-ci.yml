@@ -11,7 +11,7 @@ stages:
 devUnitTest:
   stage: checkBranch
   script:
-    - echo "Running unit tests for $CUSTOM_ENV branch"
+    - echo "Running unit tests for development"
     # do unit tests
     - echo "dev" > BRANCH.txt
     - echo "$DEV_FRONTEND_REPO" > REPO.txt
@@ -25,28 +25,28 @@ devUnitTest:
 stagingUnitTest:
   stage: checkBranch
   script:
-    - echo "Running unit tests for $CUSTOM_ENV branch"
+    - echo "Running unit tests for staging"
     # do unit tests
     - echo "staging" > BRANCH.txt
     - echo "$STAGING_FRONTEND_REPO" > REPO.txt
   artifacts:
     paths:
-      - BRANCH
-      - REPO
+      - BRANCH.txt
+      - REPO.txt
   only:
     - staging
 
 prodUnitTest:
   stage: checkBranch
   script:
-    - echo "Running unit tests for $CUSTOM_ENV branch"
+    - echo "Running unit tests for production"
     # do unit tests
     - echo "prod" > BRANCH.txt
     - echo "$PROD_FRONTEND_REPO" > REPO.txt
   artifacts:
     paths:
-      - BRANCH
-      - REPO
+      - BRANCH.txt
+      - REPO.txt
   only:
     - prod
 
@@ -59,15 +59,16 @@ buildImage:
     BRANCH: "dev"  # Set the default value
     REPO: "hold"
   script:
-    - ls -al  # List the contents of the current directory for debugging
-    - export BRANCH=$(cat BRANCH.txt)  # Load the value from the artifact
-    - echo "$BRANCH"
-    - export REPO=$(cat REPO.txt)  # Load the value from the artifact
-    - echo "$REPO"
+    - ls -al
+    - cat BRANCH.txt
+    - cat REPO.txt
+    - export BRANCH=$(cat BRANCH.txt)
+    - echo "Loaded BRANCH $BRANCH"
+    - export REPO=$(cat REPO.txt)
+    - echo "Loaded REPO $REPO"
     - docker build -t "${BRANCH}-frontend-image" .
     - docker save -o "${BRANCH}-frontend-image.tar" "${BRANCH}-frontend-image"
-  dependencies:
-    - prodUnitTest  # This ensures that prodUnitTest is executed before buildImage
+
   artifacts:
     paths:
       - "${BRANCH}-frontend-image.tar"
