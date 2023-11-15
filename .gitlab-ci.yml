@@ -14,7 +14,7 @@ devUnitTest:
     - echo "Running unit tests for $CUSTOM_ENV branch"
     # do unit tests
     - echo "dev" > BRANCH"
-    - echo "$DEV_FRONTEND_REPO" > REPO"
+    - echo "$DEV_FRONTEND_REPO" > REPO
   artifacts:
     paths:
       - BRANCH
@@ -27,8 +27,8 @@ stagingUnitTest:
   script:
     - echo "Running unit tests for $CUSTOM_ENV branch"
     # do unit tests
-    - echo "staging" > BRANCH"
-    - echo "$STAGING_FRONTEND_REPO" > REPO"
+    - echo "staging" > BRANCH
+    - echo "$STAGING_FRONTEND_REPO" > REPO
   artifacts:
     paths:
       - BRANCH
@@ -41,8 +41,8 @@ prodUnitTest:
   script:
     - echo "Running unit tests for $CUSTOM_ENV branch"
     # do unit tests
-    - echo "prod" > BRANCH"
-    - echo "$PROD_FRONTEND_REPO" > REPO"
+    - echo "prod" > BRANCH
+    - echo "$PROD_FRONTEND_REPO" > REPO
   artifacts:
     paths:
       - BRANCH
