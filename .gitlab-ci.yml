@@ -1,7 +1,3 @@
-variables:
-  BRANCH: ""
-  REPO: ""
-
 default:
   image: ubuntu
   tags:
@@ -12,35 +8,47 @@ stages:
   - buildImage
   - pushImage
 
-prodUnitTest:
+devUnitTest:
   stage: checkBranch
   script:
-    - echo "Running unit tests for production branch"
-    # do unit tests if all good do the rest else return 1
-    - export BRANCH="prod"
-    - export REPO=$PROD_FRONTEND_REPO
+    - echo "Running unit tests for $CUSTOM_ENV branch"
+    # do unit tests
+    - echo "dev" > BRANCH"
+    - echo "$DEV_FRONTEND_REPO" > REPO"
+  artifacts:
+    paths:
+      - BRANCH
+      - REPO
   only:
-    - prod
+    - ci/cd
 
 stagingUnitTest:
   stage: checkBranch
   script:
-    - echo "Running unit tests for development branch"
-    # do unit tests if all good do the rest else return 1
-    - export BRANCH="staging"
-    - export REPO=$STAGING_FRONTEND_REPO
+    - echo "Running unit tests for $CUSTOM_ENV branch"
+    # do unit tests
+    - echo "staging" > BRANCH"
+    - echo "$STAGING_FRONTEND_REPO" > REPO"
+  artifacts:
+    paths:
+      - BRANCH
+      - REPO
   only:
     - staging
 
-devUnitTest:
+prodUnitTest:
   stage: checkBranch
   script:
-    - echo "Running unit tests for development branch"
-    # do unit tests if all good do the rest else return 1
-    - export BRANCH="dev"
-    - export REPO=$DEV_FRONTEND_REPO
+    - echo "Running unit tests for $CUSTOM_ENV branch"
+    # do unit tests
+    - echo "prod" > BRANCH"
+    - echo "$PROD_FRONTEND_REPO" > REPO"
+  artifacts:
+    paths:
+      - BRANCH
+      - REPO
   only:
-    - ci/cd
+    - prod
 
 buildImage:
   stage: buildImage
@@ -48,27 +56,30 @@ buildImage:
   services:
     - docker:dind
   script:
-    - echo $BRANCH
-    - echo $REPO
-    - docker build -t $BRANCH-frontend-image .
-    - docker save -o $BRANCH-frontend-image.tar $BRANCH_ENV-frontend-image
+    - echo "cat BRANCH"
+    - echo "REPO"
+    - BRANCH=$(cat BRANCH)  # Read the value from CUSTOM_ENV.txt
+    - docker build -t "${BRANCH}-frontend-image" .
+    - docker save -o "${BRANCH}-frontend-image.tar" "${BRANCH}-frontend-image"
   dependencies:
     - devUnitTest
   artifacts:
     paths:
-      - $BRANCH-frontend-image.tar
+      - "${BRANCH}-frontend-image.tar"
 
 pushImage:
   stage: pushImage
   image: google/cloud-sdk
   script:
+    - CUSTOM_ENV=$(cat artifacts/CUSTOM_ENV.txt)  # Read the value from CUSTOM_ENV.txt
+    - REPO=$(cat artifacts/REPO.txt)  # Read the value from CUSTOM_ENV.txt
     - touch gcloud-service-key.json
     - echo "$GCLOUD_SERVICE_KEY" > gcloud-service-key.json
     - cat gcloud-service-key.json
     - gcloud auth activate-service-account --key-file=gcloud-service-key.json
     - gcloud auth configure-docker europe-west1-docker.pkg.dev
     # Load the Docker image from the tarball
-    - docker load -i $$BRANCH-frontend-image.tar
+    - docker load -i $CUSTOM_ENV-frontend-image.tar
     # Push the Docker image to the specified repository
-    - docker tag $BRANCH-frontend-image:latest $REPO
+    - docker tag dev-frontend-image:latest $REPO
     - docker push $REPO
