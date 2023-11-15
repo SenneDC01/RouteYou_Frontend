@@ -7,6 +7,8 @@ const Button = ({ label, backgroundColor, borderColor, fontColor, icon, width, h
     const buttonStyle = {
         backgroundColor: backgroundColor,
         borderColor: borderColor,
+        borderWidth: 3,
+        borderRadius: 5,
         color: fontColor,
         width: width,
         height: height,
@@ -17,7 +19,7 @@ const Button = ({ label, backgroundColor, borderColor, fontColor, icon, width, h
 
     return (
         <button style={buttonStyle}>
-            {icon && <span>{icon}</span>}
+            <img src={icon} width="200" height="20" />
             {label}
         </button>
     );
@@ -37,12 +39,13 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
+    label: 'Click me',
     backgroundColor: colors.green,
-    borderColor: colors.green,
+    borderColor: colors.dark,
     fontColor: colors.white,
     icon: null,
-    width: 'auto',
-    height: 'auto',
+    width: '100px',
+    height: '50px',
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: 'inherit'
