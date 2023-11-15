@@ -59,6 +59,7 @@ buildImage:
     BRANCH: "dev"  # Set the default value
     REPO: "hold"
   script:
+    - ls -al  # List the contents of the current directory for debugging
     - export BRANCH=$(cat BRANCH)  # Load the value from the artifact
     - echo "$BRANCH"
     - export REPO=$(cat REPO)  # Load the value from the artifact
