@@ -13,7 +13,7 @@ devUnitTest:
   script:
     - echo "Running unit tests for $CUSTOM_ENV branch"
     # do unit tests
-    - echo "dev" > BRANCH"
+    - echo "dev" > BRANCH
     - echo "$DEV_FRONTEND_REPO" > REPO
   artifacts:
     paths:
