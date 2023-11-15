@@ -13,12 +13,12 @@ devUnitTest:
   script:
     - echo "Running unit tests for $CUSTOM_ENV branch"
     # do unit tests
-    - echo "dev" > BRANCH
-    - echo "$DEV_FRONTEND_REPO" > REPO
+    - echo "dev" > BRANCH.txt
+    - echo "$DEV_FRONTEND_REPO" > REPO.txt
   artifacts:
     paths:
-      - BRANCH
-      - REPO
+      - BRANCH.txt
+      - REPO.txt
   only:
     - ci/cd
 
@@ -27,8 +27,8 @@ stagingUnitTest:
   script:
     - echo "Running unit tests for $CUSTOM_ENV branch"
     # do unit tests
-    - echo "staging" > BRANCH
-    - echo "$STAGING_FRONTEND_REPO" > REPO
+    - echo "staging" > BRANCH.txt
+    - echo "$STAGING_FRONTEND_REPO" > REPO.txt
   artifacts:
     paths:
       - BRANCH
@@ -41,8 +41,8 @@ prodUnitTest:
   script:
     - echo "Running unit tests for $CUSTOM_ENV branch"
     # do unit tests
-    - echo "prod" > BRANCH
-    - echo "$PROD_FRONTEND_REPO" > REPO
+    - echo "prod" > BRANCH.txt
+    - echo "$PROD_FRONTEND_REPO" > REPO.txt
   artifacts:
     paths:
       - BRANCH
@@ -60,9 +60,9 @@ buildImage:
     REPO: "hold"
   script:
     - ls -al  # List the contents of the current directory for debugging
-    - export BRANCH=$(cat BRANCH)  # Load the value from the artifact
+    - export BRANCH=$(cat BRANCH.txt)  # Load the value from the artifact
     - echo "$BRANCH"
-    - export REPO=$(cat REPO)  # Load the value from the artifact
+    - export REPO=$(cat REPO.txt)  # Load the value from the artifact
     - echo "$REPO"
     - docker build -t "${BRANCH}-frontend-image" .
     - docker save -o "${BRANCH}-frontend-image.tar" "${BRANCH}-frontend-image"
