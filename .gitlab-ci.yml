@@ -55,14 +55,18 @@ buildImage:
   image: docker:24.0.7
   services:
     - docker:dind
+  variables:
+    BRANCH: "dev"  # Set the default value
+    REPO: "hold"
   script:
-    - echo "cat BRANCH"
-    - echo "REPO"
-    - BRANCH=$(cat BRANCH)  # Read the value from CUSTOM_ENV.txt
+    - export BRANCH=$(cat BRANCH)  # Load the value from the artifact
+    - echo "$BRANCH"
+    - export REPO=$(cat REPO)  # Load the value from the artifact
+    - echo "$REPO"
     - docker build -t "${BRANCH}-frontend-image" .
     - docker save -o "${BRANCH}-frontend-image.tar" "${BRANCH}-frontend-image"
   dependencies:
-    - devUnitTest
+    - prodUnitTest  # This ensures that prodUnitTest is executed before buildImage
   artifacts:
     paths:
       - "${BRANCH}-frontend-image.tar"
