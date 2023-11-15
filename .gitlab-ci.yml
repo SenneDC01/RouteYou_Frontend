@@ -68,7 +68,7 @@ buildImage:
 
   artifacts:
     paths:
-      - ./$CI_COMMIT_BRANCH-frontend-image.tar
+      - ./dev-frontend-image.tar
 
 pushImage:
   stage: pushImage
