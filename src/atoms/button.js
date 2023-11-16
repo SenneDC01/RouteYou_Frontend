@@ -3,32 +3,38 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as colors from '../utils/colors';
 
-const Button = ({ label, backgroundColor, borderColor, fontColor, icon, width, height, fontStyle, fontWeight, fontSize }) => {
+const Button = ({ label, backgroundColor, borderColor, borderRadius, fontColor, icon, width, height, fontStyle, fontWeight, fontSize }) => {
     const buttonStyle = {
         backgroundColor: backgroundColor,
         borderColor: borderColor,
         borderWidth: 3,
-        borderRadius: 5,
+        borderRadius: borderRadius,
         color: fontColor,
         width: width,
         height: height,
         fontStyle: fontStyle,
         fontWeight: fontWeight,
-        fontSize: fontSize
+        fontSize: fontSize,
+        textTransform: 'uppercase', // Capitalize text
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
     };
 
     return (
         <button style={buttonStyle}>
-            <img src={icon} width="200" height="20" />
+            {icon && React.cloneElement(icon, { width: '40px', height: '20px' })}
             {label}
         </button>
     );
 };
 
+
 Button.propTypes = {
     label: PropTypes.string.isRequired,
     backgroundColor: PropTypes.string,
     borderColor: PropTypes.string,
+    borderRadius: PropTypes.string,
     fontColor: PropTypes.string,
     icon: PropTypes.element,
     width: PropTypes.string,
@@ -41,13 +47,14 @@ Button.propTypes = {
 Button.defaultProps = {
     label: 'Click me',
     backgroundColor: colors.green,
-    borderColor: colors.dark,
+    borderColor: colors.green,
     fontColor: colors.white,
+    borderRadius: 5,
     icon: null,
     width: '100px',
     height: '50px',
-    fontStyle: 'normal',
-    fontWeight: 'normal',
+    fontStyle: 'Inter',
+    fontWeight: 'bold',
     fontSize: 'inherit'
 };
 
