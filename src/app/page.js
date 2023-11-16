@@ -1,12 +1,18 @@
 // pages/index.js or any other component file
 import React from 'react';
-import Button from '../Atoms/Button';
+import CustomButton from '../atoms/Button';
 import * as colors from '../utils/colors';
 import EditSVG from '../utils/icons/EditSVG';
 import ArrowLeftSVG from '../utils/icons/ArrowLeftSVG';
-
+import Header from '../organisms/header';
+import '../app/globals.css';
 
 const HomePage = () => {
+    const headerData = {
+        profilePicture: '/path/to/profile-picture.jpg',
+        profileName: 'John Doe',
+    };
+
     const containerStyle = {
         display: 'flex',
         flexDirection: 'column',
@@ -17,47 +23,50 @@ const HomePage = () => {
     };
 
     return (
-        <div style={containerStyle}>
-            <Button
-                label="Inscrijven"
-                backgroundColor={colors.white}
-                borderColor={colors.green}
-                fontColor={colors.green}
-                icon={<EditSVG/>}
-                width="200px"
-                height="50px"
-                fontStyle="Inter"
-                fontWeight="bold"
-                fontSize='16px'
-            />
+        <div>
+            <Header {...headerData} />
+            <div style={containerStyle}>
+                <CustomButton
+                    label="Inscrijven"
+                    backgroundColor={colors.white}
+                    borderColor={colors.green}
+                    fontColor={colors.green}
+                    icon={<EditSVG/>}
+                    width="15em"
+                    height="3.5em"
+                    fontStyle="Inter"
+                    fontWeight="bold"
+                    fontSize='1em'
+                />
 
-            <Button
-                label="Cancel"
-                backgroundColor={colors.white}
-                borderColor={colors.red}
-                fontColor={colors.red}
-                icon={null}
-                width="150px"
-                height="50px"
-                fontStyle="Inter"
-                fontWeight="bold"
-                fontSize='16px'
-            />
+                <CustomButton
+                    label="Cancel"
+                    backgroundColor={colors.white}
+                    borderColor={colors.red}
+                    fontColor={colors.red}
+                    icon={null}
+                    width="12em"
+                    height="3.5em"
+                    fontStyle="Inter"
+                    fontWeight="bold"
+                    fontSize='1em'
+                />
 
-            <Button
-                label=""
-                backgroundColor={colors.green}
-                borderColor={colors.green}
-                fontColor={colors.white}
-                icon={<ArrowLeftSVG/>}
-                width="50px"
-                height="50px"
-                borderRadius={30}
-            />
+                <CustomButton
+                    label=""
+                    backgroundColor={colors.green}
+                    borderColor={colors.green}
+                    fontColor={colors.white}
+                    icon={<ArrowLeftSVG/>}
+                    width="3em"
+                    height="3em"
+                    borderRadius={30}
+                />
 
-            <Button
-                label="Save"
-            />
+                <CustomButton
+                    label="Save"
+                />
+            </div>
         </div>
     );
 };
