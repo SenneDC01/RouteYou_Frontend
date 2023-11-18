@@ -1,18 +1,18 @@
 import React from "react";
 
-const ArrowLeftSVG = ({ width, height }) => {
+const ArrowDownSVG = ({ width, height }) => {
   return (
     <svg
       width={width}
       height={height}
-      viewBox="0 0 13 18"
+      viewBox="0 0 18 13"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clipPath="url(#clip0_192_4666)">
+      <g clipPath="url(#clip0_61_6970)">
         <path
-          d="M10.5708 16.5L1.5708 9L10.5708 1.5"
-          stroke="#FFF"
+          d="M16.5 2L9 11L1.5 2"
+          stroke="#222222"
           strokeWidth="2"
           strokeMiterlimit="10"
           strokeLinecap="square"
@@ -20,12 +20,12 @@ const ArrowLeftSVG = ({ width, height }) => {
         />
       </g>
       <defs>
-        <clipPath id="clip0_192_4666">
+        <clipPath id="clip0_61_6970">
           <rect
-            width="12"
-            height="18"
+            width="18"
+            height="12"
             fill="white"
-            transform="translate(0.0708008)"
+            transform="translate(0 0.5)"
           />
         </clipPath>
       </defs>
@@ -33,4 +33,4 @@ const ArrowLeftSVG = ({ width, height }) => {
   );
 };
 
-export default ArrowLeftSVG;
+export default ArrowDownSVG;
