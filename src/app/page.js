@@ -7,6 +7,7 @@ import EditSVG from "../utils/icons/EditSVG";
 import ArrowLeftSVG from "../utils/icons/ArrowLeftSVG";
 import Header from "../organisms/header";
 import "../app/globals.css";
+import Footer from "@/organisms/footer";
 
 const HomePage = () => {
   const headerData = {
@@ -66,6 +67,7 @@ const HomePage = () => {
 
         <CustomButton label="Save" />
       </div>
+      <Footer />
     </div>
   );
 };

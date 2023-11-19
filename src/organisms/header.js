@@ -6,8 +6,6 @@ import logo from "../utils/images/logo.png";
 import profilePic from "../utils/images/profilePicture.png";
 import * as colors from "../utils/colors";
 import CustomDropdown from "@/molecules/dropdown";
-import ArrowLeftSVG from "@/utils/icons/ArrowLeftSVG";
-import ArrowDownSVG from "@/utils/icons/ArrowDownSVG";
 
 const Header = ({ profileName }) => {
   const headerStyle = {
