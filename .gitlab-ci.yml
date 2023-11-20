@@ -66,7 +66,6 @@ buildImage:
     - echo "Loaded REPO $REPO"
     - docker build -t $BRANCH_NAME-frontend-image .
     - docker save -o $BRANCH_NAME-frontend-image.tar $BRANCH_NAME-frontend-image
-
   artifacts:
     paths:
       - ./dev-frontend-image.tar
