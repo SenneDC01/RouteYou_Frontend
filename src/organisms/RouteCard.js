@@ -3,6 +3,12 @@ import React from "react";
 import { Card, CardBody, CardFooter } from "@nextui-org/react";
 import Image from "next/image";
 import PropTypes from "prop-types";
+import AfstandSVG from "@/utils/icons/AfstandSVG";
+import HoogteSVG from "@/utils/icons/HoogteSVG";
+import GemStijgingSVG from "@/utils/icons/GemStijgingSVG";
+import KlokSVG from "@/utils/icons/KlokSVG";
+import MaxStijgingSVG from "@/utils/icons/MaxStijgingSVG";
+import MoeilijkheidSVG from "@/utils/icons/MoeilijkheidSVG";
 
 const RouteCard = ({
   image,
@@ -29,16 +35,34 @@ const RouteCard = ({
           />
           <div className={"flex justify-center font-semibold"}>{title}</div>{" "}
           {/*font-bold werkt niet font-semibold wel*/}
-          <div className="flex justify-center flex-row gap-1">
-            <div className="flex flex-col gap-1">
-              <p>{afstand}</p>
-              <p>{hoogte}</p>
-              <p>{gemStijgingsPercentage}</p>
+          <div className="flex justify-center flex-row gap-3 p-2">
+            <div className="flex flex-col gap-5">
+              <p className="flex flex-row gap-1">
+                {<AfstandSVG width={25} height={25} />}
+                {afstand}
+              </p>
+              <p className="flex flex-row gap-1">
+                {<HoogteSVG width={25} height={25} />}
+                {hoogte}
+              </p>
+              <p className="flex flex-row gap-1">
+                {<GemStijgingSVG width={25} height={25} />}
+                {gemStijgingsPercentage}
+              </p>
             </div>
-            <div className="flex flex-col gap-1">
-              <p>{tijd}</p>
-              <p>{maxStijgingsPercentage}</p>
-              <p>{moeilijkheid}</p>
+            <div className="flex flex-col">
+              <p className="flex flex-row gap-1">
+                {<KlokSVG width={25} height={25} />}
+                {tijd}
+              </p>
+              <p className="flex flex-row gap-1">
+                {<MaxStijgingSVG width={25} height={25} />}
+                {maxStijgingsPercentage}
+              </p>
+              <p className="flex flex-row gap-1">
+                {<MoeilijkheidSVG width={25} height={25} />}
+                {moeilijkheid}
+              </p>
             </div>
           </div>
         </CardBody>
