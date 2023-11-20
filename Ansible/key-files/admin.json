@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "project-atp-routeyou1",
+  "private_key_id": "26870b223fd0f100de01879a6173775e7df4c77b",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCmdOOJTOaDvjU0\nt2UcyevkISOXBtUbLjqUsradtG+8nVJODw7m8X20NcUdAa4gHBMl2/tgChBpnXEx\njS+o86uZndWE6sWaI5LrEUZfnBCGPmX9Cww4npq4uQCnlcaaoEbT6nDZaTA/q19e\nZXv9u7rDjvs9q/lQCFoWoGyHMRN3SYZDj4jz6twV4HOyo8goiAHXL4DRH0EY2wSX\nnVUvpr33+ZYhh0JepWxqgUR97JMfL3sn2xUiJ6RYIQ+MB+l03XdlAEjW6HxjHXhp\n/c2akHSlQNY8XHZOr7MdXzQZH1qTucc34xhk4IS6IuxFn3feelu1cZzONVIOWMxL\nJk992AfbAgMBAAECggEATbwJpI1+myihNUiuFhcwK73UHowIymQ45EdfY9+nTMiV\nbrG2jmBZiWaQ8l5eAE3MHWKRjoS0rHXjrjXWe4qr6RXd6HAxLq4NRuyu1iiOSPrr\n6xOVNf3PmJOA/EJEWOKfoQh7gfSPHTS9WVqAYHqimf/0UZU13UvBMo7hj/L5ubsh\npmvKxgcoSMH6kAFxzVrD91HPNQONlUyqqMj0F2Lv5c5iltqEc3JE6pksHjqrco3Z\nepPCJ92kudVkE4TCJmWtwb1xCDI20T+rAVp2xbd/q+ih1mTb+i5X20PYmAiANlUG\nuyfsDMxV3tKzuFggFm9nmSzTAgiAz2Qz7jn0c8nuUQKBgQDbhEKvAdNllWDwbfwK\nibkbMoVg8jzxp6miGlhJcUGxNBXPQWNg9qX0n4z7FHr97dV3cbcYc6Sm8/W51i7F\nL6GBPMOTa/WfWTOp0wJbInP1Vw18KiysBsUbApNz8phsZTZ2/TyFYg8SnxMSDhaH\nimeQVPcb5ZrgUOyryz98qGv5MQKBgQDCHxdO+ZuU91jjEBe0mMKV8RSVZLsRQef/\nwUwda1W8ewhSgJdquxsY2S1m6hIZtbeuFJczuBhLqH97huy4ugVcZbKppuUjHNrY\nThK+1NrPzVaudMgc9rk9MsIuyfO6zdizs9fAba8f7nL/H/xmG8r5+qQqZ28r/Cf1\nKvk7e/TOywKBgCk3NxIG5LsxBed+rxEHdNLvdG2Ube7tjQMbsTHw6uWrouCsJU2i\nYdyBTIYj/UfKLQdlOXyE0ghqy9tdpKBvZgKO9yWp4o9Nv06GiO21lVIeSzDh9ktC\nZiXBIRBnH0lS45wJxiBBHhVf+sOsE3zVdsZ5vX/mZ2Lwrs8+tSfhs4wxAoGBAJil\nuD97GrPeeUA8dFeoVENySxxbFJsyd0vvZXow4D+Rg+7Ufb0JGvrENOabo9YhximW\nuXuLBVfhTTYG2Hk+ll6c/gxYWBDvbMvxQN5dJR+JOeN/o6ja/rk4A+ilGArKOeC9\nyCfiWHbEnBswvNpSep9uT8+kfJBa/dTVkR0MkWpXAoGAdAmOJMdUIQXhCaMY0OTp\nFrSDCHNOY068CVQ4msShoPlP6YM9rYvwsiGrPWM72/cbR8JpbFCfFLd335M0UG77\nd7BeWQkry7rF6tBrWUG1XaDEQO7QV96i7kHubLttXnw4GAbB8M5mOeTh8NbKzeoW\nvE9TLj9ZinJYbMjNaujM1i0=\n-----END PRIVATE KEY-----\n",
+  "client_email": "service-artifact-registry@project-atp-routeyou1.iam.gserviceaccount.com",
+  "client_id": "113408607838593942717",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/service-artifact-registry%40project-atp-routeyou1.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
