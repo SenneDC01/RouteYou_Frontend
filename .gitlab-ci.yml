@@ -12,7 +12,7 @@ stages:
 devUnitTest:
   stage: checkBranch
   only:
-    - ci/cd
+    - dev
   script:
     - echo "Running unit tests for development"
     # do unit tests
@@ -67,7 +67,7 @@ buildImage:
     - docker save -o $BRANCH_NAME-frontend-image.tar $BRANCH_NAME-frontend-image
   artifacts:
     paths:
-      - ./dev-frontend-image.tar
+      - ./$CI_COMMIT_BRANCH-frontend-image.tar
 
 pushImage:
   stage: pushImage
