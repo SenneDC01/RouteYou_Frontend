@@ -27,7 +27,9 @@ const RouteCard = ({
             className="w-full object-cover"
             src={image}
           />
-          <div className="flex flex-row gap-1">
+          <div className={"flex justify-center font-semibold"}>{title}</div>{" "}
+          {/*font-bold werkt niet font-semibold wel*/}
+          <div className="flex justify-center flex-row gap-1">
             <div className="flex flex-col gap-1">
               <p>{afstand}</p>
               <p>{hoogte}</p>

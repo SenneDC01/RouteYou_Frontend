@@ -44,10 +44,10 @@ const HomePage = () => {
 
   return (
     <div style={containerStyle}>
-      <Header {...headerData} />
+      <Header {...headerData} /> {/*text scaled nog niet correct*/}
       <div style={cardContainer}>
         <RouteCard image={cardImage} title="test" />
-        <RouteCard image={profilePic} title="test" />
+        <RouteCard image={cardImage} title="test" />
       </div>
       <div style={buttonContainer}>
         <CustomButton
