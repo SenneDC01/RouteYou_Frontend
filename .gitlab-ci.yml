@@ -9,6 +9,7 @@ stages:
   - pushImage
   - runAnsible
 
+
 devUnitTest:
   stage: checkBranch
   only:
