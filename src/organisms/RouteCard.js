@@ -33,33 +33,33 @@ const RouteCard = ({
             className="w-full object-cover"
             src={image}
           />
-          <div className={"flex justify-center font-semibold"}>{title}</div>{" "}
+          <div className={"flex justify-center font-semibold p-2"}>{title}</div>
           {/*font-bold werkt niet font-semibold wel*/}
-          <div className="flex justify-center flex-row gap-3 p-2">
+          <div className="flex justify-center flex-row gap-3">
             <div className="flex flex-col gap-5">
-              <p className="flex flex-row gap-1">
+              <p className="flex flex-row gap-1 p-3">
                 {<AfstandSVG width={25} height={25} />}
                 {afstand}
               </p>
-              <p className="flex flex-row gap-1">
+              <p className="flex flex-row gap-1 p-3">
                 {<HoogteSVG width={25} height={25} />}
                 {hoogte}
               </p>
-              <p className="flex flex-row gap-1">
+              <p className="flex flex-row gap-1 p-3">
                 {<GemStijgingSVG width={25} height={25} />}
                 {gemStijgingsPercentage}
               </p>
             </div>
             <div className="flex flex-col">
-              <p className="flex flex-row gap-1">
+              <p className="flex flex-row gap-1 p-3">
                 {<KlokSVG width={25} height={25} />}
                 {tijd}
               </p>
-              <p className="flex flex-row gap-1">
+              <p className="flex flex-row gap-1 p-3">
                 {<MaxStijgingSVG width={25} height={25} />}
                 {maxStijgingsPercentage}
               </p>
-              <p className="flex flex-row gap-1">
+              <p className="flex flex-row gap-1 p-3">
                 {<MoeilijkheidSVG width={25} height={25} />}
                 {moeilijkheid}
               </p>
