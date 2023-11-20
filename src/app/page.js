@@ -1,7 +1,7 @@
 // pages/index.js or any other component file
 "use client";
 import React from "react";
-import CustomButton from "../atoms/Button";
+import CustomButton from "../atoms/button";
 import * as colors from "../utils/colors";
 import EditSVG from "../utils/icons/EditSVG";
 import ArrowLeftSVG from "../utils/icons/ArrowLeftSVG";
