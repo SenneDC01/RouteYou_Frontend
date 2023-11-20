@@ -3,7 +3,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import * as colors from "../utils/colors";
 
-// Warning: Button: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead.
 const Button = ({
   label = "Click me",
   backgroundColor = colors.green,
@@ -55,19 +54,5 @@ Button.propTypes = {
   fontWeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   fontSize: PropTypes.string,
 };
-
-// Button.defaultProps = {
-//     label: 'Click me',
-//     backgroundColor: colors.green,
-//     borderColor: colors.green,
-//     fontColor: colors.white,
-//     borderRadius: 5,
-//     icon: null,
-//     width: '100px',
-//     height: '50px',
-//     fontStyle: 'Inter',
-//     fontWeight: 'bold',
-//     fontSize: 'inherit'
-// };
 
 export default Button;
