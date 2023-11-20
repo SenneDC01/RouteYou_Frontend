@@ -22,7 +22,6 @@ devUnitTest:
   artifacts:
     paths: [output/]
 
-
 stagingUnitTest:
   stage: checkBranch
   only:
