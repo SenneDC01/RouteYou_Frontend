@@ -35,6 +35,7 @@ stagingUnitTest:
     - echo "$STAGING_FRONTEND_REPO" > output/repo.txt
   artifacts:
     paths: [output/]
+    
 
 prodUnitTest:
   stage: checkBranch
