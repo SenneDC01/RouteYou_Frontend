@@ -11,7 +11,6 @@ import {
 // https://nextui.org/docs/components/dropdown
 const CustomDropdown = ({ buttonText, items }) => {
   const dropdownStyle = {
-    //border: "solid",
     padding: 0,
     maxWidth: 100,
     fontSize: "20"
@@ -23,13 +22,11 @@ const CustomDropdown = ({ buttonText, items }) => {
     alignItems: "center",
     justifyContent: "space-around",
     gap: 4,
-    //border: "solid",
     padding: 0,
   };
 
   return (
     <NextUIProvider style={dropdownStyle}>
-      {/*{<ArrowDownSVG />}*/}
       <Dropdown>
         <DropdownTrigger style={buttonStyle}>
           <Button variant="none" size={"lg"} className={"h-0 p-0 min-w-fit"}>{buttonText}</Button>

@@ -8,6 +8,7 @@ import ArrowLeftSVG from "../utils/icons/ArrowLeftSVG";
 import Header from "../organisms/header";
 import "../app/globals.css";
 import Footer from "@/organisms/footer";
+import RouteCard from "@/organisms/RouteCard";
 
 const HomePage = () => {
   const headerData = {
@@ -20,13 +21,24 @@ const HomePage = () => {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    height: "100vh",
+    height: "100vh", //moet ergens anders
     gap: "1vh",
+  };
+
+  const cardContainer = {
+    display: "flex",
+    flexDirection: "row",
+    //alignItems: "center",
+    //justifyContent: "center",
+    //gap: "1vh",
   };
 
   return (
     <div>
       <Header {...headerData} />
+      <div style={cardContainer}>
+        <RouteCard></RouteCard>
+      </div>
       <div style={containerStyle}>
         <CustomButton
           label="Inscrijven"
