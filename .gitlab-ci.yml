@@ -7,6 +7,7 @@ stages:
   - checkBranch
   - buildImage
   - pushImage
+  - runAnsible
 
 devUnitTest:
   stage: checkBranch
@@ -91,3 +92,32 @@ pushImage:
     # Push the Docker image to the specified repository
     - docker tag $BRANCH_NAME-frontend-image:latest "$REPO"
     - docker push "$REPO"
+
+runAnsible:
+  image: ubuntu
+  before_script:
+    ## Install ssh-agent
+    - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y  && apt-get install git -y)'
+    ## Run ssh-agent
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+  stage: runAnsible
+  script:
+    - apt-get update && apt-get upgrade -y
+    - apt-get install openssh-server openssh-client -y
+    - apt-get -y install sshpass
+    - apt-get install -y python3
+    - apt-get install python3-pip -y
+    - python3 -m pip install --upgrade pip
+    - pip3 install ansible==2.9
+    - pip3 install ansible-lint
+    - cd Ansible
+    - chmod 770 .
+    - touch .vault_pass.txt
+    - echo $ANSIBLE_VAULT_PASSWORD > .vault_pass.txt
+    - ansible -i hosts.yml all -m ping
+    - ansible-playbook playbook.yml
