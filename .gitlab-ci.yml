@@ -36,7 +36,6 @@ stagingUnitTest:
   artifacts:
     paths: [output/]
     
-
 prodUnitTest:
   stage: checkBranch
   only:
