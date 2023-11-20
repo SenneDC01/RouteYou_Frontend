@@ -1,0 +1,7 @@
+---
+# tasks file for install-ssh-pass
+    - name: Install sshpass
+      become: true
+      ansible.builtin.package:
+        name: sshpass
+        state: present

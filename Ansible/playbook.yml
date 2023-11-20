@@ -1,0 +1,48 @@
+---
+# we dont make ssh keys with ansible we use vars in ci/cd otherwise we would have a key everytime we run this 
+- name: copying ssh key and updating sudoers
+  hosts: host
+  gather_facts: false
+  become: true
+  roles:
+    - install-ssh-pass
+
+# !proberen authentiseren op de dev met google json login file om te kunnen pullen van de artifact registry 
+- name: install googleSDK
+  hosts: 
+    - dev
+  become: yes 
+  roles: 
+    - googleSDK
+
+- name: authenticate to googlecloud 
+  hosts: 
+    - dev
+  become_user: "{{ ansible_user }}" 
+  roles: 
+    - gcloudAuthArtifactRegistry
+
+- hosts: dev
+  tasks:
+    - name: Ensure Docker directory exists
+      ansible.builtin.file:
+        path: "./infra/docker"
+        state: directory
+
+    - name: Run Docker Compose Down as student with sudo
+      ansible.builtin.shell:
+        cmd: "sudo -u {{ ansible_user }} docker compose down"
+        chdir: "./infra/docker"
+
+
+    - name: Pull Docker images as student with sudo
+      ansible.builtin.shell:
+        cmd: "sudo -u {{ ansible_user }} docker compose pull"
+        chdir: "./infra/docker"
+
+
+    - name: Rebuild and Run Docker Compose Up as student with sudo
+      ansible.builtin.shell:
+        cmd: "sudo -u {{ ansible_user }} docker compose up -d"
+        chdir: "./infra/docker"
+
