@@ -113,7 +113,7 @@ runAnsible:
     - apt-get install -y python3
     - apt-get install python3-pip -y
     - python3 -m pip install --upgrade pip
-    - pip3 install ansible==2.9
+    - pip3 install --upgrade ansible
     - pip3 install ansible-lint
     - cd Ansible
     - chmod 770 .
