@@ -19,7 +19,7 @@ const Header = ({ profileName }) => {
 
   const logoStyle = {
     marginRight: "1em",
-    width: 120,
+    width: 150,
   };
 
   const itemsStyle = {
@@ -56,7 +56,8 @@ const Header = ({ profileName }) => {
     background: colors.green,
   };
 
-  const dropdownItems = ["test", "Copy link", "Edit file", "Delete file"];
+  const dropdownItemsEvent = ["Create Event", "Search Event"];
+  const dropdownItemsRoutes = ["Go to RouteYou Routes"];
 
   return (
     <header style={headerStyle}>
@@ -71,7 +72,7 @@ const Header = ({ profileName }) => {
           <CustomDropdown
             buttonText={
               <>
-                Home{" "}
+                Event
                 <span
                   style={{
                     transform: "rotate(90deg) scale(.6, 1.3)",
@@ -83,12 +84,29 @@ const Header = ({ profileName }) => {
                 </span>
               </>
             }
-            items={dropdownItems}
+            items={dropdownItemsEvent}
           />
+
           <div style={itemBorderStyle}></div>
         </div>
         <div style={itemTextStyle}>
-          <p>Routes</p>
+          <CustomDropdown
+              buttonText={
+                <>
+                  Routes
+                  <span
+                      style={{
+                        transform: "rotate(90deg) scale(.6, 1.3)",
+                        fontSize: 16,
+                        fontWeight: "500",
+                      }}
+                  >
+                  &gt;
+                </span>
+                </>
+              }
+              items={dropdownItemsRoutes}
+          />
           <div style={itemBorderStyle}></div>
         </div>
         <div style={itemTextStyle}>

@@ -7,22 +7,23 @@ import {
   DropdownItem,
   Button,
 } from "@nextui-org/react";
-import ArrowDownSVG from "@/utils/icons/ArrowDownSVG";
 
 // https://nextui.org/docs/components/dropdown
 const CustomDropdown = ({ buttonText, items }) => {
   const dropdownStyle = {
-    border: "solid",
+    //border: "solid",
     padding: 0,
     maxWidth: 100,
+    fontSize: "20"
+
   };
 
   const buttonStyle = {
     display: "flex",
     alignItems: "center",
     justifyContent: "space-around",
-    gap: 0,
-    border: "solid",
+    gap: 4,
+    //border: "solid",
     padding: 0,
   };
 
@@ -31,12 +32,12 @@ const CustomDropdown = ({ buttonText, items }) => {
       {/*{<ArrowDownSVG />}*/}
       <Dropdown>
         <DropdownTrigger style={buttonStyle}>
-          <Button variant="none">{buttonText}</Button>
+          <Button variant="none" size={"lg"} className={"h-0 p-0 min-w-fit"}>{buttonText}</Button>
         </DropdownTrigger>
         <DropdownMenu aria-label="Static Actions">
           {items.map((item, index) => (
-            <DropdownItem key={index}>{item}</DropdownItem>
-          ))}
+            <DropdownItem key={index} textValue={item} className={"border-b"}>{item}</DropdownItem>
+        ))}
         </DropdownMenu>
       </Dropdown>
     </NextUIProvider>
