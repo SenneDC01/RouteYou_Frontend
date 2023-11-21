@@ -11,7 +11,7 @@ import Footer from "@/organisms/footer";
 import BigTitle from "@/atoms/BigTitle";
 import SubText from "@/atoms/SubText";
 import RegularText from "@/atoms/RegularText";
-import ViewMore from "@/atoms/ViewMore";
+{/* import ViewMore from "@/atoms/ViewMore"; */}
 
 export default function DetailColumn({ event }) {
   return (
