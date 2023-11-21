@@ -130,7 +130,7 @@ const Header = ({ profileName, profilePicture }) => {
 };
 
 Header.propTypes = {
-  profilePicture: PropTypes.string.isRequired,
+  profilePicture: PropTypes.object.isRequired,
   profileName: PropTypes.string.isRequired,
 };
 

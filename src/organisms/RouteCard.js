@@ -22,7 +22,12 @@ const RouteCard = ({
 }) => {
   return (
     <div className="flex justify-center gap-2">
-      <Card shadow="sm" isPressable onPress={() => console.log("item pressed")}>
+      <Card
+        shadow="sm"
+        isPressable
+        onPress={() => console.log("item pressed")}
+        className="hover:shadow-md transition-shadow duration-300 ease-in-out"
+      >
         <CardBody className="overflow-visible p-0">
           <Image
             shadow="sm"
@@ -77,7 +82,7 @@ const RouteCard = ({
 };
 
 RouteCard.propTypes = {
-  image: PropTypes.string,
+  image: PropTypes.object,
   title: PropTypes.string,
   afstand: PropTypes.string,
   hoogte: PropTypes.string,
