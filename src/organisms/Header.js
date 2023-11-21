@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import Image from "next/image";
 import logo from "../utils/images/logo.png";
 import * as colors from "../utils/colors";
-import CustomDropdown from "@/molecules/dropdown";
+import CustomDropdown from "@/molecules/Dropdown";
 
 const Header = ({ profileName, profilePicture }) => {
   const headerStyle = {
@@ -85,7 +85,6 @@ const Header = ({ profileName, profilePicture }) => {
             }
             items={dropdownItemsEvent}
           />
-
           <div style={itemBorderStyle}></div>
         </div>
         <div style={itemTextStyle}>

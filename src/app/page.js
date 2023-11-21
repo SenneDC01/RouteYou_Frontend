@@ -5,12 +5,16 @@ import CustomButton from "@/atoms/Button";
 import * as colors from "../utils/colors";
 import EditSVG from "../utils/icons/EditSVG";
 import ArrowLeftSVG from "../utils/icons/ArrowLeftSVG";
-import Header from "../organisms/header";
+import Header from "../organisms/Header";
 import "../app/globals.css";
-import Footer from "@/organisms/footer";
+import Footer from "@/organisms/Footer";
 import RouteCard from "@/organisms/RouteCard";
 import cardImage from "../utils/images/CardImage.png";
 import profilePic from "../utils/images/profilePicture.png";
+import InfoCard from "@/organisms/InfoCard";
+import GroupSVG from "../utils/icons/GroupSVG";
+import CameraSVG from "../utils/icons/CameraSVG";
+import RouteSVG from "../utils/icons/RouteSVG";
 
 const HomePage = () => {
   const containerStyle = {
@@ -41,6 +45,21 @@ const HomePage = () => {
     <div style={containerStyle}>
       <Header profileName={"John Doe"} profilePicture={profilePic} />
       {/*text scaled nog niet correct*/}
+
+      <div style={cardContainer}>
+        <InfoCard
+          icon={<RouteSVG />}
+          text="Meer dan 7.270.000 routes"
+        ></InfoCard>
+        <InfoCard
+          icon={<GroupSVG />}
+          text="Meer dan 15.115.000 gebruikers"
+        ></InfoCard>
+        <InfoCard
+          icon={<CameraSVG />}
+          text="Meer dan 3.475.000 trekpleisters"
+        ></InfoCard>
+      </div>
       <div style={cardContainer}>
         <RouteCard
           image={cardImage}

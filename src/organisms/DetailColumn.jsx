@@ -6,12 +6,14 @@ import { useRouter } from "next/navigation";
 import CustomButton from "@/atoms/Button";
 import * as colors from "@/utils/colors";
 import styles from "@/app/DetailColumn.module.scss";
-import Header from "@/organisms/header";
-import Footer from "@/organisms/footer";
+import Header from "@/organisms/Header";
+import Footer from "@/organisms/Footer";
 import BigTitle from "@/atoms/BigTitle";
 import SubText from "@/atoms/SubText";
 import RegularText from "@/atoms/RegularText";
-{/* import ViewMore from "@/atoms/ViewMore"; */}
+{
+  /* import ViewMore from "@/atoms/ViewMore"; */
+}
 
 export default function DetailColumn({ event }) {
   return (
