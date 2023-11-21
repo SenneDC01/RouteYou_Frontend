@@ -1,0 +1,10 @@
+@use "./vars.scss" as vars;
+
+.image {
+  width: 100%;
+}
+
+.column {
+  width: 25rem;
+  background-color: vars.$white;
+}
