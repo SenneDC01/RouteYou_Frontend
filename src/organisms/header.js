@@ -3,11 +3,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import Image from "next/image";
 import logo from "../utils/images/logo.png";
-import profilePic from "../utils/images/profilePicture.png";
 import * as colors from "../utils/colors";
 import CustomDropdown from "@/molecules/dropdown";
 
-const Header = ({ profileName }) => {
+const Header = ({ profileName, profilePicture }) => {
   const headerStyle = {
     display: "flex",
     alignItems: "center",
@@ -91,21 +90,21 @@ const Header = ({ profileName }) => {
         </div>
         <div style={itemTextStyle}>
           <CustomDropdown
-              buttonText={
-                <>
-                  Routes
-                  <span
-                      style={{
-                        transform: "rotate(90deg) scale(.6, 1.3)",
-                        fontSize: 16,
-                        fontWeight: "500",
-                      }}
-                  >
+            buttonText={
+              <>
+                Routes
+                <span
+                  style={{
+                    transform: "rotate(90deg) scale(.6, 1.3)",
+                    fontSize: 16,
+                    fontWeight: "500",
+                  }}
+                >
                   &gt;
                 </span>
-                </>
-              }
-              items={dropdownItemsRoutes}
+              </>
+            }
+            items={dropdownItemsRoutes}
           />
           <div style={itemBorderStyle}></div>
         </div>
@@ -118,7 +117,7 @@ const Header = ({ profileName }) => {
       <div style={profileStyle}>
         <div style={profilePictureStyle}>
           <Image
-            src={profilePic}
+            src={profilePicture}
             alt="Profile picture"
             width={30}
             height={30}

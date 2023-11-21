@@ -9,37 +9,75 @@ import Header from "../organisms/header";
 import "../app/globals.css";
 import Footer from "@/organisms/footer";
 import RouteCard from "@/organisms/RouteCard";
+import cardImage from "../utils/images/CardImage.png";
+import profilePic from "../utils/images/profilePicture.png";
 
 const HomePage = () => {
   const headerData = {
-    profilePicture: "/path/to/profile-picture.jpg",
+    profilePicture: profilePic,
     profileName: "John Doe",
   };
 
   const containerStyle = {
     display: "flex",
     flexDirection: "column",
+    minHeight: "100vh",
+  };
+
+  const buttonContainer = {
+    display: "flex",
+    flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    height: "100vh", //moet ergens anders
     gap: "1vh",
+    flex: 1, // Make the content take up the available space
   };
 
   const cardContainer = {
     display: "flex",
-    flexDirection: "row",
-    //alignItems: "center",
-    //justifyContent: "center",
-    //gap: "1vh",
+    alignItems: "center",
+    justifyContent: "center",
+    margin: "5vh",
+    flex: 1, // Make the content take up the available space
+    gap: "2em",
   };
 
   return (
-    <div>
-      <Header {...headerData} />
+    <div style={containerStyle}>
+      <Header {...headerData} /> {/*text scaled nog niet correct*/}
       <div style={cardContainer}>
-        <RouteCard></RouteCard>
+        <RouteCard
+          image={cardImage}
+          title="Groene Gordel Route"
+          afstand="220km"
+          hoogte="1400m"
+          gemStijgingsPercentage="1,6%"
+          tijd="4:23:45"
+          maxStijgingsPercentage="14,4%"
+          moeilijkheid="Medium"
+        />
+        <RouteCard
+          image={cardImage}
+          title="Groene Gordel Route"
+          afstand="250km"
+          hoogte="1800m"
+          gemStijgingsPercentage="1,6%"
+          tijd="5:23:45"
+          maxStijgingsPercentage="14,4%"
+          moeilijkheid="Hard"
+        />
+        <RouteCard
+          image={cardImage}
+          title="Groene Gordel Route"
+          afstand="180km"
+          hoogte="1200m"
+          gemStijgingsPercentage="1,6%"
+          tijd="3:23:45"
+          maxStijgingsPercentage="14,4%"
+          moeilijkheid="Easy"
+        />
       </div>
-      <div style={containerStyle}>
+      <div style={buttonContainer}>
         <CustomButton
           label="Inscrijven"
           backgroundColor={colors.white}

@@ -40,7 +40,7 @@ const Footer = () => {
 
         {/* Column 4 */}
         <div className="flex flex-col">
-          <div className="font-bold">Adres</div>
+          <div className="font-semibold">Adres</div>
           <div>Kerkstraat 108</div>
           <div>9050 Gentbrugge, België</div>
         </div>

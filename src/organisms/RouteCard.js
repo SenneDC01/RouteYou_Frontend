@@ -1,78 +1,89 @@
 "use client";
 import React from "react";
-import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
+import { Card, CardBody, CardFooter } from "@nextui-org/react";
+import Image from "next/image";
+import PropTypes from "prop-types";
+import AfstandSVG from "@/utils/icons/AfstandSVG";
+import HoogteSVG from "@/utils/icons/HoogteSVG";
+import GemStijgingSVG from "@/utils/icons/GemStijgingSVG";
+import KlokSVG from "@/utils/icons/KlokSVG";
+import MaxStijgingSVG from "@/utils/icons/MaxStijgingSVG";
+import MoeilijkheidSVG from "@/utils/icons/MoeilijkheidSVG";
 
-const RouteCard = () => {
-  const list = [
-    {
-      title: "Orange",
-      img: "/images/fruit-1.jpeg",
-      price: "$5.50",
-    },
-    {
-      title: "Tangerine",
-      img: "/images/fruit-2.jpeg",
-      price: "$3.00",
-    },
-    {
-      title: "Raspberry",
-      img: "/images/fruit-3.jpeg",
-      price: "$10.00",
-    },
-    {
-      title: "Lemon",
-      img: "/images/fruit-4.jpeg",
-      price: "$5.30",
-    },
-    {
-      title: "Avocado",
-      img: "/images/fruit-5.jpeg",
-      price: "$15.70",
-    },
-    {
-      title: "Lemon 2",
-      img: "/images/fruit-6.jpeg",
-      price: "$8.00",
-    },
-    {
-      title: "Banana",
-      img: "/images/fruit-7.jpeg",
-      price: "$7.50",
-    },
-    {
-      title: "Watermelon",
-      img: "/images/fruit-8.jpeg",
-      price: "$12.20",
-    },
-  ];
-
+const RouteCard = ({
+  image,
+  title = "label",
+  afstand = "200km",
+  hoogte = "1500m",
+  gemStijgingsPercentage = "1,6%",
+  tijd = "5:23:45",
+  maxStijgingsPercentage = "14,4%",
+  moeilijkheid = "Hard",
+}) => {
   return (
-    <div className="gap-2 grid grid-cols-2 sm:grid-cols-4">
-      {list.map((item, index) => (
-        <Card
-          shadow="sm"
-          key={index}
-          isPressable
-          onPress={() => console.log("item pressed")}
-        >
-          <CardBody className="overflow-visible p-0">
-            <Image
-              shadow="sm"
-              radius="lg"
-              width="100%"
-              alt={item.title}
-              className="w-full object-cover h-[140px]"
-              src={item.img}
-            />
-          </CardBody>
-          <CardFooter className="text-small justify-between">
-            <b>{item.title}</b>
-            <p className="text-default-500">{item.price}</p>
-          </CardFooter>
-        </Card>
-      ))}
+    <div className="flex justify-center gap-2">
+      <Card shadow="sm" isPressable onPress={() => console.log("item pressed")}>
+        <CardBody className="overflow-visible p-0">
+          <Image
+            shadow="sm"
+            radius="lg"
+            height={200}
+            width={200}
+            alt={title}
+            className="w-full object-cover"
+            src={image}
+          />
+          <div className={"flex justify-center font-semibold p-2"}>{title}</div>
+          {/*font-bold werkt niet font-semibold wel*/}
+          <div className="flex justify-center flex-row gap-3">
+            <div className="flex flex-col gap-5">
+              <p className="flex flex-row gap-1 p-3">
+                {<AfstandSVG width={25} height={25} />}
+                {afstand}
+              </p>
+              <p className="flex flex-row gap-1 p-3">
+                {<HoogteSVG width={25} height={25} />}
+                {hoogte}
+              </p>
+              <p className="flex flex-row gap-1 p-3">
+                {<GemStijgingSVG width={25} height={25} />}
+                {gemStijgingsPercentage}
+              </p>
+            </div>
+            <div className="flex flex-col">
+              <p className="flex flex-row gap-1 p-3">
+                {<KlokSVG width={25} height={25} />}
+                {tijd}
+              </p>
+              <p className="flex flex-row gap-1 p-3">
+                {<MaxStijgingSVG width={25} height={25} />}
+                {maxStijgingsPercentage}
+              </p>
+              <p className="flex flex-row gap-1 p-3">
+                {<MoeilijkheidSVG width={25} height={25} />}
+                {moeilijkheid}
+              </p>
+            </div>
+          </div>
+        </CardBody>
+
+        {/*<CardFooter className="text-small justify-between">
+          <b>{title}</b>
+          <p className="text-default-500">{afstand}</p>
+        </CardFooter>*/}
+      </Card>
     </div>
   );
 };
 
+RouteCard.propTypes = {
+  image: PropTypes.string,
+  title: PropTypes.string,
+  afstand: PropTypes.string,
+  hoogte: PropTypes.string,
+  gemStijgingsPercentage: PropTypes.string,
+  tijd: PropTypes.string,
+  maxStijgingsPercentage: PropTypes.string,
+  moeilijkheid: PropTypes.string,
+};
 export default RouteCard;
