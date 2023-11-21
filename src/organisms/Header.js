@@ -14,6 +14,7 @@ const Header = ({ profileName, profilePicture }) => {
     padding: "1em",
     borderBottom: "1px solid #ddd",
     boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+    flexWrap: "wrap",
   };
 
   const logoStyle = {
@@ -25,6 +26,7 @@ const Header = ({ profileName, profilePicture }) => {
     display: "flex",
     alignItems: "center",
     gap: 20,
+    flexWrap: "wrap",
   };
 
   const profileStyle = {

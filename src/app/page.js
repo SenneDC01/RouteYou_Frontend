@@ -15,6 +15,7 @@ import InfoCard from "@/organisms/InfoCard";
 import GroupSVG from "../utils/icons/GroupSVG";
 import CameraSVG from "../utils/icons/CameraSVG";
 import RouteSVG from "../utils/icons/RouteSVG";
+import EventCard from "@/organisms/EventCard";
 
 const HomePage = () => {
   const containerStyle = {
@@ -39,13 +40,12 @@ const HomePage = () => {
     margin: "5vh",
     flex: 1, // Make the content take up the available space
     gap: "2em",
+    flexWrap: "wrap",
   };
 
   return (
     <div style={containerStyle}>
       <Header profileName={"John Doe"} profilePicture={profilePic} />
-      {/*text scaled nog niet correct*/}
-
       <div style={cardContainer}>
         <InfoCard
           icon={<RouteSVG />}
@@ -90,6 +90,28 @@ const HomePage = () => {
           tijd="3:23:45"
           maxStijgingsPercentage="14,4%"
           moeilijkheid="Easy"
+        />
+      </div>
+      <div style={cardContainer}>
+        <EventCard
+          image={cardImage}
+          title="Groene Gordel 2024"
+          organisator="Toerisme Vlaanderen"
+          dateTime="29 oktober 2023 - 09:00"
+          locatie="Sint-Annakring Aalst"
+          route="Racefiets route"
+          afstand="106 km"
+          description="Ontdek naast de prachtige in herfstkleuren gehulde natuur ook ons cultureel erfgoed, in en rond de dreven van Merksplas Kolonie. Wandelen in 3 lussen van 8 km, naar hartenlust onderling combineerbaar tot 16 en 24 km om volop van al het moois te genieten. Tevens voorzien wij een lus van 4 km die geschikt is voor kinderwagens"
+        />
+        <EventCard
+          image={cardImage}
+          title="Groene Gordel 2024"
+          organisator="Toerisme Vlaanderen"
+          dateTime="29 oktober 2023 - 09:00"
+          locatie="Sint-Annakring Aalst"
+          route="Racefiets route"
+          afstand="106 km"
+          description="Ontdek naast de prachtige in herfstkleuren gehulde natuur ook ons cultureel erfgoed, in en rond de dreven van Merksplas Kolonie. Wandelen in 3 lussen van 8 km, naar hartenlust onderling combineerbaar tot 16 en 24 km om volop van al het moois te genieten. Tevens voorzien wij een lus van 4 km die geschikt is voor kinderwagens"
         />
       </div>
       <div style={buttonContainer}>

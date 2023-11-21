@@ -9,6 +9,7 @@ import GemStijgingSVG from "@/utils/icons/GemStijgingSVG";
 import KlokSVG from "@/utils/icons/KlokSVG";
 import MaxStijgingSVG from "@/utils/icons/MaxStijgingSVG";
 import MoeilijkheidSVG from "@/utils/icons/MoeilijkheidSVG";
+import SVGtext from "@/atoms/SVGtext";
 
 const RouteCard = ({
   image,
@@ -39,34 +40,22 @@ const RouteCard = ({
             src={image}
           />
           <p className={"flex justify-center font-semibold pt-2"}>{title}</p>
-          <div className="flex justify-center flex-row gap-5 py-4 text-sm">
+          <div className="flex justify-around flex-row p-4 text-sm">
             <div className="flex flex-col gap-5">
-              <p className="flex flex-row gap-1 items-center">
-                {<AfstandSVG width={25} height={25} />}
-                {afstand}
-              </p>
-              <p className="flex flex-row gap-1 items-center">
-                {<HoogteSVG width={25} height={25} />}
-                {hoogte}
-              </p>
-              <p className="flex flex-row gap-1 items-center">
-                {<GemStijgingSVG width={25} height={25} />}
-                {gemStijgingsPercentage}
-              </p>
+              <SVGtext label={afstand} icon={<AfstandSVG />} />
+              <SVGtext label={hoogte} icon={<HoogteSVG />} />
+              <SVGtext
+                label={gemStijgingsPercentage}
+                icon={<GemStijgingSVG />}
+              />
             </div>
             <div className="flex flex-col gap-5">
-              <p className="flex flex-row gap-1 items-center">
-                {<KlokSVG width={25} height={25} />}
-                {tijd}
-              </p>
-              <p className="flex flex-row gap-1 items-center">
-                {<MaxStijgingSVG width={25} height={25} />}
-                {maxStijgingsPercentage}
-              </p>
-              <p className="flex flex-row gap-1 items-center">
-                {<MoeilijkheidSVG width={25} height={25} />}
-                {moeilijkheid}
-              </p>
+              <SVGtext label={tijd} icon={<KlokSVG />} />
+              <SVGtext
+                label={maxStijgingsPercentage}
+                icon={<MaxStijgingSVG />}
+              />
+              <SVGtext label={moeilijkheid} icon={<MoeilijkheidSVG />} />
             </div>
           </div>
         </CardBody>
