@@ -46,8 +46,36 @@ const HomePage = () => {
     <div style={containerStyle}>
       <Header {...headerData} /> {/*text scaled nog niet correct*/}
       <div style={cardContainer}>
-        <RouteCard image={cardImage} title="test" />
-        <RouteCard image={cardImage} title="test" />
+        <RouteCard
+          image={cardImage}
+          title="Groene Gordel Route"
+          afstand="220km"
+          hoogte="1400m"
+          gemStijgingsPercentage="1,6%"
+          tijd="4:23:45"
+          maxStijgingsPercentage="14,4%"
+          moeilijkheid="Medium"
+        />
+        <RouteCard
+          image={cardImage}
+          title="Groene Gordel Route"
+          afstand="250km"
+          hoogte="1800m"
+          gemStijgingsPercentage="1,6%"
+          tijd="5:23:45"
+          maxStijgingsPercentage="14,4%"
+          moeilijkheid="Hard"
+        />
+        <RouteCard
+          image={cardImage}
+          title="Groene Gordel Route"
+          afstand="180km"
+          hoogte="1200m"
+          gemStijgingsPercentage="1,6%"
+          tijd="3:23:45"
+          maxStijgingsPercentage="14,4%"
+          moeilijkheid="Easy"
+        />
       </div>
       <div style={buttonContainer}>
         <CustomButton
