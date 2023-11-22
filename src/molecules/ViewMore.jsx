@@ -1,14 +1,16 @@
 "use client";
 import React from "react";
-import styles from "@/app/fonts.module.scss";
+import styles from "@/app/ViewMore.module.scss";
 import BoldText from "@/atoms/BoldText";
-import Button from "@/atoms/Button";
+import ButtonLink from "@/atoms/ButtonLink";
 
-export default function BigTitle({ label, link }) {
+export default function BigTitle({ children, link }) {
   return (
-    <div>
-      <BoldText>{label}</BoldText>
-      <Button></Button>
+    <div className={styles.viewMore}>
+      <BoldText>{children}</BoldText>
+      <ButtonLink width="fit-content" link={link}>
+        more
+      </ButtonLink>
     </div>
   );
 }

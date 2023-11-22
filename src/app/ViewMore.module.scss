@@ -1,0 +1,10 @@
+@use "./vars.scss" as vars;
+
+.viewMore {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 0.2rem;
+  border-bottom: solid 2.5px;
+  align-items: baseline;
+}
