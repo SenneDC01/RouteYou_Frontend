@@ -15,8 +15,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <link rel="stylesheet" href="https://unpkg.com/normalize.css" />
-        <title>HomePage</title>
+        {/* <link rel="stylesheet" href="https://unpkg.com/normalize.css" /> */}
       </head>
       {/* <body className={inter.className}>{children}</body> */}
       <body>

@@ -30,11 +30,11 @@ export default function DetailColumn({ event }) {
         <ViewMore link={`./${event.id}/pictures`}>Pictures</ViewMore>
         <div className={styles.row}>
           <CustomButton
-            label="dsafd"
+            label="share"
             backgroundColor={colors.green}
             borderColor={colors.green}
             fontColor={colors.white}
-            icon={<ArrowLeftSVG />}
+            // icon={<ArrowLeftSVG />}
             width="100%"
             height="inherit"
             borderRadius={5}
