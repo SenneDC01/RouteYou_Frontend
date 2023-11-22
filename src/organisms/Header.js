@@ -6,7 +6,6 @@ import {
   NavbarContent,
   NavbarItem,
   Link,
-  Button,
   NavbarMenuToggle,
   NavbarMenuItem,
   NavbarMenu,
@@ -20,7 +19,6 @@ import * as colors from "../utils/colors";
 const Header = ({ profileName = "John Doe", profilePicture = null }) => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
-  const menuItems = ["Home", "Event", "Routes", "Dashnoard"];
   const dropdownItemsEvents = ["Create Event", "Search Event"];
   const dropdownItemsRoutes = ["Go to RouteYou Routes"];
 
@@ -34,18 +32,18 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
   };
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen} isBordered>
+    <Navbar onMenuOpenChange={setIsMenuOpen} isBordered maxWidth="xl">
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="sm:hidden"
         />
-        <NavbarBrand>
+        <NavbarBrand className="flex">
           <Image src={logo} priority={true} alt="RouteYou" />
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex gap-4" justify="start">
+      <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem isActive>
           <Link href="#" aria-current="page">
             Home
