@@ -48,7 +48,7 @@ const Page = () => {
       </div>
       <h2>Niet-toegankelijke inhoud</h2>
       <div>
-        <p>Er zijn slechts 2 pagina's toegankelijk.</p>
+        <p>Er zijn slechts 2 pagina&apos;s toegankelijk.</p>
 
         <p>Op kaarten is het niet mogelijk om te navigeren met toetsenbord.</p>
       </div>
