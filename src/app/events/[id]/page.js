@@ -27,8 +27,8 @@ export default function Page({ event }) {
   //     },
   //   ],
   // };
-  const [key, setKey] = useState(true);
-  const [value, setValue] = useState("");
+  // const [key, setKey] = useState(true);
+  // const [value, setValue] = useState("");
 
   // useEffect(() => {
   //   const iframe = document.querySelector("#iframe");
