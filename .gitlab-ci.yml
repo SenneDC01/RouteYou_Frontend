@@ -120,4 +120,3 @@ runAnsible:
     - ansible -i hosts.yml all -m ping
     - ansible-playbook playbook.yml
     
-    
