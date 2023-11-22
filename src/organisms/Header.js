@@ -1,52 +1,28 @@
 "use client";
 import React from "react";
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  Link,
+  Button,
+  NavbarMenuToggle,
+  NavbarMenuItem,
+  NavbarMenu,
+} from "@nextui-org/react";
 import PropTypes from "prop-types";
 import Image from "next/image";
-import logo from "../utils/images/logo.png";
-import * as colors from "../utils/colors";
+import logo from "@/utils/images/logo.png";
 import CustomDropdown from "@/molecules/Dropdown";
+import * as colors from "../utils/colors";
 
-const Header = ({ profileName, profilePicture }) => {
-  const headerStyle = {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    padding: "1em",
-    borderBottom: "1px solid #ddd",
-    boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
-    flexWrap: "wrap",
-  };
+const Header = ({ profileName = "John Doe", profilePicture = null }) => {
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
-  const logoStyle = {
-    marginRight: "1em",
-    width: 150,
-  };
-
-  const itemsStyle = {
-    display: "flex",
-    alignItems: "center",
-    gap: 20,
-    flexWrap: "wrap",
-  };
-
-  const profileStyle = {
-    display: "flex",
-    alignItems: "center",
-  };
-
-  const profilePictureStyle = {
-    borderRadius: "50%",
-    width: "2.5em",
-    height: "2.5em",
-    marginRight: "0.625em",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  };
-
-  const itemTextStyle = {
-    position: "relative",
-  };
+  const menuItems = ["Home", "Event", "Routes", "Dashnoard"];
+  const dropdownItemsEvents = ["Create Event", "Search Event"];
+  const dropdownItemsRoutes = ["Go to RouteYou Routes"];
 
   const itemBorderStyle = {
     position: "absolute",
@@ -57,23 +33,31 @@ const Header = ({ profileName, profilePicture }) => {
     background: colors.green,
   };
 
-  const dropdownItemsEvent = ["Create Event", "Search Event"];
-  const dropdownItemsRoutes = ["Go to RouteYou Routes"];
-
   return (
-    <header style={headerStyle}>
-      <div style={itemsStyle}>
-        <Image src={logo} priority={true} alt="Logo" style={logoStyle} />
+    <Navbar onMenuOpenChange={setIsMenuOpen} isBordered>
+      <NavbarContent>
+        <NavbarMenuToggle
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          className="sm:hidden"
+        />
+        <NavbarBrand>
+          <Image src={logo} priority={true} alt="RouteYou" />
+        </NavbarBrand>
+      </NavbarContent>
 
-        <div style={itemTextStyle}>
-          <p>Home</p>
-          <div style={itemBorderStyle}></div>
-        </div>
-        <div style={itemTextStyle}>
+      <NavbarContent className="hidden sm:flex gap-4" justify="start">
+        <NavbarItem isActive>
+          <Link href="#" aria-current="page">
+            Home
+            <div style={itemBorderStyle}></div>
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
           <CustomDropdown
             buttonText={
               <>
-                Event
+                Events
+                <div style={itemBorderStyle}></div>
                 <span
                   style={{
                     transform: "rotate(90deg) scale(.6, 1.3)",
@@ -85,11 +69,73 @@ const Header = ({ profileName, profilePicture }) => {
                 </span>
               </>
             }
-            items={dropdownItemsEvent}
+            items={dropdownItemsEvents}
           />
-          <div style={itemBorderStyle}></div>
-        </div>
-        <div style={itemTextStyle}>
+        </NavbarItem>
+        <NavbarItem isActive>
+          <CustomDropdown
+            buttonText={
+              <>
+                Routes
+                <div style={itemBorderStyle}></div>
+                <span
+                  style={{
+                    transform: "rotate(90deg) scale(.6, 1.3)",
+                    fontSize: 16,
+                    fontWeight: "500",
+                  }}
+                >
+                  &gt;
+                </span>
+              </>
+            }
+            items={dropdownItemsRoutes}
+          />
+        </NavbarItem>
+        <NavbarItem>
+          <Link color="foreground" href="#">
+            Dashboard
+            <div style={itemBorderStyle}></div>
+          </Link>
+        </NavbarItem>
+      </NavbarContent>
+      <NavbarContent justify="end">
+        <NavbarItem className="flex gap-3">
+          <Image
+            src={profilePicture}
+            alt="Profile picture"
+            width={30}
+            height={30}
+          />
+          <p>{profileName}</p>
+        </NavbarItem>
+      </NavbarContent>
+      <NavbarMenu>
+        <NavbarMenuItem>
+          <Link className="w-full" href="#" size="lg">
+            Home
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <CustomDropdown
+            buttonText={
+              <>
+                Events
+                <span
+                  style={{
+                    transform: "rotate(90deg) scale(.6, 1.3)",
+                    fontSize: 16,
+                    fontWeight: "500",
+                  }}
+                >
+                  &gt;
+                </span>
+              </>
+            }
+            items={dropdownItemsEvents}
+          />
+        </NavbarMenuItem>
+        <NavbarMenuItem>
           <CustomDropdown
             buttonText={
               <>
@@ -107,26 +153,14 @@ const Header = ({ profileName, profilePicture }) => {
             }
             items={dropdownItemsRoutes}
           />
-          <div style={itemBorderStyle}></div>
-        </div>
-        <div style={itemTextStyle}>
-          <p>Dashboard</p>
-          <div style={itemBorderStyle}></div>
-        </div>
-      </div>
-
-      <div style={profileStyle}>
-        <div style={profilePictureStyle}>
-          <Image
-            src={profilePicture}
-            alt="Profile picture"
-            width={30}
-            height={30}
-          />
-        </div>
-        <p>{profileName}</p>
-      </div>
-    </header>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <Link className="w-full" href="#" size="lg" color="foreground">
+            Dashboard
+          </Link>
+        </NavbarMenuItem>
+      </NavbarMenu>
+    </Navbar>
   );
 };
 
@@ -134,5 +168,4 @@ Header.propTypes = {
   profilePicture: PropTypes.object.isRequired,
   profileName: PropTypes.string.isRequired,
 };
-
 export default Header;

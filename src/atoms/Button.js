@@ -45,6 +45,7 @@ const Button = ({
       style={{ ...customButtonStyle, ...(isHovered && hoverStyle) }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      type="image"
     >
       {icon && React.cloneElement(icon, { width: "40px", height: "20px" })}
       {label}
