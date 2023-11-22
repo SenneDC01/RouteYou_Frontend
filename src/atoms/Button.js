@@ -13,7 +13,7 @@ const Button = ({
   width = "100px",
   height = "50px",
   fontStyle = "Inter",
-  fontWeight = "bold",
+  fontWeight = "semi-bold",
   fontSize = "inherit",
 }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -45,6 +45,7 @@ const Button = ({
       style={{ ...customButtonStyle, ...(isHovered && hoverStyle) }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      type="image"
     >
       {icon && React.cloneElement(icon, { width: "40px", height: "20px" })}
       {label}
