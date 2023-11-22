@@ -16,6 +16,7 @@ import GroupSVG from "../utils/icons/GroupSVG";
 import CameraSVG from "../utils/icons/CameraSVG";
 import RouteSVG from "../utils/icons/RouteSVG";
 import EventCard from "@/organisms/EventCard";
+import NuiButton from "@/atoms/NuiButton";
 
 const HomePage = () => {
   const containerStyle = {
@@ -46,6 +47,7 @@ const HomePage = () => {
   return (
     <div style={containerStyle}>
       <Header profileName={"John Doe"} profilePicture={profilePic} />
+
       <div style={cardContainer}>
         <InfoCard
           icon={<RouteSVG />}
@@ -115,6 +117,8 @@ const HomePage = () => {
         />
       </div>
       <div style={buttonContainer}>
+        <NuiButton />
+
         <CustomButton
           label="Inscrijven"
           backgroundColor={colors.white}
