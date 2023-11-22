@@ -34,7 +34,12 @@ const CustomDropdown = ({ buttonText, items }) => {
         </DropdownTrigger>
         <DropdownMenu aria-label="Static Actions">
           {items.map((item, index) => (
-            <DropdownItem key={index} textValue={item} className={"border-b"}>
+            <DropdownItem
+              key={index}
+              textValue={item}
+              className={"border-b"}
+              tabIndex={index}
+            >
               {item}
             </DropdownItem>
           ))}
