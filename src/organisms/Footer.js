@@ -1,42 +1,66 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import logo from "../utils/images/logo.png";
+import styles from "@/app/Footer.module.scss";
 
 const Footer = () => {
   return (
     <footer
-      className="flex items-center p-4"
+      className="flex flex-col sm:flex-row items-center p-8 gap-8"
       style={{
         boxShadow: "0px -4px 8px rgba(0, 0, 0, 0.1)",
-        marginTop: "-8px", // anders is de shadow niet goed
+        // marginTop: "-8px", // anders is de shadow niet goed
       }}
     >
       <Image src={logo} priority={true} alt="Logo" width={250} />
 
-      <div className="flex flex-1 justify-between px-4">
+      <div className="flex flex-col md:flex-wrap md:flex-row flex-1 justify-between gap-y-8 gap-x-8">
         {/* Column 1 */}
-        <div className="flex flex-col">
-          <div className="p-2">Home</div>
-          <div className="p-2">Home</div>
-          <div className="p-2">Home</div>
-          <div className="p-2">Home</div>
-        </div>
-
+        <ul className="flex flex-col justify-start gap-2">
+          <li>
+            <Link href="/" className={styles.linkStyles}>
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link href="/events" className={styles.linkStyles}>
+              Search Events
+            </Link>
+          </li>
+          <li>
+            <Link href="/events/create" className={styles.linkStyles}>
+              Create Event
+            </Link>
+          </li>
+          <li>
+            <Link href="/dashboard" className={styles.linkStyles}>
+              Dashboard
+            </Link>
+          </li>
+        </ul>
         {/* Column 2 */}
-        <div className="flex flex-col">
-          <div className="p-2">row 1</div>
-          <div className="p-2">row 2</div>
-          <div className="p-2">row 3</div>
-          <div className="p-2">row 4</div>
-        </div>
+        <ul className="flex flex-col justify-start gap-2">
+          <li>
+            <Link
+              href="/toegankelijkheidsverklaring"
+              className={styles.linkStyles}
+            >
+              Toegankelijkheidsverklaring
+            </Link>
+          </li>
+          <li>
+            <Link href="/privacyverklaring" className={styles.linkStyles}>
+              Privacyverklaring
+            </Link>
+          </li>
 
-        {/* Column 3 */}
-        <div className="flex flex-col">
-          <div className="p-2">row 1</div>
-          <div className="p-2">row 2</div>
-          <div className="p-2">row 3</div>
-          <div className="p-2">row 4</div>
-        </div>
+          <li>
+            <Link href="/wcag-report" className={styles.linkStyles}>
+              WCAG Report
+            </Link>
+          </li>
+        </ul>
 
         {/* Column 4 */}
         <div className="flex flex-col">

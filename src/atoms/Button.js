@@ -1,5 +1,5 @@
 // src/atoms/Button.js
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import * as colors from "../utils/colors";
 
@@ -13,10 +13,12 @@ const Button = ({
   width = "100px",
   height = "50px",
   fontStyle = "Inter",
-  fontWeight = "bold",
+  fontWeight = "semi-bold",
   fontSize = "inherit",
 }) => {
-  const buttonStyle = {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const customButtonStyle = {
     backgroundColor: backgroundColor,
     borderColor: borderColor,
     borderWidth: 3,
@@ -31,10 +33,20 @@ const Button = ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    transition: "background-color 0.3s ease-in-out, transform 0.3s ease-in-out",
+  };
+
+  const hoverStyle = {
+    transform: "scale(1.06)",
   };
 
   return (
-    <button style={buttonStyle}>
+    <button
+      style={{ ...customButtonStyle, ...(isHovered && hoverStyle) }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      type="image"
+    >
       {icon && React.cloneElement(icon, { width: "40px", height: "20px" })}
       {label}
     </button>

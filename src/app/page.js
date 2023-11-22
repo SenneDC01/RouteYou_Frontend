@@ -1,68 +1,31 @@
 // pages/index.js or any other component file
 "use client";
 import React from "react";
-import CustomButton from "@/atoms/Button";
-import * as colors from "../utils/colors";
-import EditSVG from "../utils/icons/EditSVG";
-import ArrowLeftSVG from "../utils/icons/ArrowLeftSVG";
-import Header from "../organisms/Header";
 import "../app/globals.css";
-import Footer from "@/organisms/Footer";
 import RouteCard from "@/organisms/RouteCard";
 import cardImage from "../utils/images/CardImage.png";
-import profilePic from "../utils/images/profilePicture.png";
 import InfoCard from "@/organisms/InfoCard";
 import GroupSVG from "../utils/icons/GroupSVG";
 import CameraSVG from "../utils/icons/CameraSVG";
 import RouteSVG from "../utils/icons/RouteSVG";
 import EventCard from "@/organisms/EventCard";
-import NuiButton from "@/atoms/NuiButton";
+import Banner from "@/organisms/Banner";
 
 const HomePage = () => {
-  const containerStyle = {
-    display: "flex",
-    flexDirection: "column",
-    minHeight: "100vh",
-  };
-
-  const buttonContainer = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "1vh",
-    flex: 1, // Make the content take up the available space
-  };
-
-  const cardContainer = {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    margin: "5vh",
-    flex: 1, // Make the content take up the available space
-    gap: "2em",
-    flexWrap: "wrap",
-  };
-
   return (
-    <div style={containerStyle}>
-      <Header profileName={"John Doe"} profilePicture={profilePic} />
-
-      <div style={cardContainer}>
-        <InfoCard
-          icon={<RouteSVG />}
-          text="Meer dan 7.270.000 routes"
-        ></InfoCard>
-        <InfoCard
-          icon={<GroupSVG />}
-          text="Meer dan 15.115.000 gebruikers"
-        ></InfoCard>
+    <div className="flex flex-col min-h-screen">
+      <div className="flex justify-center p-0 relative">
+        <Banner />
+      </div>
+      <div className="flex justify-center gap-20 p-20 border-b-2 border-light-gray flex-wrap">
+        <InfoCard icon={<RouteSVG />} text="Meer dan 7.270.000 routes" />
+        <InfoCard icon={<GroupSVG />} text="Meer dan 15.115.000 gebruikers" />
         <InfoCard
           icon={<CameraSVG />}
           text="Meer dan 3.475.000 trekpleisters"
-        ></InfoCard>
+        />
       </div>
-      <div style={cardContainer}>
+      <div className="flex justify-center gap-20 p-20 border-b-2 border-light-gray flex-wrap">
         <RouteCard
           image={cardImage}
           title="Groene Gordel Route"
@@ -94,7 +57,7 @@ const HomePage = () => {
           moeilijkheid="Easy"
         />
       </div>
-      <div style={cardContainer}>
+      <div className="flex justify-center gap-20 p-20 flex-wrap">
         <EventCard
           image={cardImage}
           title="Groene Gordel 2024"
@@ -116,49 +79,6 @@ const HomePage = () => {
           description="Ontdek naast de prachtige in herfstkleuren gehulde natuur ook ons cultureel erfgoed, in en rond de dreven van Merksplas Kolonie. Wandelen in 3 lussen van 8 km, naar hartenlust onderling combineerbaar tot 16 en 24 km om volop van al het moois te genieten. Tevens voorzien wij een lus van 4 km die geschikt is voor kinderwagens"
         />
       </div>
-      <div style={buttonContainer}>
-        <NuiButton />
-
-        <CustomButton
-          label="Inscrijven"
-          backgroundColor={colors.white}
-          borderColor={colors.green}
-          fontColor={colors.green}
-          icon={<EditSVG />}
-          width="15em"
-          height="3.5em"
-          fontStyle="Inter"
-          fontWeight="bold"
-          fontSize="1em"
-        />
-
-        <CustomButton
-          label="Cancel"
-          backgroundColor={colors.white}
-          borderColor={colors.red}
-          fontColor={colors.red}
-          icon={null}
-          width="12em"
-          height="3.5em"
-          fontStyle="Inter"
-          fontWeight="bold"
-          fontSize="1em"
-        />
-
-        <CustomButton
-          label=""
-          backgroundColor={colors.green}
-          borderColor={colors.green}
-          fontColor={colors.white}
-          icon={<ArrowLeftSVG />}
-          width="3em"
-          height="3em"
-          borderRadius={30}
-        />
-
-        <CustomButton label="Save" />
-      </div>
-      <Footer />
     </div>
   );
 };
