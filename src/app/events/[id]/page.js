@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "@/app/DetailPage.module.scss";
 import "@/app/globals.css";
 import DetailColumn from "@/organisms/DetailColumn";

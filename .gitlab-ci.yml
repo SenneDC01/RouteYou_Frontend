@@ -119,3 +119,4 @@ runAnsible:
     - echo $ANSIBLE_VAULT_PASSWORD > .vault_pass.txt
     - ansible -i hosts.yml all -m ping
     - ansible-playbook playbook.yml
+    

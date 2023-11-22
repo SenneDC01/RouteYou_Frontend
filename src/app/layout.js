@@ -2,6 +2,7 @@
 import Header from "@/organisms/Header";
 import "./globals.css";
 import Footer from "@/organisms/Footer";
+import profilePic from "../utils/images/profilePicture.png";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +19,7 @@ export default function RootLayout({ children }) {
       </head>
       {/* <body className={inter.className}>{children}</body> */}
       <body>
-        <Header />
+        <Header profileName={"John Doe"} profilePicture={profilePic} />
         <main>{children}</main>
         <Footer />
       </body>
