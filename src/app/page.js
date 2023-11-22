@@ -1,7 +1,7 @@
 // pages/index.js or any other component file
 "use client";
 import React from "react";
-import CustomButton from "@/atoms/button";
+import CustomButton from "@/atoms/Button";
 import * as colors from "../utils/colors";
 import EditSVG from "../utils/icons/EditSVG";
 import ArrowLeftSVG from "../utils/icons/ArrowLeftSVG";
@@ -13,11 +13,6 @@ import cardImage from "../utils/images/CardImage.png";
 import profilePic from "../utils/images/profilePicture.png";
 
 const HomePage = () => {
-  const headerData = {
-    profilePicture: profilePic,
-    profileName: "John Doe",
-  };
-
   const containerStyle = {
     display: "flex",
     flexDirection: "column",
@@ -44,7 +39,8 @@ const HomePage = () => {
 
   return (
     <div style={containerStyle}>
-      <Header {...headerData} /> {/*text scaled nog niet correct*/}
+      <Header profileName={"John Doe"} profilePicture={profilePic} />
+      {/*text scaled nog niet correct*/}
       <div style={cardContainer}>
         <RouteCard
           image={cardImage}
