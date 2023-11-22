@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../utils/images/logo.png";
-import styles from "@/app/footer.module.scss";
+import styles from "@/app/Footer.module.scss";
 
 const Footer = () => {
   return (
