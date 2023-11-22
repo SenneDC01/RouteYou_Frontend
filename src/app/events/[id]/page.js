@@ -1,10 +1,7 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "@/app/DetailPage.module.scss";
 import "@/app/globals.css";
-import * as colors from "@/utils/colors";
-import Header from "@/organisms/header";
-import Footer from "@/organisms/footer";
 import DetailColumn from "@/organisms/DetailColumn";
 
 export default function Page({ params }) {
@@ -30,8 +27,8 @@ export default function Page({ params }) {
       },
     ],
   };
-  const [key, setKey] = useState(true);
-  const [value, setValue] = useState("");
+  // const [key, setKey] = useState(true);
+  // const [value, setValue] = useState("");
 
   // useEffect(() => {
   //   const iframe = document.querySelector("#iframe");
