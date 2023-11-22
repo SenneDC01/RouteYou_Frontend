@@ -2,9 +2,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "@/app/DetailPage.module.scss";
 import "@/app/globals.css";
-import * as colors from "@/utils/colors";
-import Header from "@/organisms/header";
-import Footer from "@/organisms/footer";
 import DetailColumn from "@/organisms/DetailColumn";
 
 export default function Page({ params }) {
@@ -51,6 +48,7 @@ export default function Page({ params }) {
     <div className={styles.detailPage}>
       <DetailColumn event={event} />
       <iframe
+        title="Interactive map with the route of the event"
         className={styles.map}
         key="1"
         id="iframe"

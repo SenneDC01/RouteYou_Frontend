@@ -1,17 +1,14 @@
 "use client";
 import React from "react";
 import "@/app/globals.css";
-import { useRouter } from "next/navigation";
 import ButtonLink from "@/atoms/ButtonLink";
 import * as colors from "@/utils/colors";
 import styles from "@/app/DetailColumn.module.scss";
-import Header from "@/organisms/Header";
-import Footer from "@/organisms/Footer";
 import BigTitle from "@/atoms/BigTitle";
 import SubText from "@/atoms/SubText";
 import RegularText from "@/atoms/RegularText";
 import ViewMore from "@/molecules/ViewMore";
-import CustomButton from "@/atoms/button";
+import CustomButton from "@/atoms/Button";
 import ArrowLeftSVG from "@/utils/icons/ArrowLeftSVG";
 
 export default function DetailColumn({ event }) {
@@ -33,11 +30,11 @@ export default function DetailColumn({ event }) {
         <ViewMore link={`./${event.id}/pictures`}>Pictures</ViewMore>
         <div className={styles.row}>
           <CustomButton
-            label="dsafd"
+            label="share"
             backgroundColor={colors.green}
             borderColor={colors.green}
             fontColor={colors.white}
-            icon={<ArrowLeftSVG />}
+            // icon={<ArrowLeftSVG />}
             width="100%"
             height="inherit"
             borderRadius={5}
