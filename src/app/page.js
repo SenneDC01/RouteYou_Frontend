@@ -5,18 +5,14 @@ import CustomButton from "@/atoms/Button";
 import * as colors from "../utils/colors";
 import EditSVG from "../utils/icons/EditSVG";
 import ArrowLeftSVG from "../utils/icons/ArrowLeftSVG";
-import Header from "../organisms/Header";
 import "../app/globals.css";
-import Footer from "@/organisms/Footer";
 import RouteCard from "@/organisms/RouteCard";
 import cardImage from "../utils/images/CardImage.png";
-import profilePic from "../utils/images/profilePicture.png";
 import InfoCard from "@/organisms/InfoCard";
 import GroupSVG from "../utils/icons/GroupSVG";
 import CameraSVG from "../utils/icons/CameraSVG";
 import RouteSVG from "../utils/icons/RouteSVG";
 import EventCard from "@/organisms/EventCard";
-import NuiButton from "@/atoms/NuiButton";
 
 const HomePage = () => {
   const containerStyle = {
@@ -46,8 +42,6 @@ const HomePage = () => {
 
   return (
     <div style={containerStyle}>
-      <Header profileName={"John Doe"} profilePicture={profilePic} />
-
       <div style={cardContainer}>
         <InfoCard
           icon={<RouteSVG />}
@@ -117,8 +111,6 @@ const HomePage = () => {
         />
       </div>
       <div style={buttonContainer}>
-        <NuiButton />
-
         <CustomButton
           label="Inscrijven"
           backgroundColor={colors.white}
@@ -158,7 +150,6 @@ const HomePage = () => {
 
         <CustomButton label="Save" />
       </div>
-      <Footer />
     </div>
   );
 };

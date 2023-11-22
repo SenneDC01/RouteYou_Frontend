@@ -10,8 +10,8 @@ import LocationSVG from "@/utils/icons/LocationSVG";
 import CyclistSVG from "@/utils/icons/CyclistSVG";
 import StarSVG from "@/utils/icons/StarSVG";
 import * as colors from "../utils/colors";
-import ArrowLeftSVG from "@/utils/icons/ArrowLeftSVG";
 import CustomButton from "@/atoms/Button";
+import ArrowRightSVG from "@/utils/icons/ArrowRightSVG";
 
 const EventCard = ({
   image,
@@ -85,7 +85,7 @@ const EventCard = ({
                     backgroundColor={colors.green}
                     borderColor={colors.green}
                     fontColor={colors.white}
-                    icon={<ArrowLeftSVG />}
+                    icon={<ArrowRightSVG />}
                     width="3em"
                     height="3em"
                     borderRadius={30}

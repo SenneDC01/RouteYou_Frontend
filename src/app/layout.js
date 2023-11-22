@@ -1,7 +1,8 @@
 // import { Inter } from "next/font/google";
-import Header from "@/organisms/header";
+import Header from "@/organisms/Header";
 import "./globals.css";
-import Footer from "@/organisms/footer";
+import Footer from "@/organisms/Footer";
+import profilePic from "../utils/images/profilePicture.png";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -15,10 +16,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <link rel="stylesheet" href="https://unpkg.com/normalize.css" />
+        <title>HomePage</title>
       </head>
       {/* <body className={inter.className}>{children}</body> */}
       <body>
-        <Header />
+        <Header profileName={"John Doe"} profilePicture={profilePic} />
         <main>{children}</main>
         <Footer />
       </body>
