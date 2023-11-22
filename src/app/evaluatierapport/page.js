@@ -37,7 +37,7 @@ export default function page() {
             <dd>FireFox met NVDA Chrome met NVDA</dd>
             <dt>Verdere onderzoeksvereisten</dt>
             <dd>
-              De evaluatie zal gebeuren op 2 pagina's, de homepagina en detail
+              De evaluatie zal gebeuren op 2 pagina&apos;s, de homepagina en detail
               pagina van een event.
             </dd>
           </dl>
