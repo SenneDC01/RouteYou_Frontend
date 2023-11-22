@@ -1,7 +1,7 @@
 // import { Inter } from "next/font/google";
-import Header from "@/organisms/header";
+import Header from "@/organisms/Header";
 import "./globals.css";
-import Footer from "@/organisms/footer";
+import Footer from "@/organisms/Footer";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <link rel="stylesheet" href="https://unpkg.com/normalize.css" />
+        {/* <link rel="stylesheet" href="https://unpkg.com/normalize.css" /> */}
       </head>
       {/* <body className={inter.className}>{children}</body> */}
       <body>
