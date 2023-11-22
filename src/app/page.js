@@ -5,12 +5,18 @@ import CustomButton from "@/atoms/Button";
 import * as colors from "../utils/colors";
 import EditSVG from "../utils/icons/EditSVG";
 import ArrowLeftSVG from "../utils/icons/ArrowLeftSVG";
-import Header from "../organisms/header";
+import Header from "../organisms/Header";
 import "../app/globals.css";
-import Footer from "@/organisms/footer";
+import Footer from "@/organisms/Footer";
 import RouteCard from "@/organisms/RouteCard";
 import cardImage from "../utils/images/CardImage.png";
 import profilePic from "../utils/images/profilePicture.png";
+import InfoCard from "@/organisms/InfoCard";
+import GroupSVG from "../utils/icons/GroupSVG";
+import CameraSVG from "../utils/icons/CameraSVG";
+import RouteSVG from "../utils/icons/RouteSVG";
+import EventCard from "@/organisms/EventCard";
+import NuiButton from "@/atoms/NuiButton";
 
 const HomePage = () => {
   const containerStyle = {
@@ -35,12 +41,27 @@ const HomePage = () => {
     margin: "5vh",
     flex: 1, // Make the content take up the available space
     gap: "2em",
+    flexWrap: "wrap",
   };
 
   return (
     <div style={containerStyle}>
       <Header profileName={"John Doe"} profilePicture={profilePic} />
-      {/*text scaled nog niet correct*/}
+
+      <div style={cardContainer}>
+        <InfoCard
+          icon={<RouteSVG />}
+          text="Meer dan 7.270.000 routes"
+        ></InfoCard>
+        <InfoCard
+          icon={<GroupSVG />}
+          text="Meer dan 15.115.000 gebruikers"
+        ></InfoCard>
+        <InfoCard
+          icon={<CameraSVG />}
+          text="Meer dan 3.475.000 trekpleisters"
+        ></InfoCard>
+      </div>
       <div style={cardContainer}>
         <RouteCard
           image={cardImage}
@@ -73,7 +94,31 @@ const HomePage = () => {
           moeilijkheid="Easy"
         />
       </div>
+      <div style={cardContainer}>
+        <EventCard
+          image={cardImage}
+          title="Groene Gordel 2024"
+          organisator="Toerisme Vlaanderen"
+          dateTime="29 oktober 2023 - 09:00"
+          locatie="Sint-Annakring Aalst"
+          route="Racefiets route"
+          afstand="106 km"
+          description="Ontdek naast de prachtige in herfstkleuren gehulde natuur ook ons cultureel erfgoed, in en rond de dreven van Merksplas Kolonie. Wandelen in 3 lussen van 8 km, naar hartenlust onderling combineerbaar tot 16 en 24 km om volop van al het moois te genieten. Tevens voorzien wij een lus van 4 km die geschikt is voor kinderwagens"
+        />
+        <EventCard
+          image={cardImage}
+          title="Groene Gordel 2024"
+          organisator="Toerisme Vlaanderen"
+          dateTime="29 oktober 2023 - 09:00"
+          locatie="Sint-Annakring Aalst"
+          route="Racefiets route"
+          afstand="106 km"
+          description="Ontdek naast de prachtige in herfstkleuren gehulde natuur ook ons cultureel erfgoed, in en rond de dreven van Merksplas Kolonie. Wandelen in 3 lussen van 8 km, naar hartenlust onderling combineerbaar tot 16 en 24 km om volop van al het moois te genieten. Tevens voorzien wij een lus van 4 km die geschikt is voor kinderwagens"
+        />
+      </div>
       <div style={buttonContainer}>
+        <NuiButton />
+
         <CustomButton
           label="Inscrijven"
           backgroundColor={colors.white}

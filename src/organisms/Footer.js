@@ -16,26 +16,26 @@ const Footer = () => {
       <div className="flex flex-1 justify-between px-4">
         {/* Column 1 */}
         <div className="flex flex-col">
-          <div className="p-2 bg-gray-200">Home</div>
-          <div className="p-2 bg-gray-200">Home</div>
-          <div className="p-2 bg-gray-200">Home</div>
-          <div className="p-2 bg-gray-200">Home</div>
+          <div className="p-2">Home</div>
+          <div className="p-2">Home</div>
+          <div className="p-2">Home</div>
+          <div className="p-2">Home</div>
         </div>
 
         {/* Column 2 */}
         <div className="flex flex-col">
-          <div className="p-2 bg-gray-200">row 1</div>
-          <div className="p-2 bg-gray-200">row 2</div>
-          <div className="p-2 bg-gray-200">row 3</div>
-          <div className="p-2 bg-gray-200">row 4</div>
+          <div className="p-2">row 1</div>
+          <div className="p-2">row 2</div>
+          <div className="p-2">row 3</div>
+          <div className="p-2">row 4</div>
         </div>
 
         {/* Column 3 */}
         <div className="flex flex-col">
-          <div className="p-2 bg-gray-200">row 1</div>
-          <div className="p-2 bg-gray-200">row 2</div>
-          <div className="p-2 bg-gray-200">row 3</div>
-          <div className="p-2 bg-gray-200">row 4</div>
+          <div className="p-2">row 1</div>
+          <div className="p-2">row 2</div>
+          <div className="p-2">row 3</div>
+          <div className="p-2">row 4</div>
         </div>
 
         {/* Column 4 */}

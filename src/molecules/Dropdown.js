@@ -13,8 +13,7 @@ const CustomDropdown = ({ buttonText, items }) => {
   const dropdownStyle = {
     padding: 0,
     maxWidth: 100,
-    fontSize: "20"
-
+    fontSize: "20",
   };
 
   const buttonStyle = {
@@ -29,12 +28,16 @@ const CustomDropdown = ({ buttonText, items }) => {
     <NextUIProvider style={dropdownStyle}>
       <Dropdown>
         <DropdownTrigger style={buttonStyle}>
-          <Button variant="none" size={"lg"} className={"h-0 p-0 min-w-fit"}>{buttonText}</Button>
+          <Button variant="none" size={"lg"} className={"h-6 p-0 min-w-fit"}>
+            {buttonText}
+          </Button>
         </DropdownTrigger>
         <DropdownMenu aria-label="Static Actions">
           {items.map((item, index) => (
-            <DropdownItem key={index} textValue={item} className={"border-b"}>{item}</DropdownItem>
-        ))}
+            <DropdownItem key={index} textValue={item} className={"border-b"}>
+              {item}
+            </DropdownItem>
+          ))}
         </DropdownMenu>
       </Dropdown>
     </NextUIProvider>

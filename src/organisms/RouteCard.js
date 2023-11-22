@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Card, CardBody, CardFooter } from "@nextui-org/react";
+import { Card, CardBody } from "@nextui-org/react";
 import Image from "next/image";
 import PropTypes from "prop-types";
 import AfstandSVG from "@/utils/icons/AfstandSVG";
@@ -9,6 +9,7 @@ import GemStijgingSVG from "@/utils/icons/GemStijgingSVG";
 import KlokSVG from "@/utils/icons/KlokSVG";
 import MaxStijgingSVG from "@/utils/icons/MaxStijgingSVG";
 import MoeilijkheidSVG from "@/utils/icons/MoeilijkheidSVG";
+import SVGtext from "@/atoms/SVGtext";
 
 const RouteCard = ({
   image,
@@ -26,7 +27,7 @@ const RouteCard = ({
         shadow="sm"
         isPressable
         onPress={() => console.log("item pressed")}
-        className="hover:shadow-md transition-shadow duration-300 ease-in-out"
+        className="hover:shadow-xl transition-shadow duration-300 ease-in-out"
       >
         <CardBody className="overflow-visible p-0">
           <Image
@@ -38,44 +39,26 @@ const RouteCard = ({
             className="w-full object-cover"
             src={image}
           />
-          <div className={"flex justify-center font-semibold p-2"}>{title}</div>
-          {/*font-bold werkt niet font-semibold wel*/}
-          <div className="flex justify-center flex-row gap-3">
+          <p className={"flex justify-center font-semibold pt-2"}>{title}</p>
+          <div className="flex justify-around flex-row p-4 text-sm">
             <div className="flex flex-col gap-5">
-              <p className="flex flex-row gap-1 p-3">
-                {<AfstandSVG width={25} height={25} />}
-                {afstand}
-              </p>
-              <p className="flex flex-row gap-1 p-3">
-                {<HoogteSVG width={25} height={25} />}
-                {hoogte}
-              </p>
-              <p className="flex flex-row gap-1 p-3">
-                {<GemStijgingSVG width={25} height={25} />}
-                {gemStijgingsPercentage}
-              </p>
+              <SVGtext label={afstand} icon={<AfstandSVG />} />
+              <SVGtext label={hoogte} icon={<HoogteSVG />} />
+              <SVGtext
+                label={gemStijgingsPercentage}
+                icon={<GemStijgingSVG />}
+              />
             </div>
-            <div className="flex flex-col">
-              <p className="flex flex-row gap-1 p-3">
-                {<KlokSVG width={25} height={25} />}
-                {tijd}
-              </p>
-              <p className="flex flex-row gap-1 p-3">
-                {<MaxStijgingSVG width={25} height={25} />}
-                {maxStijgingsPercentage}
-              </p>
-              <p className="flex flex-row gap-1 p-3">
-                {<MoeilijkheidSVG width={25} height={25} />}
-                {moeilijkheid}
-              </p>
+            <div className="flex flex-col gap-5">
+              <SVGtext label={tijd} icon={<KlokSVG />} />
+              <SVGtext
+                label={maxStijgingsPercentage}
+                icon={<MaxStijgingSVG />}
+              />
+              <SVGtext label={moeilijkheid} icon={<MoeilijkheidSVG />} />
             </div>
           </div>
         </CardBody>
-
-        {/*<CardFooter className="text-small justify-between">
-          <b>{title}</b>
-          <p className="text-default-500">{afstand}</p>
-        </CardFooter>*/}
       </Card>
     </div>
   );
