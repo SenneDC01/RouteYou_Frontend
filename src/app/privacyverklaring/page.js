@@ -5,7 +5,7 @@ import BoldText from "@/atoms/BoldText";
 
 export default function Page() {
   return (
-    <div className={styles.page}>
+    <div className={styles.page} style={{ maxWidth: 1100, margin: '2rem auto' }}>
       <BigTitle>Privacyverklaring</BigTitle>
       <br></br>
 
