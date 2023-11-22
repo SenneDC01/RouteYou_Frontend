@@ -43,7 +43,7 @@ const Footer = () => {
         <ul className="flex flex-col justify-start gap-2">
           <li>
             <Link
-              href="/toegankelijkheidsverklaring"
+              href="/toegankelijkheisverklaring"
               className={styles.linkStyles}
             >
               Toegankelijkheidsverklaring
@@ -56,7 +56,7 @@ const Footer = () => {
           </li>
 
           <li>
-            <Link href="/wcag-report" className={styles.linkStyles}>
+            <Link href="/evaluatierapport" className={styles.linkStyles}>
               WCAG Report
             </Link>
           </li>

@@ -39,13 +39,15 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
           className="sm:hidden"
         />
         <NavbarBrand className="flex">
-          <Image src={logo} priority={true} alt="RouteYou" />
+          <Link href="/">
+            <Image src={logo} priority={true} alt="RouteYou" />
+          </Link>
         </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem isActive>
-          <Link href="#" aria-current="page">
+          <Link href="/" aria-current="page">
             Home
             <div style={itemBorderStyle}></div>
           </Link>
@@ -91,7 +93,7 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
           />
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="#">
+          <Link color="foreground" href="/">
             Dashboard
             <div style={itemBorderStyle}></div>
           </Link>
