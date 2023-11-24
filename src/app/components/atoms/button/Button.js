@@ -1,7 +1,7 @@
 // src/atoms/Button.js
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import * as colors from "../utils/colors";
+import * as colors from "../../../../utils/colors";
 
 const Button = ({
   label = "Click me",

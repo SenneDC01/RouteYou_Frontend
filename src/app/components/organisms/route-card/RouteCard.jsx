@@ -9,7 +9,7 @@ import GemStijgingSVG from "@/utils/icons/GemStijgingSVG";
 import KlokSVG from "@/utils/icons/KlokSVG";
 import MaxStijgingSVG from "@/utils/icons/MaxStijgingSVG";
 import MoeilijkheidSVG from "@/utils/icons/MoeilijkheidSVG";
-import SVGtext from "@/atoms/SVGtext";
+import SVGtext from "@/app/components/atoms/svg-text/SVGtext";
 
 const RouteCard = ({
   image,

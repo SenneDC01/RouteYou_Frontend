@@ -1,14 +1,15 @@
 import Head from "next/head";
-import Header from "@/organisms/Header";
+import Header from "@/app/components/organisms/header/Header";
 import "./globals.css";
-import Footer from "@/organisms/Footer";
+import Footer from "@/app/components/organisms/footer/Footer";
 import profilePic from "../utils/images/profilePicture.png";
 
 // const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "RouteYou - Ontdek en deel routes",
-  description: "RouteYou - Jouw platform voor het ontdekken en delen van routes voor wandel, loop, fiets en meer.",
+  description:
+    "RouteYou - Jouw platform voor het ontdekken en delen van routes voor wandel, loop, fiets en meer.",
   keywords: "RouteYou, routes, wandelen, fietsen, evenementen",
 };
 

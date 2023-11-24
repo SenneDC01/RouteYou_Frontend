@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import banner from "../utils/images/banner.jpg";
-import Button from "../atoms/Button";
+import Button from "../../atoms/button/Button";
 import RouteSVGWhite from "@/utils/icons/RouteSVGWhite";
 import CalenderSVG from "@/utils/icons/CalenderSVG";
 

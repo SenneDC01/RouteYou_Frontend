@@ -1,7 +1,7 @@
 // src/atoms/Button.js
 import React from "react";
 import Link from "next/link";
-import * as colors from "../utils/colors";
+import * as colors from "../../../../utils/colors";
 import styles from "@/app/button.module.scss";
 
 const ButtonLink = ({
