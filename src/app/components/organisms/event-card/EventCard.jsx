@@ -9,7 +9,7 @@ import SVGtext from "@/app/components/atoms/svg-text/SVGtext";
 import LocationSVG from "@/utils/icons/LocationSVG";
 import CyclistSVG from "@/utils/icons/CyclistSVG";
 import StarSVG from "@/utils/icons/StarSVG";
-import * as colors from "../../../../utils/colors";
+import * as colors from "@/utils/colors";
 import CustomButton from "@/app/components/atoms/button/Button";
 import ArrowRightSVG from "@/utils/icons/ArrowRightSVG";
 
