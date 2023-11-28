@@ -25,6 +25,7 @@ const Banner = () => {
             height="3em"
             icon={<RouteSVGWhite />}
             fontSize="0.9em"
+            link="#"
           />
           <Button
             label="Events"
@@ -32,6 +33,7 @@ const Banner = () => {
             height="3em"
             icon={<CalenderSVG />}
             fontSize="0.9em"
+            link="#"
           />
         </div>
       </div>

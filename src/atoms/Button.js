@@ -12,9 +12,10 @@ const Button = ({
   icon = null,
   width = "100px",
   height = "50px",
-  fontStyle = "Inter",
-  fontWeight = "semi-bold",
+  fontFamily = "Inter",
+  fontWeight = "bold",
   fontSize = "inherit",
+  link = "#",
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -26,7 +27,7 @@ const Button = ({
     color: fontColor,
     width: width,
     height: height,
-    fontStyle: fontStyle,
+    fontFamily: fontFamily,
     fontWeight: fontWeight,
     fontSize: fontSize,
     textTransform: "uppercase",
@@ -41,15 +42,16 @@ const Button = ({
   };
 
   return (
-    <button
-      style={{ ...customButtonStyle, ...(isHovered && hoverStyle) }}
+    <a
+      style={{ ...customButtonStyle, ...(isHovered && hoverStyle) }} //inline style?
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      type="image"
+      aria-label="forward button"
+      href={link}
     >
       {icon && React.cloneElement(icon, { width: "40px", height: "20px" })}
       {label}
-    </button>
+    </a>
   );
 };
 
@@ -62,9 +64,10 @@ Button.propTypes = {
   icon: PropTypes.element,
   width: PropTypes.string,
   height: PropTypes.string,
-  fontStyle: PropTypes.string,
+  fontFamily: PropTypes.string,
   fontWeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   fontSize: PropTypes.string,
+  link: PropTypes.string.isRequired,
 };
 
 export default Button;

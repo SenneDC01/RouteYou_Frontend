@@ -13,7 +13,6 @@ const CustomDropdown = ({ buttonText, items }) => {
   const dropdownStyle = {
     padding: 0,
     maxWidth: 100,
-    fontSize: "20",
   };
 
   const buttonStyle = {

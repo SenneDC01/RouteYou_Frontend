@@ -38,7 +38,6 @@ const EventCard = ({
           <div className="flex">
             {/*Image width werkt nie mee*/}
             <Image
-              shadow="sm"
               height={100}
               width={100}
               alt={title}
@@ -89,6 +88,7 @@ const EventCard = ({
                     width="3em"
                     height="3em"
                     borderRadius={30}
+                    link="#"
                   />
                 </div>
               </div>
