@@ -1,14 +1,14 @@
 "use client";
 import React from "react";
 import "@/app/assets/globals.css";
-import ButtonLink from "@/app/components/atoms/button-link/ButtonLink";
+import ButtonLink from "@/components/atoms/button-link/ButtonLink";
 import * as colors from "@/utils/colors";
 import styles from "./DetailColumn.module.scss";
-import BigTitle from "@/app/components/atoms/big-title/BigTitle";
-import SubText from "@/app/components/atoms/sub-text/SubText";
-import RegularText from "@/app/components/atoms/regular-text/RegularText";
-import ViewMore from "@/app/components/molecules/view-more/ViewMore";
-import CustomButton from "@/app/components/atoms/button/Button";
+import BigTitle from "@/components/atoms/big-title/BigTitle";
+import SubText from "@/components/atoms/sub-text/SubText";
+import RegularText from "@/components/atoms/regular-text/RegularText";
+import ViewMore from "@/components/molecules/view-more/ViewMore";
+import CustomButton from "@/components/atoms/button/Button";
 import ArrowLeftSVG from "@/utils/icons/ArrowLeftSVG";
 
 export default function DetailColumn({ event }) {

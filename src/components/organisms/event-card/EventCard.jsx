@@ -3,14 +3,14 @@ import React, { useState } from "react";
 import { Card, CardBody, Button } from "@nextui-org/react";
 import Image from "next/image";
 import PropTypes from "prop-types";
-import BoldText from "@/app/components/atoms/bold-text/BoldText";
-import SubText from "@/app/components/atoms/sub-text/SubText";
-import SVGtext from "@/app/components/atoms/svg-text/SVGtext";
+import BoldText from "@/components/atoms/bold-text/BoldText";
+import SubText from "@/components/atoms/sub-text/SubText";
+import SVGtext from "@/components/atoms/svg-text/SVGtext";
 import LocationSVG from "@/utils/icons/LocationSVG";
 import CyclistSVG from "@/utils/icons/CyclistSVG";
 import StarSVG from "@/utils/icons/StarSVG";
 import * as colors from "@/utils/colors";
-import CustomButton from "@/app/components/atoms/button/Button";
+import CustomButton from "@/components/atoms/button/Button";
 import ArrowRightSVG from "@/utils/icons/ArrowRightSVG";
 
 const EventCard = ({

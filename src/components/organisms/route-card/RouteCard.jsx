@@ -9,7 +9,7 @@ import GemStijgingSVG from "@/utils/icons/GemStijgingSVG";
 import KlokSVG from "@/utils/icons/KlokSVG";
 import MaxStijgingSVG from "@/utils/icons/MaxStijgingSVG";
 import MoeilijkheidSVG from "@/utils/icons/MoeilijkheidSVG";
-import SVGtext from "@/app/components/atoms/svg-text/SVGtext";
+import SVGtext from "@/components/atoms/svg-text/SVGtext";
 
 const RouteCard = ({
   image,
@@ -38,7 +38,7 @@ const RouteCard = ({
             src={image}
           />
           <p className={"flex justify-center font-semibold pt-2"}>{title}</p>
-          <div className="flex justify-around flex-row p-4 text-sm">
+          <div className="flex justify-around flex-row p-4 text-sm gap-4">
             <div className="flex flex-col gap-5">
               <SVGtext label={afstand} icon={<AfstandSVG />} />
               <SVGtext label={hoogte} icon={<HoogteSVG />} />

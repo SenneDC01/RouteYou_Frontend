@@ -1,7 +1,7 @@
-import BigTitle from "@/app/components/atoms/big-title/BigTitle";
-import RegularText from "@/app/components/atoms/regular-text/RegularText";
+import BigTitle from "@/components/atoms/big-title/BigTitle";
+import RegularText from "@/components/atoms/regular-text/RegularText";
 import styles from "./StylesPrivacyVerklaring.scss";
-import BoldText from "@/app/components/atoms/bold-text/BoldText";
+import BoldText from "@/components/atoms/bold-text/BoldText";
 
 export default function Page() {
   return (

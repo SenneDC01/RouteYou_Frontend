@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 import styles from "./ViewMore.module.scss";
-import BoldText from "@/app/components/atoms/bold-text/BoldText";
-import ButtonLink from "@/app/components/atoms/button-link/ButtonLink";
+import BoldText from "@/components/atoms/bold-text/BoldText";
+import ButtonLink from "@/components/atoms/button-link/ButtonLink";
 
 export default function BigTitle({ children, link }) {
   return (

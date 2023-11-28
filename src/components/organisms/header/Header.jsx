@@ -14,7 +14,7 @@ import {
 import PropTypes from "prop-types";
 import Image from "next/image";
 import logo from "@/utils/images/logo.png";
-import CustomDropdown from "@/app/components/molecules/drop-down/Dropdown";
+import CustomDropdown from "@/components/molecules/drop-down/Dropdown";
 import * as colors from "@/utils/colors";
 
 const Header = ({ profileName = "John Doe", profilePicture = null }) => {

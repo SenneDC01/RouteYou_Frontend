@@ -2,14 +2,14 @@
 "use client";
 import React from "react";
 import "@/app/assets/globals.css";
-import RouteCard from "@/app/components/organisms/route-card/RouteCard";
+import RouteCard from "@/components/organisms/route-card/RouteCard";
 import cardImage from "@/utils/images/CardImage.png";
-import InfoCard from "@/app/components/organisms/info-card/InfoCard";
+import InfoCard from "@/components/organisms/info-card/InfoCard";
 import GroupSVG from "@/utils/icons/GroupSVG";
 import CameraSVG from "@/utils/icons/CameraSVG";
 import RouteSVG from "@/utils/icons/RouteSVG";
-import EventCard from "@/app/components/organisms/event-card/EventCard";
-import Banner from "@/app/components/organisms/banner/Banner";
+import EventCard from "@/components/organisms/event-card/EventCard";
+import Banner from "@/components/organisms/banner/Banner";
 
 const HomePage = () => {
   return (

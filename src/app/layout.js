@@ -1,10 +1,8 @@
 import Head from "next/head";
-import Header from "@/app/components/organisms/header/Header";
+import Header from "@/components/organisms/header/Header";
 import "@/app/assets/globals.css";
-import Footer from "@/app/components/organisms/footer/Footer";
+import Footer from "@/components/organisms/footer/Footer";
 import profilePic from "@/utils/images/profilePicture.png";
-
-// const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "RouteYou - Ontdek en deel routes",
@@ -15,13 +13,10 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <Head>
-        <link rel="stylesheet" href="https://unpkg.com/normalize.css" />
-      </Head>
+    <html lang="nl">
+      <Head></Head>
       <body>
         <Header profileName={"John Doe"} profilePicture={profilePic} />
-        {/*<HeaderUI />*/}
         <main>{children}</main>
         <Footer />
       </body>

@@ -2,7 +2,7 @@
 import React from "react";
 import styles from "./DetailPage.module.scss";
 import "@/app/assets/globals.css";
-import DetailColumn from "@/app/components/organisms/detail-column/DetailColumn";
+import DetailColumn from "@/components/organisms/detail-column/DetailColumn";
 
 export default function Page({ event }) {
   // const event = {
