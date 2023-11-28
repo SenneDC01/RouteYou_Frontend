@@ -1,12 +1,9 @@
 ---
-    - name: Copy Google Cloud key file to the server
-      ansible.builtin.copy:
-        src: "./key-files/admin.json"
-        dest: "admin.json"
-      #works without this just remeber if it fails 
-
-    - name: Configure Google Cloud service account
-      ansible.builtin.command: "gcloud auth activate-service-account --key-file=admin.json"
+    # - name: Copy Google Cloud key file to the server
+    #   ansible.builtin.copy:
+    #     src: "./key-files/admin.json"
+    #     dest: "admin.json"
+    #   #works without this just remeber if it fails 
 
     - name: Ensure the Docker config directory exists
       ansible.builtin.file:

@@ -1,0 +1,24 @@
+---
+# tasks file for updateDockerContainers
+    - name: Ensure Docker directory exists
+      ansible.builtin.file:
+        path: "./infra"
+        state: directory
+
+    - name: Run Docker Compose Down as student with sudo
+      ansible.builtin.shell:
+        cmd: "sudo -u {{ ansible_user }} docker compose down"
+        chdir: "./infra"
+
+
+    - name: Pull Docker images as student with sudo
+      ansible.builtin.shell:
+        cmd: "sudo -u {{ ansible_user }} docker compose pull"
+        chdir: "./infra"
+
+
+    - name: Rebuild and Run Docker Compose Up as student with sudo
+      ansible.builtin.shell:
+        cmd: "sudo -u {{ ansible_user }} docker compose up -d"
+        chdir: "./infra"
+

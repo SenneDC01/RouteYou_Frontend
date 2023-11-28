@@ -1,0 +1,19 @@
+---
+- name: Authenticate to Google Cloud
+  hosts: 
+    - "{{target_host}}"
+  become_user: "{{ ansible_user }}" 
+  tasks:
+    - name: Include gcloudAuthArtifactRegistry for non-dev hosts
+      include_role:
+        name: gcloudAuthArtifactRegistry
+      when: "'dev' not in inventory_hostname"
+
+- name : update the containers on the servers 
+  hosts: 
+    - "{{target_host}}"
+  roles:
+    - updateDockerContainers
+
+
+    
