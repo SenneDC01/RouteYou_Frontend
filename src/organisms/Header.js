@@ -9,6 +9,7 @@ import {
   NavbarMenuToggle,
   NavbarMenuItem,
   NavbarMenu,
+  Button,
 } from "@nextui-org/react";
 import PropTypes from "prop-types";
 import Image from "next/image";
@@ -31,9 +32,16 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
     background: colors.green,
   };
 
+  const arrowStyle = {
+    transform: "rotate(90deg) scale(.6, 1.3)",
+    fontSize: "1.2em",
+    fontWeight: "500",
+  };
+
+  //header mag niet in nav?
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen} isBordered maxWidth="xl">
-      <NavbarContent>
+    <Navbar onMenuOpenChange={setIsMenuOpen} isBordered maxWidth="xl" as="div">
+      <NavbarContent as="div">
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="sm:hidden"
@@ -49,7 +57,7 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
         <NavbarItem isActive>
           <Link href="/" aria-current="page">
             Home
-            <div style={itemBorderStyle}></div>
+            <span style={itemBorderStyle}></span>
           </Link>
         </NavbarItem>
         <NavbarItem>
@@ -57,16 +65,8 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
             buttonText={
               <>
                 Events
-                <div style={itemBorderStyle}></div>
-                <span
-                  style={{
-                    transform: "rotate(90deg) scale(.6, 1.3)",
-                    fontSize: 16,
-                    fontWeight: "500",
-                  }}
-                >
-                  &gt;
-                </span>
+                <span style={itemBorderStyle}></span>
+                <span style={arrowStyle}>&gt;</span>
               </>
             }
             items={dropdownItemsEvents}
@@ -77,16 +77,8 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
             buttonText={
               <>
                 Routes
-                <div style={itemBorderStyle}></div>
-                <span
-                  style={{
-                    transform: "rotate(90deg) scale(.6, 1.3)",
-                    fontSize: 16,
-                    fontWeight: "500",
-                  }}
-                >
-                  &gt;
-                </span>
+                <span style={itemBorderStyle}></span>
+                <span style={arrowStyle}>&gt;</span>
               </>
             }
             items={dropdownItemsRoutes}
@@ -95,7 +87,7 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
         <NavbarItem>
           <Link color="foreground" href="/">
             Dashboard
-            <div style={itemBorderStyle}></div>
+            <span style={itemBorderStyle}></span>
           </Link>
         </NavbarItem>
       </NavbarContent>
@@ -121,38 +113,33 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
             buttonText={
               <>
                 Events
-                <span
-                  style={{
-                    transform: "rotate(90deg) scale(.6, 1.3)",
-                    fontSize: 16,
-                    fontWeight: "500",
-                  }}
-                >
-                  &gt;
-                </span>
+                <span style={arrowStyle}>&gt;</span>
               </>
             }
             items={dropdownItemsEvents}
           />
+          <Link className="w-full" href="#" size="lg" color="foreground">
+            Create event
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <Link className="w-full" href="#" size="lg" color="foreground">
+            Search event
+          </Link>
         </NavbarMenuItem>
         <NavbarMenuItem>
           <CustomDropdown
             buttonText={
               <>
                 Routes
-                <span
-                  style={{
-                    transform: "rotate(90deg) scale(.6, 1.3)",
-                    fontSize: 16,
-                    fontWeight: "500",
-                  }}
-                >
-                  &gt;
-                </span>
+                <span style={arrowStyle}>&gt;</span>
               </>
             }
             items={dropdownItemsRoutes}
           />
+          <Link className="w-full" href="#" size="lg" color="foreground">
+            Go to RouteYou Routes
+          </Link>
         </NavbarMenuItem>
         <NavbarMenuItem>
           <Link className="w-full" href="#" size="lg" color="foreground">
