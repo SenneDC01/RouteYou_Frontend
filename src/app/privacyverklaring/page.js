@@ -1,11 +1,14 @@
-import BigTitle from "@/atoms/BigTitle";
-import RegularText from "@/atoms/RegularText";
+import BigTitle from "@/app/components/atoms/big-title/BigTitle";
+import RegularText from "@/app/components/atoms/regular-text/RegularText";
 import styles from "./StylesPrivacyVerklaring.scss";
-import BoldText from "@/atoms/BoldText";
+import BoldText from "@/app/components/atoms/bold-text/BoldText";
 
 export default function Page() {
   return (
-    <div className={styles.page} style={{ maxWidth: 1100, margin: '2rem auto' }}>
+    <div
+      className={styles.page}
+      style={{ maxWidth: 1100, margin: "2rem auto" }}
+    >
       <BigTitle>Privacyverklaring</BigTitle>
       <br></br>
 

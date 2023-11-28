@@ -1,0 +1,22 @@
+@use "../../../assets/vars.scss" as vars;
+
+.buttonStyle {
+  border: none;
+  width: 100%;
+  height: fit-content;
+  padding: vars.$button_padding;
+  font-family: "Inter", sans-serif;
+  font-size: vars.$text_regular;
+  border-radius: vars.$button_radius;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  transition-duration: 200ms;
+}
+
+.buttonStyle:hover {
+  transform: scale(1.06);
+  background-color: red;
+}

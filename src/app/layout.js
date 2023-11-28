@@ -1,9 +1,8 @@
 import Head from "next/head";
-import Header from "@/organisms/Header";
-import HeaderUI from "@//organisms/HeaderUI";
-import "./globals.css";
-import Footer from "@/organisms/Footer";
-import profilePic from "../utils/images/profilePicture.png";
+import Header from "@/app/components/organisms/header/Header";
+import "@/app/assets/globals.css";
+import Footer from "@/app/components/organisms/footer/Footer";
+import profilePic from "@/utils/images/profilePicture.png";
 
 // const inter = Inter({ subsets: ["latin"] });
 
