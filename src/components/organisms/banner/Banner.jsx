@@ -4,6 +4,7 @@ import banner from "@/utils/images/banner.jpg";
 import Button from "@/components/atoms/button/Button";
 import RouteSVGWhite from "@/utils/icons/RouteSVGWhite";
 import CalenderSVG from "@/utils/icons/CalenderSVG";
+import styles from "./Banner.module.scss";
 
 const Banner = () => {
   return (
@@ -26,6 +27,7 @@ const Banner = () => {
             icon={<RouteSVGWhite />}
             fontSize="0.9em"
             link="#"
+            buttonStyles={styles.button}
           />
           <Button
             label="Events"

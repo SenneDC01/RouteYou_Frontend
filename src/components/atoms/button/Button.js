@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import * as colors from "@/utils/colors";
+import styles from "./Button.module.scss";
 
 const Button = ({
   label = "Click me",
@@ -14,34 +15,35 @@ const Button = ({
   height = "50px",
   fontWeight = "bold",
   fontSize = "inherit",
+  buttonStyles,
   link = "#",
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
-  const customButtonStyle = {
-    backgroundColor: backgroundColor,
-    borderColor: borderColor,
-    borderWidth: 3,
-    borderRadius: borderRadius,
-    color: fontColor,
-    width: width,
-    height: height,
-    fontWeight: fontWeight,
-    fontSize: fontSize,
-    textTransform: "uppercase",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    transition: "background-color 0.3s ease-in-out, transform 0.3s ease-in-out",
-  };
+  // const customButtonStyle = {
+  //   backgroundColor: backgroundColor,
+  //   borderColor: borderColor,
+  //   borderWidth: 3,
+  //   borderRadius: borderRadius,
+  //   color: fontColor,
+  //   width: width,
+  //   height: height,
+  //   fontWeight: fontWeight,
+  //   fontSize: fontSize,
+  //   textTransform: "uppercase",
+  //   display: "flex",
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  //   transition: "background-color 0.3s ease-in-out, transform 0.3s ease-in-out",
+  // };
 
-  const hoverStyle = {
-    transform: "scale(1.06)",
-  };
+  // const hoverStyle = {
+  //   transform: "scale(1.06)",
+  // };
 
   return (
     <a
-      style={{ ...customButtonStyle, ...(isHovered && hoverStyle) }} //inline style?
+      className={[styles.buttonStyle, buttonStyles].join(" ")}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       aria-label="forward button"
