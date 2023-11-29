@@ -79,7 +79,9 @@ const EventCard = ({
                       ? description.slice(0, 130) + "..."
                       : description}
                   </SubText>
-                  <RoundButton icon={<ArrowRightSVG />} link="#" />
+                  <div className="flex flex-col h-full justify-end px-2">
+                    <RoundButton icon={<ArrowRightSVG />} link="#" />
+                  </div>
                 </div>
               </div>
             </div>
