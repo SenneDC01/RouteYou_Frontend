@@ -14,10 +14,17 @@
   justify-content: center;
   font-weight: bold;
   transition-duration: 200ms;
-
+  color: vars.$white;
   background-color: vars.$green;
+
 }
 
 .buttonStyle:hover {
   transform: scale(1.06);
+}
+
+.buttonSpacing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

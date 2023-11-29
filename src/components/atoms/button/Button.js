@@ -15,8 +15,10 @@ const Button = ({
       aria-label="forward button"
       href={link}
     >
-      {icon && React.cloneElement(icon, { width: "40px", height: "20px" })}
-      {label}
+      <div className={[styles.buttonSpacing]}>
+        {icon && React.cloneElement(icon, { width: "3rem", height: "1.5rem" })}
+        {label}
+      </div>
     </a>
   );
 };

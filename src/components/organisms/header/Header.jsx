@@ -40,20 +40,18 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
 
   //header mag niet in nav?
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen} isBordered maxWidth="xl" as="div">
-      <NavbarContent as="div">
-        <NavbarMenuToggle
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className="sm:hidden"
-        />
-        <NavbarBrand className="flex">
-          <Link href="/">
-            <Image src={logo} priority={true} alt="RouteYou" />
-          </Link>
-        </NavbarBrand>
-      </NavbarContent>
+    <Navbar onMenuOpenChange={setIsMenuOpen} isBordered maxWidth="2xl" as="div">
+      <NavbarMenuToggle
+        aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+        className="sm:hidden"
+      />
+      <NavbarBrand className="flex min-w-fit justify-center flex-grow-0 pe-2">
+        <Link href="/">
+          <Image src={logo} priority={true} alt="RouteYou" />
+        </Link>
+      </NavbarBrand>
 
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+      <NavbarContent className="hidden sm:flex gap-4">
         <NavbarItem isActive>
           <Link href="/" aria-current="page">
             Home

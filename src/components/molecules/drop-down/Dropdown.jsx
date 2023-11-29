@@ -21,6 +21,7 @@ const CustomDropdown = ({ buttonText, items }) => {
     justifyContent: "space-around",
     gap: 4,
     padding: 0,
+    borderRadius: 0,
   };
 
   return (
