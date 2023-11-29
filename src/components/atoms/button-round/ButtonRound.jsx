@@ -1,14 +1,9 @@
 // src/atoms/Button.js
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import styles from "./Button.module.scss";
+import styles from "./ButtonRound.module.scss";
 
-const Button = ({
-  label = "Click me",
-  icon = null,
-  buttonStyles,
-  link = "#",
-}) => {
+const ButtonRound = ({ icon = null, buttonStyles, link = "#" }) => {
   return (
     <a
       className={[styles.buttonStyle, buttonStyles].join(" ")}
@@ -16,15 +11,13 @@ const Button = ({
       href={link}
     >
       {icon && React.cloneElement(icon, { width: "40px", height: "20px" })}
-      {label}
     </a>
   );
 };
 
-Button.propTypes = {
-  label: PropTypes.string.isRequired,
+ButtonRound.propTypes = {
   icon: PropTypes.element,
   link: PropTypes.string.isRequired,
 };
 
-export default Button;
+export default ButtonRound;

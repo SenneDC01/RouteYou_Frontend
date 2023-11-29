@@ -23,12 +23,7 @@ const RouteCard = ({
 }) => {
   return (
     <div className="flex justify-center gap-2">
-      <Card
-        shadow="sm"
-        // isPressable
-        // onPress={() => console.log("item pressed")}
-        // className="hover:shadow-xl transition-shadow duration-300 ease-in-out"
-      >
+      <Card shadow="sm">
         <CardBody className="overflow-visible p-0">
           <Image
             height={200}

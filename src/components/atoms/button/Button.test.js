@@ -1,4 +1,4 @@
-// src/atoms/Button.test.js
+// src/atoms/ButtonRound.test.js
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
@@ -23,7 +23,7 @@ describe("Button component", () => {
         fontStyle="italic"
         fontWeight="bold"
         fontSize="18px"
-      />
+      />,
     );
 
     const buttonElement = screen.getByText("Styled Button");

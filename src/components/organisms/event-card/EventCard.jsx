@@ -10,7 +10,7 @@ import LocationSVG from "@/utils/icons/LocationSVG";
 import CyclistSVG from "@/utils/icons/CyclistSVG";
 import StarSVG from "@/utils/icons/StarSVG";
 import * as colors from "@/utils/colors";
-import CustomButton from "@/components/atoms/button/Button";
+import RoundButton from "@/components/atoms/button-round/ButtonRound";
 import ArrowRightSVG from "@/utils/icons/ArrowRightSVG";
 
 const EventCard = ({
@@ -79,17 +79,7 @@ const EventCard = ({
                       ? description.slice(0, 130) + "..."
                       : description}
                   </SubText>
-                  <CustomButton
-                    label=""
-                    backgroundColor={colors.green}
-                    borderColor={colors.green}
-                    fontColor={colors.white}
-                    icon={<ArrowRightSVG />}
-                    width="3em"
-                    height="3em"
-                    borderRadius={30}
-                    link="#"
-                  />
+                  <RoundButton icon={<ArrowRightSVG />} link="#" />
                 </div>
               </div>
             </div>

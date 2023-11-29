@@ -1,4 +1,4 @@
-// src/atoms/Button.test.js
+// src/atoms/ButtonRound.test.js
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
