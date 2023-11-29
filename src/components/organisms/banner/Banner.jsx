@@ -22,8 +22,6 @@ const Banner = () => {
         <div className="flex gap-20 justify-center flex-wrap">
           <Button
             label="Routes"
-            width="14em"
-            height="3em"
             icon={<RouteSVGWhite />}
             fontSize="0.9em"
             link="#"
@@ -31,11 +29,10 @@ const Banner = () => {
           />
           <Button
             label="Events"
-            width="14em"
-            height="3em"
             icon={<CalenderSVG />}
             fontSize="0.9em"
             link="#"
+            buttonStyles={styles.button}
           />
         </div>
       </div>

@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 const InfoCard = ({ icon = null, text = "label" }) => {
   return (
     <div className="flex justify-center gap-2">
-      {/*Shadows vragen*/}
       <Card className="py-4 shadow-md">
         <CardBody className="flex items-center overflow-visible py-2">
           {icon && React.cloneElement(icon, { width: "10em", height: "5em" })}
