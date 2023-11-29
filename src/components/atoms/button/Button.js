@@ -1,13 +1,12 @@
 // src/atoms/Button.js
-import React, { useState } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 import styles from "./Button.module.scss";
 
 const Button = ({
   label = "Click me",
+  link = "#",
   icon = null,
   buttonStyles,
-  link = "#",
 }) => {
   return (
     <a
@@ -16,17 +15,11 @@ const Button = ({
       href={link}
     >
       <div className={[styles.buttonSpacing]}>
-        {icon && React.cloneElement(icon, { width: "3rem", height: "1.5rem" })}
+        {icon && React.cloneElement(icon, { width: "1.5rem", height: "1.5rem" })}
         {label}
       </div>
     </a>
   );
-};
-
-Button.propTypes = {
-  label: PropTypes.string.isRequired,
-  icon: PropTypes.element,
-  link: PropTypes.string.isRequired,
 };
 
 export default Button;

@@ -1,7 +1,6 @@
 @use "@/app/assets/vars.scss" as vars;
 
 .buttonStyle {
-  border: none;
   width: 100%;
   height: fit-content;
   padding: vars.$button_padding;
@@ -9,14 +8,15 @@
   font-size: vars.$text_regular;
   border-radius: vars.$button_radius;
   text-transform: uppercase;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-weight: bold;
   transition-duration: 200ms;
   color: vars.$white;
   background-color: vars.$green;
 
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .buttonStyle:hover {
@@ -27,4 +27,5 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
 }
