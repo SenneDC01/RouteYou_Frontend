@@ -69,6 +69,8 @@ buildImage:
 pushImage:
   stage: pushImage
   image: google/cloud-sdk
+  services:
+    - docker:dind
   variables:
     BRANCH_NAME: ""
     REPO: ""
