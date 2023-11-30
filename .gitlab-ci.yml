@@ -122,8 +122,7 @@ runAnsible:
     - echo $GCLOUD_SERVICE_KEY > serviceArtifactRegistryAdmin.json
     - echo $ADMIN_KEY > sshKey/admin_key 
     - echo $ADMIN_KEY_PUB > sshKey/admin_key.pub
-    - cat ./sshKey/admin_key
-    - cat ./sshKey/admin_key.pub
+    - chmod 600 ./sshKey/admin_key
     
     - ansible-playbook -e "target_host=staging" playbook.yml
     
