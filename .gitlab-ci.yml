@@ -69,7 +69,7 @@ buildImage:
 
 pushImage:
   stage: pushImage
-  image: docker:stable
+  image: google/cloud-sdk:slim
   variables:
     BRANCH_NAME: ""
     REPO: ""
@@ -78,21 +78,14 @@ pushImage:
     - export REPO=$(cat output/repo.txt)
   script:
     - echo "Pushing image to repo for branch $BRANCH_NAME"
-    - apt-get update -qy
-    - apt-get install -yq --no-install-recommends curl
-    - curl -sSL https://sdk.cloud.google.com | bash
-    - exec -l $SHELL
-    - gcloud version
-    - touch gcloud-service-key.json
-    - echo "$GCLOUD_SERVICE_KEY" > gcloud-service-key.json
-    - cat gcloud-service-key.json
     - gcloud auth activate-service-account --key-file=gcloud-service-key.json
     - gcloud auth configure-docker europe-west1-docker.pkg.dev
     # Use the artifacts from the build stage directly
     - docker load -i ./$BRANCH_NAME-frontend-image.tar
-    # Push the Docker image to the specified repository
+    # Tag and push the Docker image to the specified repository
     - docker tag $BRANCH_NAME-frontend-image:latest "$REPO"
     - docker push "$REPO"
+
 
 runAnsible:
   image: ubuntu
