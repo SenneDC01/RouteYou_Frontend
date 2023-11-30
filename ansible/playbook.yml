@@ -15,14 +15,15 @@
   roles:
     - updateDockerContainers
 
-# - name: Run commands inside Docker container
-#   hosts:
-#     - "{{target_host}}"
-#   command: >
-#     docker exec -it backend_web bash -c 'cp .env.example .env && 
-#     composer install && 
-#     php artisan key:generate && 
-#     touch storage/logs/laravel.log && 
-#     chmod 777 -R storage bootstrap/cache && 
-#     php artisan storage:link'
+- name: Run commands inside Docker container
+  hosts:
+    - "{{target_host}}"
+  command: >
+    docker exec -it backend_web bash -c 'cp .env.example .env && 
+    composer install && 
+    php artisan key:generate && 
+    touch storage/logs/laravel.log && 
+    chmod 777 -R storage bootstrap/cache && 
+    php artisan storage:link
+    exit'
     
