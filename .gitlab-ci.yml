@@ -61,10 +61,11 @@ buildImage:
     - echo "$BRANCH_NAME-frontend-image"
     - echo "Loaded REPO $REPO"
     - docker build -t $BRANCH_NAME-frontend-image .
-    - docker save -o $BRANCH_NAME-frontend-image.tar $BRANCH_NAME-frontend-image
+    - docker save -o ./$BRANCH_NAME-frontend-image.tar $BRANCH_NAME-frontend-image
   artifacts:
     paths:
       - ./$BRANCH_NAME-frontend-image.tar
+
 
 pushImage:
   stage: pushImage
@@ -87,6 +88,7 @@ pushImage:
     # Push the Docker image to the specified repository
     - docker tag $BRANCH_NAME-frontend-image:latest "$REPO"
     - docker push "$REPO"
+
 
 runAnsible:
   image: ubuntu
