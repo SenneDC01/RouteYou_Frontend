@@ -50,8 +50,6 @@ buildImage:
   image: docker:24.0.7
   services:
   - name: docker:dind
-    entrypoint: ["env", "-u", "DOCKER_HOST"]
-    command: ["--host=unix:///var/run/docker.sock"]
   variables:
     BRANCH_NAME: ""  # Set the default value
     REPO: ""
@@ -71,6 +69,8 @@ buildImage:
 pushImage:
   stage: pushImage
   image: google/cloud-sdk
+  services:
+  - name: docker:dind
   variables:
     BRANCH_NAME: ""
     REPO: ""
