@@ -80,7 +80,6 @@ pushImage:
     - apt-get install -y curl python3
     # Install Google Cloud SDK
     - curl -sSL https://sdk.cloud.google.com | bash
-    - exec -l $SHELL  # Restart the shell to update the PATH
     - gcloud version
     # Authenticate with Google Cloud
     - touch gcloud-service-key.json
