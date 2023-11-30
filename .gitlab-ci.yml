@@ -113,6 +113,7 @@ runAnsible:
     - pip3 install ansible-lint
     - cd ansible
     - chmod 700 .
+    
     - touch .vault_pass.txt
     - touch key-files/serviceArtifactRegistryAdmin.json
     - touch sshKey/admin_key
