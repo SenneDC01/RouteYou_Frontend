@@ -19,13 +19,20 @@
   hosts:
     - "{{ target_host }}"
   tasks:
+    - name: Ensure Docker Python library is installed
+      pip:
+        name: docker
+        state: present
+
     - name: Wait for 30 seconds
       pause:
         seconds: 30
+
     - name: Execute commands in Docker container
       docker_container:
         name: backend_web
         command: "/bin/bash -c 'cp .env.example .env && composer install && php artisan key:generate && touch storage/logs/laravel.log && chmod 777 -R storage bootstrap/cache && php artisan storage:link'"
+
 
 
 
