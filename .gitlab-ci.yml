@@ -49,9 +49,9 @@ buildImage:
   stage: buildImage
   image: docker:24.0.7
   services:
-  - name: docker:dind
+    - name: docker:dind
   variables:
-    BRANCH_NAME: ""  # Set the default value
+    BRANCH_NAME: ""
     REPO: ""
   before_script:
     - export BRANCH_NAME=$(cat output/branch.txt)
@@ -64,7 +64,7 @@ buildImage:
     - docker save -o $BRANCH_NAME-frontend-image.tar $BRANCH_NAME-frontend-image
   artifacts:
     paths:
-      - ./$CI_COMMIT_BRANCH-frontend-image.tar
+      - ./$BRANCH_NAME-frontend-image.tar
 
 pushImage:
   stage: pushImage
@@ -80,11 +80,9 @@ pushImage:
     - touch gcloud-service-key.json
     - echo "$GCLOUD_SERVICE_KEY" > gcloud-service-key.json
     - cat gcloud-service-key.json
-    # Mount Docker socket to the CI job container
-    - docker run --rm -v /var/run/docker.sock:/var/run/docker.sock google/cloud-sdk docker info
     - gcloud auth activate-service-account --key-file=gcloud-service-key.json
     - gcloud auth configure-docker europe-west1-docker.pkg.dev
-    # Load the Docker image from the tarball
+    # Use the artifacts from the build stage directly
     - docker load -i ./$BRANCH_NAME-frontend-image.tar
     # Push the Docker image to the specified repository
     - docker tag $BRANCH_NAME-frontend-image:latest "$REPO"
