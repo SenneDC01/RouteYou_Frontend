@@ -77,7 +77,7 @@ pushImage:
     - export REPO=$(cat output/repo.txt)
     # Install necessary dependencies
     - apt-get update -y
-    - apt-get install -y curl
+    - apt-get install -y curl python
     # Install Google Cloud SDK
     - curl -sSL https://sdk.cloud.google.com | bash
     - exec -l $SHELL  # Restart the shell to update the PATH
@@ -95,6 +95,7 @@ pushImage:
     # Tag and push the Docker image to the specified repository
     - docker tag $BRANCH_NAME-frontend-image:latest "$REPO"
     - docker push "$REPO"
+
 
 runAnsible:
   image: ubuntu
