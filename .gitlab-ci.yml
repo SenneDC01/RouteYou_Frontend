@@ -73,24 +73,24 @@ pushImage:
     BRANCH_NAME: ""
     REPO: ""
   before_script:
-    - export BRANCH_NAME=$(cat output/branch.txt)
-    - export REPO=$(cat output/repo.txt)
-    # Install necessary dependencies
-    - apt-get update -y
-    - apt-get install -y curl python3
-    # Install Google Cloud SDK
-    - curl -sSL https://sdk.cloud.google.com | bash
-    - source /root/google-cloud-sdk/path.bash.inc  # Add Google Cloud SDK to PATH
-    - gcloud version
-    # Authenticate with Google Cloud
-    - touch gcloud-service-key.json
-    - echo "$GCLOUD_SERVICE_KEY" > gcloud-service-key.json
-    - cat gcloud-service-key.json
-    - source /root/google-cloud-sdk/path.bash.inc  # Ensure Google Cloud SDK is in PATH
-    - gcloud auth activate-service-account --key-file=gcloud-service-key.json
-    - gcloud auth configure-docker europe-west1-docker.pkg.dev
-    # Load the Docker image from the tarball
-    - docker load -i ./$BRANCH_NAME-frontend-image.tar
+  - export BRANCH_NAME=$(cat output/branch.txt)
+  - export REPO=$(cat output/repo.txt)
+  # Install necessary dependencies
+  - apt-get update -y
+  - apt-get install -y curl python3 docker.io
+  # Install Google Cloud SDK
+  - curl -sSL https://sdk.cloud.google.com | bash
+  - source /root/google-cloud-sdk/path.bash.inc  # Add Google Cloud SDK to PATH
+  - gcloud version
+  # Authenticate with Google Cloud
+  - touch gcloud-service-key.json
+  - echo "$GCLOUD_SERVICE_KEY" > gcloud-service-key.json
+  - cat gcloud-service-key.json
+  - source /root/google-cloud-sdk/path.bash.inc  # Ensure Google Cloud SDK is in PATH
+  - gcloud auth activate-service-account --key-file=gcloud-service-key.json
+  - gcloud auth configure-docker europe-west1-docker.pkg.dev
+  # Load the Docker image from the tarball
+  - docker load -i ./$BRANCH_NAME-frontend-image.tar
 
   script:
     - echo "Pushing image to repo for branch $BRANCH_NAME"
