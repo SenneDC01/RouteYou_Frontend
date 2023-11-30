@@ -22,6 +22,7 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
 
   const dropdownItemsEvents = ["Create Event", "Search Event"];
   const dropdownItemsRoutes = ["Go to RouteYou Routes"];
+  const dropdownItemsProfile = ["Dashboard", "Logout"];
 
   //header mag niet in nav?
   return (
@@ -82,7 +83,15 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
             width={30}
             height={30}
           />
-          <p>{profileName}</p>
+          <CustomDropdown
+            buttonText={
+              <>
+                {profileName}
+                <span className={styles.arrowStyle}>&gt;</span>
+              </>
+            }
+            items={dropdownItemsProfile}
+          />
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu>
