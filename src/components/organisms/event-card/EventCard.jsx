@@ -58,7 +58,7 @@ const EventCard = ({
                   <StarSVG
                     width={30}
                     height={30}
-                    // fill={isFavorite ? colors.green : "none"}
+                    fill={isFavorite ? "#1a614a" : "none"}
                   />
                 </Button>
               </div>

@@ -22,7 +22,7 @@ const RouteCard = ({
   moeilijkheid = "Hard",
 }) => {
   return (
-    <div className="flex justify-center gap-2">
+    <a href="#" className="flex justify-center gap-2">
       <Card shadow="sm">
         <CardBody className="overflow-visible p-0">
           <Image
@@ -53,7 +53,7 @@ const RouteCard = ({
           </div>
         </CardBody>
       </Card>
-    </div>
+    </a>
   );
 };
 

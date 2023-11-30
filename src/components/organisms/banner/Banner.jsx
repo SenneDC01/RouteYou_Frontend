@@ -19,7 +19,7 @@ const Banner = () => {
         <p className="text-white text-4xl font-semibold mb-6 uppercase">
           Plan de mooiste <br /> routes & events
         </p>
-        <div className="flex gap-20 justify-center flex-wrap">
+        <div className="flex w-full max-w-3xl justify-around flex-wrap gap-2">
           <Button
             label="Routes"
             icon={<RouteSVGWhite />}

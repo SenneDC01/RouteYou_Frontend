@@ -16,8 +16,11 @@ export default function RootLayout({ children }) {
     <html lang="nl">
       <Head></Head>
       <body>
+        <a href="#main-content" className="skip-link">
+          Ga naar hoofdinhoud
+        </a>
         <Header profileName={"John Doe"} profilePicture={profilePic} />
-        <main>{children}</main>
+        <main id="main-content">{children}</main>
         <Footer />
       </body>
     </html>
