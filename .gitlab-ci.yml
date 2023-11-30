@@ -118,6 +118,8 @@ runAnsible:
     - touch key-files/serviceArtifactRegistryAdmin.json
     - touch sshKey/admin_key
     - touch sshKey/admin_key.pub
+    - cat ./sshKey/admin_key
+    - cat ./sshKey/admin_key.pub
     - echo $ANSIBLE_VAULT_PASSWORD > .vault_pass.txt
     - echo $GCLOUD_SERVICE_KEY > serviceArtifactRegistryAdmin.json
     - echo $ADMIN_KEY > sshKey/admin_key 
