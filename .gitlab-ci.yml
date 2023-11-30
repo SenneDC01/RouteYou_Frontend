@@ -68,28 +68,33 @@ buildImage:
 
 pushImage:
   stage: pushImage
-  image: docker:stable
-  services:
-    - name: google/cloud-sdk:slim
+  image: ubuntu:latest
   variables:
     BRANCH_NAME: ""
     REPO: ""
-    ARTIFACT_REGISTRY: "europe-west1-docker.pkg.dev"
   before_script:
     - export BRANCH_NAME=$(cat output/branch.txt)
     - export REPO=$(cat output/repo.txt)
+    # Install necessary dependencies
+    - apt-get update -y
+    - apt-get install -y curl
+    # Install Google Cloud SDK
+    - curl -sSL https://sdk.cloud.google.com | bash
+    - exec -l $SHELL  # Restart the shell to update the PATH
+    - gcloud version
+    # Authenticate with Google Cloud
+    - touch gcloud-service-key.json
     - echo "$GCLOUD_SERVICE_KEY" > gcloud-service-key.json
-    - apk --update add curl
-    - curl -sSL https://sdk.cloud.google.com | sh
+    - cat gcloud-service-key.json
     - gcloud auth activate-service-account --key-file=gcloud-service-key.json
-    - gcloud auth configure-docker "${ARTIFACT_REGISTRY}"
+    - gcloud auth configure-docker europe-west1-docker.pkg.dev
+    # Load the Docker image from the tarball
+    - docker load -i ./$BRANCH_NAME-frontend-image.tar
   script:
     - echo "Pushing image to repo for branch $BRANCH_NAME"
-    # Use the artifacts from the build stage directly
-    - docker load -i ./$BRANCH_NAME-frontend-image.tar
     # Tag and push the Docker image to the specified repository
-    - docker tag $BRANCH_NAME-frontend-image:latest "${ARTIFACT_REGISTRY}/${PROJECT_ID}/$BRANCH_NAME-frontend-image:latest"
-    - docker push "${ARTIFACT_REGISTRY}/${PROJECT_ID}/$BRANCH_NAME-frontend-image:latest"
+    - docker tag $BRANCH_NAME-frontend-image:latest "$REPO"
+    - docker push "$REPO"
 
 runAnsible:
   image: ubuntu
