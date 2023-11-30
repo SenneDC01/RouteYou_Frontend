@@ -1,0 +1,27 @@
+---
+    # - name: Copy Google Cloud key file to the server
+    #   ansible.builtin.copy:
+    #     src: "./key-files/admin.json"
+    #     dest: "admin.json"
+    #   #works without this just remeber if it fails 
+
+    - name: Ensure the Docker config directory exists
+      ansible.builtin.file:
+        path: "{{ansible_env.HOME}}/.docker"
+        state: directory
+
+    - name: Create an empty Docker config file
+      ansible.builtin.copy:
+        content: ""
+        dest: "{{ansible_env.HOME}}/.docker/config.json"
+
+    - name: Make Docker config file writable
+      ansible.builtin.file:
+        path: "{{ansible_env.HOME}}/.docker/config.json"
+        mode: "0644"
+
+    
+    - name: Configure Docker with gcloud credentials for a specific registry and write to config.json
+      ansible.builtin.shell:
+        cmd: "echo 'Y' | gcloud auth configure-docker {{docker_registry}} && echo '{\"credHelpers\":{\"{{docker_registry}}\":\"gcloud\"}}' > {{ansible_env.HOME}}/.docker/config.json"
+      become_user: "{{ ansible_user }}"

@@ -1,0 +1,19 @@
+@use "@/app/assets/vars.scss" as vars;
+
+.detailPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100vw;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.map {
+  min-height: 45rem;
+}
+
+@media screen and (min-width: 750px) {
+  .detailPage {
+    flex-direction: row;
+  }
+}

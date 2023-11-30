@@ -1,0 +1,35 @@
+@use "./vars.scss" as vars;
+
+.bigTitle {
+  font-family: "Inter", sans-serif;
+  font-size: vars.$text_xl;
+  color: vars.$black;
+  font-weight: 700;
+}
+
+.subText {
+  font-family: "Inter", sans-serif;
+  font-size: vars.$text_regular;
+  color: vars.$black;
+  font-style: italic;
+}
+
+.regularText {
+  font-family: "Inter", sans-serif;
+  font-size: vars.$text_medium;
+  color: vars.$black;
+}
+
+.boldText {
+  font-family: "Inter", sans-serif;
+  font-size: vars.$text_medium;
+  color: vars.$black;
+  font-weight: 700;
+}
+
+.SVGtext {
+  font-family: "Inter", sans-serif;
+  font-size: vars.$text_medium;
+  color: vars.$black;
+  font-weight: 700;
+}
