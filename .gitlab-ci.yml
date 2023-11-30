@@ -1,95 +1,92 @@
 default:
   image: ubuntu
-  tags:
-    - docker-runner-frontend
-
 stages:
-  - checkBranch
-  - buildImage
-  - pushImage
+  # - checkBranch
+  # - buildImage
+  # - pushImage
   - runAnsible
 
-devUnitTest:
-  stage: checkBranch
-  only:
-    - dev
-  script:
-    - echo "Running unit tests for development"
-    # do unit tests
-    - mkdir output
-    - echo "dev" > output/branch.txt
-    - echo "$DEV_FRONTEND_REPO" > output/repo.txt
-  artifacts:
-    paths: [output/]
+# devUnitTest:
+#   stage: checkBranch
+#   only:
+#     - dev
+#   script:
+#     - echo "Running unit tests for development"
+#     # do unit tests
+#     - mkdir output
+#     - echo "dev" > output/branch.txt
+#     - echo "$DEV_FRONTEND_REPO" > output/repo.txt
+#   artifacts:
+#     paths: [output/]
 
-stagingUnitTest:
-  stage: checkBranch
-  only:
-    - staging
-  script:
-    - echo "Running unit tests for staging"
-    # do unit tests
-    - mkdir output
-    - echo "staging" > output/branch.txt
-    - echo "$STAGING_FRONTEND_REPO" > output/repo.txt
-  artifacts:
-    paths: [output/]
+# stagingUnitTest:
+#   stage: checkBranch
+#   only:
+#     - staging
+#   script:
+#     - echo "Running unit tests for staging"
+#     # do unit tests
+#     - mkdir output
+#     - echo "staging" > output/branch.txt
+#     - echo "$STAGING_FRONTEND_REPO" > output/repo.txt
+#   artifacts:
+#     paths: [output/]
     
-prodUnitTest:
-  stage: checkBranch
-  only:
-    - prod
-  script:
-    - echo "Running unit tests for production"
-    # do unit tests
-    - mkdir output
-    - echo "prod" > output/branch.txt
-    - echo "$PROD_FRONTEND_REPO" > output/repo.txt
-  artifacts:
-    paths: [output/]
+# prodUnitTest:
+#   stage: checkBranch
+#   only:
+#     - prod
+#   script:
+#     - echo "Running unit tests for production"
+#     # do unit tests
+#     - mkdir output
+#     - echo "prod" > output/branch.txt
+#     - echo "$PROD_FRONTEND_REPO" > output/repo.txt
+#   artifacts:
+#     paths: [output/]
 
-buildImage:
-  stage: buildImage
-  image: docker:24.0.7
-  services:
-    - docker:dind
-  variables:
-    BRANCH_NAME: ""  # Set the default value
-    REPO: ""
-  before_script:
-    - export BRANCH_NAME=$(cat output/branch.txt)
-    - export REPO=$(cat output/repo.txt)
-  script:
-    - echo "Building image for branch $BRANCH_NAME"
-    - echo "$BRANCH_NAME-frontend-image"
-    - echo "Loaded REPO $REPO"
-    - docker build -t $BRANCH_NAME-frontend-image .
-    - docker save -o $BRANCH_NAME-frontend-image.tar $BRANCH_NAME-frontend-image
-  artifacts:
-    paths:
-      - ./$CI_COMMIT_BRANCH-frontend-image.tar
+# buildImage:
+#   stage: buildImage
+#   image: docker:24.0.7
+#   services:
+#     - docker:dind
+#   variables:
+#     BRANCH_NAME: ""  # Set the default value
+#     REPO: ""
+#   before_script:
+#     - export BRANCH_NAME=$(cat output/branch.txt)
+#     - export REPO=$(cat output/repo.txt)
+#   script:
+#     - echo "Building image for branch $BRANCH_NAME"
+#     - echo "$BRANCH_NAME-frontend-image"
+#     - echo "Loaded REPO $REPO"
+#     - docker build -t $BRANCH_NAME-frontend-image .
+#     - docker save -o $BRANCH_NAME-frontend-image.tar $BRANCH_NAME-frontend-image
+#   artifacts:
+#     paths:
+#       - ./$CI_COMMIT_BRANCH-frontend-image.tar
 
-pushImage:
-  stage: pushImage
-  image: google/cloud-sdk
-  variables:
-    BRANCH_NAME: ""
-    REPO: ""
-  before_script:
-    - export BRANCH_NAME=$(cat output/branch.txt)
-    - export REPO=$(cat output/repo.txt)
-  script:
-    - echo "Pushing image to repo for branch $BRANCH_NAME"
-    - touch gcloud-service-key.json
-    - echo "$GCLOUD_SERVICE_KEY" > gcloud-service-key.json
-    - cat gcloud-service-key.json
-    - gcloud auth activate-service-account --key-file=gcloud-service-key.json
-    - gcloud auth configure-docker europe-west1-docker.pkg.dev
-    # Load the Docker image from the tarball
-    - docker load -i ./$BRANCH_NAME-frontend-image.tar
-    # Push the Docker image to the specified repository
-    - docker tag $BRANCH_NAME-frontend-image:latest "$REPO"
-    - docker push "$REPO"
+# pushImage:
+#   stage: pushImage
+#   image: google/cloud-sdk
+#   variables:
+#     BRANCH_NAME: ""
+#     REPO: ""
+#   before_script:
+#     - export BRANCH_NAME=$(cat output/branch.txt)
+#     - export REPO=$(cat output/repo.txt)
+#   script:
+#     - echo "Pushing image to repo for branch $BRANCH_NAME"
+#     - touch gcloud-service-key.json
+#     - echo "$GCLOUD_SERVICE_KEY" > gcloud-service-key.json
+#     - cat gcloud-service-key.json
+#     - gcloud auth activate-service-account --key-file=gcloud-service-key.json
+#     - gcloud auth configure-docker europe-west1-docker.pkg.dev
+#     # Load the Docker image from the tarball
+#     - docker load -i ./$BRANCH_NAME-frontend-image.tar
+#     # Push the Docker image to the specified repository
+#     - docker tag $BRANCH_NAME-frontend-image:latest "$REPO"
+#     - docker push "$REPO"
 
 runAnsible:
   image: ubuntu
@@ -126,5 +123,5 @@ runAnsible:
     - echo $ADMIN_KEY > sshKey/admin_key 
     - echo $ADMIN_KEY_PUB > sshKey/admin_key.pub
     
-    - ansible-playbook -e "target_host=$BRANCH_NAME" playbook.yml
+    - ansible-playbook -e "target_host=staging" playbook.yml
     
