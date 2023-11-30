@@ -49,9 +49,9 @@ buildImage:
   stage: buildImage
   image: docker:24.0.7
   services:
-    - name: docker:dind
+    - docker:dind
   variables:
-    BRANCH_NAME: ""
+    BRANCH_NAME: ""  # Set the default value
     REPO: ""
   before_script:
     - export BRANCH_NAME=$(cat output/branch.txt)
@@ -61,10 +61,10 @@ buildImage:
     - echo "$BRANCH_NAME-frontend-image"
     - echo "Loaded REPO $REPO"
     - docker build -t $BRANCH_NAME-frontend-image .
-    - docker save -o ./$BRANCH_NAME-frontend-image.tar $BRANCH_NAME-frontend-image  # Corrected line
+    - docker save -o $BRANCH_NAME-frontend-image.tar $BRANCH_NAME-frontend-image
   artifacts:
     paths:
-      - ./$BRANCH_NAME-frontend-image.tar
+      - ./$CI_COMMIT_BRANCH-frontend-image.tar
 
 
 pushImage:
