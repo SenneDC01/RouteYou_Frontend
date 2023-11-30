@@ -85,7 +85,6 @@ pushImage:
     - gcloud auth activate-service-account --key-file=gcloud-service-key.json
     - gcloud auth configure-docker europe-west1-docker.pkg.dev
     # Load the Docker image from the tarball
-    - docker info
     - docker load -i ./$BRANCH_NAME-frontend-image.tar
     # Push the Docker image to the specified repository
     - docker tag $BRANCH_NAME-frontend-image:latest "$REPO"
