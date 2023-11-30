@@ -25,8 +25,8 @@
     - name: Execute commands in Docker container
       docker_container:
         name: backend_web
-        exec: "/bin/bash"
-        cmd: "cp .env.example .env && composer install && php artisan key:generate && touch storage/logs/laravel.log && chmod 777 -R storage bootstrap/cache && php artisan storage:link"
+        command: "/bin/bash -c 'cp .env.example .env && composer install && php artisan key:generate && touch storage/logs/laravel.log && chmod 777 -R storage bootstrap/cache && php artisan storage:link'"
+
 
 
     
