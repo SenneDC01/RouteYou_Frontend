@@ -1,5 +1,7 @@
 default:
   image: ubuntu
+  tags:
+    - docker-runner-frontend
 stages:
   - checkBranch
   - buildImage
