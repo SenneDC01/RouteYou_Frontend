@@ -1,13 +1,13 @@
 ---
-# - name: Authenticate to Google Cloud
-#   hosts: 
-#     - "{{target_host}}"
-#   become_user: "{{ ansible_user }}" 
-#   tasks:
-#     - name: Include gcloudAuthArtifactRegistry for non-dev hosts
-#       include_role:
-#         name: gcloudAuthArtifactRegistry
-#       when: "'dev' not in inventory_hostname"
+- name: Authenticate to Google Cloud
+  hosts: 
+    - "{{target_host}}"
+  become_user: "{{ ansible_user }}" 
+  tasks:
+    - name: Include gcloudAuthArtifactRegistry for non-dev hosts
+      include_role:
+        name: gcloudAuthArtifactRegistry
+      when: "'dev' not in inventory_hostname"
 
 - name : update the containers on the servers 
   hosts: 
@@ -15,14 +15,27 @@
   roles:
     - updateDockerContainers
 
-- name: Run commands inside Docker container
-  hosts:
-    - "{{target_host}}"
-  command: >
-    docker exec -it backend_web bash -c 'cp .env.example .env && 
-    composer install && 
-    php artisan key:generate && 
-    touch storage/logs/laravel.log && 
-    chmod 777 -R storage bootstrap/cache && 
-    php artisan storage:link'
+# - name: Run commands inside Docker container
+#   hosts:
+#     - "{{ target_host }}"
+#   tasks:
+#     - name: Ensure Docker Python library is installed
+#       pip:
+#         name: docker
+#         state: present
+
+#     - name: Wait for 30 seconds
+#       pause:
+#         seconds: 30
+
+#     - name: Execute commands in Docker container
+#       docker_container:
+#         name: backend_web
+#         command: "/bin/bash -c 'cp .env.example .env && composer install && php artisan key:generate && touch storage/logs/laravel.log && chmod 777 -R storage bootstrap/cache && php artisan storage:link'"
+#         detach: no
+
+
+
+
+
     
