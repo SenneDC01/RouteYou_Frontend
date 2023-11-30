@@ -7,7 +7,7 @@ import styles from "./Footer.module.scss";
 const Footer = () => {
   return (
     <footer
-      className="flex flex-col sm:flex-row items-center p-8 gap-8 max-w-screen-2xl justify-center"
+      className="flex flex-col sm:flex-row items-center p-8 gap-8 w-full"
       style={{
         boxShadow: "0px -4px 8px rgba(0, 0, 0, 0.1)",
         // marginTop: "-8px", // anders is de shadow niet goed

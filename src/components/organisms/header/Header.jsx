@@ -23,12 +23,6 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
   const dropdownItemsEvents = ["Create Event", "Search Event"];
   const dropdownItemsRoutes = ["Go to RouteYou Routes"];
 
-  const arrowStyle = {
-    transform: "rotate(90deg) scale(.6, 1.3)",
-    fontSize: "1.2em",
-    fontWeight: "500",
-  };
-
   //header mag niet in nav?
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen} isBordered maxWidth="2xl" as="div">
@@ -55,7 +49,7 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
               <>
                 Events
                 <span className={styles.itemBorderStyle}></span>
-                <span style={arrowStyle}>&gt;</span>
+                <span className={styles.arrowStyle}>&gt;</span>
               </>
             }
             items={dropdownItemsEvents}
@@ -67,7 +61,7 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
               <>
                 Routes
                 <span className={styles.itemBorderStyle}></span>
-                <span style={arrowStyle}>&gt;</span>
+                <span className={styles.arrowStyle}>&gt;</span>
               </>
             }
             items={dropdownItemsRoutes}
@@ -102,33 +96,22 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
             buttonText={
               <>
                 Events
-                <span style={arrowStyle}>&gt;</span>
+                <span className={styles.arrowStyle}>&gt;</span>
               </>
             }
             items={dropdownItemsEvents}
           />
-          <Link className="w-full" href="#" size="lg" color="foreground">
-            Create event
-          </Link>
-        </NavbarMenuItem>
-        <NavbarMenuItem>
-          <Link className="w-full" href="#" size="lg" color="foreground">
-            Search event
-          </Link>
         </NavbarMenuItem>
         <NavbarMenuItem>
           <CustomDropdown
             buttonText={
               <>
                 Routes
-                <span style={arrowStyle}>&gt;</span>
+                <span className={styles.arrowStyle}>&gt;</span>
               </>
             }
             items={dropdownItemsRoutes}
           />
-          <Link className="w-full" href="#" size="lg" color="foreground">
-            Go to RouteYou Routes
-          </Link>
         </NavbarMenuItem>
         <NavbarMenuItem>
           <Link className="w-full" href="#" size="lg" color="foreground">
