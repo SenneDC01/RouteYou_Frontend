@@ -19,6 +19,9 @@
   hosts:
     - "{{ target_host }}"
   tasks:
+    - name: Wait for 30 seconds
+      pause:
+        seconds: 30
     - name: Execute commands in Docker container
       docker_container:
         name: backend_web
