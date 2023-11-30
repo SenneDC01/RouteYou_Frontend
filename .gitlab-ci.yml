@@ -80,6 +80,10 @@ pushImage:
     - export BRANCH_NAME=$(cat output/branch.txt)
     - export REPO=$(cat output/repo.txt)
     - echo "$GCLOUD_SERVICE_KEY" > gcloud-service-key.json
+    - apk --update add curl
+    - curl -sSL https://sdk.cloud.google.com | bash
+    - touch gcloud-service-key.json
+    - echo "$GCLOUD_SERVICE_KEY" > gcloud-service-key.json
     - gcloud auth activate-service-account --key-file=gcloud-service-key.json
     - gcloud auth configure-docker "${ARTIFACT_REGISTRY}"
   script:
@@ -87,8 +91,9 @@ pushImage:
     # Use the artifacts from the build stage directly
     - docker load -i ./$BRANCH_NAME-frontend-image.tar
     # Tag and push the Docker image to the specified repository
-    - docker tag $BRANCH_NAME-frontend-image:latest "${ARTIFACT_REGISTRY}/${PROJECT_ID}/$BRANCH_NAME-frontend-image:latest"
-    - docker push "${ARTIFACT_REGISTRY}/${PROJECT_ID}/$BRANCH_NAME-frontend-image:latest"
+    - docker tag $BRANCH_NAME-frontend-image:latest "$REPO"
+    - docker push "$REPO"
+
 
 
 runAnsible:
