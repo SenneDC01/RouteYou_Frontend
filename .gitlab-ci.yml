@@ -66,7 +66,6 @@ buildImage:
     paths:
       - ./$CI_COMMIT_BRANCH-frontend-image.tar
 
-
 pushImage:
   stage: pushImage
   image: docker:stable
@@ -81,7 +80,7 @@ pushImage:
     - export REPO=$(cat output/repo.txt)
     - echo "$GCLOUD_SERVICE_KEY" > gcloud-service-key.json
     - apk --update add curl
-    - curl -sSL https://sdk.cloud.google.com | bash
+    - curl -sSL https://sdk.cloud.google.com | sh
     - touch gcloud-service-key.json
     - echo "$GCLOUD_SERVICE_KEY" > gcloud-service-key.json
     - gcloud auth activate-service-account --key-file=gcloud-service-key.json
@@ -93,8 +92,6 @@ pushImage:
     # Tag and push the Docker image to the specified repository
     - docker tag $BRANCH_NAME-frontend-image:latest "$REPO"
     - docker push "$REPO"
-
-
 
 runAnsible:
   image: ubuntu
