@@ -69,8 +69,6 @@ buildImage:
 pushImage:
   stage: pushImage
   image: google/cloud-sdk
-  services:
-  - name: docker:dind
   variables:
     BRANCH_NAME: ""
     REPO: ""
@@ -82,6 +80,8 @@ pushImage:
     - touch gcloud-service-key.json
     - echo "$GCLOUD_SERVICE_KEY" > gcloud-service-key.json
     - cat gcloud-service-key.json
+    # Mount Docker socket to the CI job container
+    - docker run --rm -v /var/run/docker.sock:/var/run/docker.sock google/cloud-sdk docker info
     - gcloud auth activate-service-account --key-file=gcloud-service-key.json
     - gcloud auth configure-docker europe-west1-docker.pkg.dev
     # Load the Docker image from the tarball
