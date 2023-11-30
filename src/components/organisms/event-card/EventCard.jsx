@@ -9,7 +9,7 @@ import SVGtext from "@/components/atoms/svg-text/SVGtext";
 import LocationSVG from "@/utils/icons/LocationSVG";
 import CyclistSVG from "@/utils/icons/CyclistSVG";
 import StarSVG from "@/utils/icons/StarSVG";
-import * as colors from "@/utils/colors";
+
 import RoundButton from "@/components/atoms/button-round/ButtonRound";
 import ArrowRightSVG from "@/utils/icons/ArrowRightSVG";
 
@@ -58,7 +58,7 @@ const EventCard = ({
                   <StarSVG
                     width={30}
                     height={30}
-                    fill={isFavorite ? colors.green : "none"}
+                    // fill={isFavorite ? colors.green : "none"}
                   />
                 </Button>
               </div>

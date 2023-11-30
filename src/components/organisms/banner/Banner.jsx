@@ -23,14 +23,12 @@ const Banner = () => {
           <Button
             label="Routes"
             icon={<RouteSVGWhite />}
-            fontSize="0.9em"
             link="#"
             buttonStyles={styles.button}
           />
           <Button
             label="Events"
             icon={<CalenderSVG />}
-            fontSize="0.9em"
             link="#"
             buttonStyles={styles.button}
           />

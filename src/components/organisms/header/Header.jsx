@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import styles from "./Header.module.scss";
 import {
   Navbar,
   NavbarBrand,
@@ -15,22 +16,12 @@ import PropTypes from "prop-types";
 import Image from "next/image";
 import logo from "@/utils/images/logo.png";
 import CustomDropdown from "@/components/molecules/drop-down/Dropdown";
-import * as colors from "@/utils/colors";
 
 const Header = ({ profileName = "John Doe", profilePicture = null }) => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const dropdownItemsEvents = ["Create Event", "Search Event"];
   const dropdownItemsRoutes = ["Go to RouteYou Routes"];
-
-  const itemBorderStyle = {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    bottom: 0,
-    height: "2px",
-    background: colors.green,
-  };
 
   const arrowStyle = {
     transform: "rotate(90deg) scale(.6, 1.3)",
@@ -55,7 +46,7 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
         <NavbarItem isActive>
           <Link href="/" aria-current="page">
             Home
-            <span style={itemBorderStyle}></span>
+            <span className={styles.itemBorderStyle}></span>
           </Link>
         </NavbarItem>
         <NavbarItem>
@@ -63,7 +54,7 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
             buttonText={
               <>
                 Events
-                <span style={itemBorderStyle}></span>
+                <span className={styles.itemBorderStyle}></span>
                 <span style={arrowStyle}>&gt;</span>
               </>
             }
@@ -75,7 +66,7 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
             buttonText={
               <>
                 Routes
-                <span style={itemBorderStyle}></span>
+                <span className={styles.itemBorderStyle}></span>
                 <span style={arrowStyle}>&gt;</span>
               </>
             }
@@ -85,7 +76,7 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
         <NavbarItem>
           <Link color="foreground" href="/">
             Dashboard
-            <span style={itemBorderStyle}></span>
+            <span className={styles.itemBorderStyle}></span>
           </Link>
         </NavbarItem>
       </NavbarContent>
