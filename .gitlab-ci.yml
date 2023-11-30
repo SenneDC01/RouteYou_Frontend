@@ -92,6 +92,9 @@ pushImage:
   - gcloud auth configure-docker europe-west1-docker.pkg.dev
   # Load the Docker image from the tarball
   - docker load -i ./$BRANCH_NAME-frontend-image.tar
+  # Push the Docker image to the specified repository
+  - docker tag $BRANCH_NAME-frontend-image:latest "$REPO"
+  - docker push "$REPO"
 
   script:
     - echo "Pushing image to repo for branch $BRANCH_NAME"
