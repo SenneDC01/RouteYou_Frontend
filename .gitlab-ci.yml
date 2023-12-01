@@ -1,5 +1,8 @@
 default:
   image: ubuntu
+  tags:
+    - atp-frontend
+
 stages:
   - unitTests
   - checkBranch
