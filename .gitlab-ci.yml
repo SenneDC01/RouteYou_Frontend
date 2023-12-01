@@ -1,10 +1,19 @@
 default:
   image: ubuntu
 stages:
+  - unitTests
   - checkBranch
   - buildImage
   - pushImage
   - runAnsible
+
+unit-test:
+  image: node:latest
+  stage: unitTests
+  before_script:
+    - npm install
+  script:
+    - npm run test
 
 devUnitTest:
   stage: checkBranch
