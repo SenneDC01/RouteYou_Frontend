@@ -37,16 +37,6 @@ const RouteSVG = ({ width, height }) => {
           strokeMiterlimit="10"
         />
       </g>
-      <defs>
-        <clipPath id="clip0_39_927">
-          <rect
-            width="55"
-            height="55"
-            fill="white"
-            transform="translate(0 0.5)"
-          />
-        </clipPath>
-      </defs>
     </svg>
   );
 };

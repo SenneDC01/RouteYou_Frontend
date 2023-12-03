@@ -17,16 +17,6 @@ const LocationSVG = ({ width, height }) => {
           strokeMiterlimit="10"
         />
       </g>
-      <defs>
-        <clipPath id="clip0_578_2371">
-          <rect
-            width="25"
-            height="25"
-            fill="white"
-            transform="translate(0 0.900024)"
-          />
-        </clipPath>
-      </defs>
     </svg>
   );
 };

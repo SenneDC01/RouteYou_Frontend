@@ -17,14 +17,6 @@ const GemStijgingSVG = ({ width, height }) => {
           />
         </g>
       </g>
-      <defs>
-        <clipPath id="clip0_503_226">
-          <rect width="24" height="24" fill="white" />
-        </clipPath>
-        <clipPath id="clip1_503_226">
-          <rect width="24" height="24" fill="white" />
-        </clipPath>
-      </defs>
     </svg>
   );
 };

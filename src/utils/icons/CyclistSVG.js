@@ -72,16 +72,6 @@ const CyclistSVG = ({ width, height }) => {
           strokeLinejoin="round"
         />
       </g>
-      <defs>
-        <clipPath id="clip0_578_2375">
-          <rect
-            width="24"
-            height="23"
-            fill="white"
-            transform="translate(0 0.61554)"
-          />
-        </clipPath>
-      </defs>
     </svg>
   );
 };

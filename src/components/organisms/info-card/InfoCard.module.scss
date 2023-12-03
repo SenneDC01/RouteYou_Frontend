@@ -1,0 +1,12 @@
+@use "@/app/assets/vars.scss" as vars;
+
+.infoCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  padding: 1rem;
+  gap: 1rem;
+}

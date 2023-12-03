@@ -4,20 +4,23 @@ import React from "react";
 import "@/app/assets/globals.css";
 import RouteCard from "@/components/organisms/route-card/RouteCard";
 import cardImage from "@/utils/images/CardImage.png";
+import bannerImage from "@/utils/images/banner.jpg";
 import InfoCard from "@/components/organisms/info-card/InfoCard";
 import GroupSVG from "@/utils/icons/GroupSVG";
 import CameraSVG from "@/utils/icons/CameraSVG";
 import RouteSVG from "@/utils/icons/RouteSVG";
+import EventCardOld from "@/components/organisms/event-card/EventCardOld";
 import EventCard from "@/components/organisms/event-card/EventCard";
 import Banner from "@/components/organisms/banner/Banner";
+import styles from "./page.module.scss";
 
 const HomePage = () => {
   return (
-    <div className="flex flex-col min-h-screen">
-      <div className="flex justify-center p-0 relative">
+    <div className={[styles.pageContainer]}>
+      <div className={[styles.bannerContainer]}>
         <Banner />
       </div>
-      <div className="flex justify-center gap-20 p-20 border-b-2 border-light-gray flex-wrap">
+      <div className={[styles.borderContainer]}>
         <InfoCard icon={<RouteSVG />} text="Meer dan 7.270.000 routes" />
         <InfoCard icon={<GroupSVG />} text="Meer dan 15.115.000 gebruikers" />
         <InfoCard
@@ -25,7 +28,7 @@ const HomePage = () => {
           text="Meer dan 3.475.000 trekpleisters"
         />
       </div>
-      <div className="flex justify-center gap-20 p-20 border-b-2 border-light-gray flex-wrap">
+      <div className={[styles.borderContainer]}>
         <RouteCard
           image={cardImage}
           title="Groene Gordel Route"
@@ -57,8 +60,8 @@ const HomePage = () => {
           moeilijkheid="Easy"
         />
       </div>
-      <div className="flex justify-center gap-20 p-20 flex-wrap">
-        <EventCard
+      <div className={[styles.bottomCardContainer]}>
+        <EventCardOld
           image={cardImage}
           title="Groene Gordel 2024"
           organisator="Toerisme Vlaanderen"
@@ -69,7 +72,7 @@ const HomePage = () => {
           description="Ontdek naast de prachtige in herfstkleuren gehulde natuur ook ons cultureel erfgoed, in en rond de dreven van Merksplas Kolonie. Wandelen in 3 lussen van 8 km, naar hartenlust onderling combineerbaar tot 16 en 24 km om volop van al het moois te genieten. Tevens voorzien wij een lus van 4 km die geschikt is voor kinderwagens"
         />
         <EventCard
-          image={cardImage}
+          image={bannerImage}
           title="Groene Gordel 2024"
           organisator="Toerisme Vlaanderen"
           dateTime="29 oktober 2023 - 09:00"

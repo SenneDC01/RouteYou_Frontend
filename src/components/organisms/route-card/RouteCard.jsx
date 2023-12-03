@@ -23,13 +23,13 @@ const RouteCard = ({
 }) => {
   return (
     <a href="#" className="flex justify-center gap-2">
-      <Card shadow="sm">
-        <CardBody className="overflow-visible p-0">
+      <div className="shadow-md rounded-2xl">
+        <div className="overflow-visible p-0">
           <Image
             height={200}
             width={200}
             alt={title}
-            className="w-full object-cover"
+            className="w-full object-cover rounded-t-2xl"
             src={image}
           />
           <p className={"flex justify-center font-semibold pt-2"}>{title}</p>
@@ -51,8 +51,8 @@ const RouteCard = ({
               <SVGtext label={moeilijkheid} icon={<MoeilijkheidSVG />} />
             </div>
           </div>
-        </CardBody>
-      </Card>
+        </div>
+      </div>
     </a>
   );
 };

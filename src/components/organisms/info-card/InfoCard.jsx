@@ -1,19 +1,13 @@
 "use client";
 import React from "react";
-import { Card, CardBody, CardFooter } from "@nextui-org/react";
 import PropTypes from "prop-types";
+import styles from "./InfoCard.module.scss";
 
 const InfoCard = ({ icon = null, text = "label" }) => {
   return (
-    <div className="flex justify-center gap-2">
-      <Card className="py-4 shadow-md">
-        <CardBody className="flex items-center overflow-visible py-2">
-          {icon && React.cloneElement(icon, { width: "10em", height: "5em" })}
-        </CardBody>
-        <CardFooter className="pb-0 pt-2 px-4 flex-col items-start">
-          <p className="text-tiny">{text}</p>
-        </CardFooter>
-      </Card>
+    <div tabindex="0" className={[styles.infoCard]}>
+      {icon && React.cloneElement(icon, { width: "10em", height: "5em" })}
+      <p>{text}</p>
     </div>
   );
 };
