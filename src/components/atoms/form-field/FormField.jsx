@@ -11,7 +11,7 @@ const FormField = ({ label, placeholder, value, name, type, onChange, errorMessa
         type={type}
         value={value}
         name={name}
-        className={styles.field}
+        className={[styles.field, errorMessage ? styles.inValid : ""].join(" ")}
         placeholder={placeholder}
         onChange={onChange}
       />

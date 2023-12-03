@@ -20,4 +20,8 @@
   .error {
     color: vars.$red;
   }
+
+  .inValid {
+    border: 1px solid vars.$red;
+  }
 }
