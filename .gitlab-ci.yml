@@ -65,6 +65,10 @@ prodUnitTest:
 buildImage:
   stage: buildImage
   image: docker:24.0.7
+  only:
+    - dev
+    - staging
+    - main
   services:
     - docker:dind
   variables:
@@ -87,6 +91,10 @@ buildImage:
 pushImage:
   stage: pushImage
   image: google/cloud-sdk
+  only:
+    - dev
+    - staging
+    - main
   variables:
     BRANCH_NAME: ""
     REPO: ""
