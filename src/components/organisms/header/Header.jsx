@@ -10,7 +10,6 @@ import {
   NavbarMenuToggle,
   NavbarMenuItem,
   NavbarMenu,
-  Button,
 } from "@nextui-org/react";
 import PropTypes from "prop-types";
 import Image from "next/image";
