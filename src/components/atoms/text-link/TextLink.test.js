@@ -6,7 +6,7 @@ import TextLink from "./TextLink";
 
 describe("TextLink component", () => {
   it("Renders text link correctly", () => {
-    render(<TextLink>Text</TextLink>);
+    render(<TextLink href="/">Text</TextLink>);
     const title = screen.getByText("Text");
     expect(title).toBeInTheDocument();
   });
