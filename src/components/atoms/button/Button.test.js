@@ -6,7 +6,7 @@ import Button from "./Button";
 
 describe("Button component", () => {
   it("renders button with label", () => {
-    render(<Button label="Click me" link="/" />);
+    render(<Button>Click me</Button>);
     const buttonElement = screen.getByText("Click me");
     expect(buttonElement).toBeInTheDocument();
   });

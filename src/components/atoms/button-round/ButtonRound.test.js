@@ -8,7 +8,7 @@ import ArrowRightSVG from "@/utils/icons/ArrowRightSVG";
 describe("Button component", () => {
   it("renders button with icon", () => {
     render(<Button icon={<ArrowRightSVG />} />);
-    const buttonElement = screen.getByText("Click me");
+    const buttonElement = screen.getByLabelText("forward button");
     expect(buttonElement).toBeInTheDocument();
   });
 });

@@ -15,9 +15,4 @@ const ButtonRound = ({ icon = null, buttonStyles, link = "#" }) => {
   );
 };
 
-ButtonRound.propTypes = {
-  icon: PropTypes.element,
-  link: PropTypes.string.isRequired,
-};
-
 export default ButtonRound;
