@@ -13,6 +13,11 @@ stages:
 unit-test:
   image: node:latest
   stage: unitTests
+  only:
+    - dev
+    - staging
+    - main
+
   before_script:
     - npm install
   script:
@@ -82,6 +87,10 @@ buildImage:
 pushImage:
   stage: pushImage
   image: ubuntu:latest
+  only:
+    - dev
+    - staging
+    - main
   variables:
     BRANCH_NAME: ""
     REPO: ""
@@ -117,6 +126,10 @@ pushImage:
 runAnsible:
   image: ubuntu
   before_script:
+  only:
+    - dev
+    - staging
+    - main
     - export BRANCH_NAME=$(cat output/branch.txt)
     ## Install ssh-agent
     - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y  && apt-get install git -y)'
