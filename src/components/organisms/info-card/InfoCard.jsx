@@ -5,7 +5,7 @@ import styles from "./InfoCard.module.scss";
 
 const InfoCard = ({ icon = null, text = "label" }) => {
   return (
-    <div tabindex="0" className={[styles.infoCard]}>
+    <div tabIndex="0" className={[styles.infoCard]}>
       {icon && React.cloneElement(icon, { width: "10em", height: "5em" })}
       <p>{text}</p>
     </div>
