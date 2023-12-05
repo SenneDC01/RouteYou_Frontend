@@ -4,26 +4,21 @@ default:
     - atp-frontend
 
 stages:
-  # - unitTests
+  - unitTests
   - checkBranch
   - buildImage
   - pushImage
   - runAnsible
 
-# unit-test:
-#   image: node:latest
-#   stage: unitTests
-#   only:
-#     - dev
-#     - staging
-#     - main
+unit-test:
+  image: node:latest
+  stage: unitTests
+  before_script:
+    - npm install
+  script:
+    - npm run test
 
-#   before_script:
-#     - npm install
-#   script:
-#     - npm run test
-
-devUnitTest:
+dev:
   stage: checkBranch
   only:
     - dev
@@ -36,7 +31,7 @@ devUnitTest:
   artifacts:
     paths: [output/]
 
-stagingUnitTest:
+staging:
   stage: checkBranch
   only:
     - staging
@@ -49,7 +44,7 @@ stagingUnitTest:
   artifacts:
     paths: [output/]
     
-prodUnitTest:
+prod:
   stage: checkBranch
   only:
     - prod
@@ -66,9 +61,8 @@ buildImage:
   stage: buildImage
   image: docker:24.0.7
   only:
-    - dev
-    - staging
-    - main
+    - /^dev$/
+    - /^staging$/
   services:
     - docker:dind
   variables:
@@ -87,14 +81,37 @@ buildImage:
     paths:
       - ./$CI_COMMIT_BRANCH-frontend-image.tar
 
+buildImageMain:
+  stage: buildImage
+  image: docker:24.0.7
+  only:
+    - /^main$/
+  services:
+    - docker:dind
+  variables:
+    BRANCH_NAME: ""  # Set the default value
+    REPO: ""
+  before_script:
+    - export BRANCH_NAME=$(cat output/branch.txt)
+    - export REPO=$(cat output/repo.txt)
+  script:
+    - echo "Building image for branch $BRANCH_NAME"
+    - echo "$BRANCH_NAME-frontend-image"
+    - echo "Loaded REPO $REPO"
+    - docker build -t $BRANCH_NAME-frontend-image .
+    - docker save -o $BRANCH_NAME-frontend-image.tar $BRANCH_NAME-frontend-image
+  artifacts:
+    paths:
+      - ./prod-frontend-image.tar
+
 ## i know this is not prietty but google-sdk and docker didn't want to work
 pushImage:
   stage: pushImage
   image: google/cloud-sdk
   only:
-    - dev
-    - staging
-    - main
+    - /^dev$/
+    - /^main$/
+    - /^staging$/
   variables:
     BRANCH_NAME: ""
     REPO: ""
@@ -114,9 +131,9 @@ pushImage:
 runAnsible:
   image: ubuntu
   only:
-    - dev
-    - staging
-    - main
+    - /^dev$/
+    - /^main$/
+    - /^staging$/
   before_script:
     - export BRANCH_NAME=$(cat output/branch.txt)
     ## Install ssh-agent
