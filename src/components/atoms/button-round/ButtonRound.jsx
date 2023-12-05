@@ -1,23 +1,18 @@
 // src/atoms/Button.js
 import React from "react";
-import PropTypes from "prop-types";
 import styles from "./ButtonRound.module.scss";
+import Link from "next/link";
 
-const ButtonRound = ({ icon = null, buttonStyles, link = "#" }) => {
+const ButtonRound = ({ href = "#", ariaLabel = "forward-button", icon = null, className }) => {
   return (
-    <a
-      className={[styles.buttonStyle, buttonStyles].join(" ")}
-      aria-label="forward button"
-      href={link}
+    <Link
+      href={href}
+      aria-label={ariaLabel}
+      className={[styles.buttonStyle, className].join(" ")}
     >
-      {icon && React.cloneElement(icon, { width: "40px", height: "20px" })}
-    </a>
+      {icon && <span className={styles.icon}>{icon}</span>}
+    </Link>
   );
-};
-
-ButtonRound.propTypes = {
-  icon: PropTypes.element,
-  link: PropTypes.string.isRequired,
 };
 
 export default ButtonRound;

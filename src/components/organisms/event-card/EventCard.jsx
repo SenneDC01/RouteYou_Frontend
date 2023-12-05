@@ -80,7 +80,7 @@ const EventCard = ({
                       : description}
                   </SubText>
                   <div className="flex flex-col h-full justify-end px-2">
-                    <RoundButton icon={<ArrowRightSVG />} link="#" />
+                    <RoundButton href="#" ariaLabel="Ga naar event" icon={<ArrowRightSVG />} />
                   </div>
                 </div>
               </div>

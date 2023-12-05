@@ -1,4 +1,3 @@
-// pages/index.js or any other component file
 "use client";
 import React from "react";
 import "@/app/assets/globals.css";
