@@ -7,7 +7,7 @@ import BigTitle from "@/components/atoms/big-title/BigTitle";
 import SubText from "@/components/atoms/sub-text/SubText";
 import RegularText from "@/components/atoms/regular-text/RegularText";
 import ViewMore from "@/components/molecules/view-more/ViewMore";
-import ArrowLeftSVG from "@/utils/icons/ArrowLeftSVG";
+import ArrowRightSVG from "@/utils/icons/ArrowRightSVG";
 import Button from "@/components/atoms/button/Button";
 import Image from "next/image";
 
@@ -34,8 +34,12 @@ export default function DetailColumn({ event }) {
         <ViewMore link={`./${event.id}/posts`}>Posts</ViewMore>
         <ViewMore link={`./${event.id}/pictures`}>Pictures</ViewMore>
         <div className={styles.row}>
-          <Button label="Share" link="#" />
-          <ButtonLink link={`./${event.id}/signup`}>sign-up</ButtonLink>
+          <Button link="#" icon={<ArrowRightSVG />}>
+            Share
+          </Button>
+          <ButtonLink link={`./${event.id}/signup`} icon={<ArrowRightSVG />}>
+            sign-up
+          </ButtonLink>
         </div>
       </div>
     </div>
