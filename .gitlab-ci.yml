@@ -168,5 +168,5 @@ runAnsible:
     - echo "$ADMIN_KEY_PUB" > sshKey/admin_key.pub
     - chmod 600 ./sshKey/admin_key
     
-    - ansible-playbook -e "target_host=dev" playbook.yml
+    - ansible-playbook -e "target_host=$BRANCH_NAME" playbook.yml
     
