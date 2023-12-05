@@ -1,15 +1,15 @@
-const API_URL = process.env.API_URL;
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const HEADERS = {
   "Content-Type": "application/json",
 };
 
 export const login = async (body) => {
-  const response = await fetch(`${API_URL}/login`, {
+  const response = await fetch(`${API_URL}/users/login`, {
     method: "POST",
     headers: HEADERS,
     body: JSON.stringify(body),
   });
   const data = await response.json();
 
-  return data;
+  return { ...data, code: response.status };
 };
