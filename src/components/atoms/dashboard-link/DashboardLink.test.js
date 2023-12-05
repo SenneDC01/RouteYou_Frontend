@@ -13,8 +13,8 @@ jest.mock("next/navigation", () => ({
 }));
 
 describe("Dashboard link component", () => {
-  it("renders bold text correctly", () => {
-    render(<DashboardLink link="/test">Test</DashboardLink>);
+  it("renders dashboard link correctly", () => {
+    render(<DashboardLink link="test">Test</DashboardLink>);
     const element = screen.getByText("Test");
     expect(element).toBeInTheDocument();
   });
@@ -23,7 +23,15 @@ describe("Dashboard link component", () => {
     mockPathname.mockImplementation(() => "/test");
 
     render(<DashboardLink link="/test">Test</DashboardLink>);
-    const classes = screen.findByText("Text");
+    const classes = screen.getByText("Test").className;
     expect(classes).toEqual(expect.stringContaining("active"));
+  });
+
+  it("doesn't have an active class", () => {
+    mockPathname.mockImplementation(() => "/events");
+
+    render(<DashboardLink link="/test">Test</DashboardLink>);
+    const classes = screen.getByText("Test").className;
+    expect(classes).toEqual(expect.not.stringContaining("active"));
   });
 });
