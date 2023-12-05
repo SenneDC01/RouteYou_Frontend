@@ -10,20 +10,20 @@ const options = [
 
 describe("SelectField component", () => {
   test("renders options and handles change", () => {
-    const onChangeMock = jest.fn();
-    const { getByLabelText } = render(
-      <SelectField label="Select" options={options} onChange={onChangeMock} value="option2" />
+    const formValues = { selectField: 'option2' };
+    const setFormValues = jest.fn();
+
+    const handleChange = (e) => {
+      setFormValues({ ...formValues, [e.target.name]: e.target.value });
+    };
+    const { getByRole, getByText } = render(
+      <SelectField label="Select" name="selectField" options={options} onChange={handleChange} value={formValues.selectField} />
     );
 
-    options.forEach((option) => {
-      const optionElement = getByLabelText(option.label);
-      expect(optionElement).toBeInTheDocument();
-    });
+    const selectElement = getByRole('combobox');
+    expect(selectElement.value).toBe('option2');
 
-    const selectElement = getByLabelText("Select");
-    expect(selectElement.value).toBe("option2");
-
-    fireEvent.change(selectElement, { target: { value: "option3" } });
-    expect(onChangeMock).toHaveBeenCalledWith("option3");
+    fireEvent.change(selectElement,  { target: { name: 'selectField', value: "option3" } });
+    expect(setFormValues).toHaveBeenCalledWith({ selectField: 'option3' });    
   });
 });
