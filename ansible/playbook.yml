@@ -15,7 +15,8 @@
   roles:
     - updateDockerContainers
 
-- hosts: dev
+- hosts: 
+    - "{{target_host}}"
   tasks:
     - name: Run commands inside Docker container
       command: >
