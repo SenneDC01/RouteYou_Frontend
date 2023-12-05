@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./ButtonRound.module.scss";
 import Link from "next/link";
 
-const ButtonRound = ({ href = "#", ariaLabel = "forward-button", icon = null, className }) => {
+const ButtonRound = ({ href, ariaLabel = "forward-button", icon, className }) => {
   return (
     <Link
       href={href}
