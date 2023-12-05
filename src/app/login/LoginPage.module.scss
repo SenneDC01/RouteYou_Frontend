@@ -35,4 +35,8 @@
     align-items: center;
     justify-content: center;
     gap: 1rem;
+
+    .error {
+        color: vars.$red;
+    }
 }

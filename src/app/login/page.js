@@ -12,6 +12,7 @@ import {
   isPasswordFilled,
   isValidEmail,
 } from "@/helpers/FormValidation/FormValidation";
+import { login } from "@/services/UserService";
 
 const Page = () => {
   const [formValues, setFormValues] = useState({ email: "", password: "" });
@@ -25,15 +26,25 @@ const Page = () => {
     if (!isPasswordFilled(formValues.password)) {
       newErrors.password = "Vul een wachtwoord in";
     }
-    setErrors(newErrors);
+    setErrors({ ...newErrors, formError: errors.formError });
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      // Submit form to backend
-      console.log("Form Is Valid");
+      try {
+        const response = await login(formValues);
+
+        if (response.code === 200) {
+          console.log("Redirect User");
+          // TODO Redirect User
+        } else {
+          setErrors({ formError: response.message });
+        }
+      } catch (error) {
+        setErrors({ formError: "Something went wrong try again later" });
+      }
     }
   };
 
@@ -46,6 +57,9 @@ const Page = () => {
       <div className={styles.container}>
         <BigTitle className={styles.title}>Login</BigTitle>
         <form onSubmit={handleSubmit} className={styles.form}>
+          {errors.formError && (
+            <p className={styles.error}>{errors.formError}</p>
+          )}
           <FormField
             label="Email"
             name="email"
