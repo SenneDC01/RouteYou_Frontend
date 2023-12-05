@@ -21,7 +21,7 @@ stages:
 dev:
   stage: checkBranch
   only:
-    - dev
+     - /^dev$/
   script:
     - echo "Running unit tests for development"
     # do unit tests
@@ -34,7 +34,7 @@ dev:
 staging:
   stage: checkBranch
   only:
-    - staging
+    - /^staging$/
   script:
     - echo "Running unit tests for staging"
     # do unit tests
@@ -47,7 +47,7 @@ staging:
 prod:
   stage: checkBranch
   only:
-    - prod
+    - /^main$/
   script:
     - echo "Running unit tests for production"
     # do unit tests
