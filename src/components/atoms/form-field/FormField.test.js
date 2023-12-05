@@ -14,6 +14,7 @@ describe('InputField component', () => {
                 placeholder="Test Placeholder"
                 type="text"
                 onChange={onChange}
+                errorMessage="Dit veld is verplicht"
             />
         );
 
@@ -21,7 +22,9 @@ describe('InputField component', () => {
         expect(input).toBeInTheDocument();
         expect(input).toHaveAttribute('name', 'testName');
         expect(input).toHaveAttribute('type', 'text');
-
+        expect(input).toHaveAttribute('value', '');
+        expect(input).toHaveClass('inValid');
+        
         fireEvent.change(input, { target: { value: 'test' } });
         expect(onChange).toHaveBeenCalled();
     });
