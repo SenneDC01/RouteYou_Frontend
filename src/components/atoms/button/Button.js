@@ -1,4 +1,3 @@
-// src/atoms/Button.js
 import React from "react";
 import styles from "./Button.module.scss";
 
@@ -7,13 +6,13 @@ const Button = ({
   onClick,
   type = "button",
   icon = null,
-  buttonStyles,
+  className,
 }) => {
   return (
     <button
       type={type}
       onClick={onClick}
-      className={[styles.buttonStyle, buttonStyles].join(" ")}
+      className={[styles.buttonStyle, className].join(" ")}
     >
       {icon && <span className={styles.icon}>{icon}</span>}
       {children}
