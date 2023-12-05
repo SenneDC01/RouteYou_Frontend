@@ -16,9 +16,9 @@ const Banner = () => {
         className="brightness-50"
       />
       <div className="flex flex-col items-center justify-center absolute inset-0 p-5 gap-5">
-        <p className="text-white text-4xl font-semibold mb-6 uppercase">
+        <h1 className="text-white text-4xl font-semibold mb-6 uppercase">
           Plan de mooiste <br /> routes & events
-        </p>
+        </h1>
         <div className="flex w-full max-w-3xl justify-around flex-wrap gap-2">
           <Button
             label="Routes"

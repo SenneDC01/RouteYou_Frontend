@@ -14,6 +14,7 @@ const FavButton = () => {
   return (
     <button
       className={[styles.iconButton]}
+      aria-label="favorite"
       onClick={() => handleToggleFavorite()}
     >
       <StarSVG width={30} height={30} fill={isFavorite ? "#1a614a" : "none"} />
