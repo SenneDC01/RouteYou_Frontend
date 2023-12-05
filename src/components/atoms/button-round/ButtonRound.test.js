@@ -1,4 +1,3 @@
-// src/atoms/ButtonRound.test.js
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
@@ -15,6 +14,17 @@ describe("Button component", () => {
       />
     );
     const buttonElement = screen.getByLabelText("Ga naar event");
+    expect(buttonElement).toBeInTheDocument();
+  });
+
+  it("renders button with icon and default aria-label", () => {
+    render(
+      <ButtonRound
+        href="/"
+        icon={<ArrowRightSVG />}
+      />
+    );
+    const buttonElement = screen.getByLabelText("forward-button");
     expect(buttonElement).toBeInTheDocument();
   });
 });
