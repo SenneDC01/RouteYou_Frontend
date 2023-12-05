@@ -4,19 +4,19 @@ default:
     - atp-frontend
 
 stages:
-  # - unitTests
+  - unitTests
   - checkBranch
   - buildImage
   - pushImage
   - runAnsible
 
-# unit-test:
-#   image: node:latest
-#   stage: unitTests
-#   before_script:
-#     - npm install
-#   script:
-#     - npm run test
+unit-test:
+  image: node:latest
+  stage: unitTests
+  before_script:
+    - npm install
+  script:
+    - npm run test
 
 dev:
   stage: checkBranch
