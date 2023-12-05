@@ -29,6 +29,7 @@ const HomePage = () => {
         />
       </div>
       <div className={[styles.borderContainer]}>
+        <h2>PLAN DE MOOISTE ROUTES</h2>
         <RouteCard
           image={cardImage}
           title="Groene Gordel Route"
@@ -61,6 +62,7 @@ const HomePage = () => {
         />
       </div>
       <div className={[styles.bottomCardContainer]}>
+        <h2>NEEM DEEL AAN EVENTS</h2>
         <EventCardOld
           image={cardImage}
           title="Groene Gordel 2024"
