@@ -25,6 +25,7 @@ body {
   /*    rgb(var(--background-end-rgb))*/
   /*  )*/
   /*  rgb(var(--background-start-rgb));*/
+  font-family: "Inter", sans-serif;
   color: #2a2a2a;
   background: #fafafa;
   min-height: 100vh;

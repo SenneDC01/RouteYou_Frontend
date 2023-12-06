@@ -1,4 +1,3 @@
-// src/atoms/Button.js
 import React from "react";
 import Link from "next/link";
 import styles from "./ButtonLink.module.scss";

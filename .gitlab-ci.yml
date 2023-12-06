@@ -1,18 +1,27 @@
 default:
   image: ubuntu
   tags:
-    - docker-runner-frontend
+    - atp-frontend
 
 stages:
+  - unitTests
   - checkBranch
   - buildImage
   - pushImage
   - runAnsible
 
-devUnitTest:
+unit-test:
+  image: node:latest
+  stage: unitTests
+  before_script:
+    - npm install
+  script:
+    - npm run test
+
+dev:
   stage: checkBranch
   only:
-    - dev
+     - /^dev$/
   script:
     - echo "Running unit tests for development"
     # do unit tests
@@ -22,10 +31,10 @@ devUnitTest:
   artifacts:
     paths: [output/]
 
-stagingUnitTest:
+staging:
   stage: checkBranch
   only:
-    - staging
+    - /^staging$/
   script:
     - echo "Running unit tests for staging"
     # do unit tests
@@ -35,10 +44,10 @@ stagingUnitTest:
   artifacts:
     paths: [output/]
     
-prodUnitTest:
+prod:
   stage: checkBranch
   only:
-    - prod
+    - /^main$/
   script:
     - echo "Running unit tests for production"
     # do unit tests
@@ -51,6 +60,9 @@ prodUnitTest:
 buildImage:
   stage: buildImage
   image: docker:24.0.7
+  only:
+    - /^dev$/
+    - /^staging$/
   services:
     - docker:dind
   variables:
@@ -69,9 +81,37 @@ buildImage:
     paths:
       - ./$CI_COMMIT_BRANCH-frontend-image.tar
 
+buildImageMain:
+  stage: buildImage
+  image: docker:24.0.7
+  only:
+    - /^main$/
+  services:
+    - docker:dind
+  variables:
+    BRANCH_NAME: ""  # Set the default value
+    REPO: ""
+  before_script:
+    - export BRANCH_NAME=$(cat output/branch.txt)
+    - export REPO=$(cat output/repo.txt)
+  script:
+    - echo "Building image for branch $BRANCH_NAME"
+    - echo "$BRANCH_NAME-frontend-image"
+    - echo "Loaded REPO $REPO"
+    - docker build -t $BRANCH_NAME-frontend-image .
+    - docker save -o $BRANCH_NAME-frontend-image.tar $BRANCH_NAME-frontend-image
+  artifacts:
+    paths:
+      - ./prod-frontend-image.tar
+
+## i know this is not prietty but google-sdk and docker didn't want to work
 pushImage:
   stage: pushImage
   image: google/cloud-sdk
+  only:
+    - /^dev$/
+    - /^main$/
+    - /^staging$/
   variables:
     BRANCH_NAME: ""
     REPO: ""
@@ -82,17 +122,18 @@ pushImage:
     - echo "Pushing image to repo for branch $BRANCH_NAME"
     - touch gcloud-service-key.json
     - echo "$GCLOUD_SERVICE_KEY" > gcloud-service-key.json
-    - cat gcloud-service-key.json
     - gcloud auth activate-service-account --key-file=gcloud-service-key.json
     - gcloud auth configure-docker europe-west1-docker.pkg.dev
-    # Load the Docker image from the tarball
     - docker load -i ./$BRANCH_NAME-frontend-image.tar
-    # Push the Docker image to the specified repository
     - docker tag $BRANCH_NAME-frontend-image:latest "$REPO"
     - docker push "$REPO"
 
 runAnsible:
   image: ubuntu
+  only:
+    - /^dev$/
+    - /^main$/
+    - /^staging$/
   before_script:
     - export BRANCH_NAME=$(cat output/branch.txt)
     ## Install ssh-agent
@@ -115,16 +156,17 @@ runAnsible:
     - pip3 install ansible==2.9
     - pip3 install ansible-lint
     - cd ansible
-    - chmod 770 .
+    - chmod 700 .
     
     - touch .vault_pass.txt
     - touch key-files/serviceArtifactRegistryAdmin.json
     - touch sshKey/admin_key
     - touch sshKey/admin_key.pub
-    - echo $ANSIBLE_VAULT_PASSWORD > .vault_pass.txt
-    - echo $GCLOUD_SERVICE_KEY > serviceArtifactRegistryAdmin.json
-    - echo $ADMIN_KEY > sshKey/admin_key 
-    - echo $ADMIN_KEY_PUB > sshKey/admin_key.pub
+    - echo "$ANSIBLE_VAULT_PASSWORD" > .vault_pass.txt
+    - echo "$GCLOUD_SERVICE_KEY" > serviceArtifactRegistryAdmin.json
+    - echo "$ADMIN_KEY" > sshKey/admin_key 
+    - echo "$ADMIN_KEY_PUB" > sshKey/admin_key.pub
+    - chmod 600 ./sshKey/admin_key
     
     - ansible-playbook -e "target_host=$BRANCH_NAME" playbook.yml
     

@@ -2,9 +2,8 @@
 
 .buttonStyle {
   width: 100%;
-  height: fit-content;
+  height: 3rem;
   padding: vars.$button_padding;
-  font-family: "Inter", sans-serif;
   font-size: vars.$text_regular;
   border-radius: vars.$button_radius;
   text-transform: uppercase;
@@ -23,9 +22,11 @@
   transform: scale(1.06);
 }
 
-.buttonSpacing {
+.icon {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
+  width: 1.25rem;
+  height: 100%;
+  aspect-ratio: 1;
+  margin-right: 0.5rem;
 }
