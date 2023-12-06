@@ -32,7 +32,12 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
       />
       <NavbarBrand className="flex min-w-fit justify-center flex-grow-0 pe-2">
         <Link href="/">
-          <Image src={logo} priority={true} alt="RouteYou" />
+          <Image
+            src={logo}
+            priority={true}
+            alt="RouteYou"
+            className={styles.logo}
+          />
         </Link>
       </NavbarBrand>
 
@@ -80,7 +85,7 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
             src={profilePicture}
             alt="Profile picture"
             width={30}
-            height={30}
+            className={styles.profilePic}
           />
           <CustomDropdown
             buttonText={

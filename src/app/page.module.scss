@@ -9,15 +9,19 @@
 .bannerContainer {
   display: flex;
   justify-content: center;
-  padding: 0;
+  padding: 0 0 2rem;
   position: relative;
+}
+
+.title {
+  margin: 2rem 0 0 5rem;
 }
 
 @mixin cardContainer {
   display: flex;
   justify-content: center;
   gap: 8rem;
-  padding: 4rem 1rem;
+  padding: 2rem 1rem 4rem;
   flex-wrap: wrap;
   @media screen and (max-width: 900px) {
     gap: 2rem;
