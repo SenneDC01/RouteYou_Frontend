@@ -23,7 +23,7 @@ describe("Dashboard link component", () => {
     mockPathname.mockImplementation(() => "/test");
 
     render(<DashboardLink link="/test">Test</DashboardLink>);
-    const classes = screen.getByText("Test").className;
+    const classes = screen.getByRole("listitem").className;
     expect(classes).toEqual(expect.stringContaining("active"));
   });
 
@@ -31,7 +31,7 @@ describe("Dashboard link component", () => {
     mockPathname.mockImplementation(() => "/events");
 
     render(<DashboardLink link="/test">Test</DashboardLink>);
-    const classes = screen.getByText("Test").className;
+    const classes = screen.getByRole("listitem").className;
     expect(classes).toEqual(expect.not.stringContaining("active"));
   });
 });
