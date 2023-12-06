@@ -19,16 +19,6 @@ const ArrowRightSVG = ({ width, height }) => {
           strokeLinejoin="round"
         />
       </g>
-      <defs>
-        <clipPath id="clip0_42_1363">
-          <rect
-            width="12"
-            height="18"
-            fill="white"
-            transform="translate(0.0708008)"
-          />
-        </clipPath>
-      </defs>
     </svg>
   );
 };
