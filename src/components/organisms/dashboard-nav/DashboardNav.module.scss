@@ -1,1 +1,21 @@
 @use "@/app/assets/vars.scss" as vars;
+
+.nav {
+  height: 100%;
+  min-width: 12rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-right: 1px solid vars.$grey;
+  flex: 1;
+
+  h3 {
+    font-weight: bold;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+}

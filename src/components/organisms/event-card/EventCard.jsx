@@ -14,14 +14,15 @@ import RoundButton from "@/components/atoms/button-round/ButtonRound";
 import ArrowRightSVG from "@/utils/icons/ArrowRightSVG";
 
 const EventCard = ({
-  image,
-  title = "title",
-  organisator = "organisator",
-  dateTime = "date - time",
-  locatie = "locatie",
-  route = "route",
-  afstand = "100km",
-  description = "description",
+  event,
+  // image,
+  // title = "title",
+  // organisator = "organisator",
+  // dateTime = "date - time",
+  // locatie = "locatie",
+  // route = "route",
+  // afstand = "100km",
+  // description = "description",
 }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -40,14 +41,14 @@ const EventCard = ({
             <Image
               height={100}
               width={100}
-              alt={title}
+              alt={event.title}
               className="object-cover w-full"
-              src={image}
+              src={event.image}
             />
 
             <div className="flex flex-col gap-2 p-3">
               <div className="flex flex-row justify-between gap-2 p-0">
-                <BoldText>Groene Gordel 2024</BoldText>
+                <BoldText>{event.title}</BoldText>
                 <Button
                   isIconOnly
                   className="data-[hover]:bg-foreground/10"
@@ -64,20 +65,20 @@ const EventCard = ({
               </div>
               <div className="flex flex-col gap-2">
                 <SubText>
-                  {organisator} <br /> {dateTime}
+                  {event.organisator} <br /> {event.dateTime}
                 </SubText>
                 <div className="flex flex-col gap-2">
-                  <SVGtext label={locatie} icon={<LocationSVG />} />
+                  <SVGtext label={event.locatie} icon={<LocationSVG />} />
                   <SVGtext
-                    label={`${route} - ${afstand}`}
+                    label={`${event.route} - ${event.afstand}`}
                     icon={<CyclistSVG />}
                   />
                 </div>
                 <div className="py-2 flex flex-row">
                   <SubText>
-                    {description.length > 130
-                      ? description.slice(0, 130) + "..."
-                      : description}
+                    {event.description.length > 130
+                      ? event.description.slice(0, 130) + "..."
+                      : event.description}
                   </SubText>
                   <div className="flex flex-col h-full justify-end px-2">
                     <RoundButton icon={<ArrowRightSVG />} link="#" />

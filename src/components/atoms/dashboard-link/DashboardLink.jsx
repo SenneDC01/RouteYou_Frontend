@@ -7,6 +7,7 @@ import Image from "next/image";
 
 export default function DashboardLink({ children, link, icon }) {
   const pathname = usePathname();
+  console.log(icon.default.src);
 
   return (
     <li
@@ -15,13 +16,23 @@ export default function DashboardLink({ children, link, icon }) {
       <Image
         className={styles.circle}
         src={require("@/utils/icons/activeCircle.svg")}
-        role="img"
         alt="star"
+        width={1}
+        height={1}
       ></Image>
-      <Image className={styles.icon} src={icon} role="img" alt="star"></Image>
-      <Link className={styles.link} href={link}>
-        {children}
-      </Link>
+      <div>
+        <Image
+          width={1}
+          height={1}
+          className={styles.icon}
+          src={icon}
+          alt={`${children} icon`}
+        ></Image>
+        <Link className={styles.link} href={link}>
+          {children}
+        </Link>
+        <p>{children}</p>
+      </div>
     </li>
   );
 }
