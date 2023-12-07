@@ -1,10 +1,10 @@
 import React from "react";
 import Image from "next/image";
 import banner from "@/utils/images/banner.jpg";
-import Button from "@/components/atoms/button/Button";
 import RouteSVGWhite from "@/utils/icons/RouteSVGWhite";
 import CalenderSVG from "@/utils/icons/CalenderSVG";
 import styles from "./Banner.module.scss";
+import ButtonLink from "@/components/atoms/button-link/ButtonLink";
 
 const Banner = () => {
   return (
@@ -16,22 +16,20 @@ const Banner = () => {
         className="brightness-50"
       />
       <div className="flex flex-col items-center justify-center absolute inset-0 p-5 gap-5">
-        <p className="text-white text-4xl font-semibold mb-6 uppercase">
+        <h1 className="text-white text-4xl font-semibold mb-6 uppercase">
           Plan de mooiste <br /> routes & events
-        </p>
+        </h1>
         <div className="flex w-full max-w-3xl justify-around flex-wrap gap-2">
-          <Button
-            label="Routes"
+          <ButtonLink
+            href="#"
             icon={<RouteSVGWhite />}
-            link="#"
-            buttonStyles={styles.button}
-          />
-          <Button
-            label="Events"
-            icon={<CalenderSVG />}
-            link="#"
-            buttonStyles={styles.button}
-          />
+            className={styles.button}
+          >
+            Routes
+          </ButtonLink>
+          <ButtonLink href="#" icon={<CalenderSVG />} className={styles.button}>
+            Events
+          </ButtonLink>
         </div>
       </div>
     </div>

@@ -19,16 +19,6 @@ const CalenderSVG = ({ width, height }) => {
           fill="#FFF"
         />
       </g>
-      <defs>
-        <clipPath id="clip0_50_396">
-          <rect
-            width="55"
-            height="55"
-            fill="white"
-            transform="translate(0 0.5)"
-          />
-        </clipPath>
-      </defs>
     </svg>
   );
 };

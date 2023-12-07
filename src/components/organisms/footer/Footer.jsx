@@ -13,7 +13,13 @@ const Footer = () => {
         // marginTop: "-8px", // anders is de shadow niet goed
       }}
     >
-      <Image src={logo} priority={true} alt="Logo" width={250} />
+      <Image
+        src={logo}
+        priority={true}
+        alt="Logo"
+        width={250}
+        className={styles.image}
+      />
 
       <div className="flex flex-col md:flex-wrap md:flex-row flex-1 justify-between gap-y-8 gap-x-8">
         {/* Column 1 */}

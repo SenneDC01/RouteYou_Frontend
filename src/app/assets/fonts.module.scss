@@ -7,6 +7,12 @@
   font-weight: 700;
 }
 
+.smallText {
+  font-family: "Inter", sans-serif;
+  font-size: vars.$text_s;
+  color: vars.$black;
+}
+
 .subText {
   font-family: "Inter", sans-serif;
   font-size: vars.$text_regular;

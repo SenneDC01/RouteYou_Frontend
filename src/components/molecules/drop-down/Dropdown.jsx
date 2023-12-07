@@ -38,7 +38,7 @@ const CustomDropdown = ({ buttonText, items }) => {
               key={index}
               textValue={item}
               className={"border-b"}
-              tabIndex={index}
+              tabIndex={1}
             >
               {item}
             </DropdownItem>

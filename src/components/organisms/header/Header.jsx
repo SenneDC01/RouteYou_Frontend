@@ -10,7 +10,6 @@ import {
   NavbarMenuToggle,
   NavbarMenuItem,
   NavbarMenu,
-  Button,
 } from "@nextui-org/react";
 import PropTypes from "prop-types";
 import Image from "next/image";
@@ -33,7 +32,12 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
       />
       <NavbarBrand className="flex min-w-fit justify-center flex-grow-0 pe-2">
         <Link href="/">
-          <Image src={logo} priority={true} alt="RouteYou" />
+          <Image
+            src={logo}
+            priority={true}
+            alt="RouteYou"
+            className={styles.logo}
+          />
         </Link>
       </NavbarBrand>
 
@@ -41,6 +45,12 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
         <NavbarItem isActive>
           <Link href="/" aria-current="page">
             Home
+            <span className={styles.itemBorderStyle}></span>
+          </Link>
+        </NavbarItem>
+        <NavbarItem isActive>
+          <Link href="/" aria-current="page">
+            Audit
             <span className={styles.itemBorderStyle}></span>
           </Link>
         </NavbarItem>
@@ -81,7 +91,7 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
             src={profilePicture}
             alt="Profile picture"
             width={30}
-            height={30}
+            className={styles.profilePic}
           />
           <CustomDropdown
             buttonText={

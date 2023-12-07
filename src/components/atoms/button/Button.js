@@ -1,24 +1,22 @@
-// src/atoms/Button.js
 import React from "react";
 import styles from "./Button.module.scss";
 
 const Button = ({
-  label = "Click me",
-  link = "#",
+  children,
+  onClick,
+  type = "button",
   icon = null,
-  buttonStyles,
+  className,
 }) => {
   return (
-    <a
-      className={[styles.buttonStyle, buttonStyles].join(" ")}
-      aria-label="forward button"
-      href={link}
+    <button
+      type={type}
+      onClick={onClick}
+      className={[styles.buttonStyle, className].join(" ")}
     >
-      <div className={[styles.buttonSpacing]}>
-        {icon && React.cloneElement(icon, { width: "1.5rem", height: "1.5rem" })}
-        {label}
-      </div>
-    </a>
+      {icon && <span className={styles.icon}>{icon}</span>}
+      {children}
+    </button>
   );
 };
 

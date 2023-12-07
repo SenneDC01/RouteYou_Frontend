@@ -37,11 +37,6 @@ const MaxStijgingSVG = ({ width, height }) => {
           strokeLinejoin="round"
         />
       </g>
-      <defs>
-        <clipPath id="clip0_503_220">
-          <rect width="24" height="24" fill="white" />
-        </clipPath>
-      </defs>
     </svg>
   );
 };
