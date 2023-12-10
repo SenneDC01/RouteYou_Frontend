@@ -1,4 +1,4 @@
-import { isValidEmail, isPasswordFilled, isFilled, isEmpty } from "./FormValidation";
+import { isValidEmail, isPasswordFilled, isFilled, isEmpty, isValidPasswordLength } from "./FormValidation";
 
 describe("Form Validation", () => {
   test("Validates email correctly", () => {
@@ -28,5 +28,10 @@ describe("Form Validation", () => {
   test("returns false for a non-empty object", () => {
     const nonEmptyObject = { key: "value" };
     expect(isEmpty(nonEmptyObject)).toBe(false);
+  });
+
+  test("Checks if password has a length of 8 characters", () => {
+    expect(isValidPasswordLength("password")).toBe(true);
+    expect(isValidPasswordLength("short")).toBe(false);
   });
 });
