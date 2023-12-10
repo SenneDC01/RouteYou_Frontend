@@ -9,4 +9,8 @@ const isPasswordFilled = (password) => {
   return password !== "";
 };
 
-export { isPasswordFilled, isValidEmail };
+const isFilled = (value) => {
+  return value !== "";
+}
+
+export { isPasswordFilled, isValidEmail, isFilled };
