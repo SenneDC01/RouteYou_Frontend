@@ -15,7 +15,7 @@ describe("RegisterPage component", () => {
     mockRegister.mockRestore();
   });
 
-  it("Register with valid credentials", async () => {
+  test("Register with valid credentials", async () => {
     const { getByLabelText, getByRole } = render(<RegisterPage />);
     const firstname = "Pieter";
     const lastname = "Post";
@@ -71,5 +71,52 @@ describe("RegisterPage component", () => {
       city: city,
       zipcode: zipcode,
     });
+  });
+
+  test("Register without credentials", async () => {
+    const { getByLabelText, getByRole } = render(<RegisterPage />);
+    const firstname = "";
+    const lastname = "";
+    const gender = "";
+    const email = "";
+    const address = "";
+    const city = "";
+    const zipcode = "";
+    const password = "";
+    const password_confirmation = "";
+
+    await act(async () => {
+      fireEvent.change(getByLabelText("Firstname"), {
+        target: { value: firstname },
+      });
+      fireEvent.change(getByLabelText("Lastname"), {
+        target: { value: lastname },
+      });
+      fireEvent.change(getByLabelText("Gender"), {
+        target: { value: gender },
+      });
+      fireEvent.change(getByLabelText("Email"), {
+        target: { value: email },
+      });
+      fireEvent.change(getByLabelText("Address"), {
+        target: { value: address },
+      });
+      fireEvent.change(getByLabelText("City"), {
+        target: { value: city },
+      });
+      fireEvent.change(getByLabelText("Zipcode"), {
+        target: { value: zipcode },
+      });
+      fireEvent.change(getByLabelText("Password"), {
+        target: { value: password },
+      });
+      fireEvent.change(getByLabelText("Confirm Password"), {
+        target: { value: password_confirmation },
+      });
+
+      fireEvent.click(getByRole("button", { name: "Register" }));
+    });
+
+    expect(mockRegister).not.toHaveBeenCalled();
   });
 });
