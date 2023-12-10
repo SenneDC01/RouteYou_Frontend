@@ -7,6 +7,13 @@ import styles from "./RegisterPage.module.scss";
 import bannerImage from "@/utils/images/banner.jpg";
 import Button from "@/components/atoms/button/Button";
 import SelectField from "@/components/atoms/select-field/SelectField";
+import {
+  isEmpty,
+  isFilled,
+  isValidEmail,
+  isValidPasswordLength,
+} from "@/helpers/FormValidation/FormValidation";
+import { register } from "@/services/UserService";
 
 const RegisterPage = () => {
   const [formValues, setFormValues] = useState({});
@@ -18,13 +25,92 @@ const RegisterPage = () => {
   ];
 
   const validateForm = () => {
-    // TODO Validate Form
+    const userInfoErrors = validateUserInfo();
+    const credentialsErrors = validateCredentials();
+    const addressErrors = validateAddress();
+
+    setErrors({
+      ...userInfoErrors,
+      ...credentialsErrors,
+      ...addressErrors,
+      formError: errors.formError,
+    });
+    return (
+      isEmpty(userInfoErrors) &&
+      isEmpty(credentialsErrors) &&
+      isEmpty(addressErrors)
+    );
+  };
+
+  const validateUserInfo = () => {
+    const errors = {};
+    if (!isFilled(formValues.firstname)) {
+      errors.firstname = "Please enter your firstname";
+    }
+    if (!isFilled(formValues.lastname)) {
+      errors.lastname = "Please enter your lastname";
+    }
+    if (!isFilled(formValues.gender)) {
+      errors.gender = "Please select a gender";
+    } else if (
+      !genderOptions.map((option) => option.value).includes(formValues.gender)
+    ) {
+      errors.gender = "Please select a valid gender";
+    }
+    return errors;
+  };
+
+  const validateCredentials = () => {
+    const errors = {};
+    if (!isFilled(formValues.email)) {
+      errors.email = "Please enter your email";
+    } else if (!isValidEmail(formValues.email)) {
+      errors.email = "Please enter a valid email address";
+    }
+    if (!isFilled(formValues.password)) {
+      errors.password = "Please enter your password";
+    } else if (!isValidPasswordLength(formValues.password)) {
+      errors.password = "Password must be at least 8 characters long";
+    }
+    if (!isFilled(formValues.password_confirmation)) {
+      errors.password_confirmation = "Please confirm your password";
+    } else if (formValues.password !== formValues.password_confirmation) {
+      errors.password_confirmation = "Passwords do not match";
+    }
+    return errors;
+  };
+
+  const validateAddress = () => {
+    let errors = {};
+    if (!isFilled(formValues.address)) {
+      errors.address = "Please enter your address";
+    }
+    if (!isFilled(formValues.city)) {
+      errors.city = "Please enter your city";
+    }
+    if (!isFilled(formValues.zipcode)) {
+      errors.zipcode = "Please enter your zipcode";
+    }
+    return errors;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      // TODO Register User
+    const isValid = validateForm();
+    if (isValid) {
+      try {
+        const response = await register(formValues);
+
+        if (response.code === 201) {
+          console.log("Redirect User");
+          // TODO Redirect User
+        } else {
+          setErrors({ formError: response.message });
+          // TODO Test errors with email already in use
+        }
+      } catch (error) {
+        setErrors({ formError: "Something went wrong try again later" });
+      }
     }
   };
 
@@ -36,7 +122,12 @@ const RegisterPage = () => {
     <div className={styles.page}>
       <div className={styles.container}>
         <BigTitle className={styles.title}>Register</BigTitle>
-        <form onSubmit={handleSubmit} className={styles.form}>
+        <form
+          onSubmit={handleSubmit}
+          className={styles.form}
+          method="post"
+          encType="multipart/form-data"
+        >
           {errors.formError && (
             <p className={styles.error}>{errors.formError}</p>
           )}

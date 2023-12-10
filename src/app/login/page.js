@@ -39,6 +39,7 @@ const Page = () => {
         if (response.code === 200) {
           console.log("Redirect User");
           // TODO Redirect User
+          //! Load page in chrome and check next error
         } else {
           setErrors({ formError: response.message });
         }
@@ -56,7 +57,7 @@ const Page = () => {
     <div className={styles.page}>
       <div className={styles.container}>
         <BigTitle className={styles.title}>Login</BigTitle>
-        <form onSubmit={handleSubmit} className={styles.form}>
+        <form onSubmit={handleSubmit} className={styles.form} method="post">
           {errors.formError && (
             <p className={styles.error}>{errors.formError}</p>
           )}
