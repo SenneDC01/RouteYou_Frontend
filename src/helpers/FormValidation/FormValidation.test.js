@@ -1,4 +1,4 @@
-import { isValidEmail, isPasswordFilled, isFilled } from "./FormValidation";
+import { isValidEmail, isPasswordFilled, isFilled, isEmpty } from "./FormValidation";
 
 describe("Form Validation", () => {
   test("Validates email correctly", () => {
@@ -18,5 +18,15 @@ describe("Form Validation", () => {
 
   test("returns false for empty strings", () => {
     expect(isFilled("")).toBe(false);
+  });
+
+  test("returns true for an empty object", () => {
+    const emptyObject = {};
+    expect(isEmpty(emptyObject)).toBe(true);
+  });
+
+  test("returns false for a non-empty object", () => {
+    const nonEmptyObject = { key: "value" };
+    expect(isEmpty(nonEmptyObject)).toBe(false);
   });
 });
