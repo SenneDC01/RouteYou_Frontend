@@ -15,4 +15,8 @@ const isFilled = (value) => {
 
 const isEmpty = (obj) => Object.keys(obj).length === 0;
 
-export { isPasswordFilled, isValidEmail, isFilled, isEmpty };
+const isValidPasswordLength = (password) => {
+  return password.length >= 8;
+};
+
+export { isPasswordFilled, isValidEmail, isFilled, isEmpty, isValidPasswordLength };
