@@ -42,11 +42,19 @@ describe("SelectField component", () => {
   });
 
   it("renders options without value and with an error message", () => {
+    const formValues = { selectField: "option2" };
+    const setFormValues = jest.fn();
+
+    const handleChange = (e) => {
+      setFormValues({ ...formValues, [e.target.name]: e.target.value });
+    };
+
     const { getByRole } = render(
       <SelectField
         label="Select"
         name="selectField"
         options={options}
+        onChange={handleChange}
         errorMessage="This is an error message"
       />
     );
