@@ -119,4 +119,51 @@ describe("RegisterPage component", () => {
 
     expect(mockRegister).not.toHaveBeenCalled();
   });
+
+  test("Register with wrong credentials", async () => {
+    const { getByLabelText, getByRole } = render(<RegisterPage />);
+    const firstname = "Pieter";
+    const lastname = "Post";
+    const gender = "no-gender";
+    const email = "test@example";
+    const address = "Straat 1";
+    const city = "Gent";
+    const zipcode = "9300";
+    const password = "short";
+    const password_confirmation = "password123";
+
+    await act(async () => {
+      fireEvent.change(getByLabelText("Firstname"), {
+        target: { value: firstname },
+      });
+      fireEvent.change(getByLabelText("Lastname"), {
+        target: { value: lastname },
+      });
+      fireEvent.change(getByLabelText("Gender"), {
+        target: { value: gender },
+      });
+      fireEvent.change(getByLabelText("Email"), {
+        target: { value: email },
+      });
+      fireEvent.change(getByLabelText("Address"), {
+        target: { value: address },
+      });
+      fireEvent.change(getByLabelText("City"), {
+        target: { value: city },
+      });
+      fireEvent.change(getByLabelText("Zipcode"), {
+        target: { value: zipcode },
+      });
+      fireEvent.change(getByLabelText("Password"), {
+        target: { value: password },
+      });
+      fireEvent.change(getByLabelText("Confirm Password"), {
+        target: { value: password_confirmation },
+      });
+
+      fireEvent.click(getByRole("button", { name: "Register" }));
+    });
+
+    expect(mockRegister).not.toHaveBeenCalled();
+  });
 });
