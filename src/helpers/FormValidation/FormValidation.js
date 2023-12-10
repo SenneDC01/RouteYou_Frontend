@@ -10,7 +10,9 @@ const isPasswordFilled = (password) => {
 };
 
 const isFilled = (value) => {
-  return value !== "";
-}
+  return !!(value && value.trim() !== "");
+};
 
-export { isPasswordFilled, isValidEmail, isFilled };
+const isEmpty = (obj) => Object.keys(obj).length === 0;
+
+export { isPasswordFilled, isValidEmail, isFilled, isEmpty };
