@@ -7,8 +7,7 @@ import Image from "next/image";
 
 export default function DashboardLink({ children, link, icon }) {
   const pathname = usePathname();
-  console.log(icon.default.src);
-
+  
   return (
     <li
       className={`${styles.listItem} ${pathname === link ? styles.active : ""}`}
