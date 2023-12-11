@@ -1,6 +1,6 @@
 import React from "react";
 
-const RouteSVG = ({ width, height, fill = "none" }) => {
+const StarSVG = ({ width, height, fill = "none" }) => {
   return (
     <svg
       width={width}
@@ -20,4 +20,4 @@ const RouteSVG = ({ width, height, fill = "none" }) => {
   );
 };
 
-export default RouteSVG;
+export default StarSVG;

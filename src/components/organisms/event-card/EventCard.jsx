@@ -14,14 +14,15 @@ import styles from "./EventCard.module.scss";
 import FavButton from "@/components/atoms/fav-button/FavButton";
 
 const EventCard = ({
-  image,
-  title = "title",
-  organisator = "organisator",
-  dateTime = "date - time",
-  locatie = "locatie",
-  route = "route",
-  afstand = "100km",
-  description = "description",
+  event,
+  // image,
+  // title = "title",
+  // organisator = "organisator",
+  // dateTime = "date - time",
+  // locatie = "locatie",
+  // route = "route",
+  // afstand = "100km",
+  // description = "description",
 }) => {
   return (
     <div className={[styles.eventCard]}>
