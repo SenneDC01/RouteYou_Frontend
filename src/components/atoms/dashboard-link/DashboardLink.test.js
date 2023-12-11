@@ -15,8 +15,8 @@ jest.mock("next/navigation", () => ({
 describe("Dashboard link component", () => {
   it("renders dashboard link correctly", () => {
     render(<DashboardLink link="test">Test</DashboardLink>);
-    const element = screen.getByText("Test");
-    expect(element).toBeInTheDocument();
+    const element = screen.getAllByText("Test");
+    expect(element[0]).toBeInTheDocument();
   });
 
   it("has an active class", () => {
