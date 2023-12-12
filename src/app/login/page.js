@@ -22,7 +22,7 @@ const Page = () => {
       newErrors.email = "Please enter a valid email address";
     }
     if (!isPasswordFilled(formValues.password)) {
-      newErrors.password = "Vul een wachtwoord in";
+      newErrors.password = "Please enter a password";
     }
     setErrors({ ...newErrors, formError: errors.formError });
     return Object.keys(newErrors).length === 0;
