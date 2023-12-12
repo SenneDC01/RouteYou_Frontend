@@ -11,6 +11,11 @@ module.exports = {
     "!<rootDir>/*.config.js",
     "!<rootDir>/coverage/**",
   ],
+  coveragePathIgnorePatterns: [
+    "/node_modules/",
+    "^.+\\.module\\.(css|sass|scss)$",
+    "<rootDir>/src/utils/",
+  ],
   moduleNameMapper: {
     // Handle CSS imports (with CSS modules)
     // https://jestjs.io/docs/webpack#mocking-css-modules

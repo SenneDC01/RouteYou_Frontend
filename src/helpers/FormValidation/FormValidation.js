@@ -9,4 +9,14 @@ const isPasswordFilled = (password) => {
   return password !== "";
 };
 
-export { isPasswordFilled, isValidEmail };
+const isFilled = (value) => {
+  return !!(value && value.trim() !== "");
+};
+
+const isEmpty = (obj) => Object.keys(obj).length === 0;
+
+const isValidPasswordLength = (password) => {
+  return password.length >= 8;
+};
+
+export { isPasswordFilled, isValidEmail, isFilled, isEmpty, isValidPasswordLength };
