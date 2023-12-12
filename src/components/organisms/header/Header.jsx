@@ -48,12 +48,6 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
             <span className={styles.itemBorderStyle}></span>
           </Link>
         </NavbarItem>
-        <NavbarItem isActive>
-          <Link href="/" aria-current="page">
-            Audit
-            <span className={styles.itemBorderStyle}></span>
-          </Link>
-        </NavbarItem>
         <NavbarItem>
           <CustomDropdown
             buttonText={
