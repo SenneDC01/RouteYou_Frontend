@@ -1,10 +1,8 @@
 "use client";
 import BigTitle from "@/components/atoms/big-title/BigTitle";
 import FormField from "@/components/atoms/form-field/FormField";
-import Image from "next/image";
 import React, { useState } from "react";
 import styles from "./RegisterPage.module.scss";
-import bannerImage from "@/utils/images/banner.jpg";
 import Button from "@/components/atoms/button/Button";
 import SelectField from "@/components/atoms/select-field/SelectField";
 import {
@@ -99,17 +97,26 @@ const RegisterPage = () => {
     const isValid = validateForm();
     if (isValid) {
       try {
-        const response = await register(formValues);
+        let response = await register(formValues);
 
         if (response.code === 201) {
           console.log("Redirect User");
           // TODO Redirect User
-        } else {
-          setErrors({ formError: response.message });
-          // TODO Test errors with email already in use
+        } 
+        else {
+          if (response.errors) {
+            let errors = [];
+            Object.keys(response.errors).forEach(field => {
+              errors.push(response.errors[field][0]);
+            });
+            setErrors({ formError: errors });
+          }
+          else if (response.message) {
+            setErrors({ formError: [response.message] });
+          }
         }
       } catch (error) {
-        setErrors({ formError: "Something went wrong try again later" });
+        setErrors({ formError: ["Something went wrong try again later."] });
       }
     }
   };
@@ -128,8 +135,14 @@ const RegisterPage = () => {
           method="post"
           encType="multipart/form-data"
         >
-          {errors.formError && (
-            <p className={styles.error}>{errors.formError}</p>
+          {errors?.formError && (
+            <>
+              <ul>
+                {errors.formError?.map((error, index) => (
+                  <li className={styles.error} key={index}>{ error }</li>
+                ))}
+              </ul>
+            </>
           )}
           <FormField
             label="Firstname"
@@ -209,13 +222,6 @@ const RegisterPage = () => {
           <Button type="submit">Register</Button>
         </form>
       </div>
-
-      <Image
-        src={bannerImage}
-        priority={true}
-        alt="Fietser in bos"
-        className={styles.image}
-      />
     </div>
   );
 };

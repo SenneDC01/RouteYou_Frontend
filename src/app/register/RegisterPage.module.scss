@@ -1,27 +1,23 @@
 @use "@/app/assets/vars.scss" as vars;
 
 .page {
-  height: 150vh;
-  position: relative;
-}
-.image {
-  height: 100%;
-  object-fit: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2.5rem;
+  background-image: url('../../utils/images/banner.jpg');
+  background-size: cover;
+  background-position: center;
+  width: 100%;
 }
 .container {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 1rem;
 
-  //   width: 80vw;
-  width: 80%;
+  width: 100%;
   max-width: 37.5rem;
   padding: 3rem min(5rem, 10%);
 
