@@ -1,6 +1,7 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const HEADERS = {
   "Content-Type": "application/json",
+  "Accept": "application/json",
 };
 
 export const login = async (body) => {
