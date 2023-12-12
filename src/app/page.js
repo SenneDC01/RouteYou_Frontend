@@ -15,15 +15,26 @@ import BoldText from "@/components/atoms/bold-text/BoldText";
 
 const HomePage = () => {
   const event = {
-    image: { cardImage },
-    title: "Groene Gordel 2024",
-    organisator: "Toerisme Vlaanderen",
-    dateTime: "29 oktober 2023 - 09:00",
-    locatie: "Sint-Annakring Aalst",
-    route: "Racefiets route",
-    afstand: "106 km",
-    description:
-      "Ontdek naast de prachtige in herfstkleuren gehulde natuur ook ons cultureel erfgoed, in en rond de dreven van Merksplas Kolonie. Wandelen in 3 lussen van 8 km, naar hartenlust onderling combineerbaar tot 16 en 24 km om volop van al het moois te genieten. Tevens voorzien wij een lus van 4 km die geschikt is voor kinderwagens",
+    id: 1,
+    name: "City Light Run Aalst",
+    description: "Loop langs de mooiste parels van Aalst",
+    start_date: "2024-04-22 21:00:00",
+    max_participants: 1000,
+    price: "5.00",
+    visibility: "PUBLIC",
+    image_url: bannerImage,
+    author: "Senna Uyttersprot",
+    routes: [
+      {
+        route_data: {
+          id: 6833170,
+          duration: "1.2km",
+          startAddress: "Aalst, Oost-Vlaanderen, Vlaanderen",
+          type: "Looproute",
+          difficulty: 0.3,
+        },
+      },
+    ],
   };
   return (
     <div className={[styles.pageContainer]}>
@@ -90,26 +101,8 @@ const HomePage = () => {
           <BoldText>NEEM DEEL AAN EVENTS</BoldText>
         </div>
         <div className={[styles.bottomCardContainer]}>
-          <EventCard
-            image={bannerImage}
-            title="Groene Gordel 2024"
-            organisator="Toerisme Vlaanderen"
-            dateTime="29 oktober 2023 - 09:00"
-            locatie="Sint-Annakring Aalst"
-            route="Racefiets route"
-            afstand="106 km"
-            description="Ontdek naast de prachtige in herfstkleuren gehulde natuur ook ons cultureel erfgoed, in en rond de dreven van Merksplas Kolonie. Wandelen in 3 lussen van 8 km, naar hartenlust onderling combineerbaar tot 16 en 24 km om volop van al het moois te genieten. Tevens voorzien wij een lus van 4 km die geschikt is voor kinderwagens"
-          />
-          <EventCard
-            image={bannerImage}
-            title="Groene Gordel 2024"
-            organisator="Toerisme Vlaanderen"
-            dateTime="29 oktober 2023 - 09:00"
-            locatie="Sint-Annakring Aalst"
-            route="Racefiets route"
-            afstand="106 km"
-            description="Ontdek naast de prachtige in herfstkleuren gehulde natuur ook ons cultureel erfgoed, in en rond de dreven van Merksplas Kolonie. Wandelen in 3 lussen van 8 km, naar hartenlust onderling combineerbaar tot 16 en 24 km om volop van al het moois te genieten. Tevens voorzien wij een lus van 4 km die geschikt is voor kinderwagens"
-          />
+          <EventCard event={event} />
+          <EventCard event={event} />
         </div>
       </div>
     </div>
