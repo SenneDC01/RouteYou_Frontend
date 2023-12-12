@@ -29,31 +29,31 @@ const EventCard = ({
       <Image
         height={100}
         width={100}
-        alt={title}
+        alt={event.title}
         className={[styles.eventImage]}
-        src={image}
+        src={event.image_url}
       />
 
       <div className={[styles.eventDetails]}>
         <div className={[styles.flexRowContainer]}>
-          <BoldText>Groene Gordel 2024</BoldText>
+          <BoldText>{event.name}</BoldText>
           <FavButton />
         </div>
         <SubText>
-          {organisator} <br /> {dateTime}
+          {event.organisator} <br /> {event.start_date}
         </SubText>
         <div className={[styles.flexColContainer]}>
-          <SVGtext label={locatie} icon={<LocationSVG />} />
-          <SVGtext label={`${route} - ${afstand}`} icon={<CyclistSVG />} />
+          <SVGtext label={event.routes[0].route_data.startAddress} icon={<LocationSVG />} />
+          <SVGtext label={`${event.routes[0].route_data.type} - ${event.routes[0].route_data.duration}`} icon={<CyclistSVG />} />
         </div>
         <div className={[styles.flexRowContainer]}>
           <SubText>
-            {description.length > 130
-              ? description.slice(0, 130) + "..."
-              : description}
+            {event.description.length > 130
+              ? event.description.slice(0, 130) + "..."
+              : event.description}
           </SubText>
           <div className={[styles.buttonContainer]}>
-            <RoundButton icon={<ArrowRightSVG />} link="#" />
+            <RoundButton icon={<ArrowRightSVG />} link={`/events/${event.id}`} />
           </div>
         </div>
       </div>
@@ -61,15 +61,15 @@ const EventCard = ({
   );
 };
 
-EventCard.propTypes = {
-  image: PropTypes.object,
-  title: PropTypes.string,
-  organisator: PropTypes.string,
-  dateTime: PropTypes.string,
-  locatie: PropTypes.string,
-  route: PropTypes.string,
-  afstand: PropTypes.string,
-  description: PropTypes.string,
-};
+// EventCard.propTypes = {
+//   image: PropTypes.object,
+//   title: PropTypes.string,
+//   organisator: PropTypes.string,
+//   dateTime: PropTypes.string,
+//   locatie: PropTypes.string,
+//   route: PropTypes.string,
+//   afstand: PropTypes.string,
+//   description: PropTypes.string,
+// };
 
 export default EventCard;
