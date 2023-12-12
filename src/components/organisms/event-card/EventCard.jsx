@@ -47,10 +47,7 @@ const EventCard = ({ event }) => {
               : event.description}
           </SubText>
           <div className={[styles.buttonContainer]}>
-            {/* <RoundButton
-              icon={<ArrowRightSVG />}
-              link={`/events/${event.id}`}
-            /> */}
+            <RoundButton icon={<ArrowRightSVG />} link={`/events/${event.id}`} />
           </div>
         </div>
       </div>
@@ -58,15 +55,15 @@ const EventCard = ({ event }) => {
   );
 };
 
-EventCard.propTypes = {
-  image: PropTypes.object,
-  title: PropTypes.string,
-  organisator: PropTypes.string,
-  dateTime: PropTypes.string,
-  locatie: PropTypes.string,
-  route: PropTypes.string,
-  afstand: PropTypes.string,
-  description: PropTypes.string,
-};
+// EventCard.propTypes = {
+//   image: PropTypes.object,
+//   title: PropTypes.string,
+//   organisator: PropTypes.string,
+//   dateTime: PropTypes.string,
+//   locatie: PropTypes.string,
+//   route: PropTypes.string,
+//   afstand: PropTypes.string,
+//   description: PropTypes.string,
+// };
 
 export default EventCard;
