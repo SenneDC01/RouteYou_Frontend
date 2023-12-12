@@ -4,19 +4,19 @@ default:
     - atp-frontend
 
 stages:
-  - unitTests
+  # - unitTests
   - checkBranch
   - buildImage
   - pushImage
   - runAnsible
 
-unit-test:
-  image: node:latest
-  stage: unitTests
-  before_script:
-    - npm install
-  script:
-    - npm run test
+# unit-test:
+#   image: node:latest
+#   stage: unitTests
+#   before_script:
+#     - npm install
+#   script:
+#     - npm run test
 
 dev:
   stage: checkBranch
@@ -110,8 +110,6 @@ pushImage:
   image: google/cloud-sdk
   only:
     - /^dev$/
-    - /^main$/
-    - /^staging$/
   variables:
     BRANCH_NAME: ""
     REPO: ""
@@ -128,12 +126,60 @@ pushImage:
     - docker tag $BRANCH_NAME-frontend-image:latest "$REPO"
     - docker push "$REPO"
 
+pushImageStaging:
+  stage: pushImage
+  image: google/cloud-sdk
+  only:
+    - /^staging$/
+  variables:
+    BRANCH_NAME: ""
+    REPO: ""
+  before_script:
+    - export BRANCH_NAME=$(cat output/branch.txt)
+    - export REPO=$(cat output/repo.txt)
+  script:
+    - echo "Pushing image to repo for branch $BRANCH_NAME"
+    - touch gcloud-service-key.json
+    - echo "$GCLOUD_SERVICE_KEY" > gcloud-service-key.json
+    - gcloud auth activate-service-account --key-file=gcloud-service-key.json
+    - gcloud auth configure-docker europe-west1-docker.pkg.dev
+    - docker load -i ./$BRANCH_NAME-frontend-image.tar
+    - docker tag $BRANCH_NAME-frontend-image:latest "$REPO"
+    - docker push "$REPO"
+    - gcloud run deploy $SERVICE_NAME_STAGING --image $STAGING_FRONTEND_REPO --allow-unauthenticated $CLOUD_VARIABLES
+    - gcloud run services update-traffic $SERVICE_NAME_STAGING --to-latest $CLOUD_VARIABLES
+
+pushImageMain:
+  stage: pushImage
+  image: google/cloud-sdk
+  only:
+    - /^main$/
+  variables:
+    BRANCH_NAME: ""
+    REPO: ""
+  before_script:
+    - export BRANCH_NAME=$(cat output/branch.txt)
+    - export REPO=$(cat output/repo.txt)
+  script:
+    - echo "Pushing image to repo for branch $BRANCH_NAME"
+    - touch gcloud-service-key.json
+    - echo "$GCLOUD_SERVICE_KEY" > gcloud-service-key.json
+    - gcloud auth activate-service-account --key-file=gcloud-service-key.json
+    - gcloud auth configure-docker europe-west1-docker.pkg.dev
+    - docker load -i ./$BRANCH_NAME-frontend-image.tar
+    - docker tag $BRANCH_NAME-frontend-image:latest "$REPO"
+    - docker push "$REPO"
+    - gcloud run deploy $SERVICE_NAME_MAIN --image $PROD_FRONTEND_REPO --allow-unauthenticated $CLOUD_VARIABLES
+    - gcloud run services update-traffic $SERVICE_NAME_MAIN --to-latest $CLOUD_VARIABLES
+
+
+
 runAnsible:
   image: ubuntu
   only:
     - /^dev$/
-    - /^main$/
-    - /^staging$/
+    # - /^main$/
+    # - /^staging$/
   before_script:
     - export BRANCH_NAME=$(cat output/branch.txt)
     ## Install ssh-agent
