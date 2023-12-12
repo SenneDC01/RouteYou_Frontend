@@ -24,11 +24,6 @@ const KlokSVG = ({ width, height }) => {
           strokeLinecap="round"
         />
       </g>
-      <defs>
-        <clipPath id="clip0_503_210">
-          <rect width="24" height="24" fill="white" />
-        </clipPath>
-      </defs>
     </svg>
   );
 };

@@ -4,24 +4,24 @@ default:
     - atp-frontend
 
 stages:
-  # - unitTests
+  - unitTests
   - checkBranch
   - buildImage
   - pushImage
   - runAnsible
 
-# unit-test:
-#   image: node:latest
-#   stage: unitTests
-#   before_script:
-#     - npm install
-#   script:
-#     - npm run test
+unit-test:
+  image: node:latest
+  stage: unitTests
+  before_script:
+    - npm install
+  script:
+    - npm run test
 
 dev:
   stage: checkBranch
   only:
-    - dev
+     - /^dev$/
   script:
     - echo "Running unit tests for development"
     # do unit tests
@@ -34,7 +34,7 @@ dev:
 staging:
   stage: checkBranch
   only:
-    - staging
+    - /^staging$/
   script:
     - echo "Running unit tests for staging"
     # do unit tests
@@ -47,7 +47,7 @@ staging:
 prod:
   stage: checkBranch
   only:
-    - prod
+    - /^main$/
   script:
     - echo "Running unit tests for production"
     # do unit tests
@@ -168,5 +168,5 @@ runAnsible:
     - echo "$ADMIN_KEY_PUB" > sshKey/admin_key.pub
     - chmod 600 ./sshKey/admin_key
     
-    - ansible-playbook -e "target_host=dev" playbook.yml
+    - ansible-playbook -e "target_host=$BRANCH_NAME" playbook.yml
     

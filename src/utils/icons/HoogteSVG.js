@@ -27,14 +27,6 @@ const HoogteSVG = ({ width, height }) => {
           />
         </g>
       </g>
-      <defs>
-        <clipPath id="clip0_503_214">
-          <rect width="24" height="24" fill="white" />
-        </clipPath>
-        <clipPath id="clip1_503_214">
-          <rect width="24" height="24" fill="white" />
-        </clipPath>
-      </defs>
     </svg>
   );
 };

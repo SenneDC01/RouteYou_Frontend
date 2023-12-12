@@ -1,0 +1,74 @@
+@use "@/app/assets/vars.scss" as vars;
+
+.listItem {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.3rem;
+  width: 100%;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+
+  .circle {
+    display: none;
+    width: 0.75rem;
+  }
+
+  p {
+    color: vars.$grey;
+    font-weight: normal;
+  }
+
+  .link {
+    position: absolute;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .icon {
+    width: 2rem;
+    filter: grayscale(50);
+  }
+
+  div {
+    display: flex;
+    min-width: 12rem;
+    gap: 0.5rem;
+  }
+}
+
+.active {
+  margin-left: 0;
+  font-weight: bold;
+  color: vars.$black;
+  justify-content: space-between;
+  gap: 1rem;
+
+  .circle {
+    display: revert;
+  }
+
+  .icon {
+    filter: grayscale(0);
+  }
+
+  p {
+    color: vars.$black;
+    font-weight: bold;
+  }
+
+  div {
+    min-width: 12rem;
+  }
+}
+
+.icon {
+  width: 2.2rem;
+  height: 2.2rem;
+}

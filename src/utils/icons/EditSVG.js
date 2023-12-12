@@ -15,16 +15,6 @@ const EditSVG = ({ width, height }) => {
           fill="#1A614A"
         />
       </g>
-      <defs>
-        <clipPath id="clip0_64_10334">
-          <rect
-            width="59"
-            height="55"
-            fill="white"
-            transform="translate(0 0.5)"
-          />
-        </clipPath>
-      </defs>
     </svg>
   );
 };
