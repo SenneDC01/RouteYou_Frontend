@@ -24,7 +24,7 @@ const SelectField = ({
         className={[styles.field, errorMessage ? styles.inValid : ""].join(" ")}
       >
         <option value="" disabled>
-          Selecteer een optie
+          Select an option
         </option>
         {options.map((option) => (
           <option key={option.value} value={option.value}>
