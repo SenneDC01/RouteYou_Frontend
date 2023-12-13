@@ -31,14 +31,8 @@ const EventCard = ({ event }) => {
           {event.organisator} <br /> {event.start_date}
         </SubText>
         <div className={[styles.flexColContainer]}>
-          <SVGtext
-            label={event.routes[0].route_data.startAddress}
-            icon={<LocationSVG />}
-          />
-          <SVGtext
-            label={`${event.routes[0].route_data.type} - ${event.routes[0].route_data.duration}`}
-            icon={<CyclistSVG />}
-          />
+          <SVGtext label={event.routes?.[0].route_data.startAddress} icon={<LocationSVG />} />
+          <SVGtext label={`${event.routes?.[0].route_data.type} - ${event.routes?.[0].route_data.duration}`} icon={<CyclistSVG />} />
         </div>
         <div className={[styles.flexRowContainer]}>
           <SubText>

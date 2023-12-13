@@ -1,4 +1,21 @@
 @use "@/app/assets/vars.scss" as vars;
 
+.content {
+    padding: 2rem;
+    height: 100%;
+}
+
 .list {
+    padding-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4rem 2rem;
+
+    >*{
+        min-width: 26rem;
+        width: 45%;
+    }
+}
+
+@media screen and (min-width: 700px) {
 }

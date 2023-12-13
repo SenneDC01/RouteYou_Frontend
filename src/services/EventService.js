@@ -1,10 +1,11 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const HEADERS = {
   "Content-Type": "application/json",
-  "Authorization": "Bearer 1|Jq2THPid3LywhBBskAI38mvEMnpvzG4021Dq3C0Bc9bad6fe"
+  "Authorization": "Bearer 2|CBKNMjODZHT8Q2QUj1cShlYOwGURWRSbt1Y1skIC71d425c9"
 };
 
 export const createdEvents = async () => {
+  console.log({API_URL})
   const response = await fetch(`${API_URL}/events/created`, {
     method: "GET",
     headers: HEADERS,

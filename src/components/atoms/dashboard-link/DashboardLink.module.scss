@@ -1,6 +1,7 @@
 @use "@/app/assets/vars.scss" as vars;
 
 .listItem {
+  min-width: 14rem;
   display: flex;
   justify-content: flex-end;
   gap: 0.3rem;
