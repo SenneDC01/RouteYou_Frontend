@@ -26,6 +26,7 @@ dev:
     - echo "Running unit tests for development"
     # do unit tests
     - mkdir output
+    - touch env.environment
     - echo "dev" > output/branch.txt
     - echo "$DEV_FRONTEND_REPO" > output/repo.txt
   artifacts:
