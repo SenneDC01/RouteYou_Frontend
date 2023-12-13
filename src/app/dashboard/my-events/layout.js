@@ -1,4 +1,5 @@
 import Page from "./page";
+import { createdEvents } from "@/services/EventService"
 
 export const metadata = {
   title: "City Light Run Aalst - RouteYou",
@@ -8,6 +9,8 @@ export const metadata = {
 };
 
 export default async function Layout({ children }) {
+  const events = await createdEvents()
+  console.log(events)
   // const events = [{
   //   id: 1,
   //   name: "City Light Run Aalst",
@@ -53,5 +56,5 @@ export default async function Layout({ children }) {
   //   ],
   // }];
 
-  return <Page >{children}</Page>;
+  return <Page events={events}>{children}</Page>;
 }
