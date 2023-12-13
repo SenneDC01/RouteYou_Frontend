@@ -59,5 +59,15 @@ const EventCard = ({ event }) => {
 //   afstand: PropTypes.string,
 //   description: PropTypes.string,
 // };
+// EventCard.propTypes = {
+//   image: PropTypes.object,
+//   title: PropTypes.string,
+//   organisator: PropTypes.string,
+//   dateTime: PropTypes.string,
+//   locatie: PropTypes.string,
+//   route: PropTypes.string,
+//   afstand: PropTypes.string,
+//   description: PropTypes.string,
+// };
 
 export default EventCard;
