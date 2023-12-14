@@ -7,12 +7,15 @@ import Button from "@/components/atoms/button/Button";
 import RegularText from "@/components/atoms/regular-text/RegularText";
 import TextLink from "@/components/atoms/text-link/TextLink";
 import {
+  isEmpty,
   isPasswordFilled,
   isValidEmail,
 } from "@/helpers/FormValidation/FormValidation";
 import { login } from "@/services/UserService";
+import { useRouter } from "next/navigation";
 
-const Page = () => {
+export default function LoginPage() {
+  const router = useRouter();
   const [formValues, setFormValues] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({ email: "", password: "" });
 
@@ -25,19 +28,18 @@ const Page = () => {
       newErrors.password = "Please enter a password";
     }
     setErrors({ ...newErrors, formError: errors.formError });
-    return Object.keys(newErrors).length === 0;
+    return isEmpty(newErrors);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateForm()) {
+    const isValid = validateForm();
+    if (isValid) {
       try {
         const response = await login(formValues);
 
         if (response.code === 200) {
-          console.log("Redirect User");
-          // TODO Redirect User
-          //! Load page in chrome and check next error
+          router.push("/dashboard");
         } else {
           setErrors({ formError: response.message });
         }
@@ -81,6 +83,4 @@ const Page = () => {
       </div>
     </div>
   );
-};
-
-export default Page;
+}

@@ -1,19 +1,13 @@
-// src/atoms/Button.js
 import React from "react";
-import PropTypes from "prop-types";
+import styles from "./SVGtext.module.scss";
 
-const SVGtext = ({ label = "label", icon = null }) => {
+const SVGtext = ({ label, icon }) => {
   return (
     <p className="flex flex-row gap-2 items-center">
-      {icon && React.cloneElement(icon, { width: 25, height: 25 })}
+      {icon && <span className={styles.icon}>{icon}</span>}
       {label}
     </p>
   );
-};
-
-SVGtext.propTypes = {
-  label: PropTypes.string.isRequired,
-  icon: PropTypes.element,
 };
 
 export default SVGtext;

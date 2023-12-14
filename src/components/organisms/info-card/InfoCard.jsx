@@ -1,19 +1,17 @@
-"use client";
 import React from "react";
-import PropTypes from "prop-types";
 import styles from "./InfoCard.module.scss";
 
 const InfoCard = ({ icon = null, text = "label" }) => {
   return (
-    <div tabIndex="0" className={[styles.infoCard]}>
-      {icon && React.cloneElement(icon, { width: "10em", height: "5em" })}
+    <div className={[styles.infoCard]} data-testid="infocard">
+      {icon && (
+        <span className={styles.icon} data-testid="icon">
+          {icon}
+        </span>
+      )}
       <p>{text}</p>
     </div>
   );
 };
 
-InfoCard.propTypes = {
-  icon: PropTypes.element,
-  text: PropTypes.string,
-};
 export default InfoCard;

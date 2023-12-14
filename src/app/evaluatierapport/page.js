@@ -1,6 +1,15 @@
-export default function page() {
+export function generateMetadata() {
+  return {
+    title: "Evaluatierapport - RouteYou",
+    description: "Evaluatierapport van RouteYou.",
+    keywords:
+      "RouteYou, evaluatie, rapport, evaluatierapport, WCAG, toegankelijkheid",
+  };
+}
+
+export default function Evaluatierapport() {
   return (
-    <div>
+    <div data-testid="evaluatierapport">
       <main>
         <h1>Evaluatierapport voor RouteYou Events</h1>
         <div>
@@ -37,8 +46,8 @@ export default function page() {
             <dd>FireFox met NVDA Chrome met NVDA</dd>
             <dt>Verdere onderzoeksvereisten</dt>
             <dd>
-              De evaluatie zal gebeuren op 2 pagina&apos;s, de homepagina en detail
-              pagina van een event.
+              De evaluatie zal gebeuren op 2 pagina&apos;s, de homepagina en
+              detail pagina van een event.
             </dd>
           </dl>
         </div>
