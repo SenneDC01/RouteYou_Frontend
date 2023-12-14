@@ -73,7 +73,7 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
           />
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="/">
+          <Link color="foreground" href="/" data-testid="dashboard">
             Dashboard
             <span className={styles.itemBorderStyle}></span>
           </Link>
