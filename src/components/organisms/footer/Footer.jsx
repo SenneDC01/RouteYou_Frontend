@@ -7,11 +7,10 @@ import styles from "./Footer.module.scss";
 const Footer = () => {
   return (
     <footer
-      className="flex flex-col sm:flex-row items-center p-8 gap-8 w-full"
-      style={{
-        boxShadow: "0px -4px 8px rgba(0, 0, 0, 0.1)",
-        // marginTop: "-8px", // anders is de shadow niet goed
-      }}
+      className={[
+        styles.shadow,
+        "flex flex-col sm:flex-row items-center p-8 gap-8 w-full",
+      ].join(" ")}
     >
       <Image
         src={logo}
@@ -22,7 +21,6 @@ const Footer = () => {
       />
 
       <div className="flex flex-col md:flex-wrap md:flex-row flex-1 justify-between gap-y-8 gap-x-8">
-        {/* Column 1 */}
         <ul className="flex flex-col justify-start gap-2">
           <li>
             <Link href="/" className={styles.linkStyles}>
@@ -45,11 +43,10 @@ const Footer = () => {
             </Link>
           </li>
         </ul>
-        {/* Column 2 */}
         <ul className="flex flex-col justify-start gap-2">
           <li>
             <Link
-              href="/toegankelijkheisverklaring"
+              href="/toegankelijkheidsverklaring"
               className={styles.linkStyles}
             >
               Toegankelijkheidsverklaring
@@ -68,7 +65,6 @@ const Footer = () => {
           </li>
         </ul>
 
-        {/* Column 4 */}
         <div className="flex flex-col">
           <div className="font-semibold">Adres</div>
           <div>Kerkstraat 108</div>
