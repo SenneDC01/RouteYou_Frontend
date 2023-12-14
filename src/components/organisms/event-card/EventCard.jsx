@@ -31,8 +31,14 @@ const EventCard = ({ event }) => {
           {event.organisator} <br /> {event.start_date}
         </SubText>
         <div className={[styles.flexColContainer]}>
-          <SVGtext label={event.routes?.[0].route_data.startAddress} icon={<LocationSVG />} />
-          <SVGtext label={`${event.routes?.[0].route_data.type} - ${event.routes?.[0].route_data.duration}`} icon={<CyclistSVG />} />
+          <SVGtext
+            label={event.routes?.[0].route_data.startAddress}
+            icon={<LocationSVG />}
+          />
+          <SVGtext
+            label={`${event.routes?.[0].route_data.type} - ${event.routes?.[0].route_data.duration}`}
+            icon={<CyclistSVG />}
+          />
         </div>
         <div className={[styles.flexRowContainer]}>
           <SubText>
@@ -41,33 +47,15 @@ const EventCard = ({ event }) => {
               : event.description}
           </SubText>
           <div className={[styles.buttonContainer]}>
-            <RoundButton icon={<ArrowRightSVG />} link={`/events/${event.id}`} />
+            <RoundButton
+              icon={<ArrowRightSVG />}
+              href={`/events/${event.id}`}
+            />
           </div>
         </div>
       </div>
     </div>
   );
 };
-
-// EventCard.propTypes = {
-//   image: PropTypes.object,
-//   title: PropTypes.string,
-//   organisator: PropTypes.string,
-//   dateTime: PropTypes.string,
-//   locatie: PropTypes.string,
-//   route: PropTypes.string,
-//   afstand: PropTypes.string,
-//   description: PropTypes.string,
-// };
-// EventCard.propTypes = {
-//   image: PropTypes.object,
-//   title: PropTypes.string,
-//   organisator: PropTypes.string,
-//   dateTime: PropTypes.string,
-//   locatie: PropTypes.string,
-//   route: PropTypes.string,
-//   afstand: PropTypes.string,
-//   description: PropTypes.string,
-// };
 
 export default EventCard;
