@@ -4,19 +4,20 @@ default:
     - atp-frontend
 
 stages:
-  # - unitTests
+  - unitTests
   - checkBranch
   - buildImage
   - pushImage
+  - deployCloudRun
   - runAnsible
 
-# unit-test:
-#   image: node:latest
-#   stage: unitTests
-#   before_script:
-#     - npm install
-#   script:
-#     - npm run test
+unit-test:
+  image: node:latest
+  stage: unitTests
+  before_script:
+    - npm install
+  script:
+    - npm run test
 
 dev:
   stage: checkBranch
@@ -26,7 +27,6 @@ dev:
     - echo "Running unit tests for development"
     # do unit tests
     - mkdir output
-    - touch env.environment
     - echo "dev" > output/branch.txt
     - echo "$DEV_FRONTEND_REPO" > output/repo.txt
   artifacts:
@@ -58,7 +58,32 @@ prod:
   artifacts:
     paths: [output/]
 
-buildImage:
+buildImageDev:
+  stage: buildImage
+  image: docker:24.0.7
+  only:
+    - /^dev$/
+  services:
+    - docker:dind
+  variables:
+    BRANCH_NAME: ""  # Set the default value
+    REPO: ""
+  before_script:
+    - export BRANCH_NAME=$(cat output/branch.txt)
+    - export REPO=$(cat output/repo.txt)
+  script:
+    - touch $DEV_FILE && echo '$DEV_ENV' > $DEV_FILE
+    - cat $DEV_FILE
+    - echo "Building image for branch $BRANCH_NAME"
+    - echo "$BRANCH_NAME-frontend-image"
+    - echo "Loaded REPO $REPO"
+    - docker build -t $BRANCH_NAME-frontend-image .
+    - docker save -o $BRANCH_NAME-frontend-image.tar $BRANCH_NAME-frontend-image
+  artifacts:
+    paths:
+      - ./$CI_COMMIT_BRANCH-frontend-image.tar
+
+buildImageStaging:
   stage: buildImage
   image: docker:24.0.7
   only:
@@ -73,6 +98,8 @@ buildImage:
     - export BRANCH_NAME=$(cat output/branch.txt)
     - export REPO=$(cat output/repo.txt)
   script:
+    - touch $PRODSTAG_FILE && echo '$ENV_STAGING' > $PRODSTAG_FILE
+    - cat $PRODSTAG_FILE
     - echo "Building image for branch $BRANCH_NAME"
     - echo "$BRANCH_NAME-frontend-image"
     - echo "Loaded REPO $REPO"
@@ -90,12 +117,14 @@ buildImageMain:
   services:
     - docker:dind
   variables:
-    BRANCH_NAME: ""  # Set the default value
+    BRANCH_NAME: ""
     REPO: ""
   before_script:
     - export BRANCH_NAME=$(cat output/branch.txt)
     - export REPO=$(cat output/repo.txt)
   script:
+    - touch $PRODSTAG_FILE && echo '$ENV_PROD' > $PRODSTAG_FILE
+    - cat $PRODSTAG_FILE
     - echo "Building image for branch $BRANCH_NAME"
     - echo "$BRANCH_NAME-frontend-image"
     - echo "Loaded REPO $REPO"
@@ -105,55 +134,12 @@ buildImageMain:
     paths:
       - ./prod-frontend-image.tar
 
-## i know this is not prietty but google-sdk and docker didn't want to work
 pushImage:
   stage: pushImage
   image: google/cloud-sdk
   only:
     - /^dev$/
-  variables:
-    BRANCH_NAME: ""
-    REPO: ""
-  before_script:
-    - export BRANCH_NAME=$(cat output/branch.txt)
-    - export REPO=$(cat output/repo.txt)
-  script:
-    - echo "Pushing image to repo for branch $BRANCH_NAME"
-    - touch gcloud-service-key.json
-    - echo "$GCLOUD_SERVICE_KEY" > gcloud-service-key.json
-    - gcloud auth activate-service-account --key-file=gcloud-service-key.json
-    - gcloud auth configure-docker europe-west1-docker.pkg.dev
-    - docker load -i ./$BRANCH_NAME-frontend-image.tar
-    - docker tag $BRANCH_NAME-frontend-image:latest "$REPO"
-    - docker push "$REPO"
-
-pushImageStaging:
-  stage: pushImage
-  image: google/cloud-sdk
-  only:
     - /^staging$/
-  variables:
-    BRANCH_NAME: ""
-    REPO: ""
-  before_script:
-    - export BRANCH_NAME=$(cat output/branch.txt)
-    - export REPO=$(cat output/repo.txt)
-  script:
-    - echo "Pushing image to repo for branch $BRANCH_NAME"
-    - touch gcloud-service-key.json
-    - echo "$GCLOUD_SERVICE_KEY" > gcloud-service-key.json
-    - gcloud auth activate-service-account --key-file=gcloud-service-key.json
-    - gcloud auth configure-docker europe-west1-docker.pkg.dev
-    - docker load -i ./$BRANCH_NAME-frontend-image.tar
-    - docker tag $BRANCH_NAME-frontend-image:latest "$REPO"
-    - docker push "$REPO"
-    - gcloud run deploy $SERVICE_NAME_STAGING --image $STAGING_FRONTEND_REPO --allow-unauthenticated $CLOUD_VARIABLES
-    - gcloud run services update-traffic $SERVICE_NAME_STAGING --to-latest $CLOUD_VARIABLES
-
-pushImageMain:
-  stage: pushImage
-  image: google/cloud-sdk
-  only:
     - /^main$/
   variables:
     BRANCH_NAME: ""
@@ -170,50 +156,72 @@ pushImageMain:
     - docker load -i ./$BRANCH_NAME-frontend-image.tar
     - docker tag $BRANCH_NAME-frontend-image:latest "$REPO"
     - docker push "$REPO"
-    - gcloud run deploy $SERVICE_NAME_MAIN --image $PROD_FRONTEND_REPO --allow-unauthenticated $CLOUD_VARIABLES
-    - gcloud run services update-traffic $SERVICE_NAME_MAIN --to-latest $CLOUD_VARIABLES
 
 
+deployCloudRun:
+  stage: deployCloudRun
+  image: google/cloud-sdk
+  only:
+    - /^main$/
+    - /^staging$/
+  variables:
+    INSTANCE: ""
+  before_script:
+    - REPO="$STAGING_FRONTEND_REPO"
+    - INSTANCE="$INSTANCE_STAGING"
+    - |
+      if [ "$CI_COMMIT_BRANCH" == "main" ]; then
+        REPO="$PROD_FRONTEND_REPO"
+        INSTANCE="$INSTANCE_PROD"
+      fi
 
-# runAnsible:
-#   image: ubuntu
-#   only:
-#     - /^dev$/
-#     # - /^main$/
-#     # - /^staging$/
-#   before_script:
-#     - export BRANCH_NAME=$(cat output/branch.txt)
-#     ## Install ssh-agent
-#     - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y  && apt-get install git -y)'
-#     ## Run ssh-agent
-#     - eval $(ssh-agent -s)
-#     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
-#     - mkdir -p ~/.ssh
-#     - chmod 700 ~/.ssh
-#     - echo "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
-#     - chmod 644 ~/.ssh/known_hosts
-#   stage: runAnsible
-#   script:
-#     - apt-get update && apt-get upgrade -y
-#     - apt-get install openssh-server openssh-client -y
-#     - apt-get -y install sshpass
-#     - apt-get install -y python3
-#     - apt-get install python3-pip -y
-#     - python3 -m pip install --upgrade pip
-#     - pip3 install ansible==2.9
-#     - pip3 install ansible-lint
-#     - cd ansible
-#     - chmod 700 .
+  script:
+    - touch gcloud-service-key.json
+    - echo "$GCLOUD_SERVICE_KEY_CLOUD_RUN" > gcloud-service-key.json
+    - gcloud auth activate-service-account --key-file=gcloud-service-key.json
+    - gcloud auth configure-docker europe-west1-docker.pkg.dev
     
-#     - touch .vault_pass.txt
-#     - touch key-files/serviceArtifactRegistryAdmin.json
-#     - touch sshKey/admin_key
-#     - touch sshKey/admin_key.pub
-#     - echo "$ANSIBLE_VAULT_PASSWORD" > .vault_pass.txt
-#     - echo "$GCLOUD_SERVICE_KEY" > serviceArtifactRegistryAdmin.json
-#     - echo "$ADMIN_KEY" > sshKey/admin_key 
-#     - echo "$ADMIN_KEY_PUB" > sshKey/admin_key.pub
-#     - chmod 600 ./sshKey/admin_key
+    - gcloud run deploy $INSTANCE --image $REPO $CLOUD_VARIABLES --allow-unauthenticated 
+
+runAnsible:
+  image: ubuntu
+  only:
+    - /^dev$/
+    # - /^main$/
+    # - /^staging$/
+  before_script:
+    - export BRANCH_NAME=$(cat output/branch.txt)
+    ## Install ssh-agent
+    - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y  && apt-get install git -y)'
+    ## Run ssh-agent
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+  stage: runAnsible
+  script:
+    - apt-get update && apt-get upgrade -y
+    - apt-get install openssh-server openssh-client -y
+    - apt-get -y install sshpass
+    - apt-get install -y python3
+    - apt-get install python3-pip -y
+    - python3 -m pip install --upgrade pip
+    - pip3 install ansible==2.9
+    - pip3 install ansible-lint
+    - cd ansible
+    - chmod 700 .
     
-#     - ansible-playbook -e "target_host=$BRANCH_NAME" playbook.yml
+    - touch .vault_pass.txt
+    - touch key-files/serviceArtifactRegistryAdmin.json
+    - touch sshKey/admin_key
+    - touch sshKey/admin_key.pub
+    - echo "$ANSIBLE_VAULT_PASSWORD" > .vault_pass.txt
+    - echo "$GCLOUD_SERVICE_KEY" > serviceArtifactRegistryAdmin.json
+    - echo "$ADMIN_KEY" > sshKey/admin_key 
+    - echo "$ADMIN_KEY_PUB" > sshKey/admin_key.pub
+    - chmod 600 ./sshKey/admin_key
+    
+    - ansible-playbook -e "target_host=$BRANCH_NAME" playbook.yml
     
