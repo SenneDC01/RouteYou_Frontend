@@ -73,7 +73,7 @@ buildImageDev:
     - export REPO=$(cat output/repo.txt)
   script:
     - touch $DEV_FILE && echo "$DEV_ENV" > $DEV_FILE
-    - dir && cat $DEV_FILE
+    - cat $DEV_FILE
     - echo "Building image for branch $BRANCH_NAME"
     - echo "$BRANCH_NAME-frontend-image"
     - echo "Loaded REPO $REPO"
