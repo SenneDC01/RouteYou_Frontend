@@ -72,8 +72,8 @@ buildImageDev:
     - export BRANCH_NAME=$(cat output/branch.txt)
     - export REPO=$(cat output/repo.txt)
   script:
-    - touch $DEV_FILE && echo '$DEV_ENV' > $DEV_FILE
-    - cat $DEV_FILE
+    - touch $DEV_FILE && echo "$DEV_ENV" > $DEV_FILE
+    - dir && cat $DEV_FILE
     - echo "Building image for branch $BRANCH_NAME"
     - echo "$BRANCH_NAME-frontend-image"
     - echo "Loaded REPO $REPO"
@@ -97,7 +97,7 @@ buildImageStaging:
     - export BRANCH_NAME=$(cat output/branch.txt)
     - export REPO=$(cat output/repo.txt)
   script:
-    - touch $PRODSTAG_FILE && echo '$ENV_STAGING' > $PRODSTAG_FILE
+    - touch $PRODSTAG_FILE && echo "$ENV_STAGING" > $PRODSTAG_FILE
     - cat $PRODSTAG_FILE
     - echo "Building image for branch $BRANCH_NAME"
     - echo "$BRANCH_NAME-frontend-image"
@@ -122,7 +122,7 @@ buildImageMain:
     - export BRANCH_NAME=$(cat output/branch.txt)
     - export REPO=$(cat output/repo.txt)
   script:
-    - touch $PRODSTAG_FILE && echo '$ENV_PROD' > $PRODSTAG_FILE
+    - touch $PRODSTAG_FILE && echo "$ENV_PROD" > $PRODSTAG_FILE
     - cat $PRODSTAG_FILE
     - echo "Building image for branch $BRANCH_NAME"
     - echo "$BRANCH_NAME-frontend-image"
