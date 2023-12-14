@@ -15,7 +15,7 @@ export default function DashboardNav() {
           Account
         </DashboardLink>
         <DashboardLink
-          link="/dashboard"
+          link="/dashboard/my-events"
           icon={require("@/utils/icons/myEvents.svg")}
         >
           My Events

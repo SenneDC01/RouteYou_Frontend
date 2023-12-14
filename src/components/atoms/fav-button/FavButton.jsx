@@ -1,4 +1,4 @@
-// FavButton.jsx
+"use client"
 import React, { useState } from "react";
 import styles from "./FavButton.module.scss";
 // import StarSVG from "@/utils/icons/StarSVG";
