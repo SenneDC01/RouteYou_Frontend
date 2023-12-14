@@ -87,7 +87,6 @@ buildImageStaging:
   stage: buildImage
   image: docker:24.0.7
   only:
-    - /^dev$/
     - /^staging$/
   services:
     - docker:dind
