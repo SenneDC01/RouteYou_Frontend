@@ -28,7 +28,7 @@ const EventCard = ({ event }) => {
           <FavButton />
         </div>
         <SubText>
-          {event.organisator} <br /> {event.start_date}
+          {event.author} <br /> {event.start_date}
         </SubText>
         <div className={[styles.flexColContainer]}>
           <SVGtext
