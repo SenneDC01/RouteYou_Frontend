@@ -23,7 +23,6 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
   const dropdownItemsRoutes = ["Go to RouteYou Routes"];
   const dropdownItemsProfile = ["Dashboard", "Logout"];
 
-  //header mag niet in nav?
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen} isBordered maxWidth="2xl" as="div">
       <NavbarMenuToggle
@@ -136,8 +135,4 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
   );
 };
 
-Header.propTypes = {
-  profilePicture: PropTypes.object.isRequired,
-  profileName: PropTypes.string.isRequired,
-};
 export default Header;
