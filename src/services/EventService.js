@@ -9,6 +9,9 @@ export const createdEvents = async () => {
     method: "GET",
     headers: HEADERS,
   });
+  if (!response.ok) {
+    return null;
+  }
   const data = await response.json();
   console.log(data);
 
