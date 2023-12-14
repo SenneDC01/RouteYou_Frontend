@@ -19,7 +19,10 @@ const Banner = () => {
         <h1 className="text-white text-4xl font-semibold mb-6 uppercase">
           Plan de mooiste <br /> routes & events
         </h1>
-        <div className="flex w-full max-w-3xl justify-around flex-wrap gap-2">
+        <div
+          className="flex w-full max-w-3xl justify-around flex-wrap gap-2"
+          data-testid="button-group"
+        >
           <ButtonLink
             href="#"
             icon={<RouteSVGWhite />}
