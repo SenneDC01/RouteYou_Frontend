@@ -24,7 +24,7 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
     // Set isLoggedIn based on the user's authentication status
     // Example: setIsLoggedIn(authService.isAuthenticated());
     // Replace the example with your actual authentication logic
-    setIsLoggedIn(false); // Replace with your authentication logic
+    setIsLoggedIn(true); // Replace with your authentication logic
   }, []);
 
   const dropdownItemsEvents = ["Create Event", "Search Event"];
