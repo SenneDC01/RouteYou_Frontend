@@ -85,7 +85,7 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
-        <NavbarItem className="flex gap-3">
+        <NavbarItem className="hidden sm:flex gap-3">
           {isLoggedIn ? (
             <>
               <Image
@@ -155,16 +155,40 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
             Dashboard
           </Link>
         </NavbarMenuItem>
-        <NavbarItem>
-          <Link color="foreground" href="/login">
-            Login
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="/register">
-            Register
-          </Link>
-        </NavbarItem>
+        {isLoggedIn ? (
+          <>
+            <NavbarMenuItem className="flex gap-2">
+              <Image
+                src={profilePicture}
+                alt="Profile picture"
+                width={30}
+                className={styles.profilePic}
+              />
+              <CustomDropdown
+                buttonText={
+                  <>
+                    {profileName}
+                    <span className={styles.arrowStyle}>&gt;</span>
+                  </>
+                }
+                items={dropdownItemsProfile}
+              />
+            </NavbarMenuItem>
+          </>
+        ) : (
+          <>
+            <NavbarMenuItem>
+              <Link color="foreground" href="/login">
+                Login
+              </Link>
+            </NavbarMenuItem>
+            <NavbarMenuItem>
+              <Link color="foreground" href="/register">
+                Register
+              </Link>
+            </NavbarMenuItem>
+          </>
+        )}
       </NavbarMenu>
     </Navbar>
   );
