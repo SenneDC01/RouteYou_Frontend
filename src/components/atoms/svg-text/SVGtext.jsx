@@ -1,10 +1,9 @@
 import React from "react";
-import styles from "./SVGtext.module.scss";
 
 const SVGtext = ({ label, icon }) => {
   return (
     <p className="flex flex-row gap-2 items-center">
-      {icon && <span className={styles.icon}>{icon}</span>}
+      {icon && React.cloneElement(icon, { width: "1.5rem", height: "1.5rem" })}
       {label}
     </p>
   );
