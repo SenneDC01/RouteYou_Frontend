@@ -8,21 +8,18 @@ import ButtonLink from "@/components/atoms/button-link/ButtonLink";
 
 const Banner = () => {
   return (
-    <div className="flex items-center justify-center w-full max-w-screen max-h-unit-8xl overflow-hidden bg-center relative">
+    <div className={styles.bannerContainer}>
       <Image
         src={banner}
         priority={true}
         alt="banner image"
-        className="brightness-50"
+        className={styles.image}
       />
-      <div className="flex flex-col items-center justify-center absolute inset-0 p-5 gap-5">
-        <h1 className="text-white text-4xl font-semibold mb-6 uppercase">
+      <div className={styles.contentContainer}>
+        <h1 className={styles.title}>
           Plan de mooiste <br /> routes & events
         </h1>
-        <div
-          className="flex w-full max-w-3xl justify-around flex-wrap gap-2"
-          data-testid="button-group"
-        >
+        <div className={styles.buttonGroup} data-testid="button-group">
           <ButtonLink
             href="#"
             icon={<RouteSVGWhite />}

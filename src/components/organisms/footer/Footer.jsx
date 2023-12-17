@@ -6,22 +6,16 @@ import styles from "./Footer.module.scss";
 
 const Footer = () => {
   return (
-    <footer
-      className={[
-        styles.shadow,
-        "flex flex-col sm:flex-row items-center p-8 gap-8 w-full",
-      ].join(" ")}
-    >
-      <Image
-        src={logo}
-        priority={true}
-        alt="Logo"
-        width={250}
-        className={styles.image}
-      />
-
-      <div className="flex flex-col md:flex-wrap md:flex-row flex-1 justify-between gap-y-8 gap-x-8">
-        <ul className="flex flex-col justify-start gap-2">
+    <footer className={[styles.footer]}>
+      <div className={[styles.container]}>
+        <Image
+          src={logo}
+          priority={true}
+          alt="Logo"
+          width={250}
+          className={styles.image}
+        />
+        <ul className={[styles.list]}>
           <li>
             <Link href="/" className={styles.linkStyles}>
               Home
@@ -43,7 +37,8 @@ const Footer = () => {
             </Link>
           </li>
         </ul>
-        <ul className="flex flex-col justify-start gap-2">
+
+        <ul className={[styles.list]}>
           <li>
             <Link
               href="/toegankelijkheidsverklaring"
@@ -65,7 +60,7 @@ const Footer = () => {
           </li>
         </ul>
 
-        <div className="flex flex-col">
+        <div className={[styles.list]}>
           <div className="font-semibold">Adres</div>
           <div>Kerkstraat 108</div>
           <div>9050 Gentbrugge, België</div>

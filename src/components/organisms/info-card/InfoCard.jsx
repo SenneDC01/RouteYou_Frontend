@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./InfoCard.module.scss";
+import SubText from "@/components/atoms/sub-text/SubText";
 
 const InfoCard = ({ icon = null, text = "label" }) => {
   return (
@@ -9,7 +10,7 @@ const InfoCard = ({ icon = null, text = "label" }) => {
           {icon}
         </span>
       )}
-      <p>{text}</p>
+      <SubText>{text}</SubText>
     </div>
   );
 };

@@ -1,13 +1,39 @@
 @use "@/app/assets/vars.scss" as vars;
 
+.footer {
+  display: flex;
+  justify-content: center;
+  padding: 3rem;
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 5px 15px;
+  flex-wrap: wrap;
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  justify-content: space-around;
+  gap: 2rem;
+  max-width: 80rem;
+  flex-wrap: wrap;
+  @media screen and (max-width: 425px) {
+    justify-content: start;
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 0.5rem;
+}
+
 .linkStyles:hover {
   color: vars.$blue;
 }
 
 .image {
-  width: 12rem;
+  max-width: 13rem;
+  max-height: 4rem;
 }
 
-.shadow {
-  box-shadow: 0px -4px 8px rgb(0, 0, 0, 0.1);
-}

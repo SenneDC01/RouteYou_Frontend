@@ -1,6 +1,5 @@
-"use client"
+"use client";
 import React, { useState } from "react";
-import styles from "./FavButton.module.scss";
 import StarSVG from "@/utils/icons/StarSVG";
 
 const FavButton = () => {
@@ -9,13 +8,9 @@ const FavButton = () => {
   const handleToggleFavorite = () => {
     setIsFavorite(!isFavorite);
   };
-  
+
   return (
-    <button
-      className={[styles.iconButton]}
-      aria-label="favorite"
-      onClick={() => handleToggleFavorite()}
-    >
+    <button aria-label="favorite" onClick={() => handleToggleFavorite()}>
       <StarSVG width={30} height={30} fill={isFavorite ? "#1a614a" : "none"} />
     </button>
   );
