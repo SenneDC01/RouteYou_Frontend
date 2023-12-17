@@ -17,15 +17,7 @@ import CustomDropdown from "@/components/molecules/drop-down/Dropdown";
 const Header = ({ profileName = "John Doe", profilePicture = null }) => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-
-  React.useEffect(() => {
-    // Check login status (e.g., from your authentication context or API)
-    // Set isLoggedIn based on the user's authentication status
-    // Example: setIsLoggedIn(authService.isAuthenticated());
-    // Replace the example with your actual authentication logic
-    setIsLoggedIn(true); // Replace with your authentication logic
-  }, []);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
 
   const dropdownItemsEvents = ["Create Event", "Search Event"];
   const dropdownItemsRoutes = ["Go to RouteYou Routes"];
@@ -85,7 +77,7 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
-        <NavbarItem className="hidden sm:flex gap-3">
+        <NavbarItem data-testid="profile" className="hidden sm:flex gap-3">
           {isLoggedIn ? (
             <>
               <Image
@@ -157,7 +149,7 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
         </NavbarMenuItem>
         {isLoggedIn ? (
           <>
-            <NavbarMenuItem className="flex gap-2">
+            <NavbarMenuItem data-testid="profile" className="flex gap-2">
               <Image
                 src={profilePicture}
                 alt="Profile picture"

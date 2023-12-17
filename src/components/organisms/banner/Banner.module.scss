@@ -45,3 +45,17 @@
         line-height: 2rem;
     }
 }
+
+.buttonGroup {
+    display: flex;
+    width: 100%;
+    max-width: 50rem;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 8rem;
+}
+
+.image {
+    filter: brightness(.5);
+    object-fit: cover;
+}
