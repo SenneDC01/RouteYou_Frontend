@@ -10,7 +10,6 @@ export const metadata = {
 
 export default async function Layout({ children }) {
   const events = await createdEvents();
-  console.log(events);
   // const events = [{
   //   id: 1,
   //   name: "City Light Run Aalst",

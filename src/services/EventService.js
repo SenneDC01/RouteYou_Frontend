@@ -10,7 +10,6 @@ export const createdEvents = async () => {
     headers: HEADERS,
   });
   const data = await response.json();
-  console.log(data);
 
   return data.events.data;
 };

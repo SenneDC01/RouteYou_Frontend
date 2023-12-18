@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Image from "next/image";
 import BoldText from "@/components/atoms/bold-text/BoldText";
 import SubText from "@/components/atoms/sub-text/SubText";

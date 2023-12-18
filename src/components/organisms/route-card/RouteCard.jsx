@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { Card, CardBody } from "@nextui-org/react";
 import Image from "next/image";
 import PropTypes from "prop-types";
 import AfstandSVG from "@/utils/icons/AfstandSVG";

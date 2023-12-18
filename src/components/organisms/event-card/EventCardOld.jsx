@@ -27,16 +27,13 @@ const EventCardOld = ({
 
   const handleToggleFavorite = () => {
     setIsFavorite(!isFavorite);
-    console.log("fav");
   };
 
   return (
     <div className="flex justify-center gap-2 max-w-md">
-      {/*Mag geen button in button steken*/}
       <Card shadow="sm">
         <CardBody className="p-0 flex flex-row">
           <div className="flex">
-            {/*Image width werkt nie mee*/}
             <Image
               height={100}
               width={100}
