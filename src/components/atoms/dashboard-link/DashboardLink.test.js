@@ -1,6 +1,6 @@
 // src/atoms/ButtonRound.test.js
 import React from "react";
-import { findAllByText, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import DashboardLink from "./DashboardLink";
 
