@@ -8,53 +8,7 @@ export const metadata = {
   keywords: "RouteYou, evenement, routes, inschrijven",
 };
 
-export default async function Layout({ children }) {
+export default async function Layout() {
   const events = await createdEvents();
-  console.log(events);
-  // const events = [{
-  //   id: 1,
-  //   name: "City Light Run Aalst",
-  //   description: "Loop langs de mooiste parels van Aalst",
-  //   start_date: "2024-04-22 21:00:00",
-  //   max_participants: 1000,
-  //   price: "5.00",
-  //   visibility: "PUBLIC",
-  //   image_url: "http://localhost:8080/storage/images/no-profile-picture.png",
-  //   author: "Senna Uyttersprot",
-  //   routes: [
-  //     {
-  //       route_data: {
-  //         id: 6833170,
-  //         duration: "1.2km",
-  //         startAddress: "Aalst, Oost-Vlaanderen, Vlaanderen",
-  //         type: "Looproute",
-  //         difficulty: 0.3,
-  //       },
-  //     },
-  //   ],
-  // },
-  // {
-  //   id: 2,
-  //   name: "Nekeer rijden met de velo",
-  //   description: "Rij langs de mooiste parels van Aalst",
-  //   start_date: "2024-04-22 21:00:00",
-  //   max_participants: 1000,
-  //   price: "5.00",
-  //   visibility: "PUBLIC",
-  //   image_url: "http://localhost:8080/storage/images/no-profile-picture.png",
-  //   author: "Senna Uyttersprot",
-  //   routes: [
-  //     {
-  //       route_data: {
-  //         id: 6833170,
-  //         duration: "1.2km",
-  //         startAddress: "Aalst, Oost-Vlaanderen, Vlaanderen",
-  //         type: "Looproute",
-  //         difficulty: 0.3,
-  //       },
-  //     },
-  //   ],
-  // }];
-
-  return <Page events={events}>{children}</Page>;
+  return Page({ events });
 }

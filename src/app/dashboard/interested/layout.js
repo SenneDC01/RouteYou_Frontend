@@ -8,9 +8,9 @@ export const metadata = {
   keywords: "RouteYou, evenement, routes, inschrijven",
 };
 
-export default async function Layout({ children }) {
+export default async function Layout() {
   // TODO: change fetch function
   const events = await createdEvents();
 
-  return <Page events={events}>{children}</Page>;
+  return <Page events={events} />;
 }
