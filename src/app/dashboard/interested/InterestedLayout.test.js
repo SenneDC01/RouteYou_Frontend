@@ -2,11 +2,11 @@ import { render, fireEvent } from "@testing-library/react";
 import * as EventService from "@/services/EventService";
 import Layout from "./layout";
 
-describe("Dashboard my events page component", () => {
+describe("Dashboard interested page component", () => {
   let mockEventsService;
 
   beforeEach(() => {
-    mockEventsService = jest.spyOn(EventService, "createdEvents");
+    mockEventsService = jest.spyOn(EventService, "interestedEvents");
     mockEventsService.mockResolvedValue([]);
   });
 
