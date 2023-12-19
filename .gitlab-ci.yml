@@ -185,6 +185,7 @@ runAnsible:
     - /^dev$/
   before_script:
     - export BRANCH_NAME=$(cat output/branch.txt)
+    - apt-get update
     ## Install ssh-agent
     - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y  && apt-get install git -y)'
     ## Run ssh-agent
