@@ -10,7 +10,7 @@ import MoeilijkheidSVG from '@/utils/icons/MoeilijkheidSVG';
 import SVGtext from '@/components/atoms/svg-text/SVGtext';
 import styles from './RouteCard.module.scss';
 
-const RouteCard = ({ route }) => {
+export default function RouteCard({ route }) {
   return (
     <a href="#" className={styles.linkContainer}>
       <div>
@@ -43,6 +43,4 @@ const RouteCard = ({ route }) => {
       </div>
     </a>
   );
-};
-
-export default RouteCard;
+}

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import logo from '@/utils/images/logo.png';
 import styles from './Footer.module.scss';
 
-const Footer = () => {
+export default function Footer() {
   return (
     <footer className={[styles.footer]}>
       <div className={[styles.container]}>
@@ -68,6 +68,4 @@ const Footer = () => {
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}
