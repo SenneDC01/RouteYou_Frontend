@@ -17,14 +17,6 @@
 }
 
 body {
-  /*Hou geen rekening met darkmode*/
-  /*color: rgb(var(--foreground-rgb));*/
-  /*background: linear-gradient(*/
-  /*    to bottom,*/
-  /*    transparent,*/
-  /*    rgb(var(--background-end-rgb))*/
-  /*  )*/
-  /*  rgb(var(--background-start-rgb));*/
   font-family: "Inter", sans-serif;
   color: #2a2a2a;
   background: #fafafa;
@@ -64,3 +56,4 @@ footer {
   top: 0;
   opacity: 1;
 }
+

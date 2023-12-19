@@ -36,6 +36,18 @@ const HomePage = () => {
       },
     ],
   };
+
+  const route = {
+    title: "Groene Gordel Route",
+    afstand: "220km",
+    hoogte: "1400m",
+    gemStijgingsPercentage: "1,6%",
+    maxStijgingsPercentage: "14,4%",
+    tijd: "4:23:45",
+    moeilijkheid: "Medium",
+    image: cardImage,
+  };
+
   return (
     <div className={[styles.pageContainer]}>
       <div className={[styles.bannerContainer]}>
@@ -54,46 +66,10 @@ const HomePage = () => {
           <BoldText>PLAN DE MOOISTE ROUTES</BoldText>
         </div>
         <div className={[styles.borderContainer]}>
-          <RouteCard
-            image={cardImage}
-            title="Groene Gordel Route"
-            afstand="220km"
-            hoogte="1400m"
-            gemStijgingsPercentage="1,6%"
-            tijd="4:23:45"
-            maxStijgingsPercentage="14,4%"
-            moeilijkheid="Medium"
-          />
-          <RouteCard
-            image={cardImage}
-            title="Groene Gordel Route"
-            afstand="250km"
-            hoogte="1800m"
-            gemStijgingsPercentage="1,6%"
-            tijd="5:23:45"
-            maxStijgingsPercentage="14,4%"
-            moeilijkheid="Hard"
-          />
-          <RouteCard
-            image={cardImage}
-            title="Groene Gordel Route"
-            afstand="180km"
-            hoogte="1200m"
-            gemStijgingsPercentage="1,6%"
-            tijd="3:23:45"
-            maxStijgingsPercentage="14,4%"
-            moeilijkheid="Easy"
-          />
-          <RouteCard
-            image={cardImage}
-            title="Groene Gordel Route"
-            afstand="180km"
-            hoogte="1200m"
-            gemStijgingsPercentage="1,6%"
-            tijd="3:23:45"
-            maxStijgingsPercentage="14,4%"
-            moeilijkheid="Easy"
-          />
+          <RouteCard route={route} />
+          <RouteCard route={route} />
+          <RouteCard route={route} />
+          <RouteCard route={route} />
         </div>
       </div>
       <div>

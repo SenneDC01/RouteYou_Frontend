@@ -12,8 +12,10 @@ import {
   isValidPasswordLength,
 } from "@/helpers/FormValidation/FormValidation";
 import { register } from "@/services/UserService";
+import { useRouter } from "next/navigation";
 
 const RegisterPage = () => {
+  const router = useRouter();
   const [formValues, setFormValues] = useState({});
   const [errors, setErrors] = useState({});
 
@@ -100,18 +102,15 @@ const RegisterPage = () => {
         let response = await register(formValues);
 
         if (response.code === 201) {
-          console.log("Redirect User");
-          // TODO Redirect User
-        } 
-        else {
+          router.push("/dashboard");
+        } else {
           if (response.errors) {
             let errors = [];
-            Object.keys(response.errors).forEach(field => {
+            Object.keys(response.errors).forEach((field) => {
               errors.push(response.errors[field][0]);
             });
             setErrors({ formError: errors });
-          }
-          else if (response.message) {
+          } else if (response.message) {
             setErrors({ formError: [response.message] });
           }
         }
@@ -139,7 +138,9 @@ const RegisterPage = () => {
             <>
               <ul>
                 {errors.formError?.map((error, index) => (
-                  <li className={styles.error} key={index}>{ error }</li>
+                  <li className={styles.error} key={index}>
+                    {error}
+                  </li>
                 ))}
               </ul>
             </>
