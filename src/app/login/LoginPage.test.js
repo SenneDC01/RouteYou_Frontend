@@ -1,9 +1,9 @@
-import { render, fireEvent } from "@testing-library/react";
-import LoginPage from "./page";
-import * as UserService from "@/services/UserService";
-import { act } from "react-test-renderer";
+import { render, fireEvent } from '@testing-library/react';
+import LoginPage from './page';
+import * as UserService from '@/services/UserService';
+import { act } from 'react-test-renderer';
 
-jest.mock("next/navigation", () => ({
+jest.mock('next/navigation', () => ({
   useRouter() {
     return {
       prefetch: () => null,
@@ -11,11 +11,11 @@ jest.mock("next/navigation", () => ({
   },
 }));
 
-describe("LoginPage component", () => {
+describe('LoginPage component', () => {
   let mockLogin;
 
   beforeEach(() => {
-    mockLogin = jest.spyOn(UserService, "login");
+    mockLogin = jest.spyOn(UserService, 'login');
     mockLogin.mockImplementation(() => Promise.resolve());
   });
 
@@ -23,20 +23,20 @@ describe("LoginPage component", () => {
     mockLogin.mockRestore();
   });
 
-  it("Log in with valid credentials", async () => {
+  it('Log in with valid credentials', async () => {
     const { getByLabelText, getByRole } = render(<LoginPage />);
-    const email = "test@example.com";
-    const password = "password123";
+    const email = 'test@example.com';
+    const password = 'password123';
 
     await act(async () => {
-      fireEvent.change(getByLabelText("Email"), {
+      fireEvent.change(getByLabelText('Email'), {
         target: { value: email },
       });
-      fireEvent.change(getByLabelText("Password"), {
+      fireEvent.change(getByLabelText('Password'), {
         target: { value: password },
       });
 
-      fireEvent.click(getByRole("button", { name: "Login" }));
+      fireEvent.click(getByRole('button', { name: 'Login' }));
     });
 
     expect(mockLogin).toHaveBeenCalled();

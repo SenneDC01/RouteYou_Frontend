@@ -1,13 +1,13 @@
-import BigTitle from "@/components/atoms/big-title/BigTitle";
-import RegularText from "@/components/atoms/regular-text/RegularText";
-import styles from "./Privacyverklaring.module.scss";
-import BoldText from "@/components/atoms/bold-text/BoldText";
+import BigTitle from '@/components/atoms/big-title/BigTitle';
+import RegularText from '@/components/atoms/regular-text/RegularText';
+import styles from './Privacyverklaring.module.scss';
+import BoldText from '@/components/atoms/bold-text/BoldText';
 
 export function generateMetadata() {
   return {
-    title: "Privacyverklaring - RouteYou",
-    description: "Privacyverklaring van RouteYou.",
-    keywords: "RouteYou, privacy, verklaring, privacyverklaring",
+    title: 'Privacyverklaring - RouteYou',
+    description: 'Privacyverklaring van RouteYou.',
+    keywords: 'RouteYou, privacy, verklaring, privacyverklaring',
   };
 }
 

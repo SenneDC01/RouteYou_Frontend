@@ -1,6 +1,6 @@
-"use client";
-import React, { useState } from "react";
-import StarSVG from "@/utils/icons/StarSVG";
+'use client';
+import React, { useState } from 'react';
+import StarSVG from '@/utils/icons/StarSVG';
 
 const FavButton = () => {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -11,7 +11,7 @@ const FavButton = () => {
 
   return (
     <button aria-label="favorite" onClick={() => handleToggleFavorite()}>
-      <StarSVG width={30} height={30} fill={isFavorite ? "#1a614a" : "none"} />
+      <StarSVG width={30} height={30} fill={isFavorite ? '#1a614a' : 'none'} />
     </button>
   );
 };

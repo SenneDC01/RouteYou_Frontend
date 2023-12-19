@@ -1,4 +1,4 @@
-@use "@/app/assets/vars.scss" as vars;
+@use '@/app/assets/vars.scss' as vars;
 
 .page {
   display: flex;
@@ -47,7 +47,8 @@
     flex-wrap: wrap;
     gap: 1rem;
 
-    .city, .zipcode {
+    .city,
+    .zipcode {
       flex: 1;
     }
   }

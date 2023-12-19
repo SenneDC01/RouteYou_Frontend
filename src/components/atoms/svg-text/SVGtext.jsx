@@ -1,5 +1,5 @@
-import React from "react";
-import styles from "./SVGtext.module.scss";
+import React from 'react';
+import styles from './SVGtext.module.scss';
 
 const SVGtext = ({ label, icon }) => {
   return (

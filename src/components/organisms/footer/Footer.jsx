@@ -1,8 +1,8 @@
-import React from "react";
-import Image from "next/image";
-import Link from "next/link";
-import logo from "@/utils/images/logo.png";
-import styles from "./Footer.module.scss";
+import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import logo from '@/utils/images/logo.png';
+import styles from './Footer.module.scss';
 
 const Footer = () => {
   return (

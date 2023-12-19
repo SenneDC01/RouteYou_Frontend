@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-const StarSVG = ({ width, height, fill = "none" }) => {
+const StarSVG = ({ width, height, fill = 'none' }) => {
   return (
     <svg
       width={width}

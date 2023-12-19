@@ -1,6 +1,6 @@
-import React from "react";
-import styles from "@/components/atoms/form-field/FormField.module.scss";
-import SmallText from "../small-text/SmallText";
+import React from 'react';
+import styles from '@/components/atoms/form-field/FormField.module.scss';
+import SmallText from '../small-text/SmallText';
 
 const SelectField = ({
   label,
@@ -12,16 +12,16 @@ const SelectField = ({
   className,
 }) => {
   return (
-    <div className={[styles.formField, className].join(" ")}>
+    <div className={[styles.formField, className].join(' ')}>
       <label className={styles.label} htmlFor={name}>
         {label}
       </label>
       <select
         id={name}
         name={name}
-        value={value || ""}
+        value={value || ''}
         onChange={onChange}
-        className={[styles.field, errorMessage ? styles.inValid : ""].join(" ")}
+        className={[styles.field, errorMessage ? styles.inValid : ''].join(' ')}
       >
         <option value="" disabled>
           Select an option
