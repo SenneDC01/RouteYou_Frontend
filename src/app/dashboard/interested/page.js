@@ -8,17 +8,15 @@ export default async function Page({ events }) {
   return (
     <div className={styles.dashboard}>
       <DashboardNav />
-      {events ? (
+      {events.length && (
         <DashboardContent
-          title="Interested Events"
-          description="These are the events you are interested in."
+          title="My Events"
+          description="Here you will be able to see the events you organize."
         >
-          {events.map((e, index) => {
+          {events?.map((e, index) => {
             return <EventCard key={index} event={e}></EventCard>;
           })}
         </DashboardContent>
-      ) : (
-        ""
       )}
     </div>
   );
