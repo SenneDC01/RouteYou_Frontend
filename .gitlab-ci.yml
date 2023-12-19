@@ -197,7 +197,6 @@ runAnsible:
     - chmod 700 .
     - touch .vault_pass.txt
     - echo "$ANSIBLE_VAULT_PASSWORD" > .vault_pass.txt
-
   # target host can be deleted we only run ansible for dev now needs changes in the script tho
     - ansible-playbook -e "dev_frontend_repo=$DEV_FRONTEND_REPO" -e "dev_backend_repo=$DEV_BACKEND_REPO" -e "mysql_root_password=$MYSQL_ROOT_PASSWORD" -e "mysql_database=MYSQL_DATABASE" playbook.yml
 
