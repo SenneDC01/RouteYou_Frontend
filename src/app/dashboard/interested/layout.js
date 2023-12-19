@@ -9,7 +9,6 @@ export const metadata = {
 };
 
 export default async function Layout({ children }) {
-  // TODO: change fetch function
   const events = await createdEvents();
   
   return <Page events={events}>{children}</Page>;
