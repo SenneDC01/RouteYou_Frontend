@@ -17,14 +17,14 @@
   max-width: 80rem;
   flex-wrap: wrap;
   @media screen and (max-width: 425px) {
-    justify-content: start;
+    justify-content: flex-start;
   }
 }
 
 .list {
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   gap: 0.5rem;
 }
 
