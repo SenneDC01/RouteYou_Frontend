@@ -10,7 +10,8 @@
     "no-console": "warn",
     "no-warning-comments": "warn",
     "no-comment/no-comment-line": "warn",
-    "no-comment/no-comment-block": "warn"
+    "no-comment/no-comment-block": "warn",
+    "no-useless-escape": "off"
   },
   "parserOptions": {
     "ecmaVersion": "latest",

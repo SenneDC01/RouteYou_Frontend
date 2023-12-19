@@ -7,7 +7,7 @@ export const metadata = {
   keywords: 'RouteYou, evenement, routes, inschrijven',
 };
 
-export default function EventByIdLayout({ children, params }) {
+export default function EventByIdLayout({ children }) {
   const event = {
     id: 1,
     name: 'City Light Run Aalst',
