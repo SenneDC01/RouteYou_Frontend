@@ -8,7 +8,7 @@ export default async function Page({ events }) {
   return (
     <div className={styles.dashboard}>
       <DashboardNav />
-      {events.length && (
+      {events?.length && (
         <DashboardContent
           title="My Events"
           description="Here you will be able to see the events you organize."
