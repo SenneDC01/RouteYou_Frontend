@@ -1,9 +1,9 @@
 export function generateMetadata() {
   return {
-    title: "Evaluatierapport - RouteYou",
-    description: "Evaluatierapport van RouteYou.",
+    title: 'Evaluatierapport - RouteYou',
+    description: 'Evaluatierapport van RouteYou.',
     keywords:
-      "RouteYou, evaluatie, rapport, evaluatierapport, WCAG, toegankelijkheid",
+      'RouteYou, evaluatie, rapport, evaluatierapport, WCAG, toegankelijkheid',
   };
 }
 

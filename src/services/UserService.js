@@ -1,12 +1,12 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const HEADERS = {
-  "Content-Type": "application/json",
-  Accept: "application/json",
+  'Content-Type': 'application/json',
+  Accept: 'application/json',
 };
 
 export const login = async (body) => {
   const response = await fetch(`${API_URL}/login`, {
-    method: "POST",
+    method: 'POST',
     headers: HEADERS,
     body: JSON.stringify(body),
   });
@@ -17,7 +17,7 @@ export const login = async (body) => {
 
 export const register = async (body) => {
   const response = await fetch(`${API_URL}/register`, {
-    method: "POST",
+    method: 'POST',
     headers: HEADERS,
     body: JSON.stringify(body),
   });

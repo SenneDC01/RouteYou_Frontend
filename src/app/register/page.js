@@ -1,18 +1,18 @@
-"use client";
-import BigTitle from "@/components/atoms/big-title/BigTitle";
-import FormField from "@/components/atoms/form-field/FormField";
-import React, { useState } from "react";
-import styles from "./RegisterPage.module.scss";
-import Button from "@/components/atoms/button/Button";
-import SelectField from "@/components/atoms/select-field/SelectField";
+'use client';
+import BigTitle from '@/components/atoms/big-title/BigTitle';
+import FormField from '@/components/atoms/form-field/FormField';
+import React, { useState } from 'react';
+import styles from './RegisterPage.module.scss';
+import Button from '@/components/atoms/button/Button';
+import SelectField from '@/components/atoms/select-field/SelectField';
 import {
   isEmpty,
   isFilled,
   isValidEmail,
   isValidPasswordLength,
-} from "@/helpers/FormValidation/FormValidation";
-import { register } from "@/services/UserService";
-import { useRouter } from "next/navigation";
+} from '@/helpers/FormValidation/FormValidation';
+import { register } from '@/services/UserService';
+import { useRouter } from 'next/navigation';
 
 const RegisterPage = () => {
   const router = useRouter();
@@ -20,8 +20,8 @@ const RegisterPage = () => {
   const [errors, setErrors] = useState({});
 
   const genderOptions = [
-    { value: "MALE", label: "Male" },
-    { value: "FEMALE", label: "Female" },
+    { value: 'MALE', label: 'Male' },
+    { value: 'FEMALE', label: 'Female' },
   ];
 
   const validateForm = () => {
@@ -45,17 +45,17 @@ const RegisterPage = () => {
   const validateUserInfo = () => {
     const errors = {};
     if (!isFilled(formValues.firstname)) {
-      errors.firstname = "Please enter your firstname";
+      errors.firstname = 'Please enter your firstname';
     }
     if (!isFilled(formValues.lastname)) {
-      errors.lastname = "Please enter your lastname";
+      errors.lastname = 'Please enter your lastname';
     }
     if (!isFilled(formValues.gender)) {
-      errors.gender = "Please select a gender";
+      errors.gender = 'Please select a gender';
     } else if (
       !genderOptions.map((option) => option.value).includes(formValues.gender)
     ) {
-      errors.gender = "Please select a valid gender";
+      errors.gender = 'Please select a valid gender';
     }
     return errors;
   };
@@ -63,33 +63,33 @@ const RegisterPage = () => {
   const validateCredentials = () => {
     const errors = {};
     if (!isFilled(formValues.email)) {
-      errors.email = "Please enter your email";
+      errors.email = 'Please enter your email';
     } else if (!isValidEmail(formValues.email)) {
-      errors.email = "Please enter a valid email address";
+      errors.email = 'Please enter a valid email address';
     }
     if (!isFilled(formValues.password)) {
-      errors.password = "Please enter your password";
+      errors.password = 'Please enter your password';
     } else if (!isValidPasswordLength(formValues.password)) {
-      errors.password = "Password must be at least 8 characters long";
+      errors.password = 'Password must be at least 8 characters long';
     }
     if (!isFilled(formValues.password_confirmation)) {
-      errors.password_confirmation = "Please confirm your password";
+      errors.password_confirmation = 'Please confirm your password';
     } else if (formValues.password !== formValues.password_confirmation) {
-      errors.password_confirmation = "Passwords do not match";
+      errors.password_confirmation = 'Passwords do not match';
     }
     return errors;
   };
 
   const validateAddress = () => {
-    let errors = {};
+    const errors = {};
     if (!isFilled(formValues.address)) {
-      errors.address = "Please enter your address";
+      errors.address = 'Please enter your address';
     }
     if (!isFilled(formValues.city)) {
-      errors.city = "Please enter your city";
+      errors.city = 'Please enter your city';
     }
     if (!isFilled(formValues.zipcode)) {
-      errors.zipcode = "Please enter your zipcode";
+      errors.zipcode = 'Please enter your zipcode';
     }
     return errors;
   };
@@ -99,13 +99,13 @@ const RegisterPage = () => {
     const isValid = validateForm();
     if (isValid) {
       try {
-        let response = await register(formValues);
+        const response = await register(formValues);
 
         if (response.code === 201) {
-          router.push("/dashboard");
+          router.push('/dashboard');
         } else {
           if (response.errors) {
-            let errors = [];
+            const errors = [];
             Object.keys(response.errors).forEach((field) => {
               errors.push(response.errors[field][0]);
             });
@@ -115,7 +115,7 @@ const RegisterPage = () => {
           }
         }
       } catch (error) {
-        setErrors({ formError: ["Something went wrong try again later."] });
+        setErrors({ formError: ['Something went wrong try again later.'] });
       }
     }
   };

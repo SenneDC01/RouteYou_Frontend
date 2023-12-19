@@ -1,6 +1,6 @@
-"use client";
-import React from "react";
-import styles from "./Header.module.scss";
+'use client';
+import React from 'react';
+import styles from './Header.module.scss';
 import {
   Navbar,
   NavbarContent,
@@ -15,13 +15,13 @@ import logo from "@/utils/images/logo.png";
 import CustomDropdown from "@/components/molecules/drop-down/Dropdown";
 import { usePathname } from "next/navigation";
 
-const Header = ({ profileName = "John Doe", profilePicture = null }) => {
+const Header = ({ profileName = 'John Doe', profilePicture = null }) => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
-  const dropdownItemsEvents = ["Create Event", "Search Event"];
-  const dropdownItemsRoutes = ["Go to RouteYou Routes"];
-  const dropdownItemsProfile = ["Dashboard", "Logout"];
+  const dropdownItemsEvents = ['Create Event', 'Search Event'];
+  const dropdownItemsRoutes = ['Go to RouteYou Routes'];
+  const dropdownItemsProfile = ['Dashboard', 'Logout'];
 
   const pathname = usePathname();
   const isLinkActive = (path) => {
@@ -43,7 +43,7 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
         Ga naar hoofdinhoud
       </Link>
       <NavbarMenuToggle
-        aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+        aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
         className="sm:hidden"
       />
       <Link href="/">

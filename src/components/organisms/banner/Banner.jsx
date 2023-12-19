@@ -1,10 +1,10 @@
-import React from "react";
-import Image from "next/image";
-import banner from "@/utils/images/banner.jpg";
-import RouteSVGWhite from "@/utils/icons/RouteSVGWhite";
-import CalenderSVG from "@/utils/icons/CalenderSVG";
-import styles from "./Banner.module.scss";
-import ButtonLink from "@/components/atoms/button-link/ButtonLink";
+import React from 'react';
+import Image from 'next/image';
+import banner from '@/utils/images/banner.jpg';
+import RouteSVGWhite from '@/utils/icons/RouteSVGWhite';
+import CalenderSVG from '@/utils/icons/CalenderSVG';
+import styles from './Banner.module.scss';
+import ButtonLink from '@/components/atoms/button-link/ButtonLink';
 
 const Banner = () => {
   return (
