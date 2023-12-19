@@ -6,7 +6,9 @@ import {
   DropdownMenu,
   DropdownItem,
   Button,
+  Link,
 } from "@nextui-org/react";
+import styles from "@/components/organisms/header/Header.module.scss";
 
 const CustomDropdown = ({ buttonText, items }) => {
   const dropdownStyle = {
@@ -39,7 +41,9 @@ const CustomDropdown = ({ buttonText, items }) => {
               className={"border-b"}
               tabIndex={1}
             >
-              {item}
+              <Link color="foreground" href="/events" aria-current="page">
+                {item}
+              </Link>
             </DropdownItem>
           ))}
         </DropdownMenu>

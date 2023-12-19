@@ -13,15 +13,25 @@ import {
 import Image from "next/image";
 import logo from "@/utils/images/logo.png";
 import CustomDropdown from "@/components/molecules/drop-down/Dropdown";
+import { usePathname } from "next/navigation";
 
-const Header = ({ profileName = "John Doe", profilePicture = null }) => {
+const Header = ({ profileName = "John Doe", profilePicture = null, link }) => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-
-  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
   const dropdownItemsEvents = ["Create Event", "Search Event"];
   const dropdownItemsRoutes = ["Go to RouteYou Routes"];
   const dropdownItemsProfile = ["Dashboard", "Logout"];
+
+  const pathname = usePathname();
+  const isLinkActive = (path) => {
+    if (path === "/") {
+      return pathname === path;
+    }
+    console.log("Current Path:", pathname);
+
+    return pathname.startsWith(path);
+  };
 
   return (
     <Navbar
@@ -48,17 +58,21 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
         />
       </Link>
       <NavbarContent className="hidden sm:flex gap-4">
-        <NavbarItem isActive>
-          <Link href="/" aria-current="page">
+        <NavbarItem isActive={isLinkActive("/")}>
+          <Link color="foreground" href="/" aria-current="page">
             Home
             <span className={styles.itemBorderStyle}></span>
           </Link>
         </NavbarItem>
-        <NavbarItem>
+        <NavbarItem isActive={isLinkActive("/events")}>
           <CustomDropdown
             buttonText={
               <>
-                Events
+                <span
+                  className={isLinkActive("/events") ? styles.boldText : ""}
+                >
+                  Events
+                </span>
                 <span className={styles.itemBorderStyle}></span>
                 <span className={styles.arrowStyle}>&gt;</span>
               </>
@@ -66,11 +80,15 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
             items={dropdownItemsEvents}
           />
         </NavbarItem>
-        <NavbarItem isActive>
+        <NavbarItem isActive={isLinkActive("/routes")}>
           <CustomDropdown
             buttonText={
               <>
-                Routes
+                <span
+                  className={isLinkActive("/routes") ? styles.boldText : ""}
+                >
+                  Routes
+                </span>
                 <span className={styles.itemBorderStyle}></span>
                 <span className={styles.arrowStyle}>&gt;</span>
               </>
@@ -78,8 +96,8 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
             items={dropdownItemsRoutes}
           />
         </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="/" data-testid="dashboard">
+        <NavbarItem isActive={isLinkActive("/dashboard")}>
+          <Link color="foreground" href="/dashboard" data-testid="dashboard">
             Dashboard
             <span className={styles.itemBorderStyle}></span>
           </Link>
@@ -107,13 +125,13 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
             </>
           ) : (
             <NavbarContent className="hidden sm:flex gap-4">
-              <NavbarItem>
+              <NavbarItem isActive={isLinkActive("/login")}>
                 <Link color="foreground" href="/login">
                   Login
                   <span className={styles.itemBorderStyle}></span>
                 </Link>
               </NavbarItem>
-              <NavbarItem>
+              <NavbarItem isActive={isLinkActive("/register")}>
                 <Link color="foreground" href="/register">
                   Register
                   <span className={styles.itemBorderStyle}></span>
@@ -124,8 +142,8 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu>
-        <NavbarMenuItem>
-          <Link className="w-full" href="#">
+        <NavbarMenuItem isActive={isLinkActive("/")}>
+          <Link color="foreground" className="w-full" href="/">
             Home
           </Link>
         </NavbarMenuItem>
@@ -133,7 +151,11 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
           <CustomDropdown
             buttonText={
               <>
-                Events
+                <span
+                  className={isLinkActive("/events") ? styles.boldText : ""}
+                >
+                  Events
+                </span>
                 <span className={styles.arrowStyle}>&gt;</span>
               </>
             }
@@ -144,15 +166,19 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
           <CustomDropdown
             buttonText={
               <>
-                Routes
+                <span
+                  className={isLinkActive("/routes") ? styles.boldText : ""}
+                >
+                  Routes
+                </span>
                 <span className={styles.arrowStyle}>&gt;</span>
               </>
             }
             items={dropdownItemsRoutes}
           />
         </NavbarMenuItem>
-        <NavbarMenuItem>
-          <Link color="foreground" href="/">
+        <NavbarMenuItem isActive={isLinkActive("/dashboard")}>
+          <Link color="foreground" href="/dashboard">
             Dashboard
           </Link>
         </NavbarMenuItem>
@@ -178,12 +204,12 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
           </>
         ) : (
           <>
-            <NavbarMenuItem>
+            <NavbarMenuItem isActive={isLinkActive("/login")}>
               <Link color="foreground" href="/login">
                 Login
               </Link>
             </NavbarMenuItem>
-            <NavbarMenuItem>
+            <NavbarMenuItem isActive={isLinkActive("/register")}>
               <Link color="foreground" href="/register">
                 Register
               </Link>
