@@ -1,5 +1,5 @@
 import Page from "./page";
-import { createdEvents } from "@/services/EventService";
+import { interestedEvents } from "@/services/EventService";
 
 export const metadata = {
   title: "City Light Run Aalst - RouteYou",
@@ -8,8 +8,7 @@ export const metadata = {
   keywords: "RouteYou, evenement, routes, inschrijven",
 };
 
-export default async function Layout({ children }) {
-  const events = await createdEvents();
-  
-  return <Page events={events}>{children}</Page>;
+export default async function Layout() {
+  const events = await interestedEvents();
+  return Page({ events });
 }
