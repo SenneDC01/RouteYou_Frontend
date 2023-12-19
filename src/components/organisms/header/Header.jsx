@@ -15,7 +15,7 @@ import logo from "@/utils/images/logo.png";
 import CustomDropdown from "@/components/molecules/drop-down/Dropdown";
 import { usePathname } from "next/navigation";
 
-const Header = ({ profileName = "John Doe", profilePicture = null, link }) => {
+const Header = ({ profileName = "John Doe", profilePicture = null }) => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
@@ -28,8 +28,6 @@ const Header = ({ profileName = "John Doe", profilePicture = null, link }) => {
     if (path === "/") {
       return pathname === path;
     }
-    console.log("Current Path:", pathname);
-
     return pathname.startsWith(path);
   };
 
