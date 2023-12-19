@@ -181,7 +181,10 @@ stages:
 
 runAnsible:
   stage: runAnsible
-  image: ansible/ansible:2.9
+  image:
+    name: ansible/ansible:latest
+    entrypoint: [""]
+
   only:
     # - /^dev$/
   before_script:
