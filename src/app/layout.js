@@ -14,9 +14,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="nl">
       <body>
-        <a href="#main-content" className="skip-link">
-          Ga naar hoofdinhoud
-        </a>
         <Header profileName={"John Doe"} profilePicture={profilePic} />
         <main id="main-content">{children}</main>
         <Footer />

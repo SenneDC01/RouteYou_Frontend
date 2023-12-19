@@ -31,6 +31,9 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
       maxWidth="2xl"
       as="div"
     >
+      <Link href="#main-content" className="skip-link">
+        Ga naar hoofdinhoud
+      </Link>
       <NavbarMenuToggle
         aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         className="sm:hidden"
