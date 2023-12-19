@@ -179,9 +179,11 @@ stages:
     
 #     - gcloud run deploy $INSTANCE --image $REPO $CLOUD_VARIABLES --allow-unauthenticated 
 
-runAnsibleForDev:
-  image: ubuntu
+runAnsible:
   stage: runAnsible
+  image:
+    name: google/cloud-sdk:latest
+    entrypoint: [""]
   # only:
   #   - /^dev$/
   before_script:
