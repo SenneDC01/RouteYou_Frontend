@@ -1,6 +1,6 @@
-@use "@/app/assets/vars.scss" as vars;
+@use '@/app/assets/vars.scss' as vars;
 
 .link {
-    color: vars.$blue;
-    text-decoration: underline;
+  color: vars.$blue;
+  text-decoration: underline;
 }

@@ -1,12 +1,12 @@
-import { render, fireEvent } from "@testing-library/react";
-import * as EventService from "@/services/EventService";
-import Layout from "./layout";
+import { render } from '@testing-library/react';
+import * as EventService from '@/services/EventService';
+import Layout from './layout';
 
-describe("Dashboard interested page component", () => {
+describe('Dashboard interested page component', () => {
   let mockEventsService;
 
   beforeEach(() => {
-    mockEventsService = jest.spyOn(EventService, "interestedEvents");
+    mockEventsService = jest.spyOn(EventService, 'interestedEvents');
     mockEventsService.mockResolvedValue([]);
   });
 
@@ -14,8 +14,7 @@ describe("Dashboard interested page component", () => {
     mockEventsService.mockRestore();
   });
 
-  it("Test fetch in layout", async () => {
-    // prettier-ignore
+  it('Test fetch in layout', async () => {
     render(await Layout());
 
     expect(mockEventsService).toHaveBeenCalled();

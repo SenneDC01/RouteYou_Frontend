@@ -1,20 +1,20 @@
-"use client";
-import React from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import styles from "./DashboardLink.module.scss";
-import Image from "next/image";
+'use client';
+import React from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import styles from './DashboardLink.module.scss';
+import Image from 'next/image';
 
 export default function DashboardLink({ children, link, icon }) {
   const pathname = usePathname();
-  
+
   return (
     <li
-      className={`${styles.listItem} ${pathname === link ? styles.active : ""}`}
+      className={`${styles.listItem} ${pathname === link ? styles.active : ''}`}
     >
       <Image
         className={styles.circle}
-        src={require("@/utils/icons/activeCircle.svg")}
+        src={require('@/utils/icons/activeCircle.svg')}
         alt="star"
         width={1}
         height={1}

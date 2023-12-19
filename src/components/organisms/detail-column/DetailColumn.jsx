@@ -1,15 +1,15 @@
-"use client";
-import React from "react";
-import "@/app/assets/globals.css";
-import ButtonLink from "@/components/atoms/button-link/ButtonLink";
-import styles from "./DetailColumn.module.scss";
-import BigTitle from "@/components/atoms/big-title/BigTitle";
-import SubText from "@/components/atoms/sub-text/SubText";
-import RegularText from "@/components/atoms/regular-text/RegularText";
-import ViewMore from "@/components/molecules/view-more/ViewMore";
-import ArrowRightSVG from "@/utils/icons/ArrowRightSVG";
-import Button from "@/components/atoms/button/Button";
-import Image from "next/image";
+'use client';
+import React from 'react';
+import '@/app/assets/globals.css';
+import ButtonLink from '@/components/atoms/button-link/ButtonLink';
+import styles from './DetailColumn.module.scss';
+import BigTitle from '@/components/atoms/big-title/BigTitle';
+import SubText from '@/components/atoms/sub-text/SubText';
+import RegularText from '@/components/atoms/regular-text/RegularText';
+import ViewMore from '@/components/molecules/view-more/ViewMore';
+import ArrowRightSVG from '@/utils/icons/ArrowRightSVG';
+import Button from '@/components/atoms/button/Button';
+import Image from 'next/image';
 
 export default function DetailColumn({ event }) {
   return (

@@ -1,13 +1,12 @@
-// src/atoms/ButtonRound.test.js
-import React from "react";
-import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
-import SmallText from "./SmallText";
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import SmallText from './SmallText';
 
-describe("SmallText component", () => {
-  it("Renders small text correctly", () => {
+describe('SmallText component', () => {
+  it('Renders small text correctly', () => {
     render(<SmallText>Text</SmallText>);
-    const title = screen.getByText("Text");
+    const title = screen.getByText('Text');
     expect(title).toBeInTheDocument();
   });
 });

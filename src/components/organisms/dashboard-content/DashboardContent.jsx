@@ -1,18 +1,14 @@
-"use client";
-import React from "react";
-import styles from "./DashboardContent.module.scss";
-import BigTitle from "@/components/atoms/big-title/BigTitle";
+'use client';
+import React from 'react';
+import styles from './DashboardContent.module.scss';
+import BigTitle from '@/components/atoms/big-title/BigTitle';
 
-export default function DashboardContent({title, description, children}) {
-  return <section className={styles.content}>
-    <BigTitle>
-      {title}
-    </BigTitle>
-    <p>
-      {description}
-    </p>
-    <ol className={styles.list}>
-      {children}
-    </ol>
-  </section>;
+export default function DashboardContent({ title, description, children }) {
+  return (
+    <section className={styles.content}>
+      <BigTitle>{title}</BigTitle>
+      <p>{description}</p>
+      <ol className={styles.list}>{children}</ol>
+    </section>
+  );
 }

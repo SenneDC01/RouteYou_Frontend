@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   NextUIProvider,
   Dropdown,
@@ -6,7 +6,7 @@ import {
   DropdownMenu,
   DropdownItem,
   Button,
-} from "@nextui-org/react";
+} from '@nextui-org/react';
 
 const CustomDropdown = ({ buttonText, items }) => {
   const dropdownStyle = {
@@ -15,9 +15,9 @@ const CustomDropdown = ({ buttonText, items }) => {
   };
 
   const buttonStyle = {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-around",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-around',
     gap: 4,
     padding: 0,
     borderRadius: 0,
@@ -27,7 +27,7 @@ const CustomDropdown = ({ buttonText, items }) => {
     <NextUIProvider style={dropdownStyle}>
       <Dropdown>
         <DropdownTrigger style={buttonStyle}>
-          <Button variant="none" size={"lg"} className={"h-6 p-0 min-w-fit"}>
+          <Button variant="none" size={'lg'} className={'h-6 p-0 min-w-fit'}>
             {buttonText}
           </Button>
         </DropdownTrigger>
@@ -36,7 +36,7 @@ const CustomDropdown = ({ buttonText, items }) => {
             <DropdownItem
               key={index}
               textValue={item}
-              className={"border-b"}
+              className={'border-b'}
               tabIndex={1}
             >
               {item}

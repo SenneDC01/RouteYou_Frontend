@@ -1,22 +1,25 @@
-import React from "react";
-import styles from "./Toegankelijkheidsverklaring.module.scss";
-import BigTitle from "@/components/atoms/big-title/BigTitle";
-import RegularText from "@/components/atoms/regular-text/RegularText";
-import TextLink from "@/components/atoms/text-link/TextLink";
-import BoldText from "@/components/atoms/bold-text/BoldText";
+import React from 'react';
+import styles from './Toegankelijkheidsverklaring.module.scss';
+import BigTitle from '@/components/atoms/big-title/BigTitle';
+import RegularText from '@/components/atoms/regular-text/RegularText';
+import TextLink from '@/components/atoms/text-link/TextLink';
+import BoldText from '@/components/atoms/bold-text/BoldText';
 
 export function generateMetadata() {
   return {
-    title: "Toegankelijkheidsverklaring - RouteYou",
-    description: "Toegankelijkheidsverklaring van RouteYou.",
+    title: 'Toegankelijkheidsverklaring - RouteYou',
+    description: 'Toegankelijkheidsverklaring van RouteYou.',
     keywords:
-      "RouteYou, toegankelijkheid, verklaring, toegankelijkheidsverklaring",
+      'RouteYou, toegankelijkheid, verklaring, toegankelijkheidsverklaring',
   };
 }
 
 export default function Toegankelijkheidsverklaring() {
   return (
-    <div className={styles.container} data-testid="toegankelijkheids-verklaring">
+    <div
+      className={styles.container}
+      data-testid="toegankelijkheids-verklaring"
+    >
       <div>
         <BigTitle>Toegankelijkheidsverklaring</BigTitle>
         <RegularText>

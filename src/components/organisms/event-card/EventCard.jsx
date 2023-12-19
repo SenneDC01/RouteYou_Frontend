@@ -1,14 +1,14 @@
-import React from "react";
-import Image from "next/image";
-import BoldText from "@/components/atoms/bold-text/BoldText";
-import SubText from "@/components/atoms/sub-text/SubText";
-import SVGtext from "@/components/atoms/svg-text/SVGtext";
-import LocationSVG from "@/utils/icons/LocationSVG";
-import CyclistSVG from "@/utils/icons/CyclistSVG";
-import RoundButton from "@/components/atoms/button-round/ButtonRound";
-import ArrowRightSVG from "@/utils/icons/ArrowRightSVG";
-import styles from "./EventCard.module.scss";
-import FavButton from "@/components/atoms/fav-button/FavButton";
+import React from 'react';
+import Image from 'next/image';
+import BoldText from '@/components/atoms/bold-text/BoldText';
+import SubText from '@/components/atoms/sub-text/SubText';
+import SVGtext from '@/components/atoms/svg-text/SVGtext';
+import LocationSVG from '@/utils/icons/LocationSVG';
+import CyclistSVG from '@/utils/icons/CyclistSVG';
+import RoundButton from '@/components/atoms/button-round/ButtonRound';
+import ArrowRightSVG from '@/utils/icons/ArrowRightSVG';
+import styles from './EventCard.module.scss';
+import FavButton from '@/components/atoms/fav-button/FavButton';
 
 const EventCard = ({ event }) => {
   return (
@@ -42,7 +42,7 @@ const EventCard = ({ event }) => {
         <div className={[styles.flexRowContainer]}>
           <SubText>
             {event.description.length > 130
-              ? event.description.slice(0, 130) + "..."
+              ? event.description.slice(0, 130) + '...'
               : event.description}
           </SubText>
           <div className={[styles.buttonContainer]}>
