@@ -2,7 +2,12 @@ import React from 'react';
 import Link from 'next/link';
 import styles from './ButtonLink.module.scss';
 
-const ButtonLink = ({ children, icon = null, link = '/', className }) => {
+export default function ButtonLink({
+  children,
+  icon = null,
+  link = '/',
+  className,
+}) {
   return (
     <Link
       href={link}
@@ -13,6 +18,4 @@ const ButtonLink = ({ children, icon = null, link = '/', className }) => {
       {children}
     </Link>
   );
-};
-
-export default ButtonLink;
+}

@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '@/components/atoms/form-field/FormField.module.scss';
 import SmallText from '../small-text/SmallText';
 
-const SelectField = ({
+export default function SelectField({
   label,
   name,
   options,
@@ -10,7 +10,7 @@ const SelectField = ({
   value,
   errorMessage,
   className,
-}) => {
+}) {
   return (
     <div className={[styles.formField, className].join(' ')}>
       <label className={styles.label} htmlFor={name}>
@@ -37,6 +37,4 @@ const SelectField = ({
       )}
     </div>
   );
-};
-
-export default SelectField;
+}

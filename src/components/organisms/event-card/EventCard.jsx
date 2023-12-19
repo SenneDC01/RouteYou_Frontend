@@ -10,7 +10,7 @@ import ArrowRightSVG from '@/utils/icons/ArrowRightSVG';
 import styles from './EventCard.module.scss';
 import FavButton from '@/components/atoms/fav-button/FavButton';
 
-const EventCard = ({ event }) => {
+export default function EventCard({ event }) {
   return (
     <div className={[styles.eventCard]}>
       <Image
@@ -55,6 +55,4 @@ const EventCard = ({ event }) => {
       </div>
     </div>
   );
-};
-
-export default EventCard;
+}

@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './FormField.module.scss';
 import SmallText from '../small-text/SmallText';
 
-const FormField = ({
+export default function FormField({
   label,
   placeholder,
   value,
@@ -11,7 +11,7 @@ const FormField = ({
   onChange,
   errorMessage,
   className,
-}) => {
+}) {
   return (
     <div className={[styles.formField, className].join(' ')}>
       <label className={styles.label} htmlFor={name}>
@@ -31,6 +31,4 @@ const FormField = ({
       )}
     </div>
   );
-};
-
-export default FormField;
+}

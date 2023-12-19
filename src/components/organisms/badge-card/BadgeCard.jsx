@@ -1,17 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Image from 'next/image';
 import BoldText from '@/components/atoms/bold-text/BoldText';
 import SubText from '@/components/atoms/sub-text/SubText';
 import MedalSVG from '@/utils/icons/MedalSVG';
 import styles from './BadgeCard.module.scss';
 
-const BadgeCard = ({
+export default function BadgeCard({
   image,
   title = 'Groene Gordel 2024',
   organisator = 'organisator',
   dateTime = 'date - time',
-}) => {
+}) {
   return (
     <div data-testid="badgeCard" className={[styles.badgeCard]}>
       <Image
@@ -32,13 +31,4 @@ const BadgeCard = ({
       </div>
     </div>
   );
-};
-
-BadgeCard.propTypes = {
-  image: PropTypes.object,
-  title: PropTypes.string,
-  organisator: PropTypes.string,
-  dateTime: PropTypes.string,
-};
-
-export default BadgeCard;
+}

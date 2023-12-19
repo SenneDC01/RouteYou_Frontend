@@ -9,7 +9,7 @@ import {
   Link,
 } from '@nextui-org/react';
 
-const CustomDropdown = ({ buttonText, items }) => {
+export default function CustomDropdown({ buttonText, items }) {
   const dropdownStyle = {
     padding: 0,
     maxWidth: 100,
@@ -49,6 +49,4 @@ const CustomDropdown = ({ buttonText, items }) => {
       </Dropdown>
     </NextUIProvider>
   );
-};
-
-export default CustomDropdown;
+}

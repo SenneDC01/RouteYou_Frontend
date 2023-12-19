@@ -15,7 +15,10 @@ import logo from '@/utils/images/logo.png';
 import CustomDropdown from '@/components/molecules/drop-down/Dropdown';
 import { usePathname } from 'next/navigation';
 
-const Header = ({ profileName = 'John Doe', profilePicture = null }) => {
+export default function Header({
+  profileName = 'John Doe',
+  profilePicture = null,
+}) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isLoggedIn] = React.useState(false);
 
@@ -217,6 +220,4 @@ const Header = ({ profileName = 'John Doe', profilePicture = null }) => {
       </NavbarMenu>
     </Navbar>
   );
-};
-
-export default Header;
+}

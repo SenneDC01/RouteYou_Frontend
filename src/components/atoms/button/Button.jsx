@@ -1,13 +1,13 @@
 import React from 'react';
 import styles from './Button.module.scss';
 
-const Button = ({
+export default function Button({
   children,
   onClick,
   type = 'button',
   icon = null,
   className,
-}) => {
+}) {
   return (
     <button
       type={type}
@@ -18,6 +18,4 @@ const Button = ({
       {children}
     </button>
   );
-};
-
-export default Button;
+}

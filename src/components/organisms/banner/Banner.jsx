@@ -6,7 +6,7 @@ import CalenderSVG from '@/utils/icons/CalenderSVG';
 import styles from './Banner.module.scss';
 import ButtonLink from '@/components/atoms/button-link/ButtonLink';
 
-const Banner = () => {
+export default function Banner() {
   return (
     <div className={styles.bannerContainer}>
       <Image
@@ -34,6 +34,4 @@ const Banner = () => {
       </div>
     </div>
   );
-};
-
-export default Banner;
+}

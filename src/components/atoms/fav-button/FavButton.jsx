@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import StarSVG from '@/utils/icons/StarSVG';
 
-const FavButton = () => {
+export default function FavButton() {
   const [isFavorite, setIsFavorite] = useState(false);
 
   const handleToggleFavorite = () => {
@@ -14,6 +14,4 @@ const FavButton = () => {
       <StarSVG width={30} height={30} fill={isFavorite ? '#1a614a' : 'none'} />
     </button>
   );
-};
-
-export default FavButton;
+}
