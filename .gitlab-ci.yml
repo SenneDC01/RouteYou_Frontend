@@ -180,23 +180,13 @@ deployCloudRun:
     - gcloud run deploy $INSTANCE --image $REPO $CLOUD_VARIABLES --allow-unauthenticated 
 
 runAnsible:
-  image: ubuntu
+  stage: runAnsible
+  image:
+    name: google/cloud-sdk:latest
+    entrypoint: [""]
   only:
     - /^dev$/
   before_script:
-    - export BRANCH_NAME=$(cat output/branch.txt)
-    - apt-get update
-    ## Install ssh-agent
-    - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y  && apt-get install git -y)'
-    ## Run ssh-agent
-    - eval $(ssh-agent -s)
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-    - echo "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
-    - chmod 644 ~/.ssh/known_hosts
-  stage: runAnsible
-  script:
     - apt-get update && apt-get upgrade -y
     - apt-get install openssh-server openssh-client -y
     - apt-get -y install sshpass
@@ -205,18 +195,13 @@ runAnsible:
     - python3 -m pip install --upgrade pip
     - pip3 install ansible==2.9
     - pip3 install ansible-lint
+  script: 
     - cd ansible
     - chmod 700 .
-    
     - touch .vault_pass.txt
     - touch key-files/serviceArtifactRegistryAdmin.json
-    - touch sshKey/admin_key
-    - touch sshKey/admin_key.pub
     - echo "$ANSIBLE_VAULT_PASSWORD" > .vault_pass.txt
     - echo "$GCLOUD_SERVICE_KEY" > serviceArtifactRegistryAdmin.json
-    - echo "$ADMIN_KEY" > sshKey/admin_key 
-    - echo "$ADMIN_KEY_PUB" > sshKey/admin_key.pub
-    - chmod 600 ./sshKey/admin_key
-    
-    - ansible-playbook -e "target_host=$BRANCH_NAME" playbook.yml
-    
+
+  # target host can be deleted we only run ansible for dev now needs changes in the script tho
+    - ansible-playbook -e "target_host=dev" playbook.yml 
