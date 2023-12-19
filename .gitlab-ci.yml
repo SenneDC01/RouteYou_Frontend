@@ -179,19 +179,206 @@ stages:
     
 #     - gcloud run deploy $INSTANCE --image $REPO $CLOUD_VARIABLES --allow-unauthenticated 
 
+default:
+  image: ubuntu
+  tags:
+    - atp-frontend
+
+stages:
+#   - unitTests
+#   - checkBranch
+#   - buildImage
+#   - pushImage
+#   - deployCloudRun
+  - runAnsible
+
+# unit-test:
+#   image: node:latest
+#   stage: unitTests
+#   before_script:
+#     - npm install
+#   script:
+#     - npm run test
+
+# dev:
+#   stage: checkBranch
+#   only:
+#      - /^dev$/
+#   script:
+#     - echo "Running unit tests for development"
+#     - mkdir output
+#     - echo "dev" > output/branch.txt
+#     - echo "$DEV_FRONTEND_REPO" > output/repo.txt
+#   artifacts:
+#     paths: [output/]
+
+# staging:
+#   stage: checkBranch
+#   only:
+#     - /^staging$/
+#   script:
+#     - echo "Running unit tests for staging"
+#     - mkdir output
+#     - echo "staging" > output/branch.txt
+#     - echo "$STAGING_FRONTEND_REPO" > output/repo.txt
+#   artifacts:
+#     paths: [output/]
+    
+# prod:
+#   stage: checkBranch
+#   only:
+#     - /^main$/
+#   script:
+#     - echo "Running unit tests for production"
+#     - mkdir output
+#     - echo "prod" > output/branch.txt
+#     - echo "$PROD_FRONTEND_REPO" > output/repo.txt
+#   artifacts:
+#     paths: [output/]
+
+# buildImageDev:
+#   stage: buildImage
+#   image: docker:24.0.7
+#   only:
+#     - /^dev$/
+#   services:
+#     - docker:dind
+#   variables:
+#     BRANCH_NAME: ""  # Set the default value
+#     REPO: ""
+#   before_script:
+#     - export BRANCH_NAME=$(cat output/branch.txt)
+#     - export REPO=$(cat output/repo.txt)
+#   script:
+#     - touch .env.production
+#     - echo  "$DEV_ENV" > .env.production
+#     - echo "Building image for branch $BRANCH_NAME"
+#     - echo "$BRANCH_NAME-frontend-image"
+#     - echo "Loaded REPO $REPO"
+#     - docker build -t $BRANCH_NAME-frontend-image .
+#     - docker save -o $BRANCH_NAME-frontend-image.tar $BRANCH_NAME-frontend-image
+#   artifacts:
+#     paths:
+#       - ./$CI_COMMIT_BRANCH-frontend-image.tar
+
+# buildImageStaging:
+#   stage: buildImage
+#   image: docker:24.0.7
+#   only:
+#     - /^staging$/
+#   services:
+#     - docker:dind
+#   variables:
+#     BRANCH_NAME: ""  # Set the default value
+#     REPO: ""
+#   before_script:
+#     - export BRANCH_NAME=$(cat output/branch.txt)
+#     - export REPO=$(cat output/repo.txt)
+#   script:
+#     - touch .env.production
+#     - echo  "$ENV_STAGING" > .env.production
+#     - echo "Building image for branch $BRANCH_NAME"
+#     - echo "$BRANCH_NAME-frontend-image"
+#     - echo "Loaded REPO $REPO"
+#     - docker build -t $BRANCH_NAME-frontend-image .
+#     - docker save -o $BRANCH_NAME-frontend-image.tar $BRANCH_NAME-frontend-image
+#   artifacts:
+#     paths:
+#       - ./$CI_COMMIT_BRANCH-frontend-image.tar
+
+# buildImageMain:
+#   stage: buildImage
+#   image: docker:24.0.7
+#   only:
+#     - /^main$/
+#   services:
+#     - docker:dind
+#   variables:
+#     BRANCH_NAME: ""
+#     REPO: ""
+#   before_script:
+#     - export BRANCH_NAME=$(cat output/branch.txt)
+#     - export REPO=$(cat output/repo.txt)
+#   script:
+#     - touch .env.production
+#     - echo  "$ENV_PROD" > .env.production
+#     - echo "Building image for branch $BRANCH_NAME"
+#     - echo "$BRANCH_NAME-frontend-image"
+#     - echo "Loaded REPO $REPO"
+#     - docker build -t $BRANCH_NAME-frontend-image .
+#     - docker save -o $BRANCH_NAME-frontend-image.tar $BRANCH_NAME-frontend-image
+#   artifacts:
+#     paths:
+#       - ./prod-frontend-image.tar
+
+# pushImage:
+#   stage: pushImage
+#   image: google/cloud-sdk
+#   only:
+#     - /^dev$/
+#     - /^staging$/
+#     - /^main$/
+#   variables:
+#     BRANCH_NAME: ""
+#     REPO: ""
+#   before_script:
+#     - export BRANCH_NAME=$(cat output/branch.txt)
+#     - export REPO=$(cat output/repo.txt)
+#   script:
+#     - echo "Pushing image to repo for branch $BRANCH_NAME"
+#     - touch gcloud-service-key.json
+#     - echo "$GCLOUD_SERVICE_KEY" > gcloud-service-key.json
+#     - gcloud auth activate-service-account --key-file=gcloud-service-key.json
+#     - gcloud auth configure-docker europe-west1-docker.pkg.dev
+#     - docker load -i ./$BRANCH_NAME-frontend-image.tar
+#     - docker tag $BRANCH_NAME-frontend-image:latest "$REPO"
+#     - docker push "$REPO"
+
+
+# deployCloudRun:
+#   stage: deployCloudRun
+#   image: google/cloud-sdk
+#   only:
+#     - /^main$/
+#     - /^staging$/
+#   variables:
+#     INSTANCE: ""
+#   before_script:
+#     - REPO="$STAGING_FRONTEND_REPO"
+#     - INSTANCE="$INSTANCE_STAGING"
+#     - |
+#       if [ "$CI_COMMIT_BRANCH" == "main" ]; then
+#         REPO="$PROD_FRONTEND_REPO"
+#         INSTANCE="$INSTANCE_PROD"
+#       fi
+
+#   script:
+#     - touch gcloud-service-key.json
+#     - echo "$GCLOUD_SERVICE_KEY_CLOUD_RUN" > gcloud-service-key.json
+#     - gcloud auth activate-service-account --key-file=gcloud-service-key.json
+#     - gcloud auth configure-docker europe-west1-docker.pkg.dev
+    
+#     - gcloud run deploy $INSTANCE --image $REPO $CLOUD_VARIABLES --allow-unauthenticated 
+
 runAnsible:
   stage: runAnsible
-  image:
-    name: ansible/ansible:latest
-    entrypoint: [""]
-
   only:
     # - /^dev$/
   before_script:
-  - apt-get update && apt-get install -y openssh-client openssh-server
+    - apt-get update && apt-get upgrade -y
+    - apt-get install openssh-server openssh-client -y
+    - apt-get -y install sshpass
+    - apt-get install -y python3
+    - apt-get install python3-pip -y
+    - python3 -m pip install --upgrade pip
+    - pip3 install ansible==2.9
+    - pip3 install ansible-lint
   script: 
     - cd ansible
     - chmod 700 .
     - touch .vault_pass.txt
     - echo "$ANSIBLE_VAULT_PASSWORD" > .vault_pass.txt
-    - ansible-playbook -e "dev_frontend_repo=$DEV_FRONTEND_REPO" -e "dev_backend_repo=$DEV_BACKEND_REPO" -e "mysql_root_password=$MYSQL_ROOT_PASSWORD" -e "mysql_database=$MYSQL_DATABASE" playbook.yml
+
+  # target host can be deleted we only run ansible for dev now needs changes in the script tho
+    - ansible-playbook -e "dev_frontend_repo=$DEV_FRONTEND_REPO" -e "dev_backend_repo=$DEV_BACKEND_REPO" -e "mysql_root_password=$MYSQL_ROOT_PASSWORD -e "mysql_database=MYSQL_DATABASE" playbook.yml
+
