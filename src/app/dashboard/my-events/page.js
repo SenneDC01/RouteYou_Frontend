@@ -1,12 +1,10 @@
-import React from "react";
-import DashboardNav from "@/components/organisms/dashboard-nav/DashboardNav";
-import DashboardContent from "@/components/organisms/dashboard-content/DashboardContent";
-import EventCard from "@/components/organisms/event-card/EventCard";
-import styles from "./MyEventsPage.module.scss";
-import { createdEvents } from "@/services/EventService";
+import React from 'react';
+import DashboardNav from '@/components/organisms/dashboard-nav/DashboardNav';
+import DashboardContent from '@/components/organisms/dashboard-content/DashboardContent';
+import EventCard from '@/components/organisms/event-card/EventCard';
+import styles from './MyEventsPage.module.scss';
 
 export default async function Page({ events }) {
-  console.log("events", events);
   return (
     <div className={styles.dashboard}>
       <DashboardNav />

@@ -1,31 +1,31 @@
-"use client";
-import FormField from "@/components/atoms/form-field/FormField";
-import React, { useState } from "react";
-import styles from "./LoginPage.module.scss";
-import BigTitle from "@/components/atoms/big-title/BigTitle";
-import Button from "@/components/atoms/button/Button";
-import RegularText from "@/components/atoms/regular-text/RegularText";
-import TextLink from "@/components/atoms/text-link/TextLink";
+'use client';
+import FormField from '@/components/atoms/form-field/FormField';
+import React, { useState } from 'react';
+import styles from './LoginPage.module.scss';
+import BigTitle from '@/components/atoms/big-title/BigTitle';
+import Button from '@/components/atoms/button/Button';
+import RegularText from '@/components/atoms/regular-text/RegularText';
+import TextLink from '@/components/atoms/text-link/TextLink';
 import {
   isEmpty,
   isPasswordFilled,
   isValidEmail,
-} from "@/helpers/FormValidation/FormValidation";
-import { login } from "@/services/UserService";
-import { useRouter } from "next/navigation";
+} from '@/helpers/FormValidation/FormValidation';
+import { login } from '@/services/UserService';
+import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
   const router = useRouter();
-  const [formValues, setFormValues] = useState({ email: "", password: "" });
-  const [errors, setErrors] = useState({ email: "", password: "" });
+  const [formValues, setFormValues] = useState({ email: '', password: '' });
+  const [errors, setErrors] = useState({ email: '', password: '' });
 
   const validateForm = () => {
-    let newErrors = {};
+    const newErrors = {};
     if (!isValidEmail(formValues.email)) {
-      newErrors.email = "Please enter a valid email address";
+      newErrors.email = 'Please enter a valid email address';
     }
     if (!isPasswordFilled(formValues.password)) {
-      newErrors.password = "Please enter a password";
+      newErrors.password = 'Please enter a password';
     }
     setErrors({ ...newErrors, formError: errors.formError });
     return isEmpty(newErrors);
@@ -39,12 +39,12 @@ export default function LoginPage() {
         const response = await login(formValues);
 
         if (response.code === 200) {
-          router.push("/dashboard");
+          router.push('/dashboard');
         } else {
           setErrors({ formError: response.message });
         }
       } catch (error) {
-        setErrors({ formError: "Something went wrong try again later" });
+        setErrors({ formError: 'Something went wrong try again later' });
       }
     }
   };
