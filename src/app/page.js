@@ -10,7 +10,7 @@ import CameraSVG from '@/utils/icons/CameraSVG';
 import RouteSVG from '@/utils/icons/RouteSVG';
 import EventCard from '@/components/organisms/event-card/EventCard';
 import Banner from '@/components/organisms/banner/Banner';
-import styles from './page.module.scss';
+import styles from './HomePage.module.scss';
 import BoldText from '@/components/atoms/bold-text/BoldText';
 
 const HomePage = () => {
