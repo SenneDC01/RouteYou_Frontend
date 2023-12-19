@@ -24,7 +24,13 @@ const Header = ({ profileName = "John Doe", profilePicture = null }) => {
   const dropdownItemsProfile = ["Dashboard", "Logout"];
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen} isBordered maxWidth="2xl" as="div">
+    <Navbar
+      isMenuOpen={isMenuOpen}
+      onMenuOpenChange={setIsMenuOpen}
+      isBordered
+      maxWidth="2xl"
+      as="div"
+    >
       <NavbarMenuToggle
         aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         className="sm:hidden"

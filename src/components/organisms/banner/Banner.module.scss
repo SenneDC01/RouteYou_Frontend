@@ -53,6 +53,9 @@
     justify-content: space-around;
     flex-wrap: wrap;
     gap: 8rem;
+    @media screen and (max-width: 610px) {
+        gap: 1rem
+    }
 }
 
 .image {

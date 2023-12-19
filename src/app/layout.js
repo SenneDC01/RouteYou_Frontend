@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Header from "@/components/organisms/header/Header";
 import "@/app/assets/globals.css";
 import Footer from "@/components/organisms/footer/Footer";
@@ -14,7 +13,6 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="nl">
-      <Head></Head>
       <body>
         <a href="#main-content" className="skip-link">
           Ga naar hoofdinhoud

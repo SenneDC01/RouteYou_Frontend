@@ -6,13 +6,13 @@ const HEADERS = {
 
 export const createdEvents = async () => {
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 10000); // Set a 10-second timeout
+  const timeoutId = setTimeout(() => controller.abort(), 10000);
 
   try {
     const response = await fetch(`${API_URL}/events/created`, {
       method: "GET",
       headers: HEADERS,
-      signal: controller.signal, // Attach the abort signal to the request
+      signal: controller.signal,
     });
 
     if (!response.ok) {
@@ -24,10 +24,9 @@ export const createdEvents = async () => {
 
     return data.events.data;
   } catch (error) {
-    // Handle the error, for example, if the request was aborted due to a timeout
     console.error("Error fetching data:", error);
     return null;
   } finally {
-    clearTimeout(timeoutId); // Clear the timeout to prevent it from triggering
+    clearTimeout(timeoutId);
   }
 };
