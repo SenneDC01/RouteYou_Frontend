@@ -1,19 +1,19 @@
-import "@testing-library/jest-dom";
-import { render, fireEvent, screen } from "@testing-library/react";
-import Header from "./Header.jsx";
-import profilePicture from "@/utils/images/profilePicture.png";
-import React from "react";
+import '@testing-library/jest-dom';
+import { render, fireEvent, screen } from '@testing-library/react';
+import Header from './Header.jsx';
+import profilePicture from '@/utils/images/profilePicture.png';
+import React from 'react';
 
 const mockPathname = jest.fn();
 
-jest.mock("next/navigation", () => ({
+jest.mock('next/navigation', () => ({
   usePathname() {
     return mockPathname();
   },
 }));
-describe("Header", () => {
-  test("renders Header component", () => {
-    mockPathname.mockImplementation(() => "/");
+describe('Header', () => {
+  test('renders Header component', () => {
+    mockPathname.mockImplementation(() => '/');
 
     render(<Header />);
     expect(screen.getByAltText('RouteYou')).toBeInTheDocument();

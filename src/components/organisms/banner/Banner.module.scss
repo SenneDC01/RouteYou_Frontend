@@ -1,64 +1,63 @@
-
 .button {
-    width: 13rem;
-    @media screen and (max-width: 370px) {
-        display: none;
-    }
+  width: 13rem;
+  @media screen and (max-width: 370px) {
+    display: none;
+  }
 }
 
 .bannerContainer {
-    display: flex;
-    justify-items: center;
-    justify-content: center;
-    width: 100%;
-    max-width: 100%;
-    max-height: 35rem;
-    overflow: hidden;
-    background-position: center;
+  display: flex;
+  justify-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
+  max-height: 35rem;
+  overflow: hidden;
+  background-position: center;
 }
 
 .contentContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    padding: 2rem;
-    gap: 2rem;
-    inset: 0;
-    @media screen and (max-width: 475px) {
-        gap: 0;
-        padding: 0.2rem;
-    }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  padding: 2rem;
+  gap: 2rem;
+  inset: 0;
+  @media screen and (max-width: 475px) {
+    gap: 0;
+    padding: 0.2rem;
+  }
 }
 
 .title {
-    color: white;
-    font-size: 2.5rem;
-    font-weight: 600;
-    line-height: 3rem;
+  color: white;
+  font-size: 2.5rem;
+  font-weight: 600;
+  line-height: 3rem;
+  margin: 1rem;
+  text-transform: uppercase;
+  @media screen and (max-width: 475px) {
+    font-size: 1.5rem;
     margin: 1rem;
-    text-transform: uppercase;
-    @media screen and (max-width: 475px) {
-        font-size: 1.5rem;
-        margin: 1rem;
-        line-height: 2rem;
-    }
+    line-height: 2rem;
+  }
 }
 
 .buttonGroup {
-    display: flex;
-    width: 100%;
-    max-width: 50rem;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap: 8rem;
-    @media screen and (max-width: 610px) {
-        gap: 1rem
-    }
+  display: flex;
+  width: 100%;
+  max-width: 50rem;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 8rem;
+  @media screen and (max-width: 610px) {
+    gap: 1rem;
+  }
 }
 
 .image {
-    filter: brightness(.5);
-    object-fit: cover;
+  filter: brightness(0.5);
+  object-fit: cover;
 }

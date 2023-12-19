@@ -7,8 +7,7 @@ import {
   DropdownItem,
   Button,
   Link,
-} from "@nextui-org/react";
-import styles from "@/components/organisms/header/Header.module.scss";
+} from '@nextui-org/react';
 
 const CustomDropdown = ({ buttonText, items }) => {
   const dropdownStyle = {

@@ -1,7 +1,7 @@
-import Header from "@/components/organisms/header/Header";
-import "@/app/assets/globals.css";
-import Footer from "@/components/organisms/footer/Footer";
-import profilePic from "@/utils/images/profilePicture.png";
+import Header from '@/components/organisms/header/Header';
+import '@/app/assets/globals.css';
+import Footer from '@/components/organisms/footer/Footer';
+import profilePic from '@/utils/images/profilePicture.png';
 
 export const metadata = {
   title: 'RouteYou - Ontdek en deel routes',
@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="nl">
       <body>
-        <Header profileName={"John Doe"} profilePicture={profilePic} />
+        <Header profileName={'John Doe'} profilePicture={profilePic} />
         <main id="main-content">{children}</main>
         <Footer />
       </body>
