@@ -8,7 +8,6 @@ import {
   Button,
 } from "@nextui-org/react";
 
-// https://nextui.org/docs/components/dropdown
 const CustomDropdown = ({ buttonText, items }) => {
   const dropdownStyle = {
     padding: 0,

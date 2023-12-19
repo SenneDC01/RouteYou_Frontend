@@ -3,6 +3,14 @@ import RegisterPage from "./page";
 import * as UserService from "@/services/UserService";
 import { act } from "react-test-renderer";
 
+jest.mock("next/navigation", () => ({
+  useRouter() {
+    return {
+      prefetch: () => null,
+    };
+  },
+}));
+
 describe("RegisterPage component", () => {
   let mockRegister;
 

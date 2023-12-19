@@ -1,18 +1,23 @@
 import BigTitle from "@/components/atoms/big-title/BigTitle";
 import RegularText from "@/components/atoms/regular-text/RegularText";
-import styles from "./StylesPrivacyVerklaring.scss";
+import styles from "./Privacyverklaring.module.scss";
 import BoldText from "@/components/atoms/bold-text/BoldText";
 
-export default function Page() {
+export function generateMetadata() {
+  return {
+    title: "Privacyverklaring - RouteYou",
+    description: "Privacyverklaring van RouteYou.",
+    keywords: "RouteYou, privacy, verklaring, privacyverklaring",
+  };
+}
+
+export default function Privacyverklaring() {
   return (
-    <div
-      className={styles.page}
-      style={{ maxWidth: 1100, margin: "2rem auto" }}
-    >
+    <div className={styles.page} data-testid="privacy-verklaring">
       <BigTitle>Privacyverklaring</BigTitle>
       <br></br>
 
-      <RegularText>Laatst bijgewerkt op 21/11/2023</RegularText>
+      <RegularText>Laatst bijgewerkt op 14/12/2023</RegularText>
       <RegularText>
         Welkom bij RouteYou! Wij waarderen het vertrouwen dat je in ons stelt
         door onze applicatie te gebruiken en doen er alles aan om je privacy te
@@ -86,7 +91,7 @@ export default function Page() {
       <BoldText>6. Contactgegevens</BoldText>
       <RegularText>
         Voor vragen over deze privacyverklaring of je persoonlijke gegevens,
-        neem contact met ons op via [jouw contactgegevens].
+        neem contact met ons op via info@routeyou.com.
       </RegularText>
       <br></br>
 

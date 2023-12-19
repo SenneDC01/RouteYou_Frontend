@@ -10,6 +10,8 @@ WORKDIR /app
 COPY package.json  package.json 
 COPY package-lock.json package-lock.json
 RUN npm ci
+RUN npm install sharp
+
 # Rebuild the source code only when needed
 
 FROM base AS builder

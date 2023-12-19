@@ -7,8 +7,6 @@ export const metadata = {
   keywords: "RouteYou, evenement, routes, inschrijven",
 };
 
-
-
 export default function EventByIdLayout({ children, params }) {
   console.log("Event Id:" + params.id);
   //TODO fetch event from API by ID.

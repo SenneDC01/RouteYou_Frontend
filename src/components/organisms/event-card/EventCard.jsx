@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Image from "next/image";
 import BoldText from "@/components/atoms/bold-text/BoldText";
 import SubText from "@/components/atoms/sub-text/SubText";
@@ -28,7 +27,7 @@ const EventCard = ({ event }) => {
           <FavButton />
         </div>
         <SubText>
-          {event.organisator} <br /> {event.start_date}
+          {event.author} <br /> {event.start_date}
         </SubText>
         <div className={[styles.flexColContainer]}>
           <SVGtext
