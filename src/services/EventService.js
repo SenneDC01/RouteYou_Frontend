@@ -53,3 +53,6 @@ export const interestedEvents = async () => {
     clearTimeout(timeoutId);
   }
 };
+
+// Get participants
+//http://10.129.23.226:8080/api/documentation#/Events/getParticipants
