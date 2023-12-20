@@ -7,10 +7,10 @@
 
 ## Links staging
 
-* [Frontend](http://34.38.143.130:5000/)
-* [Backend](http://34.38.143.130:8080/)
+* [Frontend](https://stagingfrontend-s3yyo4v6ta-ew.a.run.app/)
+* [Backend](https://stagingbackend-s3yyo4v6ta-ew.a.run.app/)
 
 ## Links prod
 
-* [Frontend](http://34.140.247.227:5000/)
-* [Backend](http://34.140.247.227:8080/)
+* [Frontend](https://prod-frontend-s3yyo4v6ta-ew.a.run.app/)
+* [Backend](https://prod-backend-s3yyo4v6ta-ew.a.run.app/)
