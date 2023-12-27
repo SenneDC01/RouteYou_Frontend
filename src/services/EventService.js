@@ -62,6 +62,9 @@ export const getParticipants = async () => {
 
   try {
     const response = await fetch(`${API_URL}/events/getParticipants`, {
+      // const response = await fetch(
+      //   `http://10.129.23.226:8080/api/documentation#/Events/getParticipants`,
+      //   {
       method: 'GET',
       headers: HEADERS,
       signal: controller.signal,
