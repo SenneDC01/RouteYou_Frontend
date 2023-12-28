@@ -4,6 +4,7 @@ import StatusDropdown from '@/components/molecules/status-drop-down/StatusDropdo
 import SortDropdown from '@/components/molecules/sort-drop-down/SortDropdown';
 import styles from './Participants.module.scss';
 import InviteButton from '@/components/atoms/button/Button';
+import InviteUsersFrame from '@/components/molecules/invite-users-frame/InviteUsersFrame';
 
 const mockParticipants = [
   { id: 1, name: 'John Doe', date: '2023-01-01' },
@@ -15,6 +16,7 @@ const Participants = () => {
   const [participants, setParticipants] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [sortKey, setSortKey] = useState(null);
+  const [isInviteFrameOpen, setIsInviteFrameOpen] = useState(false);
 
   useEffect(() => {
     const fetchParticipants = async () => {
@@ -48,6 +50,20 @@ const Participants = () => {
     setSortKey(key);
   };
 
+  const handleInviteClick = () => {
+    setIsInviteFrameOpen(true);
+  };
+
+  const handleCloseInviteFrame = () => {
+    setIsInviteFrameOpen(false);
+  };
+
+  const handleInviteUser = (userId) => {
+    // Implement the logic to send an invitation
+    console.log(`Inviting user with ID: ${userId}`);
+    setIsInviteFrameOpen(false);
+  };
+
   return (
     <div className={styles.container}>
       <h2>Participants:</h2>
@@ -70,7 +86,9 @@ const Participants = () => {
         </div>
         <div>
           <br />
-          <InviteButton className={styles.button}>Invite Users</InviteButton>
+          <InviteButton className={styles.button} onClick={handleInviteClick}>
+            Invite Users
+          </InviteButton>
         </div>
       </div>
       <ul>
@@ -81,6 +99,12 @@ const Participants = () => {
           </li>
         ))}
       </ul>
+      {isInviteFrameOpen && (
+        <InviteUsersFrame
+          onClose={handleCloseInviteFrame}
+          onInvite={handleInviteUser}
+        />
+      )}
     </div>
   );
 };

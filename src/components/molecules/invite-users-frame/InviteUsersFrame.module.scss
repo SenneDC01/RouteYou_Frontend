@@ -1,0 +1,32 @@
+@use '@/app/assets/vars.scss' as vars;
+
+.container {
+  width: 18rem;
+  height: 10rem;
+  border: solid 2px;
+  border-radius: 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.3rem;
+  background: vars.$white;
+  position: sticky;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.searchBar {
+  width: 13rem;
+  height: 2.5rem;
+  border: solid 2px lightgray;
+  border-radius: 4px;
+  padding: 0 0.5rem 0 0.5rem;
+}
+
+.button {
+  width: 13rem;
+  font-size: 0.8rem;
+  padding: 1rem;
+}
