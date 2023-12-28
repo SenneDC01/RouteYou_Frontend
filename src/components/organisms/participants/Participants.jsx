@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { getParticipants } from '@/services/EventService';
 import StatusDropdown from '@/components/molecules/status-drop-down/StatusDropdown';
+import SortDropdown from '@/components/molecules/sort-drop-down/SortDropdown';
 import styles from './Participants.module.scss';
+import InviteButton from '@/components/atoms/button/Button';
 
 const mockParticipants = [
-  { id: 1, name: 'John Doe' },
-  { id: 2, name: 'Jane Doe' },
-  // Add more mock participants as needed
+  { id: 1, name: 'John Doe', date: '2023-01-01' },
+  { id: 2, name: 'Jane Doe', date: '2023-02-01' },
+  { id: 3, name: 'Senne De Cock', date: '2023-03-01' },
 ];
 
 const Participants = () => {
   const [participants, setParticipants] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [sortKey, setSortKey] = useState(null);
 
   useEffect(() => {
     const fetchParticipants = async () => {
@@ -27,14 +31,53 @@ const Participants = () => {
     fetchParticipants();
   }, []);
 
+  const filteredParticipants = participants
+    .filter((participant) =>
+      participant.name.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+    .sort((a, b) => {
+      if (sortKey === 'name') {
+        return a.name.localeCompare(b.name);
+      } else if (sortKey === 'date') {
+        return new Date(a.date) - new Date(b.date);
+      }
+      return 0;
+    });
+
+  const handleSortChange = (key) => {
+    setSortKey(key);
+  };
+
   return (
     <div className={styles.container}>
       <h2>Participants:</h2>
+      <div className={styles.headerContainer}>
+        <div className={styles.searchContainer}>
+          <div>
+            <p>Search Participants</p>
+            <input
+              className={styles.searchBar}
+              type="text"
+              placeholder="Search by name"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+          <div>
+            <p>Sort</p>
+            <SortDropdown onSortChange={handleSortChange} />
+          </div>
+        </div>
+        <div>
+          <br />
+          <InviteButton className={styles.button}>Invite Users</InviteButton>
+        </div>
+      </div>
       <ul>
-        {participants.map((participant) => (
+        {filteredParticipants.map((participant) => (
           <li key={participant.id} className={styles.list}>
             {participant.name}
-            <StatusDropdown></StatusDropdown>
+            <StatusDropdown />
           </li>
         ))}
       </ul>

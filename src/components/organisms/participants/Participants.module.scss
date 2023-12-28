@@ -3,6 +3,25 @@
   width: 90%;
 }
 
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.searchContainer {
+  display: flex;
+  gap: 2rem;
+}
+
+.searchBar {
+  width: 13rem;
+  height: 2.5rem;
+  border: solid 2px lightgray;
+  border-radius: 4px;
+  padding: 0 0.5rem 0 0.5rem;
+}
+
 .list {
   border-bottom: solid 2px;
   padding: 0.5rem;
@@ -11,4 +30,10 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
+}
+
+.button {
+  width: 8rem;
+  font-size: 0.8rem;
+  padding: 1rem;
 }
