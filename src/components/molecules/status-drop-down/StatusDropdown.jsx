@@ -29,7 +29,7 @@ const statusOptions = [
   },
 ];
 
-const Participants = () => {
+const StatusDropdown = () => {
   const [selectedKeys, setSelectedKeys] = React.useState(
     new Set(['interested'])
   );
@@ -60,7 +60,11 @@ const Participants = () => {
         onSelectionChange={setSelectedKeys}
       >
         {statusOptions.map((option) => (
-          <DropdownItem key={option.key} className="flex items-center">
+          <DropdownItem
+            key={option.key}
+            textValue={option.label}
+            className="flex items-center"
+          >
             <div className="flex">
               {option.icon}
               <span className="ml-2">{option.label}</span>
@@ -72,4 +76,4 @@ const Participants = () => {
   );
 };
 
-export default Participants;
+export default StatusDropdown;
