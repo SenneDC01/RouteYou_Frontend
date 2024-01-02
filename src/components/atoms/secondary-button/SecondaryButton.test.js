@@ -6,13 +6,13 @@ import AddSVG from '@/utils/icons/AddSVG';
 
 describe('Secondary Button component', () => {
   it('renders button with label and icon', () => {
-    render(<SecondaryButton icon={<AddSVG/>}>Click me</SecondaryButton>);
+    render(<SecondaryButton icon={<AddSVG />}>Click me</SecondaryButton>);
     const buttonElement = screen.getByText('Click me');
     expect(buttonElement).toBeInTheDocument();
   });
 
   it('renders button with label and type', () => {
-    render(<SecondaryButton type='submit'>Click me</SecondaryButton>);
+    render(<SecondaryButton type="submit">Click me</SecondaryButton>);
     const buttonElement = screen.getByText('Click me');
     expect(buttonElement).toBeInTheDocument();
   });
