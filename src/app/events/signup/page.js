@@ -62,7 +62,7 @@ export default function SignUpPage({ event }) {
         if (response.code === 200) {
           console.log('Success');
         } else {
-          // setErrors({ formError: response.message });
+          setErrors({ formError: response.message });
         }
       } catch (error) {
         console.log(error);
@@ -73,22 +73,24 @@ export default function SignUpPage({ event }) {
   const validateGroupMembers = () => {
     const newErrors = [];
     let isValid = true;
-    groupMembers.forEach((groupMember) => {
-      const errors = {};
-      if (!isFilled(groupMember.firstname)) {
-        errors.firstname = 'Please enter a firstname';
-      }
-      if (!isFilled(groupMember.lastname)) {
-        errors.lastname = 'Please enter a lastname';
-      }
-      if (!isValidEmail(groupMember.email)) {
-        errors.email = 'Please enter an email';
-      }
-      if (isValid) {
-        isValid = isEmpty(errors);
-      }
-      newErrors.push(errors);
-    });
+    if (groupMembers) {
+      groupMembers.forEach((groupMember) => {
+        const errors = {};
+        if (!isFilled(groupMember.firstname)) {
+          errors.firstname = 'Please enter a firstname';
+        }
+        if (!isFilled(groupMember.lastname)) {
+          errors.lastname = 'Please enter a lastname';
+        }
+        if (!isValidEmail(groupMember.email)) {
+          errors.email = 'Please enter an email';
+        }
+        if (isValid) {
+          isValid = isEmpty(errors);
+        }
+        newErrors.push(errors);
+      });
+    }
     setErrors(newErrors);
     return isValid;
   };
@@ -109,6 +111,9 @@ export default function SignUpPage({ event }) {
         </Button>
 
         <form onSubmit={handleSubmit} method="post">
+          {errors.formError && (
+            <p className={styles.error}>{errors.formError}</p>
+          )}
           {groupMembers && (
             <div>
               {groupMembers.map((groupMember, index) => (

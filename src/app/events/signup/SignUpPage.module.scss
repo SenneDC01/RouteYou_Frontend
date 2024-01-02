@@ -18,6 +18,10 @@
   justify-content: center;
   gap: 1rem;
   flex: 1;
+
+  .error {
+    color: vars.$red;
+  }
 }
 .formGroup {
   display: flex;

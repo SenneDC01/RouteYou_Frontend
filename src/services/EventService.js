@@ -58,9 +58,9 @@ export const signUpEvent = async (eventId, groupMembers) => {
   const response = await fetch(`${API_URL}/events/${eventId}/participate`, {
     method: 'POST',
     headers: HEADERS,
-    body: JSON.stringify({
+    body: groupMembers ? JSON.stringify({
       group_members: groupMembers,
-    }),
+    }) : null,
   });
   const data = await response.json();
 
