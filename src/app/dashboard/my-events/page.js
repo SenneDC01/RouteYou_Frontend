@@ -2,7 +2,8 @@ import React from 'react';
 import DashboardNav from '@/components/organisms/dashboard-nav/DashboardNav';
 import DashboardContent from '@/components/organisms/dashboard-content/DashboardContent';
 import EventCard from '@/components/organisms/event-card/EventCard';
-import styles from './MyEventsPage.module.scss';
+import styles from '../DashboardPage.module.scss';
+import '../DashboardStyling.css';
 
 export default async function Page({ events }) {
   return (
