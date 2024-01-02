@@ -17,6 +17,7 @@ import {
   isValidEmail,
 } from '@/helpers/FormValidation/FormValidation';
 import { signUpEvent } from '@/services/EventService';
+import SignUpBill from '@/components/molecules/signup-bill/SignUpBill';
 
 export default function SignUpPage({ event }) {
   const [groupMembers, setGroupMembers] = useState(null);
@@ -65,7 +66,9 @@ export default function SignUpPage({ event }) {
           setErrors({ formError: response.message });
         }
       } catch (error) {
-        console.log(error);
+        setErrors({
+          formError: 'You were unable to register, please try again later.',
+        });
       }
     }
   };
@@ -110,7 +113,11 @@ export default function SignUpPage({ event }) {
           {groupMembers ? 'Remove group members' : 'Add group members'}
         </Button>
 
-        <form onSubmit={handleSubmit} method="post">
+        <form
+          onSubmit={handleSubmit}
+          method="post"
+          className={styles.signUpForm}
+        >
           {errors.formError && (
             <p className={styles.error}>{errors.formError}</p>
           )}
@@ -158,6 +165,10 @@ export default function SignUpPage({ event }) {
               </SecondaryButton>
             </div>
           )}
+          <SignUpBill
+            eventPrice={event.price}
+            numberOfGroupMembers={groupMembers?.length}
+          />
           <div className={styles.buttonGroup}>
             <ButtonLink
               link={`/events/${event.id}`}
