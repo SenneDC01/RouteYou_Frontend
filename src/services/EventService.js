@@ -53,3 +53,16 @@ export const interestedEvents = async () => {
     clearTimeout(timeoutId);
   }
 };
+
+export const signUpEvent = async (eventId, groupMembers) => {
+  const response = await fetch(`${API_URL}/events/${eventId}/participate`, {
+    method: 'POST',
+    headers: HEADERS,
+    body: JSON.stringify({
+      group_members: groupMembers,
+    }),
+  });
+  const data = await response.json();
+
+  return { ...data, code: response.status };
+};
