@@ -9,7 +9,9 @@ describe('LoadingSpinner', () => {
   });
 
   it('does not render when isLoading is false', () => {
-    const { container } = render(<LoadingSpinner isLoading={false} message="Not Loading..." />);
+    const { container } = render(
+      <LoadingSpinner isLoading={false} message="Not Loading..." />
+    );
     expect(container.firstChild).toBeNull();
   });
 });
