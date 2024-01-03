@@ -1,21 +1,21 @@
 import React from 'react';
-import Link from 'next/link';
-import styles from './ButtonLink.module.scss';
+import styles from './SecondaryButton.module.scss';
 
-export default function ButtonLink({
+export default function SecondaryButton({
   children,
+  onClick,
+  type = 'button',
   icon = null,
-  link = '/',
   className,
 }) {
   return (
-    <Link
-      href={link}
-      aria-label="forward button"
+    <button
+      type={type}
+      onClick={onClick}
       className={[styles.buttonStyle, className].join(' ')}
     >
       {icon && <span className={styles.icon}>{icon}</span>}
       {children}
-    </Link>
+    </button>
   );
 }

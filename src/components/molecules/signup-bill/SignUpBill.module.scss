@@ -1,0 +1,23 @@
+@use '@/app/assets/vars.scss' as vars;
+
+.bill {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  .billItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .billItemText {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .billLine {
+    border-top: 2px solid vars.$grey;
+  }
+}
