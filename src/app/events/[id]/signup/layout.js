@@ -27,6 +27,6 @@ export async function generateMetadata({ params }) {
 
 export default async function SignUpLayout({ children, params }) {
   const { event } = await getEventInfo(params.id);
-  
+
   return <SignUpPage event={event}>{children}</SignUpPage>;
 }
