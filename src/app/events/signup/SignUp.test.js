@@ -110,4 +110,45 @@ describe('SignUpPage', () => {
     });
     expect(mockSignUp).not.toHaveBeenCalled();
   });
+
+  it('tries to signs up a user but API returns 500 code', async () => {
+    const mockSignUp = jest.spyOn(EventService, 'signUpEvent');
+    mockSignUp.mockImplementation(() => Promise.reject());
+
+    render(<SignUpPage event={mockEvent} />);
+
+    await act(async () => {
+      fireEvent.click(screen.getByRole('button', { name: 'Sign up' }));
+    });
+
+    expect(mockSignUp).toHaveBeenCalled();
+    expect(
+      screen.getByText('You were unable to register, please try again later.')
+    ).toBeInTheDocument();
+
+    mockSignUp.mockRestore();
+  });
+
+  it('tries to signs up a user that is already singed up', async () => {
+    const mockSignUp = jest.spyOn(EventService, 'signUpEvent');
+    mockSignUp.mockImplementation(() =>
+      Promise.resolve({
+        message: 'You are already signed up in this event.',
+        code: 409,
+      })
+    );
+
+    render(<SignUpPage event={mockEvent} />);
+
+    await act(async () => {
+      fireEvent.click(screen.getByRole('button', { name: 'Sign up' }));
+    });
+
+    expect(mockSignUp).toHaveBeenCalled();
+    expect(
+      screen.getByText('You are already signed up in this event.')
+    ).toBeInTheDocument();
+
+    mockSignUp.mockRestore();
+  });
 });
