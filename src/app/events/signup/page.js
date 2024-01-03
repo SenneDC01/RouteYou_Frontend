@@ -19,11 +19,13 @@ import {
 import { signUpEvent } from '@/services/EventService';
 import SignUpBill from '@/components/molecules/signup-bill/SignUpBill';
 import { useRouter } from 'next/navigation';
+import LoadingSpinner from '@/components/molecules/loading-spinner/LoadingSpinner';
 
 export default function SignUpPage({ event }) {
   const router = useRouter();
   const [groupMembers, setGroupMembers] = useState(null);
   const [errors, setErrors] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const toggleGroupMembers = () => {
     setErrors([]);
@@ -61,6 +63,7 @@ export default function SignUpPage({ event }) {
     const isValid = validateGroupMembers();
     if (isValid) {
       try {
+        setIsLoading(true);
         const response = await signUpEvent(event.id, groupMembers);
         if (response.code === 200) {
           router.push(`/events/${event.id}/ticket`);
@@ -71,6 +74,8 @@ export default function SignUpPage({ event }) {
         setErrors({
           formError: 'You were unable to register, please try again later.',
         });
+      } finally {
+        setIsLoading(false);
       }
     }
   };
@@ -180,6 +185,10 @@ export default function SignUpPage({ event }) {
             </ButtonLink>
             <Button type="submit">Sign up</Button>
           </div>
+          <LoadingSpinner
+            isLoading={isLoading}
+            message="Signing up and generating your ticket."
+          />
         </form>
       </div>
     </div>
