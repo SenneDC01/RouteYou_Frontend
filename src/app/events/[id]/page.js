@@ -2,39 +2,34 @@ import React from 'react';
 import styles from './DetailPage.module.scss';
 import '@/app/assets/globals.css';
 import DetailColumn from '@/components/organisms/detail-column/DetailColumn';
+import { eventDetail } from '@/services/EventService';
+import { redirect } from 'next/navigation';
 
-export function generateMetadata() {
+const getEventInfo = async (eventId) => {
+  try {
+    const response = await eventDetail(eventId);
+
+    if (response.code !== 200) {
+      redirect('/');
+    }
+    return response;
+  } catch (error) {
+    redirect('/');
+  }
+};
+
+export async function generateMetadata({ params }) {
+  const { event } = await getEventInfo(params.id);
+
   return {
-    title: 'City Light Run Aalst - RouteYou',
-    description:
-      'Event: City Light Run Aalst - Discover the route and register for this great event on RouteYou.',
+    title: `${event.name} - RouteYou`,
+    description: `Event: ${event.name} - Discover the route and register for this great event on RouteYou.`,
     keywords: 'RouteYou, event, routes, registration',
   };
 }
 
-export default async function Page() {
-  const event = {
-    id: 1,
-    name: 'City Light Run Aalst',
-    description: 'Loop langs de mooiste parels van Aalst',
-    start_date: '2024-04-22 21:00:00',
-    max_participants: 1000,
-    price: '5.00',
-    visibility: 'PUBLIC',
-    image_url: 'http://localhost:8080/storage/images/no-profile-picture.png',
-    author: 'Senna Uyttersprot',
-    routes: [
-      {
-        route_data: {
-          id: 6833170,
-          duration: '1.2km',
-          startAddress: 'Aalst, Oost-Vlaanderen, Vlaanderen',
-          type: 'Looproute',
-          difficulty: 0.3,
-        },
-      },
-    ],
-  };
+export default async function Page({ params }) {
+  const { event } = await getEventInfo(params.id);
 
   return (
     <div className={styles.detailPage}>
