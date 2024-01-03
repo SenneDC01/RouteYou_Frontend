@@ -4,13 +4,23 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { act } from 'react-test-renderer';
 import * as EventService from '@/services/EventService';
 
+const mockPush = jest.fn();
+jest.mock('next/navigation', () => ({
+  useRouter() {
+    return {
+      prefetch: () => null,
+      push: mockPush,
+    };
+  },
+}));
+
 describe('SignUpPage', () => {
   const mockEvent = {
     name: 'Test Event',
     id: '1',
   };
 
-  it('renders correctly', () => {
+  it('renders correctly and can toggle group members form', () => {
     render(<SignUpPage event={mockEvent} />);
     expect(screen.getByText('Sign Up')).toBeInTheDocument();
     expect(
@@ -18,6 +28,12 @@ describe('SignUpPage', () => {
         `Register for ${mockEvent.name}. For groups or families it is possible to register multiple group members.`
       )
     ).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText('Add group members'));
+    expect(screen.getByText('Member 1')).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText('Remove group members'));
+    expect(screen.queryByText('Member 1')).not.toBeInTheDocument();
   });
 
   it('adds group members when button is clicked', () => {
@@ -52,7 +68,7 @@ describe('SignUpPage', () => {
 
   beforeEach(() => {
     mockSignUp = jest.spyOn(EventService, 'signUpEvent');
-    mockSignUp.mockImplementation(() => Promise.resolve());
+    mockSignUp.mockImplementation(() => Promise.resolve({ code: 200 }));
   });
 
   afterEach(() => {
@@ -83,6 +99,7 @@ describe('SignUpPage', () => {
       fireEvent.click(screen.getByRole('button', { name: 'Sign up' }));
     });
     expect(mockSignUp).toHaveBeenCalled();
+    expect(mockPush).toHaveBeenCalled();
   });
 
   it('validates form fields and handles form submission with invalid form data', async () => {
