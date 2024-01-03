@@ -1,13 +1,13 @@
-import Page from './page';
+import SignUpPage from './page';
 
 export const metadata = {
   title: 'City Light Run Aalst - RouteYou',
   description:
-    'Evenement: City Light Run Aalst - Ontdek de route en schrijf je in voor dit geweldige evenement op RouteYou.',
-  keywords: 'RouteYou, evenement, routes, inschrijven',
+    'Event: City Light Run Aalst - Discover the route and register for this great event on RouteYou.',
+  keywords: 'RouteYou, event, routes, registration',
 };
 
-export default function EventByIdLayout({ children }) {
+export default function SignUpLayout({ children }) {
   const event = {
     id: 1,
     name: 'City Light Run Aalst',
@@ -30,5 +30,5 @@ export default function EventByIdLayout({ children }) {
       },
     ],
   };
-  return <Page event={event}>{children}</Page>;
+  return <SignUpPage event={event}>{children}</SignUpPage>;
 }
