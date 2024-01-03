@@ -18,8 +18,10 @@ import {
 } from '@/helpers/FormValidation/FormValidation';
 import { signUpEvent } from '@/services/EventService';
 import SignUpBill from '@/components/molecules/signup-bill/SignUpBill';
+import { useRouter } from 'next/navigation';
 
 export default function SignUpPage({ event }) {
+  const router = useRouter();
   const [groupMembers, setGroupMembers] = useState(null);
   const [errors, setErrors] = useState([]);
 
@@ -61,7 +63,7 @@ export default function SignUpPage({ event }) {
       try {
         const response = await signUpEvent(event.id, groupMembers);
         if (response.code === 200) {
-          console.log('Success');
+          router.push(`/events/${event.id}/ticket`);
         } else {
           setErrors({ formError: response.message });
         }
