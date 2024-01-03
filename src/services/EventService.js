@@ -74,4 +74,46 @@ export const signUpEvent = async (eventId, groupMembers) => {
   const data = await response.json();
 
   return { ...data, code: response.status };
+}
+
+export const searchPublicEvents = async (term) => {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 10000);
+
+  try {
+    const response = await fetch(`${API_URL}/events/search/${term}`, {
+      method: 'GET',
+      headers: HEADERS,
+      signal: controller.signal,
+    });
+
+    const data = await response.json();
+
+    return data.events.data;
+  } catch (error) {
+    return null;
+  } finally {
+    clearTimeout(timeoutId);
+  }
+};
+
+export const searchPrivateEvents = async (term) => {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 10000);
+
+  try {
+    const response = await fetch(`${API_URL}/events/search/${term}`, {
+      method: 'GET',
+      headers: HEADERS,
+      signal: controller.signal,
+    });
+
+    const data = await response.json();
+
+    return data.events.data;
+  } catch (error) {
+    return null;
+  } finally {
+    clearTimeout(timeoutId);
+  }
 };
