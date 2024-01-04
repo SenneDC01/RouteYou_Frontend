@@ -15,6 +15,7 @@ module.exports = {
     "/node_modules/",
     "^.+\\.module\\.(css|sass|scss)$",
     "<rootDir>/src/utils/",
+    "<rootDir>/src/middleware.js",
   ],
   moduleNameMapper: {
     // Handle CSS imports (with CSS modules)
