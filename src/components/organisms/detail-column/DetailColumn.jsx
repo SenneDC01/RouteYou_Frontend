@@ -31,13 +31,16 @@ export default function DetailColumn({ event }) {
           {event.start_date}
         </SubText>
         <RegularText>{event.description}</RegularText>
-        <ViewMore link={`./${event.id}/posts`}>Posts</ViewMore>
-        <ViewMore link={`./${event.id}/pictures`}>Pictures</ViewMore>
+        <ViewMore link={`/events/${event.id}/posts`}>Posts</ViewMore>
+        <ViewMore link={`/events/${event.id}/pictures`}>Pictures</ViewMore>
         <div className={styles.row}>
           <Button link="#" icon={<ArrowRightSVG />}>
             Share
           </Button>
-          <ButtonLink link={`./${event.id}/signup`} icon={<ArrowRightSVG />}>
+          <ButtonLink
+            link={`/events/${event.id}/signup`}
+            icon={<ArrowRightSVG />}
+          >
             sign-up
           </ButtonLink>
         </div>

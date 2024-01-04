@@ -4,6 +4,13 @@ const HEADERS = {
   Authorization: process.env.NEXT_PUBLIC_API_TEST_TOKEN,
 };
 
+export const eventDetail = async (eventId) => {
+  const response = await fetch(`${API_URL}/events/${eventId}`);
+  const data = await response.json();
+
+  return { ...data, code: response.status };
+};
+
 export const createdEvents = async () => {
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), 10000);
@@ -53,3 +60,18 @@ export const interestedEvents = async () => {
     clearTimeout(timeoutId);
   }
 };
+
+export const signUpEvent = async (eventId, groupMembers) => {
+  const response = await fetch(`${API_URL}/events/${eventId}/participate`, {
+    method: 'POST',
+    headers: HEADERS,
+    body: groupMembers
+      ? JSON.stringify({
+          group_members: groupMembers,
+        })
+      : null,
+  });
+  const data = await response.json();
+
+  return { ...data, code: response.status };
+}
