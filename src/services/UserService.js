@@ -30,3 +30,14 @@ export const register = async (body) => {
 
   return { ...data, code: response.status };
 };
+
+export const logout = async () => {
+  const response = await fetch(`${API_URL}/logout`, {
+    method: 'POST',
+    headers: HEADERS,
+  });
+  const data = await response.json();
+  Cookies.remove('token');
+
+  return { ...data, code: response.status };
+};
