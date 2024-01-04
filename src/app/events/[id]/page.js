@@ -2,8 +2,8 @@ import React from 'react';
 import styles from './DetailPage.module.scss';
 import '@/app/assets/globals.css';
 import DetailColumn from '@/components/organisms/detail-column/DetailColumn';
-import { eventDetail } from '@/services/EventService';
 import { redirect } from 'next/navigation';
+import { eventDetail } from '@/services/EventService';
 
 const getEventInfo = async (eventId) => {
   try {

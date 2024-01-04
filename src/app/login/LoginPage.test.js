@@ -100,7 +100,7 @@ describe('LoginPage component', () => {
 
     mockLogin.mockRestore();
   });
-  
+
   it('Log in with valid credentials but API returns 500 code', async () => {
     mockLogin = jest.spyOn(UserService, 'login');
     mockLogin.mockImplementation(() => Promise.reject());
