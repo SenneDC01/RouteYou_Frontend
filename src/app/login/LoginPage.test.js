@@ -100,4 +100,31 @@ describe('LoginPage component', () => {
 
     mockLogin.mockRestore();
   });
+  
+  it('Log in with valid credentials but API returns 500 code', async () => {
+    mockLogin = jest.spyOn(UserService, 'login');
+    mockLogin.mockImplementation(() => Promise.reject());
+
+    const { getByLabelText, getByRole } = render(<LoginPage />);
+    const email = 'test@example.com';
+    const password = 'password123';
+
+    await act(async () => {
+      fireEvent.change(getByLabelText('Email'), {
+        target: { value: email },
+      });
+      fireEvent.change(getByLabelText('Password'), {
+        target: { value: password },
+      });
+
+      fireEvent.click(getByRole('button', { name: 'Login' }));
+    });
+
+    expect(mockLogin).toHaveBeenCalled();
+    expect(
+      screen.getByText('Something went wrong try again later')
+    ).toBeInTheDocument();
+
+    mockLogin.mockRestore();
+  });
 });
