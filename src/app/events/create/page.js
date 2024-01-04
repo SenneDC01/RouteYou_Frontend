@@ -1,24 +1,23 @@
 'use client';
 import React, { useState } from 'react';
-import RouteSelect from '@/components/atoms/route-select/RouteSelect';
+import DateTimePicker from '@/components/atoms/date-time-picker/DateTimeField';
 
 export default function Page() {
-  const [formValues, setFormValues] = useState({
-    routeSelect: '',
-  });
+  const [formValues, setFormValues] = useState({ startDate: '' });
+  const [errors, setErrors] = useState({ startDate: 'Error' });
 
-  const handleChange = (e) => {
-    setFormValues({ ...formValues, [e.target.name]: e.target.value });
+  const dateChange = (e) => {
+    setFormValues({ ...formValues, [e.name]: e.value });
   };
 
   return (
     <div>
-      <RouteSelect
-        label="Route Selection"
-        name="routeSelect"
-        placeholder="Select Route..."
-        onChange={handleChange}
-        errorMessage="Dit veld is verplicht"
+      <p>{formValues.startDate}</p>
+      <DateTimePicker
+        label="Start Date"
+        name="startDate"
+        onChange={dateChange}
+        errorMessage={errors.startDate}
       />
     </div>
   );
