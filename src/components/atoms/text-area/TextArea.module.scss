@@ -1,1 +1,29 @@
 @use '@/app/assets/vars.scss' as vars;
+
+.formField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+
+  .label {
+    font-size: vars.$text_medium;
+  }
+
+  .field {
+    font-size: vars.$text_regular;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid vars.$grey;
+    border-radius: vars.$button_radius;
+    background-color: vars.$white;
+    min-height: 6.5rem;
+  }
+
+  .error {
+    color: vars.$red;
+  }
+
+  .invalid {
+    border: 1px solid vars.$red;
+  }
+}

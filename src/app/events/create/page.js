@@ -1,5 +1,24 @@
-import React from 'react';
+'use client';
+import React, { useState } from 'react';
+import TextArea from '@/components/atoms/text-area/TextArea';
 
 export default function Page() {
-  return <div></div>;
+  const [formValues, setFormValues] = useState({ description: '' });
+
+  const handleChange = (e) => {
+    setFormValues({ ...formValues, [e.target.name]: e.target.value });
+  };
+
+  return (
+    <div>
+      <TextArea
+        value={formValues.description}
+        label="Description"
+        name="description"
+        placeholder="Describe your event here..."
+        onChange={handleChange}
+        errorMessage=""
+      />
+    </div>
+  );
 }
