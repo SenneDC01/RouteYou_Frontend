@@ -11,8 +11,8 @@ export default function Page() {
 
   return (
     <div>
+      <p>{formValues.description}</p>
       <TextArea
-        value={formValues.description}
         label="Description"
         name="description"
         placeholder="Describe your event here..."

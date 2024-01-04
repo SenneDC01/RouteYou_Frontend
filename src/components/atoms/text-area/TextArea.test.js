@@ -8,7 +8,6 @@ describe('InputField component', () => {
     const onChange = jest.fn();
     const { getByPlaceholderText } = render(
       <TextArea
-        value=""
         label="Test Label"
         name="testName"
         placeholder="Test Placeholder"
@@ -22,7 +21,6 @@ describe('InputField component', () => {
     expect(input).toBeInTheDocument();
     expect(input).toHaveAttribute('name', 'testName');
     expect(input).toHaveAttribute('type', 'text');
-    expect(input).toHaveAttribute('value', '');
     expect(input).toHaveClass('invalid');
 
     fireEvent.change(input, { target: { value: 'test' } });

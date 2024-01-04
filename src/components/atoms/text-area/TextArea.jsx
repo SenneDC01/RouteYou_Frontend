@@ -5,7 +5,6 @@ import SmallText from '../small-text/SmallText';
 export default function TextArea({
   label,
   placeholder,
-  value,
   name,
   onChange,
   errorMessage,
@@ -18,7 +17,6 @@ export default function TextArea({
       </label>
       <textarea
         id={name}
-        value={value}
         name={name}
         type="text"
         className={[styles.field, errorMessage ? styles.invalid : ''].join(' ')}
