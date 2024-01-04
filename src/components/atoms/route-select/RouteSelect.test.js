@@ -1,7 +1,6 @@
 import React from 'react';
 import * as RouteService from '@/services/RouteService';
 import { render, fireEvent, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import { act } from 'react-test-renderer';
 import RouteSelect from './RouteSelect';
 import '@testing-library/jest-dom';
@@ -24,17 +23,6 @@ describe('Search select component', () => {
 
   it('renders select correctly', async () => {
     const onChange = jest.fn();
-    // const { getByLabelText } = render(
-    //   <RouteSelect
-    //     label="Test Label"
-    //     name="testName"
-    //     placeholder="Test Placeholder"
-    //     onChange={onChange}
-    //     errorMessage="Dit veld is verplicht"
-    //   />
-    // );
-
-    // await act(async () => {});
 
     render(
       <RouteSelect
@@ -46,8 +34,6 @@ describe('Search select component', () => {
       />
     );
 
-    screen.debug();
-
     const input = screen.getByLabelText('Test Label');
     expect(input).toBeInTheDocument();
     expect(input).toHaveAttribute('id', 'testName');
@@ -56,7 +42,6 @@ describe('Search select component', () => {
   });
 
   it('calls function', async () => {
-    const events = userEvent.setup();
     const onChange = jest.fn();
     render(
       <RouteSelect
