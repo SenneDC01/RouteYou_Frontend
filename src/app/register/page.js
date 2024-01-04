@@ -13,11 +13,13 @@ import {
 } from '@/helpers/FormValidation/FormValidation';
 import { register } from '@/services/UserService';
 import { useRouter } from 'next/navigation';
+import LoadingSpinner from '@/components/molecules/loading-spinner/LoadingSpinner';
 
 const RegisterPage = () => {
   const router = useRouter();
   const [formValues, setFormValues] = useState({});
   const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   const genderOptions = [
     { value: 'MALE', label: 'Male' },
@@ -99,6 +101,7 @@ const RegisterPage = () => {
     const isValid = validateForm();
     if (isValid) {
       try {
+        setIsLoading(true);
         const response = await register(formValues);
 
         if (response.code === 201) {
@@ -116,6 +119,8 @@ const RegisterPage = () => {
         }
       } catch (error) {
         setErrors({ formError: ['Something went wrong try again later.'] });
+      } finally {
+        setIsLoading(false);
       }
     }
   };
@@ -222,6 +227,10 @@ const RegisterPage = () => {
           />
           <Button type="submit">Register</Button>
         </form>
+        <LoadingSpinner
+          isLoading={isLoading}
+          message="Checking credentials and registering"
+        />
       </div>
     </div>
   );
