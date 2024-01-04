@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import DateTimePicker from '@/components/atoms/date-time-picker/DateTimeField';
+import DateTimePicker from '@/components/atoms/date-time-field/DateTimeField';
 
 export default function Page() {
   const [formValues, setFormValues] = useState({ startDate: '' });
