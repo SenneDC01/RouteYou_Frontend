@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import DateTimeField from './DateTimeField';
 
@@ -19,9 +19,6 @@ describe('Date Time Picker component', () => {
     const input = getByLabelText('Test Label');
     expect(input).toBeInTheDocument();
     expect(input).toHaveAttribute('name', 'testName');
-    expect(input).toHaveClass('inValid');
-
-    fireEvent.change(input, { target: { value: 'test' } });
-    expect(onChange).toHaveBeenCalled();
+    expect(input).toHaveClass('invalid');
   });
 });

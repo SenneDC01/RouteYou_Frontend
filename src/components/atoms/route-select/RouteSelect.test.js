@@ -1,6 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-import FormField from './FormField';
+import RouteSelect from './RouteSelect';
 import EventService from '@/services/EventService';
 import { render, fireEvent } from '@testing-library/react';
 import { act } from 'react-test-renderer';
@@ -24,7 +24,7 @@ describe('Search select component', () => {
   it('renders select correctly', async () => {
     const onChange = jest.fn();
     const { getByPlaceholderText } = render(
-      <FormField
+      <RouteSelect
         value=""
         label="Test Label"
         name="testName"
@@ -45,7 +45,7 @@ describe('Search select component', () => {
   it('renders call function', async () => {
     const onSelect = jest.fn();
     const { getByPlaceholderText } = render(
-      <FormField
+      <RouteSelect
         value=""
         label="Test Label"
         name="testName"
