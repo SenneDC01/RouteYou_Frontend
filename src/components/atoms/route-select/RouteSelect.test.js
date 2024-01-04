@@ -1,18 +1,19 @@
 import React from 'react';
-import '@testing-library/jest-dom';
-import FormField from './FormField';
-import EventService from '@/services/EventService';
-import { render, fireEvent } from '@testing-library/react';
+import * as RouteService from '@/services/RouteService';
+import { render, fireEvent, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { act } from 'react-test-renderer';
+import RouteSelect from './RouteSelect';
+import '@testing-library/jest-dom';
 
 describe('Search select component', () => {
   let mockPublic;
   let mockPrivate;
 
   beforeEach(() => {
-    mockPublic = jest.spyOn(EventService, 'searchPublicEvents');
+    mockPublic = jest.spyOn(RouteService, 'searchPublicRoute');
     mockPublic.mockImplementation(() => Promise.resolve());
-    mockPrivate = jest.spyOn(EventService, 'searchPrivateEvents');
+    mockPrivate = jest.spyOn(RouteService, 'searchPrivateRoute');
     mockPrivate.mockImplementation(() => Promise.resolve());
   });
 
@@ -23,9 +24,20 @@ describe('Search select component', () => {
 
   it('renders select correctly', async () => {
     const onChange = jest.fn();
-    const { getByPlaceholderText } = render(
-      <FormField
-        value=""
+    // const { getByLabelText } = render(
+    //   <RouteSelect
+    //     label="Test Label"
+    //     name="testName"
+    //     placeholder="Test Placeholder"
+    //     onChange={onChange}
+    //     errorMessage="Dit veld is verplicht"
+    //   />
+    // );
+
+    // await act(async () => {});
+
+    render(
+      <RouteSelect
         label="Test Label"
         name="testName"
         placeholder="Test Placeholder"
@@ -34,34 +46,34 @@ describe('Search select component', () => {
       />
     );
 
-    const input = getByPlaceholderText('Test Placeholder');
+    screen.debug();
+
+    const input = screen.getByLabelText('Test Label');
     expect(input).toBeInTheDocument();
-    expect(input).toHaveAttribute('name', 'testName');
+    expect(input).toHaveAttribute('id', 'testName');
     expect(input).toHaveAttribute('type', 'text');
     expect(input).toHaveAttribute('value', '');
-    expect(input).toHaveClass('inValid');
   });
 
-  it('renders call function', async () => {
-    const onSelect = jest.fn();
-    const { getByPlaceholderText } = render(
-      <FormField
-        value=""
+  it('calls function', async () => {
+    const events = userEvent.setup();
+    const onChange = jest.fn();
+    render(
+      <RouteSelect
         label="Test Label"
         name="testName"
         placeholder="Test Placeholder"
-        onSelect={onSelect}
+        onChange={onChange}
         errorMessage="Dit veld is verplicht"
       />
     );
 
-    const input = getByPlaceholderText('Test Placeholder');
+    const input = screen.getByLabelText('Test Label');
 
     await act(async () => {
-      fireEvent.change(input, { target: { value: 'test' } });
+      fireEvent.change(input, { target: { value: 't' } });
     });
 
-    expect(onSelect).toHaveBeenCalled();
     expect(mockPublic).toHaveBeenCalled();
     expect(mockPrivate).toHaveBeenCalled();
   });
