@@ -61,14 +61,15 @@ export const getParticipants = async () => {
   const timeoutId = setTimeout(() => controller.abort(), 10000);
 
   try {
-    const response = await fetch(`${API_URL}/events/getParticipants`, {
-      // const response = await fetch(
-      //   `http://10.129.23.226:8080/api/documentation#/Events/getParticipants`,
-      //   {
-      method: 'GET',
-      headers: HEADERS,
-      signal: controller.signal,
-    });
+    // const response = await fetch(`${API_URL}/events/getParticipants`, {
+    const response = await fetch(
+      `https://stagingbackend-s3yyo4v6ta-ew.a.run.app/api/events/1/participants`,
+      {
+        method: 'GET',
+        headers: HEADERS,
+        signal: controller.signal,
+      }
+    );
 
     if (!response.ok) {
       return null;

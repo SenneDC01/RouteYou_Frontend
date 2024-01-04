@@ -12,7 +12,7 @@ const InviteUsersFrame = ({ onClose, onInvite }) => {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} role="dialog" aria-label="Invite Users">
       <input
         className={styles.searchBar}
         type="text"
@@ -20,9 +20,8 @@ const InviteUsersFrame = ({ onClose, onInvite }) => {
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
-      {/* Display a list of users based on the search query */}
       <ul>
-        {/* Map through the fetched users and display them */}
+        {/* Display a list of users based on the search query */}
         {/* Each user item could have a button to invite them */}
       </ul>
       <InviteButton className={styles.button} onClick={onClose}>
