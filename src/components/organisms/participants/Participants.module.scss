@@ -1,12 +1,14 @@
 
 .container {
-  width: 90%;
+  width: 100%;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .headerContainer {
   display: flex;
   justify-content: space-between;
-
+  padding-bottom: 1rem;
 }
 
 .searchContainer {
@@ -24,10 +26,9 @@
 
 .list {
   border-bottom: solid 2px;
-  padding: 0.5rem;
-  margin: 0.5rem;
+  padding: 1rem 0.5rem 0.5rem 0.5rem;
   display: flex;
-  align-items: center;
+  align-items: end;
   justify-content: space-between;
   width: 100%;
 }

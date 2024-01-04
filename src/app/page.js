@@ -13,6 +13,7 @@ import Banner from '@/components/organisms/banner/Banner';
 import styles from './HomePage.module.scss';
 import BoldText from '@/components/atoms/bold-text/BoldText';
 import Participants from '@/components/organisms/participants/Participants';
+import ManageEventDropDown from '@/components/molecules/manage-event-drop-down/ManageEventDropDown';
 
 const HomePage = () => {
   const event = {
@@ -54,7 +55,6 @@ const HomePage = () => {
       <div className={[styles.bannerContainer]}>
         <Banner />
       </div>
-      <Participants></Participants>
       <div className={[styles.borderContainer]}>
         <InfoCard icon={<RouteSVG />} text="Meer dan 7.270.000 routes" />
         <InfoCard icon={<GroupSVG />} text="Meer dan 15.115.000 gebruikers" />

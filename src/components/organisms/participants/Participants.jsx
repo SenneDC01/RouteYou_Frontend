@@ -66,7 +66,6 @@ const Participants = () => {
 
   return (
     <div className={styles.container}>
-      <h2>Participants:</h2>
       <div className={styles.headerContainer}>
         <div className={styles.searchContainer}>
           <div>
