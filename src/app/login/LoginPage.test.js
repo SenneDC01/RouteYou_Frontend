@@ -68,4 +68,36 @@ describe('LoginPage component', () => {
 
     expect(mockLogin).not.toHaveBeenCalled();
   });
+
+  it('Log in with valid credentials but credentials are not known', async () => {
+    mockLogin = jest.spyOn(UserService, 'login');
+    mockLogin.mockImplementation(() =>
+      Promise.resolve({
+        code: 401,
+        message: 'The provided credentials are incorrect',
+      })
+    );
+
+    const { getByLabelText, getByRole } = render(<LoginPage />);
+    const email = 'test@example.com';
+    const password = 'password123';
+
+    await act(async () => {
+      fireEvent.change(getByLabelText('Email'), {
+        target: { value: email },
+      });
+      fireEvent.change(getByLabelText('Password'), {
+        target: { value: password },
+      });
+
+      fireEvent.click(getByRole('button', { name: 'Login' }));
+    });
+
+    expect(mockLogin).toHaveBeenCalled();
+    expect(
+      screen.getByText('The provided credentials are incorrect')
+    ).toBeInTheDocument();
+
+    mockLogin.mockRestore();
+  });
 });
