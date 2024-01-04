@@ -21,12 +21,6 @@ export default function DateTimeField({
     });
   };
 
-  const labell = () => {
-    <label className={[styles.label]} htmlFor={name} aria-labelledby={name}>
-      {label}
-    </label>;
-  };
-
   return (
     <div
       className={[
