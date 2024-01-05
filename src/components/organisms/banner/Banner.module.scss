@@ -1,6 +1,6 @@
 .button {
   width: 13rem;
-  @media screen and (max-width: 370px) {
+  @media screen and (max-width: 400px) {
     display: none;
   }
 }
@@ -25,7 +25,7 @@
   padding: 2rem;
   gap: 2rem;
   inset: 0;
-  @media screen and (max-width: 475px) {
+  @media screen and (max-width: 500px) {
     gap: 0;
     padding: 0.2rem;
   }
@@ -38,6 +38,8 @@
   line-height: 3rem;
   margin: 1rem;
   text-transform: uppercase;
+  max-width: 40rem;
+  text-align: center;
   @media screen and (max-width: 475px) {
     font-size: 1.5rem;
     margin: 1rem;
