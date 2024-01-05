@@ -1,23 +1,23 @@
 'use client';
 import React, { useState } from 'react';
-import DateTimePicker from '@/components/atoms/date-time-field/DateTimeField';
+import TextArea from '@/components/atoms/text-area/TextArea';
 
 export default function Page() {
-  const [formValues, setFormValues] = useState({ startDate: '' });
-  const [errors, setErrors] = useState({ startDate: 'Error' });
+  const [formValues, setFormValues] = useState({ description: '' });
 
-  const dateChange = (e) => {
-    setFormValues({ ...formValues, [e.name]: e.value });
+  const handleChange = (e) => {
+    setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
 
   return (
     <div>
-      <p>{formValues.startDate}</p>
-      <DateTimePicker
-        label="Start Date"
-        name="startDate"
-        onChange={dateChange}
-        errorMessage={errors.startDate}
+      <p>{formValues.description}</p>
+      <TextArea
+        label="Description"
+        name="description"
+        placeholder="Describe your event here..."
+        onChange={handleChange}
+        errorMessage=""
       />
     </div>
   );
