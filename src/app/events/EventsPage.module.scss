@@ -5,7 +5,7 @@
   justify-content: space-between;
   flex-wrap: wrap;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   padding: 2rem 1rem;
 
   .searchBar {
@@ -17,7 +17,9 @@
 
     .eventsContainer {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      gap: 1rem;
       margin-top: 1rem;
     }
   }
