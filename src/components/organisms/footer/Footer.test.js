@@ -23,9 +23,9 @@ describe('Footer', () => {
     const createEventLink = screen.getByText('Create Event');
     const dashboardLink = screen.getByText('Dashboard');
     const accessibilityStatementLink = screen.getByText(
-      'Toegankelijkheidsverklaring'
+      'Accessibility Statement'
     );
-    const privacyStatementLink = screen.getByText('Privacyverklaring');
+    const privacyStatementLink = screen.getByText('Privacy declaration');
     const wcagReportLink = screen.getByText('WCAG Report');
 
     expect(homeLink).toBeInTheDocument();
