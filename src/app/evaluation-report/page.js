@@ -1,13 +1,13 @@
 export function generateMetadata() {
   return {
-    title: 'Evaluatierapport - RouteYou',
-    description: 'Evaluatierapport van RouteYou.',
+    title: 'Evaluation report - RouteYou',
+    description: 'Evaluation report of RouteYou.',
     keywords:
-      'RouteYou, evaluatie, rapport, evaluatierapport, WCAG, toegankelijkheid',
+      'RouteYou, evaluation, report, evaluation report, WCAG, accessibility',
   };
 }
 
-export default function Evaluatierapport() {
+export default function EvaluationReport() {
   return (
     <div data-testid="evaluatierapport">
       <main>

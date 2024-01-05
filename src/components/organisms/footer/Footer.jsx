@@ -51,8 +51,8 @@ export default function Footer() {
           </li>
 
           <li>
-            <Link href="/evaluatierapport" className={styles.linkStyles}>
-              WCAG Report
+            <Link href="/evaluation-report" className={styles.linkStyles}>
+              Evaluation Report
             </Link>
           </li>
         </ul>
