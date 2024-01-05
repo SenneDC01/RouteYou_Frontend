@@ -2,6 +2,7 @@
 
 .page {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 2rem;
@@ -9,10 +10,18 @@
   min-height: 100vh;
   padding: 0 2rem;
 
+  @media screen and (min-width: 700px) {
+    flex-direction: row;
+  }
+
   .searchBar {
-    flex: 0.2;
-    border-right: 2px solid vars.$grey;
-    padding: 2rem 2rem 0 0;
+    padding-top: 2rem;
+
+    @media screen and (min-width: 700px) {
+      flex: 0.2;
+      border-right: 2px solid vars.$grey;
+      padding: 2rem 2rem 0 0;
+    }
 
     form {
       display: flex;
@@ -22,8 +31,12 @@
   }
 
   .events {
-    flex: 0.8;
-    padding-top: 2rem;
+    margin-bottom: 2rem;
+
+    @media screen and (min-width: 700px) {
+      flex: 0.8;
+      padding-top: 2rem;
+    }
 
     .eventsContainer {
       display: flex;
