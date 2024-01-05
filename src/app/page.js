@@ -1,9 +1,8 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '@/app/assets/globals.css';
 import RouteCard from '@/components/organisms/route-card/RouteCard';
 import cardImage from '@/utils/images/CardImage.png';
-import bannerImage from '@/utils/images/banner.jpg';
 import InfoCard from '@/components/organisms/info-card/InfoCard';
 import GroupSVG from '@/utils/icons/GroupSVG';
 import CameraSVG from '@/utils/icons/CameraSVG';
@@ -12,31 +11,9 @@ import EventCard from '@/components/organisms/event-card/EventCard';
 import Banner from '@/components/organisms/banner/Banner';
 import styles from './HomePage.module.scss';
 import BoldText from '@/components/atoms/bold-text/BoldText';
+import { publicEvents } from '@/services/EventService';
 
 const HomePage = () => {
-  const event = {
-    id: 1,
-    name: 'City Light Run Aalst',
-    description: 'Loop langs de mooiste parels van Aalst',
-    start_date: '2024-04-22 21:00:00',
-    max_participants: 1000,
-    price: '5.00',
-    visibility: 'PUBLIC',
-    image_url: bannerImage,
-    author: 'Senna Uyttersprot',
-    routes: [
-      {
-        route_data: {
-          id: 6833170,
-          duration: '1.2km',
-          startAddress: 'Aalst, Oost-Vlaanderen, Vlaanderen',
-          type: 'Looproute',
-          difficulty: 0.3,
-        },
-      },
-    ],
-  };
-
   const route = {
     title: 'Groene Gordel Route',
     afstand: '220km',
@@ -47,6 +24,17 @@ const HomePage = () => {
     moeilijkheid: 'Medium',
     image: cardImage,
   };
+
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      const response = await publicEvents();
+      setEvents(response.events.data.slice(0, 2));
+    };
+
+    fetchEvents();
+  }, []);
 
   return (
     <div className={[styles.pageContainer]}>
@@ -74,8 +62,9 @@ const HomePage = () => {
           <BoldText>PARTICIPATE IN EVENTS</BoldText>
         </div>
         <div className={[styles.bottomCardContainer]}>
-          <EventCard event={event} />
-          <EventCard event={event} />
+          {events.map((event, index) => (
+            <EventCard event={event} key={index} />
+          ))}
         </div>
       </div>
     </div>
