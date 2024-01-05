@@ -7,6 +7,7 @@ import {
   arrayEmpty,
   arrayOnlyNumber,
   isValidDateTime,
+  isPositiveInteger,
 } from './FormValidation';
 import dayjs from 'dayjs';
 
@@ -59,5 +60,11 @@ describe('Form Validation', () => {
   test('Check if date time is valid', () => {
     expect(isValidDateTime(dayjs('11-1-2012 20:00'))).toBe(true);
     expect(isValidDateTime(dayjs('1/dd/yyyy 11:mm'))).toBe(false);
+  });
+
+  test('Check if string is positive integer', () => {
+    expect(isPositiveInteger('33')).toBe(true);
+    expect(isPositiveInteger('1.1')).toBe(false);
+    expect(isPositiveInteger('-1')).toBe(false);
   });
 });
