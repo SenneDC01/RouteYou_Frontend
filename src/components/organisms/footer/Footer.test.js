@@ -26,7 +26,7 @@ describe('Footer', () => {
       'Accessibility Statement'
     );
     const privacyStatementLink = screen.getByText('Privacy declaration');
-    const wcagReportLink = screen.getByText('WCAG Report');
+    const wcagReportLink = screen.getByText('Evaluation Report');
 
     expect(homeLink).toBeInTheDocument();
     expect(searchEventsLink).toBeInTheDocument();
