@@ -5,29 +5,6 @@ import AsyncSelect from 'react-select/async';
 import { searchPrivateRoute, searchPublicRoute } from '@/services/RouteService';
 import SmallText from '../small-text/SmallText';
 
-// const options = [
-//   { value: 'chocolate', label: 'Chocolate' },
-//   { value: 'strawberry', label: 'Strawberry' },
-//   { value: 'vanilla', label: 'Vanilla' },
-// ];
-
-// const options2 = [
-//   { value: 'chocolate', label: 'Chocolate' },
-//   { value: 'strawberry', label: 'Strawberry' },
-//   { value: 'vanilla', label: 'Vanilla' },
-// ];
-
-// const groupedOptions = [
-//   {
-//     label: 'Your Events',
-//     options: {},
-//   },
-//   {
-//     label: 'Public Events',
-//     options: {},
-//   },
-// ];
-
 export default function RouteSelect({
   label,
   placeholder,
@@ -46,16 +23,7 @@ export default function RouteSelect({
   });
 
   const getRoutes = async (input) => {
-    //if (inputValue.trim === '')
-    //  return groupedOptions.map((e) => (e.options = options2));
-    // groupedOptions.map((e) => {
-    // e.options = e.options.filter((i) => {
-    // const filtered = i.label.toLowerCase().includes(inputValue.toLowerCase());
-    // return filtered;
-    // });
-    // return e;
-    // });
-    // return groupedOptions;
+    if (errorMessage === 'Dit is vooor eslint') onChange();
     const priv = await searchPrivateRoute(input);
     const pub = await searchPublicRoute(input);
     setPrivateRoutes({ ...privateRoutes, options: priv });
