@@ -80,7 +80,7 @@ describe('EventsPage', () => {
 
   it('renders without crashing', async () => {
     const { getAllByTestId } = render(<EventsPage />);
-    
+
     await waitFor(() => expect(mockPublicEvents).toHaveBeenCalled());
 
     const eventCards = getAllByTestId('event-card');
