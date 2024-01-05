@@ -53,9 +53,9 @@ export default function PrivacyDeclaration() {
       </RegularText>
       <RegularText>
         2.2 Your email address may be used to send you information about the
-        events you&apos;ve registered for, as well as promotional and informational
-        messages about our services. You can unsubscribe from such emails at any
-        time.
+        events you&apos;ve registered for, as well as promotional and
+        informational messages about our services. You can unsubscribe from such
+        emails at any time.
       </RegularText>
       <br></br>
 
