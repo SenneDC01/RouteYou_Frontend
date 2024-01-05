@@ -1,11 +1,11 @@
 import '@testing-library/jest-dom';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Privacyverklaring, { generateMetadata } from './page';
+import PrivacyDeclaration, { generateMetadata } from './page';
 
-describe('Privacyverklaring', () => {
+describe('Privacy declaration', () => {
   beforeEach(() => {
-    render(<Privacyverklaring />);
+    render(<PrivacyDeclaration />);
   });
 
   it('renders the page', () => {
@@ -16,9 +16,9 @@ describe('Privacyverklaring', () => {
   it('generates correct metadata', () => {
     const metadata = generateMetadata();
     expect(metadata).toEqual({
-      title: 'Privacyverklaring - RouteYou',
-      description: 'Privacyverklaring van RouteYou.',
-      keywords: 'RouteYou, privacy, verklaring, privacyverklaring',
+      title: 'Privacy declaration - RouteYou',
+      description: 'Privacy declaration of RouteYou.',
+      keywords: 'RouteYou, privacy, declaration, privacy declaration',
     });
   });
 });
