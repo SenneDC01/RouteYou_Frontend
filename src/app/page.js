@@ -54,16 +54,13 @@ const HomePage = () => {
         <Banner />
       </div>
       <div className={[styles.borderContainer]}>
-        <InfoCard icon={<RouteSVG />} text="Meer dan 7.270.000 routes" />
-        <InfoCard icon={<GroupSVG />} text="Meer dan 15.115.000 gebruikers" />
-        <InfoCard
-          icon={<CameraSVG />}
-          text="Meer dan 3.475.000 trekpleisters"
-        />
+        <InfoCard icon={<RouteSVG />} text="More than 7,270,000 routes" />
+        <InfoCard icon={<GroupSVG />} text="More than 15,115,000 users" />
+        <InfoCard icon={<CameraSVG />} text="More than 3,475,000 attractions" />
       </div>
       <div>
         <div className={styles.title}>
-          <BoldText>PLAN DE MOOISTE ROUTES</BoldText>
+          <BoldText>PLAN THE MOST BEAUTIFUL ROUTES</BoldText>
         </div>
         <div className={[styles.borderContainer]}>
           <RouteCard route={route} />
@@ -74,7 +71,7 @@ const HomePage = () => {
       </div>
       <div>
         <div className={styles.title}>
-          <BoldText>NEEM DEEL AAN EVENTS</BoldText>
+          <BoldText>PARTICIPATE IN EVENTS</BoldText>
         </div>
         <div className={[styles.bottomCardContainer]}>
           <EventCard event={event} />
