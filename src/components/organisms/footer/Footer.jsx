@@ -40,10 +40,7 @@ export default function Footer() {
 
         <ul className={[styles.list]}>
           <li>
-            <Link
-              href="/toegankelijkheidsverklaring"
-              className={styles.linkStyles}
-            >
+            <Link href="/accessibility-statement" className={styles.linkStyles}>
               Accessibility Statement
             </Link>
           </li>

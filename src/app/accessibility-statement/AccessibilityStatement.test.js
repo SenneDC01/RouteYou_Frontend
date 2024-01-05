@@ -1,11 +1,11 @@
 import '@testing-library/jest-dom';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Toegankelijkheidsverklaring, { generateMetadata } from './page';
+import AccessibilityStatement, { generateMetadata } from './page';
 
-describe('Toegankelijkheidsverklaring', () => {
+describe('Accessibility statement', () => {
   beforeEach(() => {
-    render(<Toegankelijkheidsverklaring />);
+    render(<AccessibilityStatement />);
   });
 
   it('renders the page', () => {
@@ -16,10 +16,9 @@ describe('Toegankelijkheidsverklaring', () => {
   it('generates correct metadata', () => {
     const metadata = generateMetadata();
     expect(metadata).toEqual({
-      title: 'Toegankelijkheidsverklaring - RouteYou',
-      description: 'Toegankelijkheidsverklaring van RouteYou.',
-      keywords:
-        'RouteYou, toegankelijkheid, verklaring, toegankelijkheidsverklaring',
+      title: 'Accessibility statement - RouteYou',
+      description: 'Accessibility statement of RouteYou.',
+      keywords: 'RouteYou, accessibility, statement, accessibility statement',
     });
   });
 });
