@@ -1,0 +1,43 @@
+@use '@/app/assets/vars.scss' as vars;
+
+.dateTimeField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+
+  &.invalid {
+    > div > div {
+      border: 1px solid vars.$red;
+    }
+  }
+
+  .label {
+    font-size: vars.$text_medium;
+  }
+
+  > div > div {
+    font-size: vars.$text_regular;
+    padding: 0.25rem 0.5rem;
+    height: 2.15rem;
+    border: 1px solid vars.$grey;
+    border-radius: vars.$button_radius;
+    background-color: vars.$white;
+
+    input {
+      padding: 0;
+    }
+
+    fieldset {
+      border: none;
+    }
+  }
+
+  .error {
+    color: vars.$red;
+  }
+
+  .inValid {
+    border: 1px solid vars.$red;
+  }
+}
