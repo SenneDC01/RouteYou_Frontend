@@ -7,6 +7,13 @@ const HEADERS = {
   Authorization: 'Bearer ' + Cookies.get('token'),
 };
 
+export const publicEvents = async () => {
+  const response = await fetch(`${API_URL}/events`);
+  const data = await response.json();
+
+  return { ...data, code: response.status };
+};
+
 export const eventDetail = async (eventId) => {
   const response = await fetch(`${API_URL}/events/${eventId}`);
   const data = await response.json();
