@@ -17,17 +17,21 @@ export default function Banner() {
       />
       <div className={styles.contentContainer}>
         <h1 className={styles.title}>
-          Plan de mooiste <br /> routes & events
+          Plan the most beautiful routes & events
         </h1>
         <div className={styles.buttonGroup} data-testid="button-group">
           <ButtonLink
-            href="#"
+            link="https://www.routeyou.com/nl-be/route/search/0/routes-zoeken"
             icon={<RouteSVGWhite />}
             className={styles.button}
           >
             Routes
           </ButtonLink>
-          <ButtonLink href="#" icon={<CalenderSVG />} className={styles.button}>
+          <ButtonLink
+            link="/events"
+            icon={<CalenderSVG />}
+            className={styles.button}
+          >
             Events
           </ButtonLink>
         </div>

@@ -44,12 +44,12 @@ export default function Footer() {
               href="/toegankelijkheidsverklaring"
               className={styles.linkStyles}
             >
-              Toegankelijkheidsverklaring
+              Accessibility Statement
             </Link>
           </li>
           <li>
-            <Link href="/privacyverklaring" className={styles.linkStyles}>
-              Privacyverklaring
+            <Link href="/privacy-declaration" className={styles.linkStyles}>
+              Privacy declaration
             </Link>
           </li>
 
@@ -61,7 +61,7 @@ export default function Footer() {
         </ul>
 
         <div className={[styles.list]}>
-          <div className="font-semibold">Adres</div>
+          <div className="font-semibold">Address</div>
           <div>Kerkstraat 108</div>
           <div>9050 Gentbrugge, België</div>
         </div>
