@@ -1,0 +1,24 @@
+@use '@/app/assets/vars.scss' as vars;
+
+.page {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100vh;
+  padding: 2rem 1rem;
+
+  .searchBar {
+    flex: 0.2;
+  }
+
+  .events {
+    flex: 0.8;
+
+    .eventsContainer {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1rem;
+    }
+  }
+}
