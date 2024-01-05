@@ -12,7 +12,7 @@ import FavButton from '@/components/atoms/fav-button/FavButton';
 
 export default function EventCard({ event }) {
   return (
-    <div className={[styles.eventCard]}>
+    <div className={[styles.eventCard]} data-testid="event-card">
       <Image
         height={100}
         width={100}
@@ -31,11 +31,11 @@ export default function EventCard({ event }) {
         </SubText>
         <div className={[styles.flexColContainer]}>
           <SVGtext
-            label={event.routes?.[0].route_data.startAddress}
+            label={event.routes?.[0].route_data.begin_address}
             icon={<LocationSVG />}
           />
           <SVGtext
-            label={`${event.routes?.[0].route_data.type} - ${event.routes?.[0].route_data.duration}`}
+            label={`${event.routes?.[0].route_data.type} - ${event.routes?.[0].route_data.length}`}
             icon={<CyclistSVG />}
           />
         </div>
