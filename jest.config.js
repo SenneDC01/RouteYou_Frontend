@@ -15,6 +15,7 @@ module.exports = {
     '^.+\\.module\\.(css|sass|scss)$',
     '<rootDir>/src/utils/',
     '<rootDir>/src/middleware.js',
+    '<rootDir>/src/services',
   ],
   moduleNameMapper: {
     '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
