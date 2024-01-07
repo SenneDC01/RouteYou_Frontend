@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { authenticatedUser } from './services/UserService';
 
 export async function middleware(request) {
   const nextUrl = request.nextUrl.clone();
@@ -29,18 +30,9 @@ const isValidUser = async (request) => {
   if (!request.cookies.has('token')) return;
 
   const token = request.cookies.get('token').value;
+  const { user } = await authenticatedUser(token);
 
-  const response = await fetch(`http://localhost:8080/api/users/1175366`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-      Authorization: token ? 'Bearer ' + token : '',
-    },
-  });
-  const data = await response.json();
-
-  if (data.user) {
+  if (user) {
     return true;
   }
   return false;
