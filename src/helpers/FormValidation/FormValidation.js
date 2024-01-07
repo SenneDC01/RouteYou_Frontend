@@ -15,8 +15,23 @@ const isFilled = (value) => {
 
 const isEmpty = (obj) => Object.keys(obj).length === 0;
 
+const arrayEmpty = (arr) => arr.length === 0;
+
+const arrayOnlyNumber = (arr) => arr.every((i) => isPositiveInteger(i));
+
 const isValidPasswordLength = (password) => {
   return password.length >= 8;
+};
+
+const isValidDateTime = (date) => {
+  if (date.format('YYYY-MM-DD HH:mm:ss') === 'Invalid Date') {
+    return false;
+  }
+  return true;
+};
+
+const isPositiveInteger = (string) => {
+  return !isNaN(string) && Number.isInteger(Number(string)) && string > 0;
 };
 
 export {
@@ -24,5 +39,9 @@ export {
   isValidEmail,
   isFilled,
   isEmpty,
+  arrayEmpty,
+  arrayOnlyNumber,
   isValidPasswordLength,
+  isValidDateTime,
+  isPositiveInteger,
 };
