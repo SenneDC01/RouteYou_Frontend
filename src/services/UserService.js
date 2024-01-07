@@ -41,3 +41,17 @@ export const logout = async () => {
 
   return { ...data, code: response.status };
 };
+
+export const authenticatedUser = async (token) => {
+  if (token) {
+    HEADERS.Authorization = 'Bearer ' + token;
+  }
+
+  const response = await fetch(`${API_URL}/user`, {
+    method: 'GET',
+    headers: HEADERS,
+  });
+  const data = await response.json();
+
+  return { ...data, code: response.status };
+};
