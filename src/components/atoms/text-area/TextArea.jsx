@@ -18,7 +18,6 @@ export default function TextArea({
       <textarea
         id={name}
         name={name}
-        type="text"
         className={[styles.field, errorMessage ? styles.invalid : ''].join(' ')}
         placeholder={placeholder}
         onChange={onChange}

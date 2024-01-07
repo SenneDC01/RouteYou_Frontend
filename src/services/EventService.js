@@ -74,4 +74,21 @@ export const signUpEvent = async (eventId, groupMembers) => {
   const data = await response.json();
 
   return { ...data, code: response.status };
-}
+};
+
+export const createEvent = async (body) => {
+  console.log(body);
+  const formData = new FormData(body);
+  return {};
+  const response = await fetch(`${API_URL}/events`, {
+    method: 'POST',
+    headers: {
+      Authorization: process.env.NEXT_PUBLIC_API_TEST_TOKEN,
+      Accept: 'application/json',
+    },
+    body: formData,
+  });
+  const data = await response.json();
+
+  return { ...data, code: response.status };
+};
