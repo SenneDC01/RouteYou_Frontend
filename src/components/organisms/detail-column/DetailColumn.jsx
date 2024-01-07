@@ -16,7 +16,7 @@ export default function DetailColumn({ event }) {
     <div className={styles.column} data-testid="detail_column">
       <div className={styles.imageContainer}>
         <Image
-          src="https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg"
+          src={event.image_url}
           priority={true}
           alt="cycling event preview"
           className={styles.image}
