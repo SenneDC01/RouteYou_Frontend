@@ -1,9 +1,20 @@
 import Cookies from 'js-cookie';
 import { getCookies } from 'next-client-cookies/server';
 
+import Cookies from 'js-cookie';
+import { getCookies } from 'next-client-cookies/server';
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const HEADERS = {
   'Content-Type': 'application/json',
+  Authorization: 'Bearer ' + Cookies.get('token'),
+};
+
+export const publicEvents = async () => {
+  const response = await fetch(`${API_URL}/events`);
+  const data = await response.json();
+
+  return { ...data, code: response.status };
   Authorization: 'Bearer ' + Cookies.get('token'),
 };
 
@@ -22,6 +33,9 @@ export const eventDetail = async (eventId) => {
 };
 
 export const createdEvents = async () => {
+  const serverCookies = getCookies();
+  HEADERS.Authorization = 'Bearer ' + serverCookies.get('token');
+
   const serverCookies = getCookies();
   HEADERS.Authorization = 'Bearer ' + serverCookies.get('token');
 
@@ -50,6 +64,9 @@ export const createdEvents = async () => {
 };
 
 export const interestedEvents = async () => {
+  const serverCookies = getCookies();
+  HEADERS.Authorization = 'Bearer ' + serverCookies.get('token');
+
   const serverCookies = getCookies();
   HEADERS.Authorization = 'Bearer ' + serverCookies.get('token');
 
