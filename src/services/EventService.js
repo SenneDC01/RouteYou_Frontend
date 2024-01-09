@@ -1,41 +1,35 @@
 import Cookies from 'js-cookie';
 import { getCookies } from 'next-client-cookies/server';
 
-import Cookies from 'js-cookie';
-import { getCookies } from 'next-client-cookies/server';
-
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const HEADERS = {
   'Content-Type': 'application/json',
+  Accept: 'application/json',
   Authorization: 'Bearer ' + Cookies.get('token'),
 };
 
 export const publicEvents = async () => {
-  const response = await fetch(`${API_URL}/events`);
-  const data = await response.json();
-
-  return { ...data, code: response.status };
-  Authorization: 'Bearer ' + Cookies.get('token'),
-};
-
-export const publicEvents = async () => {
-  const response = await fetch(`${API_URL}/events`);
+  const response = await fetch(`${API_URL}/events`, {
+    headers: HEADERS,
+  });
   const data = await response.json();
 
   return { ...data, code: response.status };
 };
 
 export const eventDetail = async (eventId) => {
-  const response = await fetch(`${API_URL}/events/${eventId}`);
+  const serverCookies = getCookies();
+  HEADERS.Authorization = 'Bearer ' + serverCookies.get('token');
+
+  const response = await fetch(`${API_URL}/events/${eventId}`, {
+    headers: HEADERS,
+  });
   const data = await response.json();
 
   return { ...data, code: response.status };
 };
 
 export const createdEvents = async () => {
-  const serverCookies = getCookies();
-  HEADERS.Authorization = 'Bearer ' + serverCookies.get('token');
-
   const serverCookies = getCookies();
   HEADERS.Authorization = 'Bearer ' + serverCookies.get('token');
 
@@ -64,9 +58,6 @@ export const createdEvents = async () => {
 };
 
 export const interestedEvents = async () => {
-  const serverCookies = getCookies();
-  HEADERS.Authorization = 'Bearer ' + serverCookies.get('token');
-
   const serverCookies = getCookies();
   HEADERS.Authorization = 'Bearer ' + serverCookies.get('token');
 
