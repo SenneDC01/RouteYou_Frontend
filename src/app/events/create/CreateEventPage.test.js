@@ -44,7 +44,7 @@ describe('Create Events Page component', () => {
       fireEvent.change(getByLabelText('Routes'), {
         target: { value: routes },
       });
-      fireEvent.change(getByLabelText('Event Visibility'), {
+      fireEvent.change(getByLabelText('Visibility'), {
         target: { value: visibility },
       });
       fireEvent.change(getByLabelText('Start Date'), {
@@ -87,7 +87,7 @@ describe('Create Events Page component', () => {
       fireEvent.change(getByLabelText('Routes'), {
         target: { value: routes },
       });
-      fireEvent.change(getByLabelText('Event Visibility'), {
+      fireEvent.change(getByLabelText('Visibility'), {
         target: { value: visibility },
       });
       fireEvent.change(getByLabelText('Start Date'), {
@@ -111,9 +111,10 @@ describe('Create Events Page component', () => {
 
   test('Create with correct information', async () => {
     const { getByLabelText, getByRole } = render(<Page />);
+
     const title = 'Title';
     const description = 'Description';
-    const routes = [1];
+    const routes = 1;
     const visibility = 'private';
     const startDate = '1/1/2025 12:00';
     const endDate = '1/1/2025 18:00';
@@ -127,10 +128,10 @@ describe('Create Events Page component', () => {
       fireEvent.change(getByLabelText('Description'), {
         target: { value: description },
       });
-      fireEvent.change(getByLabelText('Routes'), {
+      fireEvent.change(getByRole('input', { hidden: true }), {
         target: { value: routes },
       });
-      fireEvent.change(getByLabelText('Event Visibility'), {
+      fireEvent.change(getByLabelText('Visibility'), {
         target: { value: visibility },
       });
       fireEvent.change(getByLabelText('Start Date'), {

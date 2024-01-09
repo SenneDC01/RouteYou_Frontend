@@ -1,5 +1,6 @@
 'use client';
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import FormField from '@/components/atoms/form-field/FormField';
 import SelectField from '@/components/atoms/select-field/SelectField';
 import TextArea from '@/components/atoms/text-area/TextArea';
@@ -19,10 +20,11 @@ import {
 import styles from './CreateEventPage.module.scss';
 
 export default function Page() {
+  const router = useRouter();
   const [formValues, setFormValues] = useState({
     name: '',
     description: '',
-    routes_id: [10132667],
+    routes_id: [],
     start_date: '',
     end_date: '',
     max_participants: '',
@@ -40,7 +42,6 @@ export default function Page() {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
   const imageChange = (e) => {
-    console.log(e.target.files[0]);
     setFormValues({ ...formValues, [e.target.name]: e.target.files[0] });
   };
 
@@ -136,15 +137,15 @@ export default function Page() {
   };
 
   const handleSubmit = async (e) => {
-    console.log(e);
     e.preventDefault();
+
     const isValid = validateForm();
     if (isValid) {
       try {
         const response = await createEvent(e.currentTarget);
 
         if (response.code === 201) {
-          // router.push('/dashboard');
+          router.push('/dashboard/created');
         } else {
           if (response.errors) {
             const errors = [];
@@ -171,7 +172,6 @@ export default function Page() {
         encType="multipart/form-data"
       >
         <div className={styles.top}>
-          <button>b</button>
           <BigTitle>Create an event</BigTitle>
         </div>
         {errors?.formError && (
@@ -202,7 +202,7 @@ export default function Page() {
           <RouteSelect
             label="Routes"
             name="routes_id"
-            placeholder="Select atleast one..."
+            placeholder="Search a route"
             onChange={handleChange}
             errorMessage={errors.routes}
           />
@@ -248,16 +248,29 @@ export default function Page() {
             onChange={imageChange}
             errorMessage={errors.event_image}
           />
-          <Button type="submit">Create Event</Button>
+          <Button className={styles.submitButton} type="submit">
+            Create Event
+          </Button>
         </div>
       </form>
-      {formValues.routes_id == [] && (
+      {!arrayEmpty(formValues.routes_id) ? (
         <iframe
           title="Interactive map with the route of the event"
           className={styles.map}
           key="1"
           id="iframe"
           src={`https://plugin.routeyou.com/routeviewer/basic/?key=25578206faf6c7cd92fc96526177379d&language=en&params.route.id=${formValues.routes_id[0]}&tabPane.position=null&map.api.key=AIzaSyAjwTWF01bBdAC3jSjbfdLGNuj5G6SVXq0&map.route.line.normal.standard.color=%2a2a2a&map.route.line.normal.standard.width=5&map.route.line.normal.standard.opacity=1&map.route.line.normal.standard.fill.color=%2a2a2a&map.route.line.normal.standard.fill.width=3&map.route.line.normal.standard.fill.opacity=0.7&map.route.line.normal.satellite.color=%2a2a2a&style.fill.color=%2a2a2a&style.fill.opacity=0.73&style.line.width=&style.line.color=%2a2a2a&map.type=terrain&map.show.startControl=true&map.show.instruction=true&map.show.positionData=true&`}
+          width="100%"
+          allow="geolocation"
+          allowFullScreen
+        ></iframe>
+      ) : (
+        <iframe
+          title="Interactive map with the route of the event"
+          className={styles.map}
+          key="1"
+          id="iframe"
+          src={`https://plugin.routeyou.com/routeviewer/basic/?key=25578206faf6c7cd92fc96526177379d&language=en&map.zoom=4&map.center=lat:50.415519,lon:50.415519&tabPane.position=null&map.route.line.normal.standard.color=%2a2a2a&map.route.line.normal.standard.width=5&map.route.line.normal.standard.opacity=1&map.route.line.normal.standard.fill.color=%2a2a2a&map.route.line.normal.standard.fill.width=3&map.route.line.normal.standard.fill.opacity=0.7&map.route.line.normal.satellite.color=%2a2a2a&style.fill.color=%2a2a2a&style.fill.opacity=0.73&style.line.width=&style.line.color=%2a2a2a&map.type=terrain&map.show.startControl=true&map.show.instruction=true&map.show.positionData=true&`}
           width="100%"
           allow="geolocation"
           allowFullScreen

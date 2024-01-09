@@ -20,7 +20,6 @@ describe('InputField component', () => {
     const input = getByPlaceholderText('Test Placeholder');
     expect(input).toBeInTheDocument();
     expect(input).toHaveAttribute('name', 'testName');
-    expect(input).toHaveAttribute('type', 'text');
     expect(input).toHaveClass('invalid');
 
     fireEvent.change(input, { target: { value: 'test' } });

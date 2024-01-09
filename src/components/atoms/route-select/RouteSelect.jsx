@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './RouteSelect.module.scss';
 import AsyncSelect from 'react-select/async';
 import { searchPrivateRoute, searchPublicRoute } from '@/services/RouteService';
@@ -13,22 +13,47 @@ export default function RouteSelect({
   errorMessage,
   className,
 }) {
-  const [privateRoutes, setPrivateRoutes] = useState({
+  const privateRoutes = {
     label: 'Your Routes',
-    options: {},
-  });
-  const [publicRoutes, setPublicRoutes] = useState({
+    options: [],
+  };
+  const publicRoutes = {
     label: 'Public Routes',
-    options: {},
-  });
+    options: [],
+  };
+
+  const handleChange = (e) => {
+    const values = e.map((option) => {
+      return option.value;
+    });
+    onChange({
+      target: {
+        name: name,
+        value: values,
+      },
+    });
+  };
 
   const getRoutes = async (input) => {
-    if (errorMessage === 'Dit is vooor eslint') onChange();
-    const priv = await searchPrivateRoute(input);
-    const pub = await searchPublicRoute(input);
-    setPrivateRoutes({ ...privateRoutes, options: priv });
-    setPublicRoutes({ ...privateRoutes, options: pub });
-    return [...privateRoutes, ...publicRoutes];
+    let priv = await searchPrivateRoute(input);
+    let pub = await searchPublicRoute(input);
+    pub = pub.map((route) => {
+      return {
+        label: route.name.en,
+        value: route.id,
+      };
+    });
+    priv = priv.map((route) => {
+      return {
+        label: route.name,
+        value: route.id,
+      };
+    });
+
+    return [
+      { ...privateRoutes, options: priv },
+      { ...publicRoutes, options: pub },
+    ];
   };
 
   const promiseOptions = async (input) => {
@@ -45,9 +70,9 @@ export default function RouteSelect({
         name={name}
         placeholder={placeholder}
         className={[styles.field, errorMessage ? styles.invalid : ''].join(' ')}
+        onChange={handleChange}
         isMulti
-        cacheOptions
-        defaultOptions
+        defaultOptions={true}
         loadOptions={promiseOptions}
       />
       {errorMessage && (
