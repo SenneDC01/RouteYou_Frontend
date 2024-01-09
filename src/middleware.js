@@ -11,14 +11,28 @@ export async function middleware(request) {
   ];
   const protectedRouteRegex = new RegExp('^/events/\\d+/signup$');
 
+  const protectedPathsSignedIn = ['/login', '/register'];
+
   if (
     (protectedPaths.includes(nextUrl.pathname) &&
       !nextUrl.pathname.startsWith('/_next')) ||
     protectedRouteRegex.test(nextUrl.pathname)
   ) {
     const isValid = await isValidUser(request);
+    console.log(isValid)
     if (!isValid) {
       nextUrl.pathname = '/login';
+      return NextResponse.redirect(nextUrl);
+    }
+  }
+
+  if (
+    protectedPathsSignedIn.includes(nextUrl.pathname) &&
+    !nextUrl.pathname.startsWith('/_next')
+  ) {
+    const isValid = await isValidUser(request);
+    if (isValid) {
+      nextUrl.pathname = '/dashboard/my-events';
       return NextResponse.redirect(nextUrl);
     }
   }
