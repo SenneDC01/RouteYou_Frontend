@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie';
+import { getCookies } from 'next-client-cookies/server';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const HEADERS = {
@@ -15,7 +16,7 @@ export const login = async (body) => {
   });
   const data = await response.json();
   Cookies.set('token', data.token);
-
+  
   return { ...data, code: response.status };
 };
 
@@ -32,6 +33,9 @@ export const register = async (body) => {
 };
 
 export const logout = async () => {
+  const serverCookies = getCookies();
+  HEADERS.Authorization = 'Bearer ' + serverCookies.get('token');
+
   const response = await fetch(`${API_URL}/logout`, {
     method: 'POST',
     headers: HEADERS,
