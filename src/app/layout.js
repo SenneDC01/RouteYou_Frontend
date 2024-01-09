@@ -1,7 +1,6 @@
 import Header from '@/components/organisms/header/Header';
 import '@/app/assets/globals.css';
 import Footer from '@/components/organisms/footer/Footer';
-import profilePic from '@/utils/images/profilePicture.png';
 
 export async function generateMetadata() {
   return {
@@ -16,7 +15,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <Header profileName={'John Doe'} profilePicture={profilePic} />
+        <Header />
         <main id="main-content">{children}</main>
         <Footer />
       </body>
