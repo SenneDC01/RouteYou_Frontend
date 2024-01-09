@@ -1,9 +1,8 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '@/app/assets/globals.css';
 import RouteCard from '@/components/organisms/route-card/RouteCard';
 import cardImage from '@/utils/images/CardImage.png';
-import bannerImage from '@/utils/images/banner.jpg';
 import InfoCard from '@/components/organisms/info-card/InfoCard';
 import GroupSVG from '@/utils/icons/GroupSVG';
 import CameraSVG from '@/utils/icons/CameraSVG';
@@ -12,31 +11,9 @@ import EventCard from '@/components/organisms/event-card/EventCard';
 import Banner from '@/components/organisms/banner/Banner';
 import styles from './HomePage.module.scss';
 import BoldText from '@/components/atoms/bold-text/BoldText';
+import { publicEvents } from '@/services/EventService';
 
 const HomePage = () => {
-  const event = {
-    id: 1,
-    name: 'City Light Run Aalst',
-    description: 'Loop langs de mooiste parels van Aalst',
-    start_date: '2024-04-22 21:00:00',
-    max_participants: 1000,
-    price: '5.00',
-    visibility: 'PUBLIC',
-    image_url: bannerImage,
-    author: 'Senna Uyttersprot',
-    routes: [
-      {
-        route_data: {
-          id: 6833170,
-          duration: '1.2km',
-          startAddress: 'Aalst, Oost-Vlaanderen, Vlaanderen',
-          type: 'Looproute',
-          difficulty: 0.3,
-        },
-      },
-    ],
-  };
-
   const route = {
     title: 'Groene Gordel Route',
     afstand: '220km',
@@ -48,22 +25,30 @@ const HomePage = () => {
     image: cardImage,
   };
 
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      const response = await publicEvents();
+      setEvents(response.events.data.slice(0, 2));
+    };
+
+    fetchEvents();
+  }, []);
+
   return (
     <div className={[styles.pageContainer]}>
       <div className={[styles.bannerContainer]}>
         <Banner />
       </div>
       <div className={[styles.borderContainer]}>
-        <InfoCard icon={<RouteSVG />} text="Meer dan 7.270.000 routes" />
-        <InfoCard icon={<GroupSVG />} text="Meer dan 15.115.000 gebruikers" />
-        <InfoCard
-          icon={<CameraSVG />}
-          text="Meer dan 3.475.000 trekpleisters"
-        />
+        <InfoCard icon={<RouteSVG />} text="More than 7,270,000 routes" />
+        <InfoCard icon={<GroupSVG />} text="More than 15,115,000 users" />
+        <InfoCard icon={<CameraSVG />} text="More than 3,475,000 attractions" />
       </div>
       <div>
         <div className={styles.title}>
-          <BoldText>PLAN DE MOOISTE ROUTES</BoldText>
+          <BoldText>PLAN THE MOST BEAUTIFUL ROUTES</BoldText>
         </div>
         <div className={[styles.borderContainer]}>
           <RouteCard route={route} />
@@ -74,11 +59,12 @@ const HomePage = () => {
       </div>
       <div>
         <div className={styles.title}>
-          <BoldText>NEEM DEEL AAN EVENTS</BoldText>
+          <BoldText>PARTICIPATE IN EVENTS</BoldText>
         </div>
         <div className={[styles.bottomCardContainer]}>
-          <EventCard event={event} />
-          <EventCard event={event} />
+          {events.map((event, index) => (
+            <EventCard event={event} key={index} />
+          ))}
         </div>
       </div>
     </div>

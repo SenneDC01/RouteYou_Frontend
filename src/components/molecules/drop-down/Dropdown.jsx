@@ -12,7 +12,6 @@ import {
 export default function CustomDropdown({ buttonText, items }) {
   const dropdownStyle = {
     padding: 0,
-    maxWidth: 100,
   };
 
   const buttonStyle = {
@@ -36,12 +35,12 @@ export default function CustomDropdown({ buttonText, items }) {
           {items.map((item, index) => (
             <DropdownItem
               key={index}
-              textValue={item}
+              textValue={item.title}
               className={'border-b'}
               tabIndex={1}
             >
-              <Link color="foreground" href="/events" aria-current="page">
-                {item}
+              <Link color="foreground" href={item.link} aria-current="page">
+                {item.title}
               </Link>
             </DropdownItem>
           ))}

@@ -13,11 +13,13 @@ import {
 } from '@/helpers/FormValidation/FormValidation';
 import { login } from '@/services/UserService';
 import { useRouter } from 'next/navigation';
+import LoadingSpinner from '@/components/molecules/loading-spinner/LoadingSpinner';
 
 export default function LoginPage() {
   const router = useRouter();
   const [formValues, setFormValues] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({ email: '', password: '' });
+  const [isLaoading, setIsLoading] = useState(false);
 
   const validateForm = () => {
     const newErrors = {};
@@ -36,15 +38,18 @@ export default function LoginPage() {
     const isValid = validateForm();
     if (isValid) {
       try {
+        setIsLoading(true);
         const response = await login(formValues);
 
         if (response.code === 200) {
-          router.push('/dashboard');
+          router.push('/dashboard/my-events');
         } else {
           setErrors({ formError: response.message });
         }
       } catch (error) {
         setErrors({ formError: 'Something went wrong try again later' });
+      } finally {
+        setIsLoading(false);
       }
     }
   };
@@ -77,6 +82,10 @@ export default function LoginPage() {
           />
           <Button type="submit">Login</Button>
         </form>
+        <LoadingSpinner
+          isLoading={isLaoading}
+          message="Checking credentials and logging in"
+        />
         <RegularText>
           Or <TextLink href="/register">create</TextLink> an account
         </RegularText>

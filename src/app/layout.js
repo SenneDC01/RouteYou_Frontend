@@ -1,20 +1,21 @@
 import Header from '@/components/organisms/header/Header';
 import '@/app/assets/globals.css';
 import Footer from '@/components/organisms/footer/Footer';
-import profilePic from '@/utils/images/profilePicture.png';
 
-export const metadata = {
-  title: 'RouteYou - Ontdek en deel routes',
-  description:
-    'RouteYou - Jouw platform voor het ontdekken en delen van routes voor wandel, loop, fiets en meer.',
-  keywords: 'RouteYou, routes, wandelen, fietsen, evenementen',
-};
+export async function generateMetadata() {
+  return {
+    title: 'RouteYou - Discover and share routes',
+    description:
+      'RouteYou - Your platform for discovering and sharing routes for walking, running, cycling and more.',
+    keywords: 'RouteYou, routes, walking, cycling, events',
+  };
+}
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="nl">
+    <html lang="en">
       <body>
-        <Header profileName={'John Doe'} profilePicture={profilePic} />
+        <Header />
         <main id="main-content">{children}</main>
         <Footer />
       </body>

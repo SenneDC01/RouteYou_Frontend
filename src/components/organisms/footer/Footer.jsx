@@ -40,28 +40,25 @@ export default function Footer() {
 
         <ul className={[styles.list]}>
           <li>
-            <Link
-              href="/toegankelijkheidsverklaring"
-              className={styles.linkStyles}
-            >
-              Toegankelijkheidsverklaring
+            <Link href="/accessibility-statement" className={styles.linkStyles}>
+              Accessibility Statement
             </Link>
           </li>
           <li>
-            <Link href="/privacyverklaring" className={styles.linkStyles}>
-              Privacyverklaring
+            <Link href="/privacy-declaration" className={styles.linkStyles}>
+              Privacy declaration
             </Link>
           </li>
 
           <li>
-            <Link href="/evaluatierapport" className={styles.linkStyles}>
-              WCAG Report
+            <Link href="/evaluation-report" className={styles.linkStyles}>
+              Evaluation Report
             </Link>
           </li>
         </ul>
 
         <div className={[styles.list]}>
-          <div className="font-semibold">Adres</div>
+          <div className="font-semibold">Address</div>
           <div>Kerkstraat 108</div>
           <div>9050 Gentbrugge, België</div>
         </div>

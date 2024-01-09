@@ -14,7 +14,7 @@ describe('Banner', () => {
   });
 
   it('renders the title', () => {
-    const title = screen.getByText('Plan de mooiste routes & events');
+    const title = screen.getByText('Plan the most beautiful routes & events');
     expect(title).toBeInTheDocument();
   });
 
