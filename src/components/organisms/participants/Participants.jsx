@@ -59,7 +59,6 @@ const Participants = () => {
   };
 
   const handleInviteUser = (userId) => {
-    // Implement the logic to send an invitation
     console.log(`Inviting user with ID: ${userId}`);
     setIsInviteFrameOpen(false);
   };
