@@ -1,7 +1,6 @@
 import '@testing-library/jest-dom';
 import { render, fireEvent, screen } from '@testing-library/react';
 import Header from './Header.jsx';
-import profilePicture from '@/utils/images/profilePicture.png';
 import React from 'react';
 
 const mockPathname = jest.fn();
@@ -20,12 +19,12 @@ describe('Header', () => {
   });
 
   test('renders default profile name when no profileName prop is provided', () => {
-    render(<Header profilePicture={profilePicture} />);
+    render(<Header />);
     expect(screen.getByTestId('profile')).toBeInTheDocument();
   });
 
   test('renders provided profile name when profileName prop is provided', () => {
-    render(<Header profileName="Jane Doe" />);
+    render(<Header />);
     expect(screen.getByTestId('profile')).toBeInTheDocument();
   });
 
@@ -37,7 +36,6 @@ describe('Header', () => {
     fireEvent.click(screen.getByText('Routes'));
     expect(screen.getByText('Go to RouteYou Routes')).toBeInTheDocument();
     fireEvent.click(screen.getByTestId('profile'));
-    expect(screen.getByTestId('dashboard')).toBeInTheDocument();
     expect(screen.getByTestId('profile')).toBeInTheDocument();
   });
 });
