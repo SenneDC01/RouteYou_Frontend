@@ -4,7 +4,6 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import SmallText from '../small-text/SmallText';
-import dayjs from 'dayjs';
 
 export default function DateTimeField({
   label,
@@ -16,8 +15,10 @@ export default function DateTimeField({
 }) {
   const handleChange = (e) => {
     onChange({
-      name: name,
-      value: dayjs(e).format('YYYY-MM-DD HH:mm:ss'),
+      target: {
+        name: name,
+        value: e,
+      },
     });
   };
 
@@ -26,7 +27,7 @@ export default function DateTimeField({
       className={[
         styles.dateTimeField,
         className,
-        errorMessage !== '' ? styles.invalid : '',
+        errorMessage ? styles.invalid : '',
       ].join(' ')}
     >
       <label className={[styles.label]} htmlFor={name}>
@@ -38,10 +39,11 @@ export default function DateTimeField({
             textField: {
               inputProps: {
                 id: name,
-                className: errorMessage !== '' ? styles.invalid : '',
+                className: errorMessage ? styles.invalid : '',
               },
             },
           }}
+          ampm={false}
           className=""
           name={name}
           value={value}

@@ -11,6 +11,7 @@ export default function FormField({
   onChange,
   errorMessage,
   className,
+  step,
 }) {
   return (
     <div className={[styles.formField, className].join(' ')}>
@@ -22,6 +23,7 @@ export default function FormField({
         type={type}
         value={value}
         name={name}
+        {...(step && { step: step })}
         className={[styles.field, errorMessage ? styles.inValid : ''].join(' ')}
         placeholder={placeholder}
         onChange={onChange}

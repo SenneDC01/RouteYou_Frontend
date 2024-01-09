@@ -4,7 +4,12 @@ import {
   isFilled,
   isEmpty,
   isValidPasswordLength,
+  arrayEmpty,
+  arrayOnlyNumber,
+  isValidDateTime,
+  isPositiveInteger,
 } from './FormValidation';
+import dayjs from 'dayjs';
 
 describe('Form Validation', () => {
   test('Validates email correctly', () => {
@@ -39,5 +44,27 @@ describe('Form Validation', () => {
   test('Checks if password has a length of 8 characters', () => {
     expect(isValidPasswordLength('password')).toBe(true);
     expect(isValidPasswordLength('short')).toBe(false);
+  });
+
+  test('Check if array only contains numbers', () => {
+    expect(arrayOnlyNumber(['12', 3])).toBe(true);
+    expect(arrayOnlyNumber(['monkey', 3])).toBe(false);
+    expect(arrayOnlyNumber(['1.1'])).toBe(false);
+  });
+
+  test('Check if array is empty', () => {
+    expect(arrayEmpty([])).toBe(true);
+    expect(arrayEmpty(['12', 3])).toBe(false);
+  });
+
+  test('Check if date time is valid', () => {
+    expect(isValidDateTime(dayjs('11-1-2012 20:00'))).toBe(true);
+    expect(isValidDateTime(dayjs('1/dd/yyyy 11:mm'))).toBe(false);
+  });
+
+  test('Check if string is positive integer', () => {
+    expect(isPositiveInteger('33')).toBe(true);
+    expect(isPositiveInteger('1.1')).toBe(false);
+    expect(isPositiveInteger('-1')).toBe(false);
   });
 });
