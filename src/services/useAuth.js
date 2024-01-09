@@ -8,7 +8,8 @@ export function useAuth() {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const { user } = await authenticatedUser();
+      const token = Cookies.get('token');
+      const { user } = await authenticatedUser(token);
 
       if (user) {
         setUser(user);
@@ -17,8 +18,12 @@ export function useAuth() {
 
     if (Cookies.get('token')) {
       fetchUser();
+    } else {
+      setUser(null);
     }
   }, []);
 
-  return user;
+  return {
+    user,
+  };
 }
