@@ -1,0 +1,40 @@
+
+.container {
+  width: 100%;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+}
+
+.searchContainer {
+  display: flex;
+  gap: 2rem;
+}
+
+.searchBar {
+  width: 13rem;
+  height: 2.5rem;
+  border: solid 2px lightgray;
+  border-radius: 4px;
+  padding: 0 0.5rem 0 0.5rem;
+}
+
+.list {
+  border-bottom: solid 2px;
+  padding: 1rem 0.5rem 0.5rem 0.5rem;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.button {
+  width: 8rem;
+  font-size: 0.8rem;
+  padding: 1rem;
+}

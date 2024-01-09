@@ -8,6 +8,7 @@ const ArrowDownSVG = ({ width, height }) => {
       viewBox="0 0 18 13"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      aria-label="Arrow Down"
     >
       <g clipPath="url(#clip0_61_6970)">
         <path

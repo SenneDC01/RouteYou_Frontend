@@ -11,6 +11,8 @@ import EventCard from '@/components/organisms/event-card/EventCard';
 import Banner from '@/components/organisms/banner/Banner';
 import styles from './HomePage.module.scss';
 import BoldText from '@/components/atoms/bold-text/BoldText';
+import Participants from '@/components/organisms/participants/Participants';
+import ManageEventDropDown from '@/components/molecules/manage-event-drop-down/ManageEventDropDown';
 import { publicEvents } from '@/services/EventService';
 
 const HomePage = () => {
