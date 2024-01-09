@@ -1,0 +1,16 @@
+@use '@/app/assets/vars.scss' as vars;
+
+.buttonStyle {
+  padding: 0.8rem 0;
+  font-size: vars.$text_regular;
+  color: vars.$grey;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon {
+  margin-right: 0.5rem;
+}

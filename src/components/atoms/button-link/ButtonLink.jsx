@@ -14,7 +14,7 @@ export default function ButtonLink({
       aria-label="forward button"
       className={[styles.buttonStyle, className].join(' ')}
     >
-      {icon && React.cloneElement(icon, { width: '40px', height: '20px' })}
+      {icon && <span className={styles.icon}>{icon}</span>}
       {children}
     </Link>
   );

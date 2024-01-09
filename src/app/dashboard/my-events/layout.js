@@ -1,12 +1,13 @@
 import Page from './page';
 import { createdEvents } from '@/services/EventService';
 
-export const metadata = {
-  title: 'City Light Run Aalst - RouteYou',
-  description:
-    'Evenement: City Light Run Aalst - Ontdek de route en schrijf je in voor dit geweldige evenement op RouteYou.',
-  keywords: 'RouteYou, evenement, routes, inschrijven',
-};
+export async function generateMetadata() {
+  return {
+    title: `My Events - RouteYou`,
+    description: `My Events - My created events on RouteYou.`,
+    keywords: 'RouteYou, event, routes, created',
+  };
+}
 
 export default async function Layout() {
   const events = await createdEvents();

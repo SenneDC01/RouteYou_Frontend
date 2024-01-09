@@ -1,10 +1,36 @@
-'use client';
 import React from 'react';
 import styles from './DetailPage.module.scss';
 import '@/app/assets/globals.css';
 import DetailColumn from '@/components/organisms/detail-column/DetailColumn';
+import { redirect } from 'next/navigation';
+import { eventDetail } from '@/services/EventService';
 
-export default function Page({ event }) {
+const getEventInfo = async (eventId) => {
+  try {
+    const response = await eventDetail(eventId);
+
+    if (response.code !== 200) {
+      redirect('/');
+    }
+    return response;
+  } catch (error) {
+    redirect('/');
+  }
+};
+
+export async function generateMetadata({ params }) {
+  const { event } = await getEventInfo(params.id);
+
+  return {
+    title: `${event.name} - RouteYou`,
+    description: `Event: ${event.name} - Discover the route and register for this great event on RouteYou.`,
+    keywords: 'RouteYou, event, routes, registration',
+  };
+}
+
+export default async function Page({ params }) {
+  const { event } = await getEventInfo(params.id);
+
   return (
     <div className={styles.detailPage}>
       <DetailColumn event={event} />

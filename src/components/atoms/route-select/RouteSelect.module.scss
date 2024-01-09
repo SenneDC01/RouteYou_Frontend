@@ -1,0 +1,31 @@
+@use '@/app/assets/vars.scss' as vars;
+
+.formField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+
+  .label {
+    font-size: vars.$text_medium;
+  }
+
+  .field > div:first-of-type {
+    font-size: vars.$text_regular;
+    border: 1px solid vars.$grey;
+    border-radius: vars.$button_radius;
+    background-color: vars.$white;
+  }
+
+  .field * {
+    color: vars.$grey;
+  }
+
+  .error {
+    color: vars.$red;
+  }
+
+  .invalid > div:first-of-type {
+    border: 1px solid vars.$red;
+  }
+}

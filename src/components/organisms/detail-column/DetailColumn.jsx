@@ -16,7 +16,7 @@ export default function DetailColumn({ event }) {
     <div className={styles.column} data-testid="detail_column">
       <div className={styles.imageContainer}>
         <Image
-          src="https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg"
+          src={event.image_url}
           priority={true}
           alt="cycling event preview"
           className={styles.image}
@@ -31,13 +31,16 @@ export default function DetailColumn({ event }) {
           {event.start_date}
         </SubText>
         <RegularText>{event.description}</RegularText>
-        <ViewMore link={`./${event.id}/posts`}>Posts</ViewMore>
-        <ViewMore link={`./${event.id}/pictures`}>Pictures</ViewMore>
+        <ViewMore link={`/events/${event.id}/posts`}>Posts</ViewMore>
+        <ViewMore link={`/events/${event.id}/pictures`}>Pictures</ViewMore>
         <div className={styles.row}>
           <Button link="#" icon={<ArrowRightSVG />}>
             Share
           </Button>
-          <ButtonLink link={`./${event.id}/signup`} icon={<ArrowRightSVG />}>
+          <ButtonLink
+            link={`/events/${event.id}/signup`}
+            icon={<ArrowRightSVG />}
+          >
             sign-up
           </ButtonLink>
         </div>

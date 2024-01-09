@@ -179,6 +179,7 @@ deployCloudRun:
     
     - gcloud run deploy $INSTANCE --image $REPO $CLOUD_VARIABLES --allow-unauthenticated 
 
+
 runAnsible:
   stage: runAnsible
   only:
