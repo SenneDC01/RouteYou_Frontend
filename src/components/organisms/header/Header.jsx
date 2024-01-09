@@ -17,7 +17,8 @@ import { usePathname } from 'next/navigation';
 import { useAuth } from '@/services/useAuth';
 
 export default function Header() {
-  const user = useAuth();
+  const { user } = useAuth();
+
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const dropdownItemsEvents = [
