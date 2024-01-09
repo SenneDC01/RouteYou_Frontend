@@ -42,7 +42,7 @@ export default function LoginPage() {
         const response = await login(formValues);
 
         if (response.code === 200) {
-          router.push('/dashboard');
+          router.push('/dashboard/my-events');
         } else {
           setErrors({ formError: response.message });
         }
