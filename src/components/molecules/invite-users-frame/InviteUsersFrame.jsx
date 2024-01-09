@@ -5,6 +5,7 @@ import InviteButton from '@/components/atoms/button/Button';
 const InviteUsersFrame = ({ onClose, onInvite }) => {
   const [searchQuery, setSearchQuery] = useState('');
 
+  /* eslint-disable */
   const handleInvite = (userId) => {
     onInvite(userId);
   };
@@ -18,10 +19,7 @@ const InviteUsersFrame = ({ onClose, onInvite }) => {
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
-      <ul>
-        {/* Display a list of users based on the search query */}
-        {/* Each user item could have a button to invite them */}
-      </ul>
+      <ul></ul>
       <InviteButton className={styles.button} onClick={onClose}>
         Invite User
       </InviteButton>

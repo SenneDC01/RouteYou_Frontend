@@ -26,7 +26,6 @@ const Participants = () => {
         setParticipants(participantsData);
       } else {
         setParticipants(mockParticipants);
-        console.error('Failed to fetch participants.');
       }
     };
 
@@ -58,8 +57,8 @@ const Participants = () => {
     setIsInviteFrameOpen(false);
   };
 
+  /* eslint-disable */
   const handleInviteUser = (userId) => {
-    console.log(`Inviting user with ID: ${userId}`);
     setIsInviteFrameOpen(false);
   };
 

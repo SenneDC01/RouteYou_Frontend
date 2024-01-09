@@ -19,7 +19,6 @@ export async function middleware(request) {
     protectedRouteRegex.test(nextUrl.pathname)
   ) {
     const isValid = await isValidUser(request);
-    console.log(isValid)
     if (!isValid) {
       nextUrl.pathname = '/login';
       return NextResponse.redirect(nextUrl);
