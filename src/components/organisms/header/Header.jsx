@@ -14,17 +14,26 @@ import Image from 'next/image';
 import logo from '@/utils/images/logo.png';
 import CustomDropdown from '@/components/molecules/drop-down/Dropdown';
 import { usePathname } from 'next/navigation';
+import { useAuth } from '@/services/useAuth';
 
-export default function Header({
-  profileName = 'John Doe',
-  profilePicture = null,
-}) {
+export default function Header() {
+  const user = useAuth();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const [isLoggedIn] = React.useState(false);
 
-  const dropdownItemsEvents = ['Create Event', 'Search Event'];
-  const dropdownItemsRoutes = ['Go to RouteYou Routes'];
-  const dropdownItemsProfile = ['Dashboard', 'Logout'];
+  const dropdownItemsEvents = [
+    { title: 'Create Event', link: '/events/create' },
+    { title: 'Search Event', link: '/events' },
+  ];
+  const dropdownItemsRoutes = [
+    {
+      title: 'Go to RouteYou Routes',
+      link: 'https://www.routeyou.com/nl-be/route/search/0/routes-zoeken',
+    },
+  ];
+  const dropdownItemsProfile = [
+    { title: 'Dashboard', link: '/dashboard/my-events' },
+    { title: 'Logout', link: '/logout' },
+  ];
 
   const pathname = usePathname();
   const isLinkActive = (path) => {
@@ -97,31 +106,34 @@ export default function Header({
             items={dropdownItemsRoutes}
           />
         </NavbarItem>
-        <NavbarItem isActive={isLinkActive('/dashboard')}>
-          <Link
-            color="foreground"
-            href="/dashboard/my-events"
-            data-testid="dashboard"
-          >
-            Dashboard
-            <span className={styles.itemBorderStyle}></span>
-          </Link>
-        </NavbarItem>
+        {user && (
+          <NavbarItem isActive={isLinkActive('/dashboard')}>
+            <Link
+              color="foreground"
+              href="/dashboard/my-events"
+              data-testid="dashboard"
+            >
+              Dashboard
+              <span className={styles.itemBorderStyle}></span>
+            </Link>
+          </NavbarItem>
+        )}
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem data-testid="profile" className="hidden sm:flex gap-3">
-          {isLoggedIn ? (
+          {user ? (
             <>
               <Image
-                src={profilePicture}
+                src={user.image_url}
                 alt="Profile picture"
                 width={30}
+                height={30}
                 className={styles.profilePic}
               />
               <CustomDropdown
                 buttonText={
                   <>
-                    {profileName}
+                    {user.full_name}
                     <span className={styles.arrowStyle}>&gt;</span>
                   </>
                 }
@@ -182,24 +194,25 @@ export default function Header({
             items={dropdownItemsRoutes}
           />
         </NavbarMenuItem>
-        <NavbarMenuItem isActive={isLinkActive('/dashboard')}>
-          <Link color="foreground" href="/dashboard/my-events">
-            Dashboard
-          </Link>
-        </NavbarMenuItem>
-        {isLoggedIn ? (
+        {user ? (
           <>
+            <NavbarMenuItem isActive={isLinkActive('/dashboard')}>
+              <Link color="foreground" href="/dashboard/my-events">
+                Dashboard
+              </Link>
+            </NavbarMenuItem>
             <NavbarMenuItem data-testid="profile" className="flex gap-2">
               <Image
-                src={profilePicture}
+                src={user.image_url}
                 alt="Profile picture"
                 width={30}
+                height={30}
                 className={styles.profilePic}
               />
               <CustomDropdown
                 buttonText={
                   <>
-                    {profileName}
+                    {user.full_name}
                     <span className={styles.arrowStyle}>&gt;</span>
                   </>
                 }
