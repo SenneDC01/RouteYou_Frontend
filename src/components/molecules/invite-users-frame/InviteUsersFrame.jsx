@@ -4,10 +4,8 @@ import InviteButton from '@/components/atoms/button/Button';
 
 const InviteUsersFrame = ({ onClose, onInvite }) => {
   const [searchQuery, setSearchQuery] = useState('');
-  // Fetch users based on the search query
 
   const handleInvite = (userId) => {
-    // Implement the logic to send an invitation
     onInvite(userId);
   };
 
