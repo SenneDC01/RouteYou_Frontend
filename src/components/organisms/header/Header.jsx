@@ -98,7 +98,11 @@ export default function Header({
           />
         </NavbarItem>
         <NavbarItem isActive={isLinkActive('/dashboard')}>
-          <Link color="foreground" href="/dashboard" data-testid="dashboard">
+          <Link
+            color="foreground"
+            href="/dashboard/my-events"
+            data-testid="dashboard"
+          >
             Dashboard
             <span className={styles.itemBorderStyle}></span>
           </Link>
@@ -179,7 +183,7 @@ export default function Header({
           />
         </NavbarMenuItem>
         <NavbarMenuItem isActive={isLinkActive('/dashboard')}>
-          <Link color="foreground" href="/dashboard">
+          <Link color="foreground" href="/dashboard/my-events">
             Dashboard
           </Link>
         </NavbarMenuItem>
