@@ -9,10 +9,13 @@ export default function ManageEventPage({ event }) {
     <div className={styles.container}>
       <div className={styles.leftColumn}>Name: {event.name}</div>
       <div className={styles.rightColumn}>
+        <ManageEventDropDown title="Edit"></ManageEventDropDown>
         <ManageEventDropDown
           title="Participants"
           comp={Participants}
         ></ManageEventDropDown>
+        <ManageEventDropDown title="Posts"></ManageEventDropDown>
+        <ManageEventDropDown title="Pictures"></ManageEventDropDown>
       </div>
     </div>
   );
