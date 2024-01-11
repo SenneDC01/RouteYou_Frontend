@@ -171,12 +171,17 @@ export const getParticipants = async () => {
 
 export const createEvent = async (body) => {
   const formData = new FormData(body);
-  const arr = [6833170, 7821899];
+  const arr = formData.getAll('routes_id');
+
+  // const arr = [6833170, 7821899];
   arr.forEach((e, i) => {
     formData.append(`routes_id[${i}]`, e);
   });
 
   formData.delete('routes_id');
+  console.log(formData.get('routes_id[0]'));
+
+  // formData.append(`routes_id`, arr);
 
   const startDate = dayjs(formData.get('start_date')).format(
     'YYYY-MM-DD HH:mm:ss'
@@ -186,11 +191,12 @@ export const createEvent = async (body) => {
   formData.set('start_date', startDate);
   formData.set('end_date', endDate);
 
+  HEADERS['Content-Type'] = undefined;
   const response = await fetch(`${API_URL}/events`, {
     method: 'POST',
     headers: {
-      Authorization: process.env.NEXT_PUBLIC_API_TEST_TOKEN,
       Accept: 'application/json',
+      Authorization: 'Bearer ' + Cookies.get('token'),
     },
     body: formData,
   });
