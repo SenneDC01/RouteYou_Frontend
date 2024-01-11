@@ -16,7 +16,7 @@ export const login = async (body) => {
   });
   const data = await response.json();
   Cookies.set('token', data.token);
-  
+
   return { ...data, code: response.status };
 };
 

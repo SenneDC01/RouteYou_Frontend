@@ -24,7 +24,6 @@ const HomePage = () => {
     moeilijkheid: 'Medium',
     image: cardImage,
   };
-  
 
   const [events, setEvents] = useState([]);
 
