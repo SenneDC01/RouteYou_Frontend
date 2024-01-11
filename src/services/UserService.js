@@ -13,6 +13,7 @@ export const login = async (body) => {
     method: 'POST',
     headers: HEADERS,
     body: JSON.stringify(body),
+    credentials: 'include',
   });
   const data = await response.json();
   Cookies.set('token', data.token);
@@ -39,6 +40,7 @@ export const logout = async () => {
   const response = await fetch(`${API_URL}/logout`, {
     method: 'POST',
     headers: HEADERS,
+    credentials: 'include',
   });
   const data = await response.json();
   Cookies.remove('token');
