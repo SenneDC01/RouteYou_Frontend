@@ -7,7 +7,9 @@ import ManageEventDropDown from '@/components/molecules/manage-event-drop-down/M
 export default function ManageEventPage({ event }) {
   return (
     <div className={styles.container}>
-      <div className={styles.leftColumn}>Name: {event.name}</div>
+      <div className={styles.leftColumn} data-testid="leftColumn">
+        Name: {event.name}
+      </div>
       <div className={styles.rightColumn}>
         <ManageEventDropDown title="Edit"></ManageEventDropDown>
         <ManageEventDropDown
