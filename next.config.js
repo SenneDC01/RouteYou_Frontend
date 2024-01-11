@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "standalone",
+  output: 'standalone',
   images: {
-    domains: ["localhost", "buffer.com"],
+    domains: ['localhost', 'buffer.com', 'storage.googleapis.com'],
   },
 };
 
