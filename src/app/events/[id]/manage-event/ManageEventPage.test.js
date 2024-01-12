@@ -1,107 +1,54 @@
 import React from 'react';
-import { render, waitFor } from '@testing-library/react';
 import ManageEventPage from './page';
 import '@testing-library/jest-dom';
-import * as EventService from '@/services/EventService';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
-const publicEventsResponse = {
-  message: 'Events have been fetched successfully',
-  events: {
-    current_page: 1,
-    data: [
-      {
-        id: 1,
-        name: 'City Light Run Aalst',
-        description: 'Loop langs de mooiste parels van Aalst',
-        start_date: '2024-04-22 21:00:00',
-        image_url:
-          'http://localhost:8080/storage/images/no-profile-picture.png',
-        author: 'Senna Uyttersprot',
-        interested: false,
-        routes: [
-          {
-            route_data: {
-              id: 6833170,
-              name: 'Stadsomloop Aalst - Rood',
-              difficulty: 0.3,
-              type: 'Looproute',
-              maximum_ascent: '1.48631%',
-              average_ascent: '0%',
-              length: '1km',
-              uri: 'https://www.routeyou.com/nl-be/route/view/6833170/looproute/StadsomloopAalst-Rood',
-              begin_address: 'Aalst, Oost-Vlaanderen, Vlaanderen',
-            },
-          },
-        ],
-      },
-    ],
-    first_page_url: 'http://localhost:8080/api/events?page=1',
-    from: 1,
-    last_page: 1,
-    last_page_url: 'http://localhost:8080/api/events?page=1',
-    links: [
-      {
-        url: null,
-        label: '&laquo; Previous',
-        active: false,
-      },
-      {
-        url: 'http://localhost:8080/api/events?page=1',
-        label: '1',
-        active: true,
-      },
-      {
-        url: null,
-        label: 'Next &raquo;',
-        active: false,
-      },
-    ],
-    next_page_url: null,
-    path: 'http://localhost:8080/api/events',
-    per_page: 10,
-    prev_page_url: null,
-    to: 1,
-    total: 1,
-  },
+const mockEvent = {
+  name: 'Sample Event',
+  author: 'John Doe',
+  start_date: '2024-01-15',
+  description: 'This is a sample event description.',
+  type: 'Cycling',
+  distance: 50,
+  time: '10:00 AM',
+  image_url: 'sample-image.jpg',
 };
 
 describe('ManageEventPage', () => {
-  let mockPublicEvents;
+  test('renders ManageEventPage with event details', () => {
+    render(<ManageEventPage event={mockEvent} />);
 
-  beforeEach(() => {
-    mockPublicEvents = jest.spyOn(EventService, 'publicEvents');
-    mockPublicEvents.mockImplementation(() =>
-      Promise.resolve({ ...publicEventsResponse, code: 200 })
-    );
+    expect(screen.getByText('Sample Event')).toBeInTheDocument();
+    expect(screen.getByText('John Doe')).toBeInTheDocument();
+    expect(
+      screen.getByText('This is a sample event description.')
+    ).toBeInTheDocument();
+    expect(screen.getByAltText('Route image')).toBeInTheDocument();
+
+    expect(screen.getByText('Cycling')).toBeInTheDocument();
+    expect(screen.getByText('50km')).toBeInTheDocument();
+    expect(screen.getByText('10:00 AM')).toBeInTheDocument();
   });
 
-  afterEach(() => {
-    mockPublicEvents.mockRestore();
+  test('renders right columns', () => {
+    render(<ManageEventPage event={mockEvent} />);
+
+    expect(screen.getByText('Manage your event')).toBeInTheDocument();
+
+    expect(screen.getByText('Edit')).toBeInTheDocument();
+    expect(screen.getByText('Participants')).toBeInTheDocument();
+    expect(screen.getByText('Posts')).toBeInTheDocument();
+    expect(screen.getByText('Pictures')).toBeInTheDocument();
   });
 
-  it('renders event details correctly', async () => {
-    const { getByTestId } = render(<ManageEventPage />);
+  test('simulates user interaction with ManageEventDropDown', async () => {
+    render(<ManageEventPage event={mockEvent} />);
 
-    await waitFor(() => expect(mockPublicEvents).toHaveBeenCalled());
+    userEvent.click(screen.getByText('Participants'));
 
-    // Adjust the following assertions based on your actual component structure
-    expect(getByTestId('event-name')).toHaveTextContent('City Light Run Aalst');
-    expect(getByTestId('event-description')).toHaveTextContent(
-      'Loop langs de mooiste parels van Aalst'
-    );
-  });
-
-  it('renders correctly without event', () => {
-    // Render the component without providing an event prop
-    const { getByTestId } = render(<ManageEventPage />);
-
-    // Assert that the element with data-testid "name-column" exists
-    expect(getByTestId('leftColumn')).toBeInTheDocument();
-
-    // Assert that the text 'No Name' is present in the left column
-    // expect(getByTestId('leftColumn')).toHaveTextContent('Name');
-
-    // Assert that the text 'Participants' is present in the right column
-    // expect(getByTestId('participants-column')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText('Participants')).toBeInTheDocument();
+    });
   });
 });
