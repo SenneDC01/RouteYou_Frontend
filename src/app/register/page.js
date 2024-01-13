@@ -53,11 +53,11 @@ const RegisterPage = () => {
       errors.lastname = 'Please enter your lastname';
     }
     if (!isFilled(formValues.gender)) {
-      errors.gender = 'Please select a gender';
+      errors.gender = 'Please select a sex';
     } else if (
       !genderOptions.map((option) => option.value).includes(formValues.gender)
     ) {
-      errors.gender = 'Please select a valid gender';
+      errors.gender = 'Please select a valid sex';
     }
     return errors;
   };
@@ -166,7 +166,7 @@ const RegisterPage = () => {
             errorMessage={errors.lastname}
           />
           <SelectField
-            label="Gender"
+            label="Sex"
             name="gender"
             options={genderOptions}
             value={formValues.gender}
