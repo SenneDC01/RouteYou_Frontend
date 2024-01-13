@@ -15,10 +15,9 @@ export default async function Page({ events }) {
         title="My Events"
         description="Here you will be able to see the events you organize."
       >
-        {events.length &&
-          events.map((e, index) => {
-            return <EventCard key={index} event={e}></EventCard>;
-          })}
+        {events?.map((e, index) => {
+          return <EventCard key={index} event={e}></EventCard>;
+        })}
         {!events.length && (
           <TextLink href="/events/create">Create your first event</TextLink>
         )}
