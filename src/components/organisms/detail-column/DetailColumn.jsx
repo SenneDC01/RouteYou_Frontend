@@ -18,7 +18,7 @@ export default function DetailColumn({ event }) {
         <Image
           src={event.image_url}
           priority={true}
-          alt="cycling event preview"
+          alt="event image"
           className={styles.image}
           width={400}
           height={400}
