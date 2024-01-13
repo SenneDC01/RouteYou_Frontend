@@ -11,7 +11,7 @@ export default function Footer() {
         <Image
           src={logo}
           priority={true}
-          alt="Logo"
+          alt="RouteYou"
           width={250}
           className={styles.image}
         />
