@@ -12,7 +12,7 @@ export default function Banner() {
       <Image
         src={banner}
         priority={true}
-        alt="banner image"
+        alt=""
         className={styles.image}
       />
       <div className={styles.contentContainer}>
