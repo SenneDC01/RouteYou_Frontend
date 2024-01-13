@@ -9,7 +9,7 @@ describe('Banner', () => {
   });
 
   it('renders the banner image', () => {
-    const bannerImage = screen.getByAltText('banner image');
+    const bannerImage = screen.getByAltText('');
     expect(bannerImage).toBeInTheDocument();
   });
 

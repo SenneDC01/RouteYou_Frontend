@@ -13,7 +13,7 @@ describe('Footer', () => {
   });
 
   it('renders the logo', () => {
-    const logoElement = screen.getByAltText('Logo');
+    const logoElement = screen.getByAltText('RouteYou');
     expect(logoElement).toBeInTheDocument();
   });
 
