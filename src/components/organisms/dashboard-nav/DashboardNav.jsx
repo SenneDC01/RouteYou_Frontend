@@ -6,7 +6,7 @@ import DashboardLink from '@/components/atoms/dashboard-link/DashboardLink';
 export default function DashboardNav() {
   return (
     <nav className={styles.nav}>
-      <h3>Your Dashboard</h3>
+      <h1>Your Dashboard</h1>
       <ul>
         <DashboardLink
           link="/dashboard/account"
