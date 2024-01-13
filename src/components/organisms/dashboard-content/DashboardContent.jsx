@@ -8,7 +8,7 @@ export default function DashboardContent({ title, description, children }) {
     <section className={styles.content}>
       <BigTitle>{title}</BigTitle>
       <p>{description}</p>
-      <ol className={styles.list}>{children}</ol>
+      <div className={styles.list}>{children}</div>
     </section>
   );
 }
