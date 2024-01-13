@@ -105,7 +105,8 @@ const RegisterPage = () => {
         const response = await register(formValues);
 
         if (response.code === 201) {
-          router.push('/dashboard');
+          window.location.reload();
+          router.push('/dashboard/my-events');
         } else {
           if (response.errors) {
             const errors = [];
