@@ -49,12 +49,6 @@ export default function Footer() {
               Privacy declaration
             </Link>
           </li>
-
-          <li>
-            <Link href="/evaluation-report" className={styles.linkStyles}>
-              Evaluation Report
-            </Link>
-          </li>
         </ul>
 
         <div className={[styles.list]}>
