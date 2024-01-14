@@ -52,7 +52,9 @@ export default function AccessibilityStatement() {
           An external accessibility audit has been conducted. This audit was a
           thorough analysis. You can read the report here:
         </RegularText>
-        <TextLink href="/evaluation-report">evaluation report</TextLink>
+        <TextLink href="https://wcag-em-report-routeyou.tiiny.site/">
+          evaluation report
+        </TextLink>
       </div>
 
       <div>
