@@ -52,12 +52,13 @@ export default function Header() {
       maxWidth="2xl"
       as="div"
     >
-      <Link href="#main-content" className="skip-link">
+      <Link href="#main-content" className="skip-link" tabIndex={1}>
         Ga naar hoofdinhoud
       </Link>
       <NavbarMenuToggle
         aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
         className="sm:hidden"
+        tabIndex={2}
       />
       <Link href="/">
         <Image
@@ -161,7 +162,7 @@ export default function Header() {
       </NavbarContent>
       <NavbarMenu>
         <NavbarMenuItem isActive={isLinkActive('/')}>
-          <Link color="foreground" className="w-full" href="/">
+          <Link color="foreground" className="w-full" href="/" tabIndex={3}>
             Home
           </Link>
         </NavbarMenuItem>
@@ -170,6 +171,7 @@ export default function Header() {
             buttonText={
               <>
                 <span
+                  tabIndex={4}
                   className={isLinkActive('/events') ? styles.boldText : ''}
                 >
                   Events
@@ -185,6 +187,7 @@ export default function Header() {
             buttonText={
               <>
                 <span
+                  tabIndex={5}
                   className={isLinkActive('/routes') ? styles.boldText : ''}
                 >
                   Routes
@@ -198,7 +201,7 @@ export default function Header() {
         {user ? (
           <>
             <NavbarMenuItem isActive={isLinkActive('/dashboard')}>
-              <Link color="foreground" href="/dashboard/my-events">
+              <Link color="foreground" href="/dashboard/my-events" tabIndex={6}>
                 Dashboard
               </Link>
             </NavbarMenuItem>
@@ -224,12 +227,12 @@ export default function Header() {
         ) : (
           <>
             <NavbarMenuItem isActive={isLinkActive('/login')}>
-              <Link color="foreground" href="/login">
+              <Link color="foreground" href="/login" tabIndex={7}>
                 Login
               </Link>
             </NavbarMenuItem>
             <NavbarMenuItem isActive={isLinkActive('/register')}>
-              <Link color="foreground" href="/register">
+              <Link color="foreground" href="/register" tabIndex={8}>
                 Register
               </Link>
             </NavbarMenuItem>
