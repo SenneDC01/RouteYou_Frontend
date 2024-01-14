@@ -10,7 +10,10 @@ export default function FavButton() {
   };
 
   return (
-    <button aria-label="favorite" onClick={() => handleToggleFavorite()}>
+    <button
+      aria-label="mark as interested"
+      onClick={() => handleToggleFavorite()}
+    >
       <StarSVG width={30} height={30} fill={isFavorite ? '#1a614a' : 'none'} />
     </button>
   );
