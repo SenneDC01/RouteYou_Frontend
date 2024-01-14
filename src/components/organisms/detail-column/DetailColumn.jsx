@@ -13,12 +13,12 @@ import Image from 'next/image';
 
 export default function DetailColumn({ event }) {
   return (
-    <div className={styles.column} data-testid="detail_column">
+    <section className={styles.column} data-testid="detail_column">
       <div className={styles.imageContainer}>
         <Image
           src={event.image_url}
           priority={true}
-          alt="event image"
+          alt=""
           className={styles.image}
           width={400}
           height={400}
@@ -46,6 +46,6 @@ export default function DetailColumn({ event }) {
           </ButtonLink>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
