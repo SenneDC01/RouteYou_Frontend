@@ -40,6 +40,7 @@ export default function DetailColumn({ event }) {
           <ButtonLink
             link={`/events/${event.id}/signup`}
             icon={<ArrowRightSVG />}
+            ariaLabel="Go to the sign-up page of this event"
           >
             sign-up
           </ButtonLink>
