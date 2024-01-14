@@ -49,6 +49,7 @@ export default function EventCard({ event }) {
             <RoundButton
               icon={<ArrowRightSVG />}
               href={`/events/${event.id}`}
+              ariaLabel={'Go to the detail page of ' + event.name}
             />
           </div>
         </div>
