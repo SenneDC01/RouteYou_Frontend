@@ -16,7 +16,7 @@ export default function EventCard({ event }) {
       <Image
         height={100}
         width={100}
-        alt={event.name}
+        alt=""
         className={[styles.eventImage]}
         src={event.image_url}
       />

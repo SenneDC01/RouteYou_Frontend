@@ -42,7 +42,7 @@ export default function DetailColumn({ event }) {
             icon={<ArrowRightSVG />}
             ariaLabel="Go to the sign-up page of this event"
           >
-            sign-up
+            Sign-up
           </ButtonLink>
         </div>
       </div>
