@@ -40,8 +40,6 @@ const mockEvent = [
   },
 ];
 
-export default async function ManageEventLayout({ children, params }) {
-  //const { event } = await getEventInfo(params.id);
-
+export default async function ManageEventLayout({ children }) {
   return <ManageEventPage event={mockEvent[0]}>{children}</ManageEventPage>;
 }
