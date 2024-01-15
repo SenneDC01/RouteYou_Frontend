@@ -32,7 +32,7 @@ export default function Page() {
     max_participants: '',
     price: '',
     visibility: '',
-    event_image: {},
+    event_image: '',
   });
   const [errors, setErrors] = useState({});
 
@@ -143,7 +143,6 @@ export default function Page() {
   };
 
   const validateImage = () => {
-    console.log(formValues.event_image);
     const errors = {};
     if (!formValues.event_image) {
       errors.event_image = 'Please add an image';

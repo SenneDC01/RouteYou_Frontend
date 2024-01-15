@@ -34,9 +34,9 @@ const isPositiveInteger = (string) => {
   return !isNaN(string) && Number.isInteger(Number(string)) && string > 0;
 };
 
-const isImage = (string) => {
-  console.log(string.includes('image/'));
-  return string.includes('image/');
+const isImage = (input) => {
+  console.log(input);
+  return input.includes('image/');
 };
 
 export {
