@@ -5,6 +5,13 @@
   flex-direction: column;
   min-height: 100vh;
   align-items: center;
+
+  h2 {
+    color: vars.$black;
+    font-weight: 700;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+  }
 }
 
 .bannerContainer {
@@ -31,7 +38,17 @@
   }
 }
 
+.section {
+  border-bottom: 2px solid #e5e7eb;
+  width: 100%;
+  padding: 0 1rem;
+}
+
 .borderContainer {
+  @include cardContainer;
+}
+
+.routeContrainer {
   @include cardContainer;
   border-bottom: 2px solid #e5e7eb;
 }

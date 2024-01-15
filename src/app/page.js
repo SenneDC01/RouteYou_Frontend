@@ -10,7 +10,6 @@ import RouteSVG from '@/utils/icons/RouteSVG';
 import EventCard from '@/components/organisms/event-card/EventCard';
 import Banner from '@/components/organisms/banner/Banner';
 import styles from './HomePage.module.scss';
-import BoldText from '@/components/atoms/bold-text/BoldText';
 import { publicEvents } from '@/services/EventService';
 
 const HomePage = () => {
@@ -42,16 +41,22 @@ const HomePage = () => {
       <section className={[styles.bannerContainer]}>
         <Banner />
       </section>
-      <section className={[styles.borderContainer]}>
-        <InfoCard icon={<RouteSVG />} text="More than 7,270,000 routes" />
-        <InfoCard icon={<GroupSVG />} text="More than 15,115,000 users" />
-        <InfoCard icon={<CameraSVG />} text="More than 3,475,000 attractions" />
-      </section>
-      <section>
-        <div className={styles.title}>
-          <BoldText>PLAN THE MOST BEAUTIFUL ROUTES</BoldText>
-        </div>
+      <section className={styles.section}>
+        <h2>Platform is always growing</h2>
         <div className={[styles.borderContainer]}>
+          <InfoCard icon={<RouteSVG />} text="More than 7,270,000 routes" />
+          <InfoCard icon={<GroupSVG />} text="More than 15,115,000 users" />
+          <InfoCard
+            icon={<CameraSVG />}
+            text="More than 3,475,000 attractions"
+          />
+        </div>
+      </section>
+      <section>
+        <div className={styles.title}>
+          <h2>Plan the most beautiful routes</h2>
+        </div>
+        <div className={[styles.routeContrainer]}>
           <RouteCard route={route} />
           <RouteCard route={route} />
           <RouteCard route={route} />
@@ -60,7 +65,7 @@ const HomePage = () => {
       </section>
       <section>
         <div className={styles.title}>
-          <BoldText>PARTICIPATE IN EVENTS</BoldText>
+          <h2>Participate in events</h2>
         </div>
         <div className={[styles.bottomCardContainer]}>
           {events.map((event, index) => (
