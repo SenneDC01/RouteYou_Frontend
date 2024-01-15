@@ -32,7 +32,7 @@ test('renders post title and message', () => {
 test('renders images in pairs', () => {
   render(<Post post={mockPost} />);
   const images = screen.getAllByAltText('');
-  expect(images).toHaveLength(2); // Assuming there are two images in the mockPost
+  expect(images).toHaveLength(2);
   expect(images[0]).toHaveAttribute('src', 'image1.jpg');
   expect(images[1]).toHaveAttribute('src', 'image2.jpg');
 });
