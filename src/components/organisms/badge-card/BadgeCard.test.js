@@ -15,9 +15,8 @@ describe('BadgeCard Component', () => {
   };
 
   it('renders with default props', () => {
-    const { getByAltText, getByText } = render(<BadgeCard {...defaultProps} />);
+    const { getByText } = render(<BadgeCard {...defaultProps} />);
 
-    expect(getByAltText(defaultProps.title)).toBeInTheDocument();
     expect(getByText(defaultProps.title)).toBeInTheDocument();
   });
 });

@@ -11,7 +11,7 @@ export default function Footer() {
         <Image
           src={logo}
           priority={true}
-          alt="Logo"
+          alt="RouteYou"
           width={250}
           className={styles.image}
         />
@@ -47,12 +47,6 @@ export default function Footer() {
           <li>
             <Link href="/privacy-declaration" className={styles.linkStyles}>
               Privacy declaration
-            </Link>
-          </li>
-
-          <li>
-            <Link href="/evaluation-report" className={styles.linkStyles}>
-              Evaluation Report
             </Link>
           </li>
         </ul>

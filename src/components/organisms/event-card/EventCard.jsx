@@ -16,7 +16,7 @@ export default function EventCard({ event }) {
       <Image
         height={100}
         width={100}
-        alt={event.name}
+        alt=""
         className={[styles.eventImage]}
         src={event.image_url}
       />
@@ -49,6 +49,7 @@ export default function EventCard({ event }) {
             <RoundButton
               icon={<ArrowRightSVG />}
               href={`/events/${event.id}`}
+              ariaLabel={'Go to the detail page of ' + event.name}
             />
           </div>
         </div>

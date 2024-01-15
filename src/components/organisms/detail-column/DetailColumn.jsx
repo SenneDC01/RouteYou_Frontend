@@ -13,12 +13,12 @@ import Image from 'next/image';
 
 export default function DetailColumn({ event }) {
   return (
-    <div className={styles.column} data-testid="detail_column">
+    <section className={styles.column} data-testid="detail_column">
       <div className={styles.imageContainer}>
         <Image
           src={event.image_url}
           priority={true}
-          alt="cycling event preview"
+          alt=""
           className={styles.image}
           width={400}
           height={400}
@@ -40,11 +40,12 @@ export default function DetailColumn({ event }) {
           <ButtonLink
             link={`/events/${event.id}/signup`}
             icon={<ArrowRightSVG />}
+            ariaLabel="Go to the sign-up page of this event"
           >
-            sign-up
+            Sign-up
           </ButtonLink>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

@@ -42,7 +42,7 @@ describe('RegisterPage component', () => {
       fireEvent.change(getByLabelText('Lastname'), {
         target: { value: lastname },
       });
-      fireEvent.change(getByLabelText('Gender'), {
+      fireEvent.change(getByLabelText('Sex'), {
         target: { value: gender },
       });
       fireEvent.change(getByLabelText('Email'), {
@@ -100,7 +100,7 @@ describe('RegisterPage component', () => {
       fireEvent.change(getByLabelText('Lastname'), {
         target: { value: lastname },
       });
-      fireEvent.change(getByLabelText('Gender'), {
+      fireEvent.change(getByLabelText('Sex'), {
         target: { value: gender },
       });
       fireEvent.change(getByLabelText('Email'), {
@@ -147,7 +147,7 @@ describe('RegisterPage component', () => {
       fireEvent.change(getByLabelText('Lastname'), {
         target: { value: lastname },
       });
-      fireEvent.change(getByLabelText('Gender'), {
+      fireEvent.change(getByLabelText('Sex'), {
         target: { value: gender },
       });
       fireEvent.change(getByLabelText('Email'), {

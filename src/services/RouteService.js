@@ -1,9 +1,11 @@
+import Cookies from 'js-cookie';
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
-const USER_ID = process.env.NEXT_PUBLIC_USER_ID;
+
 const HEADERS = {
   'Content-Type': 'application/json',
-  Authorization: process.env.NEXT_PUBLIC_API_TEST_TOKEN,
   Accept: 'application/json',
+  Authorization: 'Bearer ' + Cookies.get('token'),
 };
 
 export const searchPublicRoute = async (term) => {
@@ -22,8 +24,14 @@ export const searchPublicRoute = async (term) => {
 };
 
 export const searchPrivateRoute = async (term) => {
+  const userResponse = await fetch(`${API_URL}/user`, {
+    method: 'GET',
+    headers: HEADERS,
+    credentials: 'include',
+  });
+  const user = await userResponse.json();
   const response = await fetch(
-    `${API_URL}/users/${USER_ID}/routes?limit=10&offset=0&term=${term}`,
+    `${API_URL}/users/${user.user.id}/routes?limit=10&offset=0&term=${term}`,
     {
       method: 'GET',
       headers: HEADERS,

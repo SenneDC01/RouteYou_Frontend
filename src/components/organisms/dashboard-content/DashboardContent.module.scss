@@ -3,6 +3,10 @@
 .content {
   padding: 2rem;
   height: 100%;
+
+  h2 {
+    font-size: vars.$text_xl;
+  }
 }
 
 .list {

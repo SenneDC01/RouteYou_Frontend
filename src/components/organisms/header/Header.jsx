@@ -160,6 +160,7 @@ export default function Header() {
           )}
         </NavbarItem>
       </NavbarContent>
+
       <NavbarMenu>
         <NavbarMenuItem isActive={isLinkActive('/')}>
           <Link color="foreground" className="w-full" href="/" tabIndex={3}>

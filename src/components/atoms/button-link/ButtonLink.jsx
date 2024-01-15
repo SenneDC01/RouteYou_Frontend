@@ -7,11 +7,12 @@ export default function ButtonLink({
   icon = null,
   link = '/',
   className,
+  ariaLabel,
 }) {
   return (
     <Link
       href={link}
-      aria-label="forward button"
+      aria-label={ariaLabel}
       className={[styles.buttonStyle, className].join(' ')}
     >
       {icon && <span className={styles.icon}>{icon}</span>}
