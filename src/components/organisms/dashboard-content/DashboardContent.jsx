@@ -1,14 +1,14 @@
 'use client';
 import React from 'react';
 import styles from './DashboardContent.module.scss';
-import BigTitle from '@/components/atoms/big-title/BigTitle';
+import MediumTitle from '@/components/atoms/medium-title/MediumTitle';
 
 export default function DashboardContent({ title, description, children }) {
   return (
     <section className={styles.content}>
-      <BigTitle>{title}</BigTitle>
+      <MediumTitle>{title}</MediumTitle>
       <p>{description}</p>
-      <ol className={styles.list}>{children}</ol>
+      <div className={styles.list}>{children}</div>
     </section>
   );
 }

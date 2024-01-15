@@ -27,6 +27,11 @@
     }
   }
 
+  .map {
+    width: 100%;
+    height: 30rem;
+  }
+
   .noRoute {
     width: 100%;
     position: relative;
@@ -49,8 +54,8 @@
     }
 
     .map {
-      filter: blur(2px);
       height: 100%;
+      filter: blur(2px);
     }
   }
 }
@@ -60,6 +65,9 @@
     flex-direction: row;
     .form {
       width: 40rem;
+    }
+    .map {
+      height: auto;
     }
   }
 }

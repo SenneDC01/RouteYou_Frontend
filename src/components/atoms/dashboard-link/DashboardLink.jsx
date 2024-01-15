@@ -15,7 +15,7 @@ export default function DashboardLink({ children, link, icon }) {
       <Image
         className={styles.circle}
         src={require('@/utils/icons/activeCircle.svg')}
-        alt="star"
+        alt=""
         width={1}
         height={1}
       ></Image>

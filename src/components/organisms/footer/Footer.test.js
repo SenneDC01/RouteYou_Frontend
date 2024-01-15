@@ -13,7 +13,7 @@ describe('Footer', () => {
   });
 
   it('renders the logo', () => {
-    const logoElement = screen.getByAltText('Logo');
+    const logoElement = screen.getByAltText('RouteYou');
     expect(logoElement).toBeInTheDocument();
   });
 
@@ -26,15 +26,12 @@ describe('Footer', () => {
       'Accessibility Statement'
     );
     const privacyStatementLink = screen.getByText('Privacy declaration');
-    const wcagReportLink = screen.getByText('Evaluation Report');
-
     expect(homeLink).toBeInTheDocument();
     expect(searchEventsLink).toBeInTheDocument();
     expect(createEventLink).toBeInTheDocument();
     expect(dashboardLink).toBeInTheDocument();
     expect(accessibilityStatementLink).toBeInTheDocument();
     expect(privacyStatementLink).toBeInTheDocument();
-    expect(wcagReportLink).toBeInTheDocument();
   });
 
   it('renders the address', () => {

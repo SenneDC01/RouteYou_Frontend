@@ -53,7 +53,7 @@ export default function Header() {
       as="div"
     >
       <Link href="#main-content" className="skip-link">
-        Ga naar hoofdinhoud
+        Go to main content
       </Link>
       <NavbarMenuToggle
         aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
@@ -159,6 +159,7 @@ export default function Header() {
           )}
         </NavbarItem>
       </NavbarContent>
+
       <NavbarMenu>
         <NavbarMenuItem isActive={isLinkActive('/')}>
           <Link color="foreground" className="w-full" href="/">

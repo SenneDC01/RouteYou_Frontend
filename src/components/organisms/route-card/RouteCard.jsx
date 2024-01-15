@@ -17,7 +17,7 @@ export default function RouteCard({ route }) {
         <Image
           height={200}
           width={200}
-          alt={route.title}
+          alt={route.alt}
           className={styles.image}
           src={route.image}
         />

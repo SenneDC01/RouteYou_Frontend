@@ -23,6 +23,7 @@ const HomePage = () => {
     tijd: '4:23:45',
     moeilijkheid: 'Medium',
     image: cardImage,
+    alt: 'Uitzicht op heuvellandschap met meer',
   };
 
   const [events, setEvents] = useState([]);
@@ -38,15 +39,15 @@ const HomePage = () => {
 
   return (
     <div className={[styles.pageContainer]}>
-      <div className={[styles.bannerContainer]}>
+      <section className={[styles.bannerContainer]}>
         <Banner />
-      </div>
-      <div className={[styles.borderContainer]}>
+      </section>
+      <section className={[styles.borderContainer]}>
         <InfoCard icon={<RouteSVG />} text="More than 7,270,000 routes" />
         <InfoCard icon={<GroupSVG />} text="More than 15,115,000 users" />
         <InfoCard icon={<CameraSVG />} text="More than 3,475,000 attractions" />
-      </div>
-      <div>
+      </section>
+      <section>
         <div className={styles.title}>
           <BoldText>PLAN THE MOST BEAUTIFUL ROUTES</BoldText>
         </div>
@@ -56,8 +57,8 @@ const HomePage = () => {
           <RouteCard route={route} />
           <RouteCard route={route} />
         </div>
-      </div>
-      <div>
+      </section>
+      <section>
         <div className={styles.title}>
           <BoldText>PARTICIPATE IN EVENTS</BoldText>
         </div>
@@ -66,7 +67,7 @@ const HomePage = () => {
             <EventCard event={event} key={index} />
           ))}
         </div>
-      </div>
+      </section>
     </div>
   );
 };
