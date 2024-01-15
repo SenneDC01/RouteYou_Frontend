@@ -18,7 +18,7 @@ export default function ManageEventPage({ event }) {
       <div className={styles.leftColumn}>
         <Image
           src={event.image_url}
-          alt="Route image"
+          alt=""
           className={styles.image}
         />
         <div className={styles.textContainer}>
