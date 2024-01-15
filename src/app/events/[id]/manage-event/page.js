@@ -2,6 +2,7 @@
 import React from 'react';
 import styles from './ManageEventPage.module.scss';
 import Participants from '@/components/organisms/participants/Participants';
+import Posts from '@/components/organisms/posts/Posts';
 import ManageEventDropDown from '@/components/molecules/manage-event-drop-down/ManageEventDropDown';
 import Image from 'next/image';
 import BigTitle from '@/components/atoms/big-title/BigTitle';
@@ -45,7 +46,7 @@ export default function ManageEventPage({ event }) {
           title="Participants"
           comp={Participants}
         ></ManageEventDropDown>
-        <ManageEventDropDown title="Posts"></ManageEventDropDown>
+        <ManageEventDropDown title="Posts" comp={Posts}></ManageEventDropDown>
         <ManageEventDropDown title="Pictures"></ManageEventDropDown>
       </div>
     </div>

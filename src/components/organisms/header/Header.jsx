@@ -162,7 +162,7 @@ export default function Header() {
       </NavbarContent>
       <NavbarMenu>
         <NavbarMenuItem isActive={isLinkActive('/')}>
-          <Link color="foreground" className="w-full" href="/" tabIndex={3}>
+          <Link color="foreground" href="/" tabIndex={3}>
             Home
           </Link>
         </NavbarMenuItem>
