@@ -34,6 +34,11 @@ const isPositiveInteger = (string) => {
   return !isNaN(string) && Number.isInteger(Number(string)) && string > 0;
 };
 
+const isImage = (string) => {
+  console.log(string.includes('image/'));
+  return string.includes('image/');
+};
+
 export {
   isPasswordFilled,
   isValidEmail,
@@ -44,4 +49,5 @@ export {
   isValidPasswordLength,
   isValidDateTime,
   isPositiveInteger,
+  isImage,
 };

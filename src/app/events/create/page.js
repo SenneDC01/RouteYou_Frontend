@@ -17,6 +17,7 @@ import {
   arrayOnlyNumber,
   isValidDateTime,
   isPositiveInteger,
+  isImage,
 } from '@/helpers/FormValidation/FormValidation';
 import styles from './CreateEventPage.module.scss';
 
@@ -31,6 +32,7 @@ export default function Page() {
     max_participants: '',
     price: '',
     visibility: '',
+    event_image: {},
   });
   const [errors, setErrors] = useState({});
 
@@ -51,19 +53,22 @@ export default function Page() {
     const routesErrors = validateRoutes();
     const dateErrors = validateDate();
     const infoErrors = validateInfo();
+    const imageErrors = validateImage();
 
     setErrors({
       ...textErrors,
       ...routesErrors,
       ...dateErrors,
       ...infoErrors,
+      ...imageErrors,
       formError: errors.formError,
     });
     return (
       isEmpty(textErrors) &&
       isEmpty(routesErrors) &&
       isEmpty(dateErrors) &&
-      isEmpty(infoErrors)
+      isEmpty(infoErrors) &&
+      isEmpty(imageErrors)
     );
   };
 
@@ -133,6 +138,17 @@ export default function Page() {
     }
     if (!isFilled(formValues.description)) {
       errors.description = 'Please enter a description';
+    }
+    return errors;
+  };
+
+  const validateImage = () => {
+    console.log(formValues.event_image);
+    const errors = {};
+    if (!formValues.event_image) {
+      errors.event_image = 'Please add an image';
+    } else if (!isImage(formValues.event_image.type)) {
+      errors.event_image = 'Please add a file of type image';
     }
     return errors;
   };

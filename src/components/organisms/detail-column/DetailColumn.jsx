@@ -33,6 +33,13 @@ export default function DetailColumn({ event }) {
         <RegularText>{event.description}</RegularText>
         <ViewMore link={`/events/${event.id}/posts`}>Posts</ViewMore>
         <ViewMore link={`/events/${event.id}/pictures`}>Pictures</ViewMore>
+        {event.routes?.map((e, index) => {
+          return (
+            <ViewMore key={index} link={e.route_data.uri}>
+              Route {index + 1}
+            </ViewMore>
+          );
+        })}
         <div className={styles.row}>
           <Button link="#" icon={<ArrowRightSVG />}>
             Share

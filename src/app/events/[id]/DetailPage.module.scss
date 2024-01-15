@@ -7,14 +7,19 @@
   width: 100vw;
   box-sizing: border-box;
   overflow: hidden;
-}
-.map {
-  min-height: 45rem;
-  width: 100%;
+
+  .map {
+    height: 30rem;
+    width: 100%;
+  }
 }
 
 @media screen and (min-width: 750px) {
   .detailPage {
     flex-direction: row;
+
+    .map {
+      height: auto;
+    }
   }
 }
