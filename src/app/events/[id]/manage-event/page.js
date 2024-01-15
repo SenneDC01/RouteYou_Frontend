@@ -16,11 +16,7 @@ export default function ManageEventPage({ event }) {
   return (
     <div className={styles.container}>
       <div className={styles.leftColumn}>
-        <Image
-          src={event.image_url}
-          alt=""
-          className={styles.image}
-        />
+        <Image src={event.image_url} alt="" className={styles.image} />
         <div className={styles.textContainer}>
           <span>
             <BigTitle>{event.name}</BigTitle>
