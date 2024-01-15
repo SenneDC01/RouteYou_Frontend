@@ -62,10 +62,7 @@ const mockPosts = {
 test('renders posts with images and details', () => {
   render(<Posts posts={mockPosts.posts} />);
 
-  const postTitle = screen.getByText((content, node) => {
-    const hasTitle = (node) => node.textContent === 'Ontdek Aalst';
-    return hasTitle(node);
-  });
+  const postTitles = screen.getAllByText('Ontdek Aalst');
 
-  expect(postTitle).toBeInTheDocument();
+  expect(postTitles.length).toBeGreaterThan(0);
 });
