@@ -52,193 +52,199 @@ export default function Header() {
       maxWidth="2xl"
       as="div"
     >
-      <Link href="#main-content" className="skip-link" tabIndex={1}>
-        Ga naar hoofdinhoud
-      </Link>
-      <NavbarMenuToggle
-        aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-        className="sm:hidden"
-        tabIndex={2}
-      />
-      <Link href="/">
-        <Image
-          src={logo}
-          priority={true}
-          alt="RouteYou"
-          height={1000}
-          className={styles.logo}
+      <nav className="flex w-full items-center gap-4">
+        <Link href="#main-content" className="skip-link" tabIndex={1}>
+          Ga naar hoofdinhoud
+        </Link>
+        <NavbarMenuToggle
+          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+          className="sm:hidden"
+          tabIndex={2}
         />
-      </Link>
-      <NavbarContent className="hidden sm:flex gap-4">
-        <NavbarItem isActive={isLinkActive('/')}>
-          <Link color="foreground" href="/" aria-current="page">
-            Home
-            <span className={styles.itemBorderStyle}></span>
-          </Link>
-        </NavbarItem>
-        <NavbarItem isActive={isLinkActive('/events')}>
-          <CustomDropdown
-            buttonText={
-              <>
-                <span
-                  className={isLinkActive('/events') ? styles.boldText : ''}
-                >
-                  Events
-                </span>
-                <span className={styles.itemBorderStyle}></span>
-                <span className={styles.arrowStyle}>&gt;</span>
-              </>
-            }
-            items={dropdownItemsEvents}
+        <Link href="/">
+          <Image
+            src={logo}
+            priority={true}
+            alt="RouteYou"
+            height={1000}
+            className={styles.logo}
           />
-        </NavbarItem>
-        <NavbarItem isActive={isLinkActive('/routes')}>
-          <CustomDropdown
-            buttonText={
-              <>
-                <span
-                  className={isLinkActive('/routes') ? styles.boldText : ''}
-                >
-                  Routes
-                </span>
-                <span className={styles.itemBorderStyle}></span>
-                <span className={styles.arrowStyle}>&gt;</span>
-              </>
-            }
-            items={dropdownItemsRoutes}
-          />
-        </NavbarItem>
-        {user && (
-          <NavbarItem isActive={isLinkActive('/dashboard')}>
-            <Link
-              color="foreground"
-              href="/dashboard/my-events"
-              data-testid="dashboard"
-            >
-              Dashboard
+        </Link>
+        <NavbarContent className="hidden sm:flex gap-4">
+          <NavbarItem isActive={isLinkActive('/')}>
+            <Link color="foreground" href="/" aria-current="page">
+              Home
               <span className={styles.itemBorderStyle}></span>
             </Link>
           </NavbarItem>
-        )}
-      </NavbarContent>
-      <NavbarContent justify="end">
-        <NavbarItem data-testid="profile" className="hidden sm:flex gap-3">
+          <NavbarItem isActive={isLinkActive('/events')}>
+            <CustomDropdown
+              buttonText={
+                <>
+                  <span
+                    className={isLinkActive('/events') ? styles.boldText : ''}
+                  >
+                    Events
+                  </span>
+                  <span className={styles.itemBorderStyle}></span>
+                  <span className={styles.arrowStyle}>&gt;</span>
+                </>
+              }
+              items={dropdownItemsEvents}
+            />
+          </NavbarItem>
+          <NavbarItem isActive={isLinkActive('/routes')}>
+            <CustomDropdown
+              buttonText={
+                <>
+                  <span
+                    className={isLinkActive('/routes') ? styles.boldText : ''}
+                  >
+                    Routes
+                  </span>
+                  <span className={styles.itemBorderStyle}></span>
+                  <span className={styles.arrowStyle}>&gt;</span>
+                </>
+              }
+              items={dropdownItemsRoutes}
+            />
+          </NavbarItem>
+          {user && (
+            <NavbarItem isActive={isLinkActive('/dashboard')}>
+              <Link
+                color="foreground"
+                href="/dashboard/my-events"
+                data-testid="dashboard"
+              >
+                Dashboard
+                <span className={styles.itemBorderStyle}></span>
+              </Link>
+            </NavbarItem>
+          )}
+        </NavbarContent>
+        <NavbarContent justify="end">
+          <NavbarItem data-testid="profile" className="hidden sm:flex gap-3">
+            {user ? (
+              <>
+                <Image
+                  src={user.image_url}
+                  alt="Profile picture"
+                  width={30}
+                  height={30}
+                  className={styles.profilePic}
+                />
+                <CustomDropdown
+                  buttonText={
+                    <>
+                      {user.full_name}
+                      <span className={styles.arrowStyle}>&gt;</span>
+                    </>
+                  }
+                  items={dropdownItemsProfile}
+                />
+              </>
+            ) : (
+              <NavbarContent className="hidden sm:flex gap-4">
+                <NavbarItem isActive={isLinkActive('/login')}>
+                  <Link color="foreground" href="/login">
+                    Login
+                    <span className={styles.itemBorderStyle}></span>
+                  </Link>
+                </NavbarItem>
+                <NavbarItem isActive={isLinkActive('/register')}>
+                  <Link color="foreground" href="/register">
+                    Register
+                    <span className={styles.itemBorderStyle}></span>
+                  </Link>
+                </NavbarItem>
+              </NavbarContent>
+            )}
+          </NavbarItem>
+        </NavbarContent>
+        <NavbarMenu>
+          <NavbarMenuItem isActive={isLinkActive('/')}>
+            <Link color="foreground" href="/" tabIndex={3}>
+              Home
+            </Link>
+          </NavbarMenuItem>
+          <NavbarMenuItem>
+            <CustomDropdown
+              buttonText={
+                <>
+                  <span
+                    tabIndex={4}
+                    className={isLinkActive('/events') ? styles.boldText : ''}
+                  >
+                    Events
+                  </span>
+                  <span className={styles.arrowStyle}>&gt;</span>
+                </>
+              }
+              items={dropdownItemsEvents}
+            />
+          </NavbarMenuItem>
+          <NavbarMenuItem>
+            <CustomDropdown
+              buttonText={
+                <>
+                  <span
+                    tabIndex={5}
+                    className={isLinkActive('/routes') ? styles.boldText : ''}
+                  >
+                    Routes
+                  </span>
+                  <span className={styles.arrowStyle}>&gt;</span>
+                </>
+              }
+              items={dropdownItemsRoutes}
+            />
+          </NavbarMenuItem>
           {user ? (
             <>
-              <Image
-                src={user.image_url}
-                alt="Profile picture"
-                width={30}
-                height={30}
-                className={styles.profilePic}
-              />
-              <CustomDropdown
-                buttonText={
-                  <>
-                    {user.full_name}
-                    <span className={styles.arrowStyle}>&gt;</span>
-                  </>
-                }
-                items={dropdownItemsProfile}
-              />
+              <NavbarMenuItem isActive={isLinkActive('/dashboard')}>
+                <Link
+                  color="foreground"
+                  href="/dashboard/my-events"
+                  tabIndex={6}
+                >
+                  Dashboard
+                </Link>
+              </NavbarMenuItem>
+              <NavbarMenuItem data-testid="profile" className="flex gap-2">
+                <Image
+                  src={user.image_url}
+                  alt="Profile picture"
+                  width={30}
+                  height={30}
+                  className={styles.profilePic}
+                />
+                <CustomDropdown
+                  buttonText={
+                    <>
+                      {user.full_name}
+                      <span className={styles.arrowStyle}>&gt;</span>
+                    </>
+                  }
+                  items={dropdownItemsProfile}
+                />
+              </NavbarMenuItem>
             </>
           ) : (
-            <NavbarContent className="hidden sm:flex gap-4">
-              <NavbarItem isActive={isLinkActive('/login')}>
-                <Link color="foreground" href="/login">
+            <>
+              <NavbarMenuItem isActive={isLinkActive('/login')}>
+                <Link color="foreground" href="/login" tabIndex={7}>
                   Login
-                  <span className={styles.itemBorderStyle}></span>
                 </Link>
-              </NavbarItem>
-              <NavbarItem isActive={isLinkActive('/register')}>
-                <Link color="foreground" href="/register">
+              </NavbarMenuItem>
+              <NavbarMenuItem isActive={isLinkActive('/register')}>
+                <Link color="foreground" href="/register" tabIndex={8}>
                   Register
-                  <span className={styles.itemBorderStyle}></span>
                 </Link>
-              </NavbarItem>
-            </NavbarContent>
+              </NavbarMenuItem>
+            </>
           )}
-        </NavbarItem>
-      </NavbarContent>
-      <NavbarMenu>
-        <NavbarMenuItem isActive={isLinkActive('/')}>
-          <Link color="foreground" href="/" tabIndex={3}>
-            Home
-          </Link>
-        </NavbarMenuItem>
-        <NavbarMenuItem>
-          <CustomDropdown
-            buttonText={
-              <>
-                <span
-                  tabIndex={4}
-                  className={isLinkActive('/events') ? styles.boldText : ''}
-                >
-                  Events
-                </span>
-                <span className={styles.arrowStyle}>&gt;</span>
-              </>
-            }
-            items={dropdownItemsEvents}
-          />
-        </NavbarMenuItem>
-        <NavbarMenuItem>
-          <CustomDropdown
-            buttonText={
-              <>
-                <span
-                  tabIndex={5}
-                  className={isLinkActive('/routes') ? styles.boldText : ''}
-                >
-                  Routes
-                </span>
-                <span className={styles.arrowStyle}>&gt;</span>
-              </>
-            }
-            items={dropdownItemsRoutes}
-          />
-        </NavbarMenuItem>
-        {user ? (
-          <>
-            <NavbarMenuItem isActive={isLinkActive('/dashboard')}>
-              <Link color="foreground" href="/dashboard/my-events" tabIndex={6}>
-                Dashboard
-              </Link>
-            </NavbarMenuItem>
-            <NavbarMenuItem data-testid="profile" className="flex gap-2">
-              <Image
-                src={user.image_url}
-                alt="Profile picture"
-                width={30}
-                height={30}
-                className={styles.profilePic}
-              />
-              <CustomDropdown
-                buttonText={
-                  <>
-                    {user.full_name}
-                    <span className={styles.arrowStyle}>&gt;</span>
-                  </>
-                }
-                items={dropdownItemsProfile}
-              />
-            </NavbarMenuItem>
-          </>
-        ) : (
-          <>
-            <NavbarMenuItem isActive={isLinkActive('/login')}>
-              <Link color="foreground" href="/login" tabIndex={7}>
-                Login
-              </Link>
-            </NavbarMenuItem>
-            <NavbarMenuItem isActive={isLinkActive('/register')}>
-              <Link color="foreground" href="/register" tabIndex={8}>
-                Register
-              </Link>
-            </NavbarMenuItem>
-          </>
-        )}
-      </NavbarMenu>
+        </NavbarMenu>
+      </nav>
     </Navbar>
   );
 }
