@@ -19,11 +19,11 @@ export default function ManageEventPage({ event }) {
       <div className={styles.leftColumn}>
         <Image src={event.image_url} alt="" className={styles.image} />
         <div className={styles.textContainer}>
-          <span>
+          <div>
             <BigTitle>{event.name}</BigTitle>
             <SmallText>{event.author}</SmallText>
             <SmallText>{event.start_date}</SmallText>
-          </span>
+          </div>
           <RegularText>{event.description}</RegularText>
           <div className={styles.icons}>
             <SVGtext label={event.type} icon={<Racefiets />}></SVGtext>
