@@ -23,6 +23,7 @@ const HomePage = () => {
     tijd: '4:23:45',
     moeilijkheid: 'Medium',
     image: cardImage,
+    alt: "Uitzicht op heuvellandschap met meer",
   };
 
   const [events, setEvents] = useState([]);
