@@ -9,11 +9,13 @@
   display: flex;
   justify-content: space-between;
   padding-bottom: 1rem;
+  flex-wrap: wrap;
 }
 
 .searchContainer {
   display: flex;
   gap: 2rem;
+  flex-wrap: wrap;
 }
 
 .searchBar {

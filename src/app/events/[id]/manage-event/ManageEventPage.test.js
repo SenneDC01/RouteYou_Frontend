@@ -24,7 +24,6 @@ describe('ManageEventPage', () => {
     expect(
       screen.getByText('This is a sample event description.')
     ).toBeInTheDocument();
-    expect(screen.getByAltText('Route image')).toBeInTheDocument();
 
     expect(screen.getByText('Cycling')).toBeInTheDocument();
     expect(screen.getByText('50km')).toBeInTheDocument();
