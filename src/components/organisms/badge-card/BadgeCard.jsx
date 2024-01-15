@@ -16,7 +16,7 @@ export default function BadgeCard({
       <Image
         height={300}
         width={300}
-        alt={title}
+        alt=""
         className={[styles.badgeImage]}
         src={image}
       />
