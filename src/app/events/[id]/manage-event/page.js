@@ -12,39 +12,43 @@ import SVGtext from '@/components/atoms/svg-text/SVGtext';
 import Racefiets from '@/utils/icons/Racefiets';
 import AfstandSVG from '@/utils/icons/AfstandSVG';
 import KlokSVG from '@/utils/icons/KlokSVG';
+import Pictures from '@/components/organisms/pictures/Pictures';
 
 export default function ManageEventPage({ event }) {
   return (
-      <div className={styles.container}>
-        <div className={styles.leftColumn}>
-          <Image src={event.image_url} alt="" className={styles.image} />
-          <div className={styles.textContainer}>
-            <div>
-              <BigTitle>{event.name}</BigTitle>
-              <SmallText>{event.author}</SmallText>
-              <SmallText>{event.start_date}</SmallText>
-            </div>
-            <RegularText>{event.description}</RegularText>
-            <div className={styles.icons}>
-              <SVGtext label={event.type} icon={<Racefiets />}></SVGtext>
-              <SVGtext
-                  label={event.distance + 'km'}
-                  icon={<AfstandSVG />}
-              ></SVGtext>
-              <SVGtext label={event.time} icon={<KlokSVG />}></SVGtext>
-            </div>
+    <div className={styles.container}>
+      <div className={styles.leftColumn}>
+        <Image src={event.image_url} alt="" className={styles.image} />
+        <div className={styles.textContainer}>
+          <div>
+            <BigTitle>{event.name}</BigTitle>
+            <SmallText>{event.author}</SmallText>
+            <SmallText>{event.start_date}</SmallText>
+          </div>
+          <RegularText>{event.description}</RegularText>
+          <div className={styles.icons}>
+            <SVGtext label={event.type} icon={<Racefiets />}></SVGtext>
+            <SVGtext
+              label={event.distance + 'km'}
+              icon={<AfstandSVG />}
+            ></SVGtext>
+            <SVGtext label={event.time} icon={<KlokSVG />}></SVGtext>
           </div>
         </div>
-        <div className={styles.rightColumn}>
-          <BigTitle>Manage your event</BigTitle>
-          <ManageEventDropDown title="Edit"></ManageEventDropDown>
-          <ManageEventDropDown
-              title="Participants"
-              comp={Participants}
-          ></ManageEventDropDown>
-          <ManageEventDropDown title="Posts" comp={Posts}></ManageEventDropDown>
-          <ManageEventDropDown title="Pictures"></ManageEventDropDown>
-        </div>
       </div>
+      <div className={styles.rightColumn}>
+        <BigTitle>Manage your event</BigTitle>
+        <ManageEventDropDown title="Edit"></ManageEventDropDown>
+        <ManageEventDropDown
+          title="Participants"
+          comp={Participants}
+        ></ManageEventDropDown>
+        <ManageEventDropDown title="Posts" comp={Posts}></ManageEventDropDown>
+        <ManageEventDropDown
+          title="Pictures"
+          comp={Pictures}
+        ></ManageEventDropDown>
+      </div>
+    </div>
   );
 }

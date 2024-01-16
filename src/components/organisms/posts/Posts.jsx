@@ -63,7 +63,7 @@ const mockPosts = {
     {
       current_page: 2,
       data: {
-        id: 1,
+        id: 2,
         event_id: 1,
         title: 'Ontdek Aalst',
         message:

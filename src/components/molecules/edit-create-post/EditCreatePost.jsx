@@ -50,7 +50,7 @@ const EditCreatePost = () => {
         const response = await createEvent(e.currentTarget);
 
         if (response.code === 201) {
-          print('post added');
+          document.querySelector('form').setAttribute('data-submitted', 'true');
         } else {
           if (response.errors) {
             const errors = [];

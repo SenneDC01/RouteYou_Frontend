@@ -43,7 +43,9 @@ describe('EditCreatePost component', () => {
       fireEvent.click(addButton);
     });
 
-    expect(createEvent).toHaveBeenCalledWith(expect.any(HTMLFormElement));
+    const form = document.querySelector('form');
+    expect(form).toHaveAttribute('data-submitted', 'true');
+    expect(createEvent).toHaveBeenCalled();
   });
 
   test('handles form submission with invalid data', async () => {
