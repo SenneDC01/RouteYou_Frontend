@@ -204,3 +204,16 @@ export const createEvent = async (body) => {
 
   return { ...data, code: response.status };
 };
+
+export const signedUpEvents = async () => {
+  const serverCookies = getCookies();
+  HEADERS.Authorization = 'Bearer ' + serverCookies.get('token');
+
+  const response = await fetch(`${API_URL}/events/signedup`, {
+    method: 'GET',
+    headers: HEADERS,
+  });
+  const data = await response.json();
+
+  return { ...data, code: response.status };
+};
