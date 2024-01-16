@@ -23,6 +23,7 @@ const HomePage = () => {
     moeilijkheid: 'Medium',
     image: cardImage,
     alt: 'Uitzicht op heuvellandschap met meer',
+    link: 'https://www.routeyou.com/nl-be/route/view/9190277/recreatieve-fietsroute/groene-gordelroute-icoonroute',
   };
 
   const [events, setEvents] = useState([]);

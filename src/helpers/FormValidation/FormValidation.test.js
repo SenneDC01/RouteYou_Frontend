@@ -8,6 +8,7 @@ import {
   arrayOnlyNumber,
   isValidDateTime,
   isPositiveInteger,
+  isImage,
 } from './FormValidation';
 import dayjs from 'dayjs';
 
@@ -66,5 +67,11 @@ describe('Form Validation', () => {
     expect(isPositiveInteger('33')).toBe(true);
     expect(isPositiveInteger('1.1')).toBe(false);
     expect(isPositiveInteger('-1')).toBe(false);
+  });
+
+  test('Check type is image', () => {
+    expect(isImage('image/jpg')).toBe(true);
+    expect(isImage('image/png')).toBe(true);
+    expect(isImage('application/pdf')).toBe(false);
   });
 });
