@@ -11,13 +11,15 @@ export async function middleware(request) {
     '/events/create',
   ];
   const protectedRouteRegex = new RegExp('^/events/\\d+/signup$');
+  const protectedRouteTicketRegex = new RegExp('^/events/\\d+/ticket$');
 
   const protectedPathsSignedIn = ['/login', '/register'];
 
   if (
     (protectedPaths.includes(nextUrl.pathname) &&
       !nextUrl.pathname.startsWith('/_next')) ||
-    protectedRouteRegex.test(nextUrl.pathname)
+    protectedRouteRegex.test(nextUrl.pathname) ||
+    protectedRouteTicketRegex.test(nextUrl.pathname)
   ) {
     const isValid = await isValidUser(request);
     if (!isValid) {
