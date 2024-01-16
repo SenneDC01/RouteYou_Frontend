@@ -1,0 +1,36 @@
+@use '@/app/assets/vars.scss' as vars;
+
+@mixin button {
+  padding: 0.5rem;
+  background-color: vars.$green;
+  color: vars.$white;
+}
+
+.paginator {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.prevButton {
+  @include button;
+  border-radius: 0.5rem;
+}
+
+.nextButton {
+  @include button;
+  border-radius: 0.5rem;
+}
+
+.prevButton:disabled {
+  background-color: vars.$white;
+  color: vars.$green;
+  border: 0.18rem solid vars.$green;
+}
+
+.nextButton:disabled {
+  background-color: vars.$white;
+  color: vars.$green;
+  border: 0.18rem solid vars.$green;
+}
