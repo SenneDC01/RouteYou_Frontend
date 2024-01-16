@@ -204,3 +204,15 @@ export const createEvent = async (body) => {
 
   return { ...data, code: response.status };
 };
+
+export const eventTicket = async (eventId) => {
+  const serverCookies = getCookies();
+  HEADERS.Authorization = 'Bearer ' + serverCookies.get('token');
+
+  const response = await fetch(`${API_URL}/events/${eventId}/ticket`, {
+    headers: HEADERS,
+  });
+  const data = await response.json();
+
+  return { ...data, code: response.status };
+};
