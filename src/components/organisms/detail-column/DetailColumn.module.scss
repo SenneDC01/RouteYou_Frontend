@@ -34,3 +34,28 @@
   gap: 1.2rem;
   margin: 0 1rem;
 }
+
+.shareButton {
+  width: 100%;
+  transition-duration: 200ms;
+  a {
+    height: 3rem;
+    padding: vars.$button_padding;
+    color: vars.$white;
+    background-color: vars.$green;
+    font-size: vars.$text_regular;
+    border-radius: vars.$button_radius;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.shareButton:hover {
+  transform: scale(1.03);
+}
