@@ -12,12 +12,15 @@ import styles from './RouteCard.module.scss';
 
 export default function RouteCard({ route }) {
   return (
-    <a href="#" className={styles.linkContainer}>
+    <div className={styles.linkContainer}>
+      <a href={route.link} className={styles.coverLink}>
+        Visit route
+      </a>
       <div>
         <Image
           height={200}
           width={200}
-          alt={route.title}
+          alt={route.alt}
           className={styles.image}
           src={route.image}
         />
@@ -41,6 +44,6 @@ export default function RouteCard({ route }) {
           </div>
         </div>
       </div>
-    </a>
+    </div>
   );
 }

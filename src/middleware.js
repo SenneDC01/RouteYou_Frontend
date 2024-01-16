@@ -8,6 +8,7 @@ export async function middleware(request) {
     '/dashboard',
     '/dashboard/interested',
     '/dashboard/my-events',
+    '/events/create',
   ];
   const protectedRouteRegex = new RegExp('^/events/\\d+/signup$');
 

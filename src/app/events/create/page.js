@@ -7,6 +7,7 @@ import TextArea from '@/components/atoms/text-area/TextArea';
 import RouteSelect from '@/components/atoms/route-select/RouteSelect';
 import DateTimeField from '@/components/atoms/date-time-field/DateTimeField';
 import BigTitle from '@/components/atoms/big-title/BigTitle';
+import RegularText from '@/components/atoms/regular-text/RegularText';
 import Button from '@/components/atoms/button/Button';
 import { createEvent } from '@/services/EventService';
 import {
@@ -16,6 +17,7 @@ import {
   arrayOnlyNumber,
   isValidDateTime,
   isPositiveInteger,
+  isImage,
 } from '@/helpers/FormValidation/FormValidation';
 import styles from './CreateEventPage.module.scss';
 
@@ -30,6 +32,7 @@ export default function Page() {
     max_participants: '',
     price: '',
     visibility: '',
+    event_image: '',
   });
   const [errors, setErrors] = useState({});
 
@@ -50,19 +53,22 @@ export default function Page() {
     const routesErrors = validateRoutes();
     const dateErrors = validateDate();
     const infoErrors = validateInfo();
+    const imageErrors = validateImage();
 
     setErrors({
       ...textErrors,
       ...routesErrors,
       ...dateErrors,
       ...infoErrors,
+      ...imageErrors,
       formError: errors.formError,
     });
     return (
       isEmpty(textErrors) &&
       isEmpty(routesErrors) &&
       isEmpty(dateErrors) &&
-      isEmpty(infoErrors)
+      isEmpty(infoErrors) &&
+      isEmpty(imageErrors)
     );
   };
 
@@ -132,6 +138,16 @@ export default function Page() {
     }
     if (!isFilled(formValues.description)) {
       errors.description = 'Please enter a description';
+    }
+    return errors;
+  };
+
+  const validateImage = () => {
+    const errors = {};
+    if (!formValues.event_image) {
+      errors.event_image = 'Please add an image';
+    } else if (!isImage(formValues.event_image.type)) {
+      errors.event_image = 'Please add a file of type image';
     }
     return errors;
   };
@@ -260,21 +276,26 @@ export default function Page() {
           key="1"
           id="iframe"
           src={`https://plugin.routeyou.com/routeviewer/basic/?key=25578206faf6c7cd92fc96526177379d&language=en&params.route.id=${formValues.routes_id[0]}&tabPane.position=null&map.api.key=AIzaSyAjwTWF01bBdAC3jSjbfdLGNuj5G6SVXq0&map.route.line.normal.standard.color=%2a2a2a&map.route.line.normal.standard.width=5&map.route.line.normal.standard.opacity=1&map.route.line.normal.standard.fill.color=%2a2a2a&map.route.line.normal.standard.fill.width=3&map.route.line.normal.standard.fill.opacity=0.7&map.route.line.normal.satellite.color=%2a2a2a&style.fill.color=%2a2a2a&style.fill.opacity=0.73&style.line.width=&style.line.color=%2a2a2a&map.type=terrain&map.show.startControl=true&map.show.instruction=true&map.show.positionData=true&`}
-          width="100%"
           allow="geolocation"
           allowFullScreen
         ></iframe>
       ) : (
-        <iframe
-          title="Interactive map with the route of the event"
-          className={styles.map}
-          key="1"
-          id="iframe"
-          src={`https://plugin.routeyou.com/routeviewer/basic/?key=25578206faf6c7cd92fc96526177379d&language=en&map.zoom=4&map.center=lat:50.415519,lon:50.415519&tabPane.position=null&map.route.line.normal.standard.color=%2a2a2a&map.route.line.normal.standard.width=5&map.route.line.normal.standard.opacity=1&map.route.line.normal.standard.fill.color=%2a2a2a&map.route.line.normal.standard.fill.width=3&map.route.line.normal.standard.fill.opacity=0.7&map.route.line.normal.satellite.color=%2a2a2a&style.fill.color=%2a2a2a&style.fill.opacity=0.73&style.line.width=&style.line.color=%2a2a2a&map.type=terrain&map.show.startControl=true&map.show.instruction=true&map.show.positionData=true&`}
-          width="100%"
-          allow="geolocation"
-          allowFullScreen
-        ></iframe>
+        <div className={styles.noRoute}>
+          <div className={styles.selectRouteInfo}>
+            <RegularText>
+              A route preview will be visible once you select one.
+            </RegularText>
+          </div>
+          <iframe
+            title="Empty map"
+            className={styles.map}
+            key="1"
+            id="iframe"
+            src={`https://plugin.routeyou.com/routeviewer/basic/?key=25578206faf6c7cd92fc96526177379d&language=en&map.zoom=4&tabPane.position=null&map.route.line.normal.standard.color=%2a2a2a&map.route.line.normal.standard.width=5&map.route.line.normal.standard.opacity=1&map.route.line.normal.standard.fill.color=%2a2a2a&map.route.line.normal.standard.fill.width=3&map.route.line.normal.standard.fill.opacity=0.7&map.route.line.normal.satellite.color=%2a2a2a&style.fill.color=%2a2a2a&style.fill.opacity=0.73&style.line.width=&style.line.color=%2a2a2a&map.type=terrain&map.show.startControl=true&map.show.instruction=true&map.show.positionData=true&`}
+            allow="geolocation"
+            allowFullScreen
+          ></iframe>
+        </div>
       )}
     </div>
   );

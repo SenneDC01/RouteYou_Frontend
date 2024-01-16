@@ -12,6 +12,7 @@ describe('RouteCard', () => {
     tijd: '30min',
     maxStijgingsPercentage: '10%',
     moeilijkheid: 'Easy',
+    alt: 'Landschap met bergen',
   };
 
   beforeEach(() => {
@@ -21,7 +22,7 @@ describe('RouteCard', () => {
   test('renders the image', () => {
     const image = screen.getByRole('img');
     expect(image).toHaveAttribute('src', mockRoute.image);
-    expect(image).toHaveAttribute('alt', mockRoute.title);
+    expect(image).toHaveAttribute('alt', mockRoute.alt);
   });
 
   test('renders the title', () => {

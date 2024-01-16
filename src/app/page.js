@@ -10,7 +10,6 @@ import RouteSVG from '@/utils/icons/RouteSVG';
 import EventCard from '@/components/organisms/event-card/EventCard';
 import Banner from '@/components/organisms/banner/Banner';
 import styles from './HomePage.module.scss';
-import BoldText from '@/components/atoms/bold-text/BoldText';
 import { publicEvents } from '@/services/EventService';
 
 const HomePage = () => {
@@ -23,6 +22,8 @@ const HomePage = () => {
     tijd: '4:23:45',
     moeilijkheid: 'Medium',
     image: cardImage,
+    alt: 'Uitzicht op heuvellandschap met meer',
+    link: 'https://www.routeyou.com/nl-be/route/view/9190277/recreatieve-fietsroute/groene-gordelroute-icoonroute',
   };
 
   const [events, setEvents] = useState([]);
@@ -38,35 +39,41 @@ const HomePage = () => {
 
   return (
     <div className={[styles.pageContainer]}>
-      <div className={[styles.bannerContainer]}>
+      <section className={[styles.bannerContainer]}>
         <Banner />
-      </div>
-      <div className={[styles.borderContainer]}>
-        <InfoCard icon={<RouteSVG />} text="More than 7,270,000 routes" />
-        <InfoCard icon={<GroupSVG />} text="More than 15,115,000 users" />
-        <InfoCard icon={<CameraSVG />} text="More than 3,475,000 attractions" />
-      </div>
-      <div>
-        <div className={styles.title}>
-          <BoldText>PLAN THE MOST BEAUTIFUL ROUTES</BoldText>
-        </div>
+      </section>
+      <section className={styles.section}>
+        <h2>Platform is always growing</h2>
         <div className={[styles.borderContainer]}>
+          <InfoCard icon={<RouteSVG />} text="More than 7,270,000 routes" />
+          <InfoCard icon={<GroupSVG />} text="More than 15,115,000 users" />
+          <InfoCard
+            icon={<CameraSVG />}
+            text="More than 3,475,000 attractions"
+          />
+        </div>
+      </section>
+      <section>
+        <div className={styles.title}>
+          <h2>Plan the most beautiful routes</h2>
+        </div>
+        <div className={[styles.routeContrainer]}>
           <RouteCard route={route} />
           <RouteCard route={route} />
           <RouteCard route={route} />
           <RouteCard route={route} />
         </div>
-      </div>
-      <div>
+      </section>
+      <section>
         <div className={styles.title}>
-          <BoldText>PARTICIPATE IN EVENTS</BoldText>
+          <h2>Participate in events</h2>
         </div>
         <div className={[styles.bottomCardContainer]}>
           {events.map((event, index) => (
             <EventCard event={event} key={index} />
           ))}
         </div>
-      </div>
+      </section>
     </div>
   );
 };

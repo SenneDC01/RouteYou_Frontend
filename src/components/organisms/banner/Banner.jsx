@@ -9,12 +9,7 @@ import ButtonLink from '@/components/atoms/button-link/ButtonLink';
 export default function Banner() {
   return (
     <div className={styles.bannerContainer}>
-      <Image
-        src={banner}
-        priority={true}
-        alt="banner image"
-        className={styles.image}
-      />
+      <Image src={banner} priority={true} alt="" className={styles.image} />
       <div className={styles.contentContainer}>
         <h1 className={styles.title}>
           Plan the most beautiful routes & events

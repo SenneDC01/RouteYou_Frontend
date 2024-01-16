@@ -42,6 +42,7 @@ export default function LoginPage() {
         const response = await login(formValues);
 
         if (response.code === 200) {
+          window.location.reload();
           router.push('/dashboard/my-events');
         } else {
           setErrors({ formError: response.message });
