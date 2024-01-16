@@ -173,15 +173,11 @@ export const createEvent = async (body) => {
   const formData = new FormData(body);
   const arr = formData.getAll('routes_id');
 
-  // const arr = [6833170, 7821899];
   arr.forEach((e, i) => {
     formData.append(`routes_id[${i}]`, e);
   });
 
   formData.delete('routes_id');
-  console.log(formData.get('routes_id[0]'));
-
-  // formData.append(`routes_id`, arr);
 
   const startDate = dayjs(formData.get('start_date')).format(
     'YYYY-MM-DD HH:mm:ss'
