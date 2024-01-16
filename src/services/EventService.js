@@ -10,8 +10,8 @@ const HEADERS = {
   Authorization: 'Bearer ' + Cookies.get('token'),
 };
 
-export const publicEvents = async (pageNumber = 1) => {
-  const response = await fetch(`${API_URL}/events?page=${pageNumber}`, {
+export const publicEvents = async (querySearch) => {
+  const response = await fetch(`${API_URL}/events?${querySearch}`, {
     headers: HEADERS,
   });
   const data = await response.json();
