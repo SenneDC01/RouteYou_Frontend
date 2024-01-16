@@ -32,6 +32,10 @@
 
   .events {
     margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2rem;
 
     @media screen and (min-width: 700px) {
       flex: 0.8;
