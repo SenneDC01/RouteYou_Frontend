@@ -9,7 +9,7 @@ export default function ViewMore({ children, link }) {
     <div className={styles.viewMore}>
       <BoldText>{children}</BoldText>
       {link && (
-        <TextLink className={styles.button} href={link} ariaLabel="read more">
+        <TextLink className={styles.greenLink} href={link}>
           View {children}
         </TextLink>
       )}
