@@ -18,27 +18,28 @@ export default function EventsPage() {
   const [events, setEvents] = useState([]);
   const [page, setPage] = useState({ current: 1, last: 1 });
   const [errors, setErrors] = useState(null);
+  const [querySearch, setQuerySearch] = useState('');
 
-  const fetchEvents = async (page) => {
+  const fetchEvents = async (query) => {
     try {
-      const response = await publicEvents(page.current);
+      const response = await publicEvents(query);
       setEvents(response.events.data);
       setPage({
         current: response.events.current_page,
         last: response.events.last_page,
       });
 
-      const params = new URLSearchParams(searchParams);
-      params.set('page', page.current);
-      replace(`${pathName}?${params.toString()}`);
+      querySearch.set('page', page.current);
+      replace(`${pathName}?${querySearch.toString()}`);
     } catch (error) {
       setErrors('Failed to load events.');
     }
   };
 
   useEffect(() => {
-    page.current = parseInt(searchParams.get('page')) || 1;
-    fetchEvents(page);
+    const params = new URLSearchParams(searchParams);
+    const querySearch = params.toString();
+    fetchEvents(querySearch);
   }, []);
 
   const nextPage = () => {
@@ -54,16 +55,44 @@ export default function EventsPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    replace(`${pathName}?${querySearch.toString()}`);
+    fetchEvents(querySearch.toString());
+  };
+
+  const handleSearchChange = (e) => {
+    const params = new URLSearchParams(searchParams);
+    params.set(e.target.name, e.target.value);
+    setQuerySearch(params);
   };
 
   return (
     <div className={styles.page}>
       <div className={styles.searchBar}>
         <form method="get" onSubmit={handleSubmit}>
-          <FormField label="Search Term" name="term" type="text" />
-          <FormField label="Author" name="author" type="text" />
-          <FormField label="Before" name="before" type="date" />
-          <FormField label="After" name="after" type="date" />
+          <FormField
+            label="Search Term"
+            name="term"
+            type="text"
+            onChange={handleSearchChange}
+          />
+          <FormField
+            label="Author"
+            name="author"
+            type="text"
+            onChange={handleSearchChange}
+          />
+          <FormField
+            label="Before"
+            name="before"
+            type="date"
+            onChange={handleSearchChange}
+          />
+          <FormField
+            label="After"
+            name="after"
+            type="date"
+            onChange={handleSearchChange}
+          />
           <Button type="submit">Search</Button>
         </form>
       </div>
