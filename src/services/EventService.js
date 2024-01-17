@@ -173,15 +173,11 @@ export const createEvent = async (body) => {
   const formData = new FormData(body);
   const arr = formData.getAll('routes_id');
 
-  // const arr = [6833170, 7821899];
   arr.forEach((e, i) => {
     formData.append(`routes_id[${i}]`, e);
   });
 
   formData.delete('routes_id');
-  console.log(formData.get('routes_id[0]'));
-
-  // formData.append(`routes_id`, arr);
 
   const startDate = dayjs(formData.get('start_date')).format(
     'YYYY-MM-DD HH:mm:ss'
@@ -199,6 +195,19 @@ export const createEvent = async (body) => {
       Authorization: 'Bearer ' + Cookies.get('token'),
     },
     body: formData,
+  });
+  const data = await response.json();
+
+  return { ...data, code: response.status };
+};
+
+export const signedUpEvents = async () => {
+  const serverCookies = getCookies();
+  HEADERS.Authorization = 'Bearer ' + serverCookies.get('token');
+
+  const response = await fetch(`${API_URL}/events/signedup`, {
+    method: 'GET',
+    headers: HEADERS,
   });
   const data = await response.json();
 

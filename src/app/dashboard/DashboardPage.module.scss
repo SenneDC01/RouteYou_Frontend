@@ -9,6 +9,15 @@
   box-sizing: border-box;
   overflow: hidden;
   flex: 1;
+
+  .error {
+    color: vars.$red;
+  }
+
+  .noEvents {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 @media screen and (min-width: 750px) {
