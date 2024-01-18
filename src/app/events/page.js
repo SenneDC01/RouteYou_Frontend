@@ -12,13 +12,14 @@ import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 
 export default function EventsPage() {
   const searchParams = useSearchParams();
+  const params = new URLSearchParams(searchParams);
+
   const { replace } = useRouter();
   const pathName = usePathname();
 
   const [events, setEvents] = useState([]);
   const [page, setPage] = useState({ current: 1, last: 1 });
   const [errors, setErrors] = useState(null);
-  const [querySearch, setQuerySearch] = useState('');
 
   const fetchEvents = async (query) => {
     try {
@@ -29,40 +30,37 @@ export default function EventsPage() {
         last: response.events.last_page,
       });
 
-      querySearch.set('page', page.current);
-      replace(`${pathName}?${querySearch.toString()}`);
+      params.set('page', response.events.current_page);
+      replace(`${pathName}?${params.toString()}`);
     } catch (error) {
       setErrors('Failed to load events.');
     }
   };
 
   useEffect(() => {
-    const params = new URLSearchParams(searchParams);
-    const querySearch = params.toString();
-    fetchEvents(querySearch);
+    fetchEvents(params.toString());
   }, []);
 
   const nextPage = () => {
     if (page.current === page.last) return;
-    setPage({ current: page.current + 1, last: page.last });
-    fetchEvents({ current: page.current + 1, last: page.last });
+    params.set('page', page.current + 1);
+    fetchEvents(params.toString());
   };
   const prevPage = () => {
     if (page.current === 1) return;
-    setPage({ current: page.current - 1, last: page.last });
-    fetchEvents({ current: page.current - 1, last: page.last });
+    params.set('page', page.current - 1);
+    fetchEvents(params.toString());
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    replace(`${pathName}?${querySearch.toString()}`);
-    fetchEvents(querySearch.toString());
+    params.delete('page');
+    replace(`${pathName}?${params.toString()}`);
+    fetchEvents(params.toString());
   };
 
   const handleSearchChange = (e) => {
-    const params = new URLSearchParams(searchParams);
     params.set(e.target.name, e.target.value);
-    setQuerySearch(params);
   };
 
   return (
@@ -74,24 +72,28 @@ export default function EventsPage() {
             name="term"
             type="text"
             onChange={handleSearchChange}
+            value={params.get('term')}
           />
           <FormField
             label="Author"
             name="author"
             type="text"
             onChange={handleSearchChange}
+            value={params.get('author')}
           />
           <FormField
             label="Before"
             name="before"
             type="date"
             onChange={handleSearchChange}
+            value={params.get('before')}
           />
           <FormField
             label="After"
             name="after"
             type="date"
             onChange={handleSearchChange}
+            value={params.get('after')}
           />
           <Button type="submit">Search</Button>
         </form>
