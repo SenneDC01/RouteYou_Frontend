@@ -9,7 +9,7 @@ import Image from 'next/image';
 const getEventTicket = async (eventId) => {
   try {
     const ticketResponse = await eventTicket(eventId);
-    console.log(ticketResponse);
+
     if (ticketResponse.code !== 200) {
       redirect('/');
     }
