@@ -1,20 +1,19 @@
 import { redirect } from 'next/navigation';
 import styles from './StylesTicketPage.module.scss';
 import DetailColumn from '@/components/organisms/detail-column/DetailColumn';
-import { eventDetail, eventTicket } from '@/services/EventService';
+import { eventTicket } from '@/services/EventService';
 import MediumTitle from '@/components/atoms/medium-title/MediumTitle';
 import SubText from '@/components/atoms/sub-text/SubText';
 import Image from 'next/image';
 
 const getEventTicket = async (eventId) => {
   try {
-    const response = await eventDetail(eventId);
     const ticketResponse = await eventTicket(eventId);
-
-    if (response.code !== 200 || ticketResponse.code !== 200) {
+    console.log(ticketResponse);
+    if (ticketResponse.code !== 200) {
       redirect('/');
     }
-    return { ...response.event, ...ticketResponse.data };
+    return { ...ticketResponse.data };
   } catch (error) {
     redirect('/');
   }
@@ -45,7 +44,7 @@ export default async function TicketPage({ params }) {
           <SubText>Let the event coördinator scan your ticket</SubText>
         </div>
         <Image
-          src={`https://storage.googleapis.com/picture-staging-laravel-bucket/images/events/${event.id}/${event.qr_code}`}
+          src={event.qr_code}
           alt={`Ticket of ${event.name} event`}
           width={300}
           height={300}
