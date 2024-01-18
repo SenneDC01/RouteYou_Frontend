@@ -31,15 +31,12 @@ export const eventDetail = async (eventId) => {
   return { ...data, code: response.status };
 };
 
-export const createdEvents = async () => {
-  const serverCookies = getCookies();
-  HEADERS.Authorization = 'Bearer ' + serverCookies.get('token');
-
+export const createdEvents = async (query) => {
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), 10000);
 
   try {
-    const response = await fetch(`${API_URL}/events/created`, {
+    const response = await fetch(`${API_URL}/events/created?${query}`, {
       method: 'GET',
       headers: HEADERS,
       signal: controller.signal,
@@ -51,7 +48,7 @@ export const createdEvents = async () => {
 
     const data = await response.json();
 
-    return data.events.data;
+    return data.events;
   } catch (error) {
     return null;
   } finally {
