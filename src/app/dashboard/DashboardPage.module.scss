@@ -9,6 +9,14 @@
   box-sizing: border-box;
   overflow: hidden;
   flex: 1;
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    width: 100%;
+  }
 }
 
 @media screen and (min-width: 750px) {
