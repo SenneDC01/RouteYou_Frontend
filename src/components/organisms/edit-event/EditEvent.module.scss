@@ -1,41 +1,19 @@
-.container {
-  width: 100%;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
+@use '@/app/assets/vars.scss' as vars;
 
-.headerContainer {
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 1rem;
-  flex-wrap: wrap;
-}
+.form {
+  flex: 1;
 
-.searchContainer {
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
+  .fields {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
 
-.searchBar {
-  width: 13rem;
-  height: 2.5rem;
-  border: solid 2px lightgray;
-  border-radius: 4px;
-  padding: 0 0.5rem 0 0.5rem;
-}
+    .submitButton {
+      margin-top: 1rem;
+    }
+  }
 
-.list {
-  border-bottom: solid 2px;
-  padding: 1rem 0.5rem 0.5rem 0.5rem;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.button {
-  width: 8rem;
-  font-size: 0.8rem;
-  padding: 1rem;
+  .error {
+    color: vars.$red;
+  }
 }

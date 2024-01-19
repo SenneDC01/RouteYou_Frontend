@@ -4,7 +4,6 @@ import {
   isFilled,
   isEmpty,
   isValidPasswordLength,
-  arrayEmpty,
   arrayOnlyNumber,
   isValidDateTime,
   isPositiveInteger,
@@ -51,11 +50,6 @@ describe('Form Validation', () => {
     expect(arrayOnlyNumber(['12', 3])).toBe(true);
     expect(arrayOnlyNumber(['monkey', 3])).toBe(false);
     expect(arrayOnlyNumber(['1.1'])).toBe(false);
-  });
-
-  test('Check if array is empty', () => {
-    expect(arrayEmpty([])).toBe(true);
-    expect(arrayEmpty(['12', 3])).toBe(false);
   });
 
   test('Check if date time is valid', () => {

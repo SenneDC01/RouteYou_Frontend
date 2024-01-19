@@ -12,6 +12,7 @@ export default function RouteSelect({
   onChange,
   errorMessage,
   className,
+  disabled,
 }) {
   const privateRoutes = {
     label: 'Your Routes',
@@ -74,6 +75,7 @@ export default function RouteSelect({
         isMulti
         defaultOptions={true}
         loadOptions={promiseOptions}
+        isDisabled={disabled}
       />
       {errorMessage && (
         <SmallText className={styles.error}>{errorMessage}</SmallText>

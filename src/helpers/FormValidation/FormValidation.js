@@ -15,8 +15,6 @@ const isFilled = (value) => {
 
 const isEmpty = (obj) => Object.keys(obj).length === 0;
 
-const arrayEmpty = (arr) => arr.length === 0;
-
 const arrayOnlyNumber = (arr) => arr.every((i) => isPositiveInteger(i));
 
 const isValidPasswordLength = (password) => {
@@ -35,7 +33,6 @@ const isPositiveInteger = (string) => {
 };
 
 const isImage = (input) => {
-  console.log(input);
   return input.includes('image/');
 };
 
@@ -44,7 +41,6 @@ export {
   isValidEmail,
   isFilled,
   isEmpty,
-  arrayEmpty,
   arrayOnlyNumber,
   isValidPasswordLength,
   isValidDateTime,

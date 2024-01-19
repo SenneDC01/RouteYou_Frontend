@@ -13,7 +13,6 @@ import { createEvent } from '@/services/EventService';
 import {
   isEmpty,
   isFilled,
-  arrayEmpty,
   arrayOnlyNumber,
   isValidDateTime,
   isPositiveInteger,
@@ -122,7 +121,7 @@ export default function Page() {
 
   const validateRoutes = () => {
     const errors = {};
-    if (arrayEmpty(formValues.routes_id)) {
+    if (formValues.routes_id) {
       errors.routes = 'Please select at least one route';
     }
     if (!arrayOnlyNumber(formValues.routes_id)) {
@@ -269,7 +268,7 @@ export default function Page() {
           </Button>
         </div>
       </form>
-      {!arrayEmpty(formValues.routes_id) ? (
+      {formValues.routes_id.length ? (
         <iframe
           title="Interactive map with the route of the event"
           className={styles.map}

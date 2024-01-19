@@ -8,10 +8,12 @@ export default function FormField({
   value,
   name,
   type,
+  min,
   onChange,
   errorMessage,
   className,
   step,
+  disabled,
 }) {
   return (
     <div className={[styles.formField, className].join(' ')}>
@@ -21,11 +23,13 @@ export default function FormField({
       <input
         id={name}
         type={type}
-        value={value}
+        defaultValue={value}
         name={name}
         {...(step && { step: step })}
+        min={min}
         className={[styles.field, errorMessage ? styles.inValid : ''].join(' ')}
         placeholder={placeholder}
+        disabled={disabled}
         onChange={onChange}
       />
       {errorMessage && (

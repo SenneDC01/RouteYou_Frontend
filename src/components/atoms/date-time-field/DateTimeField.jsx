@@ -12,6 +12,7 @@ export default function DateTimeField({
   onChange,
   errorMessage,
   className,
+  disabled,
 }) {
   const handleChange = (e) => {
     onChange({
@@ -48,6 +49,7 @@ export default function DateTimeField({
           name={name}
           value={value}
           onChange={handleChange}
+          disabled={disabled}
         />
       </LocalizationProvider>
       {errorMessage && (
