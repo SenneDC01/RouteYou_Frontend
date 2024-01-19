@@ -3,7 +3,9 @@ import React from 'react';
 import styles from './ManageEventPage.module.scss';
 import Participants from '@/components/organisms/participants/Participants';
 import Posts from '@/components/organisms/posts/Posts';
+import EditEvent from '@/components/organisms/edit-event/EditEvent';
 import ManageEventDropDown from '@/components/molecules/manage-event-drop-down/ManageEventDropDown';
+import ManageEventDrawer from '@/components/molecules/manage-event-drawer/ManageEventDrawer';
 import Image from 'next/image';
 import BigTitle from '@/components/atoms/big-title/BigTitle';
 import SmallText from '@/components/atoms/small-text/SmallText';
@@ -38,7 +40,9 @@ export default function ManageEventPage({ event }) {
       </div>
       <div className={styles.rightColumn}>
         <BigTitle>Manage your event</BigTitle>
-        <ManageEventDropDown title="Edit"></ManageEventDropDown>
+        <ManageEventDrawer title="Edit">
+          <EditEvent event={event} />
+        </ManageEventDrawer>
         <ManageEventDropDown
           title="Participants"
           comp={Participants}

@@ -213,3 +213,7 @@ export const signedUpEvents = async () => {
 
   return { ...data, code: response.status };
 };
+
+export const editEvent = async () => {
+  return {};
+};
