@@ -1,4 +1,3 @@
-'use client';
 import React from 'react';
 import '@/app/assets/globals.css';
 import ButtonLink from '@/components/atoms/button-link/ButtonLink';
@@ -37,13 +36,35 @@ export default function DetailColumn({ event }) {
           <Button link="#" icon={<ArrowRightSVG />}>
             Share
           </Button>
-          <ButtonLink
-            link={`/events/${event.id}/signup`}
-            icon={<ArrowRightSVG />}
-            ariaLabel="Go to the sign-up page of this event"
-          >
-            Sign-up
-          </ButtonLink>
+          {(!('relation' in event) ||
+            event.relation === null ||
+            event.relation === 'INTERESTED') && (
+            <ButtonLink
+              link={`/events/${event.id}/signup`}
+              icon={<ArrowRightSVG />}
+              ariaLabel="Go to the sign-up page of this event"
+            >
+              Sign-up
+            </ButtonLink>
+          )}
+          {'relation' in event && event.relation === 'OWNER' && (
+            <ButtonLink
+              link={`/events/${event.id}/manage-event`}
+              icon={<ArrowRightSVG />}
+              ariaLabel="Go to the sign-up page of this event"
+            >
+              Manage
+            </ButtonLink>
+          )}
+          {'relation' in event && event.relation === 'SIGNED_UP' && (
+            <ButtonLink
+              link={`/events/${event.id}/ticket`}
+              icon={<ArrowRightSVG />}
+              ariaLabel="Go to the sign-up page of this event"
+            >
+              Ticket
+            </ButtonLink>
+          )}
         </div>
       </div>
     </section>
