@@ -15,7 +15,7 @@ describe('FavButton', () => {
     mockEventsService.mockRestore();
   });
 
-  it('toggles favorite status on click',async () => {
+  it('toggles favorite status on click', async () => {
     const { getByRole } = render(
       <FavButton event={{ id: 1, relation: null }} />
     );
