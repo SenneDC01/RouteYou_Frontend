@@ -13,7 +13,11 @@ const ticketResponseData = {
     image_url:
       'https://storage.googleapis.com/picture-staging-laravel-bucket/images/events/1/citylightrunaalst.jpg',
     author: 'Senna Uyttersprot',
-    routes: [[Object]],
+    routes: [
+      {
+        route_data: {},
+      },
+    ],
     qr_code:
       'https://storage.googleapis.com/picture-staging-laravel-bucket/images/events/1/QR-CODE_65a968644b6f7.svg',
   },
