@@ -12,6 +12,7 @@ export async function middleware(request) {
   ];
   const protectedRouteRegex = new RegExp('^/events/\\d+/signup$');
   const protectedRouteTicketRegex = new RegExp('^/events/\\d+/ticket$');
+  const protectedRouteManageRegex = new RegExp('^/events/\\d+/manage-event$');
 
   const protectedPathsSignedIn = ['/login', '/register'];
 
@@ -19,7 +20,8 @@ export async function middleware(request) {
     (protectedPaths.includes(nextUrl.pathname) &&
       !nextUrl.pathname.startsWith('/_next')) ||
     protectedRouteRegex.test(nextUrl.pathname) ||
-    protectedRouteTicketRegex.test(nextUrl.pathname)
+    protectedRouteTicketRegex.test(nextUrl.pathname) ||
+    protectedRouteManageRegex.test(nextUrl.pathname)
   ) {
     const isValid = await isValidUser(request);
     if (!isValid) {
