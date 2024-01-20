@@ -72,28 +72,24 @@ export default function EventsPage() {
             name="term"
             type="text"
             onChange={handleSearchChange}
-            value={params.get('term')}
           />
           <FormField
             label="Author"
             name="author"
             type="text"
             onChange={handleSearchChange}
-            value={params.get('author')}
           />
           <FormField
             label="Before"
             name="before"
             type="date"
             onChange={handleSearchChange}
-            value={params.get('before')}
           />
           <FormField
             label="After"
             name="after"
             type="date"
             onChange={handleSearchChange}
-            value={params.get('after')}
           />
           <Button type="submit">Search</Button>
         </form>
