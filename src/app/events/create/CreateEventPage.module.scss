@@ -54,7 +54,7 @@
     }
 
     .map {
-      height: 100%;
+      height: 30rem;
       filter: blur(2px);
     }
   }
@@ -68,6 +68,12 @@
     }
     .map {
       height: auto;
+    }
+
+    .noRoute {
+      .map {
+        height: 100%;
+      }
     }
   }
 }

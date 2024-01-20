@@ -17,6 +17,15 @@
     margin-bottom: 2rem;
     width: 100%;
   }
+  
+  .error {
+    color: vars.$red;
+  }
+
+  .noEvents {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 @media screen and (min-width: 750px) {

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import {
   NextUIProvider,
   Dropdown,
@@ -23,7 +23,6 @@ export default function CustomDropdown({ buttonText, items }) {
   };
 
   const [focusedIndex, setFocusedIndex] = useState(-1);
-  const dropdownRef = useRef(null);
 
   const handleKeyDown = (event) => {
     if (event.key === 'Tab') {
@@ -54,7 +53,7 @@ export default function CustomDropdown({ buttonText, items }) {
 
   return (
     <NextUIProvider style={dropdownStyle}>
-      <Dropdown ref={dropdownRef}>
+      <Dropdown>
         <DropdownTrigger style={buttonStyle}>
           <Button
             variant="none"

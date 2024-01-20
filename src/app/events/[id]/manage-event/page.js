@@ -2,6 +2,7 @@
 import React from 'react';
 import styles from './ManageEventPage.module.scss';
 import Participants from '@/components/organisms/participants/Participants';
+import Posts from '@/components/organisms/posts/Posts';
 import ManageEventDropDown from '@/components/molecules/manage-event-drop-down/ManageEventDropDown';
 import Image from 'next/image';
 import BigTitle from '@/components/atoms/big-title/BigTitle';
@@ -11,6 +12,7 @@ import SVGtext from '@/components/atoms/svg-text/SVGtext';
 import Racefiets from '@/utils/icons/Racefiets';
 import AfstandSVG from '@/utils/icons/AfstandSVG';
 import KlokSVG from '@/utils/icons/KlokSVG';
+import Pictures from '@/components/organisms/pictures/Pictures';
 
 export default function ManageEventPage({ event }) {
   return (
@@ -18,11 +20,11 @@ export default function ManageEventPage({ event }) {
       <div className={styles.leftColumn}>
         <Image src={event.image_url} alt="" className={styles.image} />
         <div className={styles.textContainer}>
-          <span>
+          <div>
             <BigTitle>{event.name}</BigTitle>
             <SmallText>{event.author}</SmallText>
             <SmallText>{event.start_date}</SmallText>
-          </span>
+          </div>
           <RegularText>{event.description}</RegularText>
           <div className={styles.icons}>
             <SVGtext label={event.type} icon={<Racefiets />}></SVGtext>
@@ -41,8 +43,11 @@ export default function ManageEventPage({ event }) {
           title="Participants"
           comp={Participants}
         ></ManageEventDropDown>
-        <ManageEventDropDown title="Posts"></ManageEventDropDown>
-        <ManageEventDropDown title="Pictures"></ManageEventDropDown>
+        <ManageEventDropDown title="Posts" comp={Posts}></ManageEventDropDown>
+        <ManageEventDropDown
+          title="Pictures"
+          comp={Pictures}
+        ></ManageEventDropDown>
       </div>
     </div>
   );

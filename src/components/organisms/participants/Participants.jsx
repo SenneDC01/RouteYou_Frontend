@@ -33,17 +33,17 @@ const Participants = () => {
   }, []);
 
   const filteredParticipants = participants
-    .filter((participant) =>
-      participant.name.toLowerCase().includes(searchQuery.toLowerCase())
-    )
-    .sort((a, b) => {
-      if (sortKey === 'name') {
-        return a.name.localeCompare(b.name);
-      } else if (sortKey === 'date') {
-        return new Date(a.date) - new Date(b.date);
-      }
-      return 0;
-    });
+      .filter((participant) =>
+          participant.name.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+      .sort((a, b) => {
+        if (sortKey === 'name') {
+          return a.name.localeCompare(b.name);
+        } else if (sortKey === 'date') {
+          return new Date(a.date) - new Date(b.date);
+        }
+        return 0;
+      });
 
   const handleSortChange = (key) => {
     setSortKey(key);
@@ -63,46 +63,46 @@ const Participants = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.headerContainer}>
-        <div className={styles.searchContainer}>
+      <div className={styles.container}>
+        <div className={styles.headerContainer}>
+          <div className={styles.searchContainer}>
+            <div>
+              <p>Search Participants</p>
+              <input
+                  className={styles.searchBar}
+                  type="text"
+                  placeholder="Search by name"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
+            <div>
+              <p>Sort</p>
+              <SortDropdown onSortChange={handleSortChange} />
+            </div>
+          </div>
           <div>
-            <p>Search Participants</p>
-            <input
-              className={styles.searchBar}
-              type="text"
-              placeholder="Search by name"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+            <br />
+            <InviteButton className={styles.button} onClick={handleInviteClick}>
+              Invite Users
+            </InviteButton>
+          </div>
+        </div>
+        <ul>
+          {filteredParticipants.map((participant) => (
+              <li key={participant.id} className={styles.list}>
+                {participant.name}
+                <StatusDropdown />
+              </li>
+          ))}
+        </ul>
+        {isInviteFrameOpen && (
+            <InviteUsersFrame
+                onClose={handleCloseInviteFrame}
+                onInvite={handleInviteUser}
             />
-          </div>
-          <div>
-            <p>Sort</p>
-            <SortDropdown onSortChange={handleSortChange} />
-          </div>
-        </div>
-        <div>
-          <br />
-          <InviteButton className={styles.button} onClick={handleInviteClick}>
-            Invite Users
-          </InviteButton>
-        </div>
+        )}
       </div>
-      <ul>
-        {filteredParticipants.map((participant) => (
-          <li key={participant.id} className={styles.list}>
-            {participant.name}
-            <StatusDropdown />
-          </li>
-        ))}
-      </ul>
-      {isInviteFrameOpen && (
-        <InviteUsersFrame
-          onClose={handleCloseInviteFrame}
-          onInvite={handleInviteUser}
-        />
-      )}
-    </div>
   );
 };
 

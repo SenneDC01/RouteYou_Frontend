@@ -40,7 +40,7 @@
   text-transform: uppercase;
   max-width: 40rem;
   text-align: center;
-  @media screen and (max-width: 475px) {
+  @media screen and (max-width: 515px) {
     font-size: 1.5rem;
     margin: 1rem;
     line-height: 2rem;
@@ -54,7 +54,7 @@
   justify-content: space-around;
   flex-wrap: wrap;
   gap: 8rem;
-  @media screen and (max-width: 610px) {
+  @media screen and (max-width: 625px) {
     gap: 1rem;
   }
 }
