@@ -223,3 +223,19 @@ export const completedEvents = async (query) => {
 
   return { ...data.events, code: response.status };
 };
+
+export const markAsInterested = async (eventId) => {
+  if (!Cookies.get('token')) {
+    const serverCookies = getCookies();
+    HEADERS.Authorization = 'Bearer ' + serverCookies.get('token');
+  }
+
+  const response = await fetch(`${API_URL}/events/${eventId}/interested`, {
+    method: 'POST',
+    headers: HEADERS,
+  });
+
+  const data = await response.json();
+
+  return { ...data, code: response.status };
+};
