@@ -24,7 +24,9 @@ export default function EventCard({ event }) {
       <div className={[styles.eventDetails]}>
         <div className={[styles.flexRowContainer]}>
           <BoldText>{event.name}</BoldText>
-          <FavButton />
+          {'relation' in event && event.relation !== 'OWNER' && (
+            <FavButton event={event} />
+          )}
         </div>
         <SubText>
           {event.author} <br /> {event.start_date}
