@@ -59,26 +59,46 @@ export default function DetailColumn({ event }) {
           );
         })}
         <div className={styles.row}>
-          {/* <Button link="#" icon={<ArrowRightSVG />}>
-            Share
-          </Button> */}
           <div
             className={styles.shareButton}
             data-href={window.location.href}
             data-layout="button"
             data-size=""
           >
-            <a target="_blank" href={url} class="fb-xfbml-parse-ignore">
+            <a target="_blank" href={url} className="fb-xfbml-parse-ignore">
               Share to Facebook
             </a>
           </div>
-          <ButtonLink
-            link={`/events/${event.id}/signup`}
-            icon={<ArrowRightSVG />}
-            ariaLabel="Go to the sign-up page of this event"
-          >
-            Sign-up
-          </ButtonLink>
+
+          {(!('relation' in event) ||
+            event.relation === null ||
+            event.relation === 'INTERESTED') && (
+            <ButtonLink
+              link={`/events/${event.id}/signup`}
+              icon={<ArrowRightSVG />}
+              ariaLabel="Go to the sign-up page of this event"
+            >
+              Sign-up
+            </ButtonLink>
+          )}
+          {'relation' in event && event.relation === 'OWNER' && (
+            <ButtonLink
+              link={`/events/${event.id}/manage-event`}
+              icon={<ArrowRightSVG />}
+              ariaLabel="Go to the manage page of this event"
+            >
+              Manage
+            </ButtonLink>
+          )}
+          {'relation' in event && event.relation === 'SIGNED_UP' && (
+            <ButtonLink
+              link={`/events/${event.id}/ticket`}
+              icon={<ArrowRightSVG />}
+              ariaLabel="Go to the ticket page of this event"
+            >
+              Ticket
+            </ButtonLink>
+          )}
         </div>
       </div>
     </section>

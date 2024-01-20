@@ -32,7 +32,7 @@ export default function Footer() {
             </Link>
           </li>
           <li>
-            <Link href="/dashboard" className={styles.linkStyles}>
+            <Link href="/dashboard/my-events" className={styles.linkStyles}>
               Dashboard
             </Link>
           </li>

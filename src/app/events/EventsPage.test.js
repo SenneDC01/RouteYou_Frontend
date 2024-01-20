@@ -3,6 +3,22 @@ import * as EventService from '@/services/EventService';
 import { render, waitFor } from '@testing-library/react';
 import EventsPage from './page';
 
+const mockPush = jest.fn();
+jest.mock('next/navigation', () => ({
+  useRouter() {
+    return {
+      prefetch: () => null,
+      replace: mockPush,
+    };
+  },
+  useSearchParams() {
+    return new URLSearchParams();
+  },
+  usePathname() {
+    return '/api/events';
+  },
+}));
+
 const publicEventsResponse = {
   message: 'Events have been fetched successfully',
   events: {

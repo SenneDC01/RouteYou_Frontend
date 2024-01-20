@@ -5,12 +5,7 @@ import SubText from '@/components/atoms/sub-text/SubText';
 import MedalSVG from '@/utils/icons/MedalSVG';
 import styles from './BadgeCard.module.scss';
 
-export default function BadgeCard({
-  image,
-  title = 'Groene Gordel 2024',
-  organisator = 'organisator',
-  dateTime = 'date - time',
-}) {
+export default function BadgeCard({ event }) {
   return (
     <div data-testid="badgeCard" className={[styles.badgeCard]}>
       <Image
@@ -18,13 +13,13 @@ export default function BadgeCard({
         width={300}
         alt=""
         className={[styles.badgeImage]}
-        src={image}
+        src={event.image_url}
       />
       <div className={[styles.badgeRowContainer]}>
         <div className={[styles.badgeDetails]}>
-          <BoldText>{title}</BoldText>
+          <BoldText>{event.name}</BoldText>
           <SubText>
-            {organisator} <br /> {dateTime}
+            {event.author} <br /> {event.start_date}
           </SubText>
         </div>
         <MedalSVG width={60} height={60} />

@@ -21,7 +21,7 @@ export default function FormField({
       <input
         id={name}
         type={type}
-        value={value}
+        defaultValue={value}
         name={name}
         {...(step && { step: step })}
         className={[styles.field, errorMessage ? styles.inValid : ''].join(' ')}

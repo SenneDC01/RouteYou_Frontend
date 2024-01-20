@@ -10,8 +10,8 @@ const HEADERS = {
   Authorization: 'Bearer ' + Cookies.get('token'),
 };
 
-export const publicEvents = async () => {
-  const response = await fetch(`${API_URL}/events`, {
+export const publicEvents = async (querySearch) => {
+  const response = await fetch(`${API_URL}/events?${querySearch}`, {
     headers: HEADERS,
   });
   const data = await response.json();
@@ -31,15 +31,12 @@ export const eventDetail = async (eventId) => {
   return { ...data, code: response.status };
 };
 
-export const createdEvents = async () => {
-  const serverCookies = getCookies();
-  HEADERS.Authorization = 'Bearer ' + serverCookies.get('token');
-
+export const createdEvents = async (query) => {
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), 10000);
 
   try {
-    const response = await fetch(`${API_URL}/events/created`, {
+    const response = await fetch(`${API_URL}/events/created?${query}`, {
       method: 'GET',
       headers: HEADERS,
       signal: controller.signal,
@@ -51,7 +48,7 @@ export const createdEvents = async () => {
 
     const data = await response.json();
 
-    return data.events.data;
+    return data.events;
   } catch (error) {
     return null;
   } finally {
@@ -201,6 +198,18 @@ export const createEvent = async (body) => {
   return { ...data, code: response.status };
 };
 
+export const eventTicket = async (eventId) => {
+  const serverCookies = getCookies();
+  HEADERS.Authorization = 'Bearer ' + serverCookies.get('token');
+
+  const response = await fetch(`${API_URL}/events/${eventId}/ticket`, {
+    headers: HEADERS,
+  });
+  const data = await response.json();
+
+  return { ...data, code: response.status };
+};
+
 export const signedUpEvents = async () => {
   const serverCookies = getCookies();
   HEADERS.Authorization = 'Bearer ' + serverCookies.get('token');
@@ -209,6 +218,32 @@ export const signedUpEvents = async () => {
     method: 'GET',
     headers: HEADERS,
   });
+  const data = await response.json();
+
+  return { ...data, code: response.status };
+};
+
+export const completedEvents = async (query) => {
+  const response = await fetch(`${API_URL}/events/finished?${query}`, {
+    headers: HEADERS,
+  });
+
+  const data = await response.json();
+
+  return { ...data.events, code: response.status };
+};
+
+export const markAsInterested = async (eventId) => {
+  if (!Cookies.get('token')) {
+    const serverCookies = getCookies();
+    HEADERS.Authorization = 'Bearer ' + serverCookies.get('token');
+  }
+
+  const response = await fetch(`${API_URL}/events/${eventId}/interested`, {
+    method: 'POST',
+    headers: HEADERS,
+  });
+
   const data = await response.json();
 
   return { ...data, code: response.status };

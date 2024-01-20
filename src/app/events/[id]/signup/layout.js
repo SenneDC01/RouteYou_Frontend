@@ -6,7 +6,7 @@ const getEventInfo = async (eventId) => {
   try {
     const response = await eventDetail(eventId);
 
-    if (response.code !== 200) {
+    if (response.code !== 200 || response.event.relation === 'SIGNED_UP') {
       redirect('/');
     }
     return response;
