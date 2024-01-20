@@ -65,7 +65,7 @@ export default function DetailColumn({ event }) {
             data-layout="button"
             data-size=""
           >
-            <a target="_blank" href={url} class="fb-xfbml-parse-ignore">
+            <a target="_blank" href={url} className="fb-xfbml-parse-ignore">
               Share to Facebook
             </a>
           </div>
