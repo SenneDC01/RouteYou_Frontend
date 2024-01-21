@@ -3,9 +3,11 @@ import styles from './Pictures.module.scss';
 import Image from 'next/image';
 import FormField from '@/components/atoms/form-field/FormField';
 import Button from '@/components/atoms/button/Button';
-import {getPictures, postPictures} from '@/services/EventService';
+import { getPictures, postPictures } from '@/services/EventService';
+import LoadingSpinner from "@/components/molecules/loading-spinner/LoadingSpinner";
 
 export default function Pictures({ event }) {
+  const [loading, setLoading] = useState(true);
   const [pictures, setPictures] = useState({ data: [] });
 
   useEffect(() => {
@@ -19,6 +21,8 @@ export default function Pictures({ event }) {
         }
       } catch (error) {
         console.error('Error fetching pictures:', error);
+      } finally {
+        setLoading(false); // Set loading to false regardless of success or failure
       }
     };
 
@@ -40,7 +44,7 @@ export default function Pictures({ event }) {
         const uploadResponse = await postPictures(event.id, formData);
 
         if (uploadResponse.code === 201) {
-          // fetchPictures(); // Optionally fetch pictures after successful upload
+          // fetchPictures();
         } else {
           console.error('Upload failed:', uploadResponse);
         }
@@ -52,44 +56,51 @@ export default function Pictures({ event }) {
 
   return (
       <div className={styles.container}>
-        <div className={styles.imageContainer}>
-          {pictures && pictures.data
-              ? pictures.data
-                  .reduce((pairs, image, index) => {
-                    if (index % 3 === 0) {
-                      const pair = [image];
-                      if (pictures.data[index + 1]) {
-                        pair.push(pictures.data[index + 1]);
-                      }
-                      if (pictures.data[index + 2]) {
-                        pair.push(pictures.data[index + 2]);
-                      }
-                      pairs.push(pair);
-                    }
-                    return pairs;
-                  }, [])
-                  .map((pair, pairIndex) => (
-                      <div key={pairIndex} className={styles.imagePair}>
-                        {pair.map(
-                            (img, imgIndex) =>
-                                img && (
-                                    <Image
-                                        key={imgIndex}
-                                        src={img.image_url}
-                                        alt=""
-                                        data-testid={`image-${imgIndex}`}
-                                        className={`${styles.image} ${
-                                            pair.length === 2 ? styles.twoImagesInRow : ''
-                                        }`}
-                                        height={1000}
-                                        width={1000}
-                                    />
-                                )
-                        )}
-                      </div>
-                  ))
-              : <p>No images available</p>}
-        </div>
+        {loading ? (
+            <LoadingSpinner
+                isLoading={loading}
+                message="Pictures loading"
+            />
+        ) : (
+            <div className={styles.imageContainer}>
+              {pictures && pictures.data
+                  ? pictures.data
+                      .reduce((pairs, image, index) => {
+                        if (index % 3 === 0) {
+                          const pair = [image];
+                          if (pictures.data[index + 1]) {
+                            pair.push(pictures.data[index + 1]);
+                          }
+                          if (pictures.data[index + 2]) {
+                            pair.push(pictures.data[index + 2]);
+                          }
+                          pairs.push(pair);
+                        }
+                        return pairs;
+                      }, [])
+                      .map((pair, pairIndex) => (
+                          <div key={pairIndex} className={styles.imagePair}>
+                            {pair.map(
+                                (img, imgIndex) =>
+                                    img && (
+                                        <Image
+                                            key={imgIndex}
+                                            src={img.image_url}
+                                            alt=""
+                                            data-testid={`image-${imgIndex}`}
+                                            className={`${styles.image} ${
+                                                pair.length === 2 ? styles.twoImagesInRow : ''
+                                            }`}
+                                            height={1000}
+                                            width={1000}
+                                        />
+                                    )
+                            )}
+                          </div>
+                      ))
+                  : <p>No images available</p>}
+            </div>
+        )}
         <form onSubmit={handleSubmit} className={styles.form} method="post">
           <div className={styles.fields}>
             <FormField name="event_image" type="file" data-testid="event_image" />
