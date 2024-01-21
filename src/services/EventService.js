@@ -169,6 +169,15 @@ export const getParticipants = async (eventId) => {
   }
 };
 
+export const getPictures = async (eventId) => {
+  const response = await fetch(`${API_URL}/events/${eventId}/images`, {
+    headers: HEADERS,
+  });
+  const data = await response.json();
+
+  return { ...data, code: response.status };
+};
+
 export const createEvent = async (body) => {
   const formData = new FormData(body);
   const arr = formData.getAll('routes_id');
