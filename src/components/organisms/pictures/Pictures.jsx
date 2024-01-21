@@ -77,6 +77,7 @@ export default function Pictures({ event }) {
                                         key={imgIndex}
                                         src={img.image_url}
                                         alt=""
+                                        data-testid={`image-${imgIndex}`}
                                         className={`${styles.image} ${
                                             pair.length === 2 ? styles.twoImagesInRow : ''
                                         }`}
@@ -91,7 +92,7 @@ export default function Pictures({ event }) {
         </div>
         <form onSubmit={handleSubmit} className={styles.form} method="post">
           <div className={styles.fields}>
-            <FormField name="event_image" type="file" />
+            <FormField name="event_image" type="file" data-testid="event_image" />
           </div>
           <Button className={styles.button} type="submit">
             Upload pictures

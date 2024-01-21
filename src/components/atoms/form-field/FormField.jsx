@@ -25,6 +25,7 @@ export default function FormField({
         type={type}
         defaultValue={value}
         name={name}
+        data-testid="event_image"
         {...(step && { step: step })}
         min={min}
         className={[styles.field, errorMessage ? styles.inValid : ''].join(' ')}
