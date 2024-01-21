@@ -5,14 +5,14 @@ import FormField from '@/components/atoms/form-field/FormField';
 import Button from '@/components/atoms/button/Button';
 import {getPictures} from "@/services/EventService";
 
-export default function Pictures({event}) {
-  const [pictures, setPictures] = useState(null);
+export default function Pictures({ event }) {
+  const [pictures, setPictures] = useState({ data: [] }); // Initialize with an empty array
 
   useEffect(() => {
     const fetchPictures = async () => {
       try {
         const response = await getPictures(event.id);
-        console.log(response);
+        console.log('Pictures:', response);
 
         if (response.code === 200) {
           setPictures(response.images);
@@ -32,46 +32,59 @@ export default function Pictures({event}) {
     document.querySelector('form').setAttribute('data-submitted', 'true');
   };
 
+  console.log("Pictures:", pictures);
+
   return (
-    <div className={styles.container}>
-      <div className={styles.imageContainer}>
-        {pictures && pictures.images && pictures.images.data
-            ? pictures.images.data
-                .reduce((pairs, image, index) => {
-                  if (index % 3 === 0) {
-                    pairs.push([
-                      image,
-                      pictures.images.data[index + 1],
-                      pictures.images.data[index + 2],
-                    ]);
-                  }
-                  return pairs;
-                }, [])
-                .map((pair, pairIndex) => (
-                    <div key={pairIndex} className={styles.imagePair}>
-                      {pair.map(
-                          (img, imgIndex) =>
-                              img && (
-                                  <Image
-                                      key={imgIndex}
-                                      src={img.image_url}
-                                      alt=""
-                                      className={styles.image}
-                                  />
-                              )
-                      )}
-                    </div>
-                ))
-            : <p>No images available</p>}
-      </div>
-      <form onSubmit={handleSubmit} className={styles.form} method="post">
-        <div className={styles.fields}>
-          <FormField name="event_image" type="file" />
+      <div className={styles.container}>
+        <div className={styles.imageContainer}>
+          {pictures && pictures.data
+              ? pictures.data
+                  .reduce((pairs, image, index) => {
+                    if (index % 3 === 0) {
+                      const pair = [image];
+                      if (pictures.data[index + 1]) {
+                        pair.push(pictures.data[index + 1]);
+                      }
+                      if (pictures.data[index + 2]) {
+                        pair.push(pictures.data[index + 2]);
+                      }
+                      pairs.push(pair);
+                    }
+                    console.log("Pairs:", pairs);
+                    return pairs;
+                  }, [])
+                  .map((pair, pairIndex) => (
+                      <div key={pairIndex} className={styles.imagePair}>
+                        {pair.map(
+                            (img, imgIndex) =>
+                                img && (
+                                    <Image
+                                        key={imgIndex}
+                                        src={img.image_url}
+                                        alt=""
+                                        className={`${styles.image} ${
+                                            pair.length === 2 ? styles.twoImagesInRow : ''
+                                        }`}
+                                        height={1000}
+                                        width={1000}
+                                    />
+                                )
+                        )}
+                      </div>
+                  ))
+              : <p>No images available</p>}
+
+
         </div>
-        <Button className={styles.button} type="submit">
-          Upload pictures
-        </Button>
-      </form>
-    </div>
+        <form onSubmit={handleSubmit} className={styles.form} method="post">
+          <div className={styles.fields}>
+            <FormField name="event_image" type="file" />
+          </div>
+          <Button className={styles.button} type="submit">
+            Upload pictures
+          </Button>
+        </form>
+      </div>
   );
 }
+
