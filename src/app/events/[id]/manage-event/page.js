@@ -20,7 +20,13 @@ export default function ManageEventPage({ event }) {
   return (
     <div className={styles.container}>
       <div className={styles.leftColumn}>
-        <Image src={event.image_url} alt="" className={styles.image} />
+        <Image
+          src={event.image_url}
+          alt=""
+          className={styles.image}
+          height={500}
+          width={500}
+        />
         <div className={styles.textContainer}>
           <div>
             <BigTitle>{event.name}</BigTitle>
@@ -29,12 +35,18 @@ export default function ManageEventPage({ event }) {
           </div>
           <RegularText>{event.description}</RegularText>
           <div className={styles.icons}>
-            <SVGtext label={event.type} icon={<Racefiets />}></SVGtext>
             <SVGtext
-              label={event.distance + 'km'}
+              label={event.routes[0].route_data.type}
+              icon={<Racefiets />}
+            ></SVGtext>
+            <SVGtext
+              label={event.routes[0].route_data.length}
               icon={<AfstandSVG />}
             ></SVGtext>
-            <SVGtext label={event.time} icon={<KlokSVG />}></SVGtext>
+            <SVGtext
+              label={'Dit is niet aanwezig in de data en moet vervangen worden'}
+              icon={<KlokSVG />}
+            ></SVGtext>
           </div>
         </div>
       </div>

@@ -59,9 +59,6 @@ export default function DetailColumn({ event }) {
           );
         })}
         <div className={styles.row}>
-          {/* <Button link="#" icon={<ArrowRightSVG />}>
-            Share
-          </Button> */}
           <div
             className={styles.shareButton}
             data-href={window.location.href}

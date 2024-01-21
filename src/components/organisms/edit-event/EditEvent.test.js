@@ -1,4 +1,4 @@
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, getByDisplayValue } from '@testing-library/react';
 import EditEvent from './EditEvent';
 import * as EventService from '@/services/EventService';
 import { act } from 'react-test-renderer';
@@ -66,7 +66,7 @@ describe('Create Events Page component', () => {
       fireEvent.change(getByLabelText('Max Participants'), {
         target: { value: maxParticipants },
       });
-      fireEvent.click(getByRole('button', { name: 'Edit Event' }));
+      fireEvent.click(getByDisplayValue('Edit Event'));
     });
 
     expect(mockCreate).not.toHaveBeenCalled();
@@ -88,7 +88,7 @@ describe('Create Events Page component', () => {
       fireEvent.change(getByLabelText('Max Participants'), {
         target: { value: maxParticipants },
       });
-      fireEvent.click(getByRole('button', { name: 'Edit Event' }));
+      fireEvent.click(getByDisplayValue('Edit Event'));
     });
 
     expect(mockCreate).not.toHaveBeenCalled();

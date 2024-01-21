@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import FormField from '@/components/atoms/form-field/FormField';
 import SelectField from '@/components/atoms/select-field/SelectField';
@@ -22,6 +22,8 @@ import styles from './CreateEventPage.module.scss';
 
 export default function Page() {
   const router = useRouter();
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => setIsMounted(true), []);
   const [formValues, setFormValues] = useState({
     name: '',
     description: '',
@@ -214,13 +216,16 @@ export default function Page() {
             onChange={handleChange}
             errorMessage={errors.description}
           />
-          <RouteSelect
-            label="Routes"
-            name="routes_id"
-            placeholder="Search a route"
-            onChange={handleChange}
-            errorMessage={errors.routes}
-          />
+          {isMounted && (
+            <RouteSelect
+              id={'routes_id'}
+              label="Routes"
+              name="routes_id"
+              placeholder="Search a route"
+              onChange={handleChange}
+              errorMessage={errors.routes}
+            />
+          )}
           <DateTimeField
             label="Start Date"
             name="start_date"

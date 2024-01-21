@@ -8,6 +8,7 @@ import RouteSelect from '@/components/atoms/route-select/RouteSelect';
 import DateTimeField from '@/components/atoms/date-time-field/DateTimeField';
 import BigTitle from '@/components/atoms/big-title/BigTitle';
 import Button from '@/components/atoms/button/Button';
+import dayjs from 'dayjs';
 import { editEvent } from '@/services/EventService';
 import {
   isEmpty,
@@ -18,18 +19,22 @@ import {
 import styles from './EditEvent.module.scss';
 
 export default function EditEvent({ event }) {
-  console.log(event);
   const router = useRouter();
   const [formValues, setFormValues] = useState({
     name: event.name,
-    description: event.name,
-    routes_id: [],
-    start_date: event.name,
-    end_date: event.name,
-    max_participants: event.name,
-    price: event.name,
-    visibility: event.name,
-    event_image: event.name,
+    description: event.description,
+    routes_id: event.routes.map((route) => {
+      return {
+        value: route.route_data.id,
+        label: route.route_data.name,
+      };
+    }),
+    start_date: dayjs(event.start_date),
+    end_date: dayjs(event.end_date),
+    max_participants: event.max_participants,
+    price: event.price,
+    visibility: event.visibility,
+    event_image: event.event_image,
   });
   const [errors, setErrors] = useState({});
 
@@ -53,7 +58,6 @@ export default function EditEvent({ event }) {
 
     setErrors({
       ...textErrors,
-
       ...infoErrors,
       ...imageErrors,
       formError: errors.formError,
@@ -106,25 +110,25 @@ export default function EditEvent({ event }) {
     const isValid = validateForm();
     if (isValid) {
       console.log('valid');
-      // try {
-      //   const response = await createEvent(e.currentTarget);
+      try {
+        const response = await editEvent(e.currentTarget);
 
-      //   if (response.code === 201) {
-      //     router.push('/dashboard/created');
-      //   } else {
-      //     if (response.errors) {
-      //       const errors = [];
-      //       Object.keys(response.errors).forEach((field) => {
-      //         errors.push(response.errors[field][0]);
-      //       });
-      //       setErrors({ formError: errors });
-      //     } else if (response.message) {
-      //       setErrors({ formError: [response.message] });
-      //     }
-      //   }
-      // } catch (error) {
-      //   setErrors({ formError: ['Something went wrong try again later.'] });
-      // }
+        if (response.code === 201) {
+          router.push('/dashboard/created');
+        } else {
+          if (response.errors) {
+            const errors = [];
+            Object.keys(response.errors).forEach((field) => {
+              errors.push(response.errors[field][0]);
+            });
+            setErrors({ formError: errors });
+          } else if (response.message) {
+            setErrors({ formError: [response.message] });
+          }
+        }
+      } catch (error) {
+        setErrors({ formError: ['Something went wrong try again later.'] });
+      }
     }
   };
 
@@ -135,9 +139,6 @@ export default function EditEvent({ event }) {
       method="post"
       encType="multipart/form-data"
     >
-      <div className={styles.top}>
-        <h2>Edit your event</h2>
-      </div>
       {errors?.formError && (
         <>
           <ul>
@@ -170,6 +171,7 @@ export default function EditEvent({ event }) {
           label="Routes"
           name="routes_id"
           placeholder="Search a route"
+          value={formValues.routes_id}
           onChange={handleChange}
           errorMessage={errors.routes}
           disabled={true}
@@ -177,6 +179,7 @@ export default function EditEvent({ event }) {
         <DateTimeField
           label="Start Date"
           name="start_date"
+          value={formValues.start_date}
           onChange={handleChange}
           errorMessage={errors.start_date}
           disabled={true}
@@ -184,6 +187,7 @@ export default function EditEvent({ event }) {
         <DateTimeField
           label="End Date"
           name="end_date"
+          value={formValues.end_date}
           onChange={handleChange}
           errorMessage={errors.end_date}
           disabled={true}
@@ -202,6 +206,7 @@ export default function EditEvent({ event }) {
           name="price"
           type="number"
           step={0.01}
+          value={event.price}
           onChange={handleChange}
           errorMessage={errors.price}
           disabled={true}

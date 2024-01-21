@@ -6,9 +6,11 @@ import { searchPrivateRoute, searchPublicRoute } from '@/services/RouteService';
 import SmallText from '../small-text/SmallText';
 
 export default function RouteSelect({
+  id,
   label,
   placeholder,
   name,
+  value,
   onChange,
   errorMessage,
   className,
@@ -67,6 +69,7 @@ export default function RouteSelect({
         {label}
       </label>
       <AsyncSelect
+        id={id}
         inputId={name}
         name={name}
         placeholder={placeholder}
@@ -74,6 +77,7 @@ export default function RouteSelect({
         onChange={handleChange}
         isMulti
         defaultOptions={true}
+        defaultValue={value}
         loadOptions={promiseOptions}
         isDisabled={disabled}
       />
