@@ -1,16 +1,17 @@
-# ATP RouteYou 1
+# Frontend RouteYou Evenementen 1
 
-## Links dev 
+## Productie
 
-* [Frontend](http://10.129.23.226:5000)
-* [Backend](http://10.129.23.226:8080)
+- [Frontend](https://prod-frontend-s3yyo4v6ta-ew.a.run.app/)
+- [Backend](https://prod-backend-s3yyo4v6ta-ew.a.run.app/)
 
-## Links staging
+## Staging
 
-* [Frontend](https://stagingfrontend-s3yyo4v6ta-ew.a.run.app/)
-* [Backend](https://stagingbackend-s3yyo4v6ta-ew.a.run.app/)
+- [Frontend](https://stagingfrontend-s3yyo4v6ta-ew.a.run.app/)
+- [Backend](https://stagingbackend-s3yyo4v6ta-ew.a.run.app/)
 
-## Links prod
+## Development
+Bereikbaar binnen schoolnetwerk of met VPN
 
-* [Frontend](https://prod-frontend-s3yyo4v6ta-ew.a.run.app/)
-* [Backend](https://prod-backend-s3yyo4v6ta-ew.a.run.app/)
+- [Frontend](http://10.129.23.226:5000/)
+- [Backend](http://10.129.23.226:8080/)
