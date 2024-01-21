@@ -1,19 +1,17 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Pictures.module.scss';
 import Image from 'next/image';
 import FormField from '@/components/atoms/form-field/FormField';
 import Button from '@/components/atoms/button/Button';
-import {getPictures} from "@/services/EventService";
+import {getPictures, postPictures} from '@/services/EventService';
 
 export default function Pictures({ event }) {
-  const [pictures, setPictures] = useState({ data: [] }); // Initialize with an empty array
+  const [pictures, setPictures] = useState({ data: [] });
 
   useEffect(() => {
     const fetchPictures = async () => {
       try {
         const response = await getPictures(event.id);
-        console.log('Pictures:', response);
-
         if (response.code === 200) {
           setPictures(response.images);
         } else {
@@ -30,9 +28,27 @@ export default function Pictures({ event }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     document.querySelector('form').setAttribute('data-submitted', 'true');
-  };
 
-  console.log("Pictures:", pictures);
+    const fileInput = document.querySelector('input[name="event_image"]');
+    const file = fileInput.files[0];
+
+    if (file) {
+      try {
+        const formData = new FormData();
+        formData.append('image', file);
+
+        const uploadResponse = await postPictures(event.id, formData);
+
+        if (uploadResponse.code === 201) {
+          // fetchPictures(); // Optionally fetch pictures after successful upload
+        } else {
+          console.error('Upload failed:', uploadResponse);
+        }
+      } catch (error) {
+        console.error('Error uploading image:', error);
+      }
+    }
+  };
 
   return (
       <div className={styles.container}>
@@ -50,7 +66,6 @@ export default function Pictures({ event }) {
                       }
                       pairs.push(pair);
                     }
-                    console.log("Pairs:", pairs);
                     return pairs;
                   }, [])
                   .map((pair, pairIndex) => (
@@ -73,8 +88,6 @@ export default function Pictures({ event }) {
                       </div>
                   ))
               : <p>No images available</p>}
-
-
         </div>
         <form onSubmit={handleSubmit} className={styles.form} method="post">
           <div className={styles.fields}>
@@ -87,4 +100,3 @@ export default function Pictures({ event }) {
       </div>
   );
 }
-

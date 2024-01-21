@@ -178,6 +178,30 @@ export const getPictures = async (eventId) => {
   return { ...data, code: response.status };
 };
 
+export const postPictures = async (eventId, formData) => {
+  try {
+    const response = await fetch(`${API_URL}/events/${eventId}/images`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        Authorization: 'Bearer ' + Cookies.get('token'),
+      },
+      body: formData,
+    });
+
+    const data = await response.json();
+
+    if (response.status !== 201) {
+      console.error('Non-201 status code received:', response.status, data);
+    }
+
+    return { ...data, code: response.status };
+  } catch (error) {
+    console.error('Error posting image:', error);
+    throw error;
+  }
+};
+
 export const createEvent = async (body) => {
   const formData = new FormData(body);
   const arr = formData.getAll('routes_id');
