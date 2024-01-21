@@ -1,36 +1,31 @@
-import React, { useEffect, useState } from 'react';
-import { getParticipants } from '@/services/EventService';
+import React, { useState } from 'react';
+import {getParticipants} from '@/services/EventService';
 import StatusDropdown from '@/components/molecules/status-drop-down/StatusDropdown';
 import SortDropdown from '@/components/molecules/sort-drop-down/SortDropdown';
 import styles from './Participants.module.scss';
 import InviteButton from '@/components/atoms/button/Button';
 import InviteUsersFrame from '@/components/molecules/invite-users-frame/InviteUsersFrame';
+// import { redirect } from 'next/navigation';
 
-const mockParticipants = [
-  { id: 1, name: 'John Doe', date: '2023-01-01' },
-  { id: 2, name: 'Jane Doe', date: '2023-02-01' },
-  { id: 3, name: 'Senne De Cock', date: '2023-03-01' },
-];
+const getEventParticipants = async (eventId) => {
+  try {
+    const response = await getParticipants(eventId);
 
-const Participants = () => {
-  const [participants, setParticipants] = useState([]);
+    if (response.code !== 200) {
+      // redirect('/');
+    }
+    return response;
+  } catch (error) {
+    // redirect('/');
+  }
+};
+export default async function Participants({event}) {
+  const {participants} = await getEventParticipants(event.id);
+  console.log(participants)
+
   const [searchQuery, setSearchQuery] = useState('');
   const [sortKey, setSortKey] = useState(null);
   const [isInviteFrameOpen, setIsInviteFrameOpen] = useState(false);
-
-  useEffect(() => {
-    const fetchParticipants = async () => {
-      const participantsData = await getParticipants();
-
-      if (participantsData) {
-        setParticipants(participantsData);
-      } else {
-        setParticipants(mockParticipants);
-      }
-    };
-
-    fetchParticipants();
-  }, []);
 
   const filteredParticipants = participants
       .filter((participant) =>
@@ -78,11 +73,11 @@ const Participants = () => {
             </div>
             <div>
               <p>Sort</p>
-              <SortDropdown onSortChange={handleSortChange} />
+              <SortDropdown onSortChange={handleSortChange}/>
             </div>
           </div>
           <div>
-            <br />
+            <br/>
             <InviteButton className={styles.button} onClick={handleInviteClick}>
               Invite Users
             </InviteButton>
@@ -92,7 +87,7 @@ const Participants = () => {
           {filteredParticipants.map((participant) => (
               <li key={participant.id} className={styles.list}>
                 {participant.name}
-                <StatusDropdown />
+                <StatusDropdown/>
               </li>
           ))}
         </ul>
@@ -105,5 +100,3 @@ const Participants = () => {
       </div>
   );
 };
-
-export default Participants;

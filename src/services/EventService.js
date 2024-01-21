@@ -144,12 +144,12 @@ export const searchPrivateEvents = async (term) => {
   }
 };
 
-export const getParticipants = async () => {
+export const getParticipants = async (eventId) => {
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), 10000);
 
   try {
-    const response = await fetch(`${API_URL}/events/1/participants`, {
+    const response = await fetch(`${API_URL}/events/${eventId}/participants`, {
       method: 'GET',
       headers: HEADERS,
       signal: controller.signal,
@@ -160,7 +160,7 @@ export const getParticipants = async () => {
     }
 
     const data = await response.json();
-
+    console.log(data)
     return data.events.data;
   } catch (error) {
     return null;
