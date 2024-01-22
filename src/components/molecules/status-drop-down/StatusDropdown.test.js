@@ -14,7 +14,7 @@ test('StatusDropdown renders correctly and triggers onStatusChange', () => {
 
   expect(screen.getByText('Signed Up')).toBeInTheDocument();
 
-  fireEvent.click(screen.getByText('Canceled'));
+  fireEvent.click(screen.getByText('Present'));
 
-  expect(screen.getByText('Canceled')).toBeInTheDocument();
+  expect(screen.getByText('Present')).toBeInTheDocument();
 });
