@@ -14,6 +14,7 @@ export default function FormField({
   className,
   step,
   disabled,
+  multiple = false,
 }) {
   return (
     <div className={[styles.formField, className].join(' ')}>
@@ -32,6 +33,7 @@ export default function FormField({
         placeholder={placeholder}
         disabled={disabled}
         onChange={onChange}
+        multiple={multiple}
       />
       {errorMessage && (
         <SmallText className={styles.error}>{errorMessage}</SmallText>

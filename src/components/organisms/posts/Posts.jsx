@@ -9,28 +9,32 @@ export default function Posts({ event }) {
   const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState({ data: [] });
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await getPosts(event.id);
-        if (response.code === 200) {
-          setPosts(response.posts || { data: [] });
-        } else {
-          console.error('Non-200 status code received');
-        }
-      } catch (error) {
-        console.error('Error fetching posts:', error);
-      } finally {
-        setLoading(false);
+  const fetchPosts = async () => {
+    console.log('test');
+    try {
+      const response = await getPosts(event.id);
+      if (response.code === 200) {
+        setPosts(response.posts || { data: [] });
+      } else {
+        console.log('Non-200 status code received');
       }
-    };
+    } catch (error) {
+      console.log('Error fetching posts:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchPosts();
   }, [event.id]);
 
   return (
     <div className={styles.container}>
-      <EditCreatePost eventId={event.id}></EditCreatePost>
+      <EditCreatePost
+        eventId={event.id}
+        reloadPosts={() => fetchPosts()}
+      ></EditCreatePost>
       {loading ? (
         <LoadingSpinner
           isLoading={loading}

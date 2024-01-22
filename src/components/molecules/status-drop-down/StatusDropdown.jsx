@@ -27,16 +27,6 @@ const statusOptions = [
     label: 'Interested',
     icon: <StarSVG width={20} height={20} fill={'#1a614a'} />,
   },
-  {
-    key: 'INVITED',
-    label: 'Invited',
-    icon: <StarSVG width={20} height={20} fill={'#1a614a'} />,
-  },
-  {
-    key: 'CANCELED',
-    label: 'Canceled',
-    icon: <CancelledSVG width={20} height={20} />,
-  },
 ];
 
 export default function StatusDropdown({ status }) {

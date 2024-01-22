@@ -196,33 +196,26 @@ export const getPosts = async (eventId) => {
 };
 
 export const postPosts = async (eventId, postData) => {
-  try {
-    const formData = new FormData();
+  const formData = new FormData(postData);
+  const arr = formData.getAll('images[]');
+  console.log(arr);
 
-    Object.keys(postData).forEach((key) => {
-      formData.append(key, postData[key]);
-    });
+  arr.forEach((e, i) => {
+    formData.append(`images[${i}]`, e);
+  });
 
-    const response = await fetch(`${API_URL}/events/${eventId}/posts`, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        Authorization: 'Bearer ' + Cookies.get('token'),
-      },
-      body: formData,
-    });
+  const response = await fetch(`${API_URL}/events/${eventId}/posts`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      Authorization: 'Bearer ' + Cookies.get('token'),
+    },
+    body: formData,
+  });
 
-    const data = await response.json();
+  const data = await response.json();
 
-    if (response.status !== 201) {
-      console.error('Non-201 status code received:', response.status, data);
-    }
-
-    return { ...data, code: response.status };
-  } catch (error) {
-    console.error('Error creating post:', error);
-    throw error;
-  }
+  return { ...data, code: response.status };
 };
 
 export const createEvent = async (body) => {

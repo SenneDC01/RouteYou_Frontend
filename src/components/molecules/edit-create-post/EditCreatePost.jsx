@@ -6,10 +6,11 @@ import styles from './EditCreatePost.module.scss';
 import { isEmpty, isFilled } from '@/helpers/FormValidation/FormValidation';
 import { createEvent, postPictures, postPosts } from '@/services/EventService';
 
-const EditCreatePost = ({ eventId }) => {
+export default function EditCreatePost({ eventId, reloadPosts }) {
   const [formValues, setFormValues] = useState({
     name: '',
     description: '',
+    images: [],
   });
   const [errors, setErrors] = useState({});
   const [errorMessage, setErrorMessage] = useState(null);
@@ -18,8 +19,10 @@ const EditCreatePost = ({ eventId }) => {
   const handleChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
+
   const imageChange = (e) => {
-    setFormValues({ ...formValues, [e.target.name]: e.target.files[0] });
+    const files = e.target.files;
+    setFormValues({ ...formValues, images: files });
   };
 
   const validateForm = () => {
@@ -45,36 +48,21 @@ const EditCreatePost = ({ eventId }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    document.querySelector('form').setAttribute('data-submitted', 'true');
 
-    // const fileInput = document.querySelector('input[name="event_image"]');
-    // const file = fileInput.files[0];
+    const isValid = validateForm();
 
-    const titleInput = document.querySelector('input[name="name"]');
-    const descriptionInput = document.querySelector(
-      'textarea[name="description"]'
-    );
-
-    const title = titleInput.value;
-    const description = descriptionInput.value;
-
-    if (!title || !description) {
-      setErrorMessage('Please enter a title and description.');
+    if (!isValid) {
       return;
     }
 
     setIsUploading(true);
+
     try {
-      const postData = {
-        title: title,
-        message: description,
-      };
+      const uploadResponse = await postPosts(eventId, e.currentTarget);
 
-      const uploadResponse = await postPosts(eventId, postData);
-
-      console.log(postData);
-
-      if (uploadResponse.code === 201) {
+      if (uploadResponse.code === 200) {
+        reloadPosts();
+        setFormValues({ name: '', description: '', images: [] });
         setErrorMessage(null);
       } else {
         setErrorMessage('Error creating post.');
@@ -97,22 +85,23 @@ const EditCreatePost = ({ eventId }) => {
       <div className={styles.fields}>
         <FormField
           label="Title"
-          name="name"
+          name="title"
           type="text"
           onChange={handleChange}
           errorMessage={errors.name}
         />
         <TextArea
           label="Description"
-          name="description"
+          name="message"
           onChange={handleChange}
           errorMessage={errors.description}
         />
         <FormField
           label="Event Image"
-          name="event_image"
+          name="images[]"
           type="file"
           onChange={imageChange}
+          multiple={true}
         />
       </div>
       <Button className={styles.button} type="submit" disabled={isUploading}>
@@ -120,6 +109,4 @@ const EditCreatePost = ({ eventId }) => {
       </Button>
     </form>
   );
-};
-
-export default EditCreatePost;
+}
