@@ -5,20 +5,18 @@ import Post from './Post';
 import '@testing-library/jest-dom';
 
 const mockPost = {
-  data: {
-    title: 'Event Title',
-    message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    images: [
-      {
-        id: 1,
-        image_url: 'image1.jpg',
-      },
-      {
-        id: 2,
-        image_url: 'image2.jpg',
-      },
-    ],
-  },
+  title: 'Event Title',
+  message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+  images: [
+    {
+      id: 1,
+      image_url: 'image1.jpg',
+    },
+    {
+      id: 2,
+      image_url: 'image2.jpg',
+    },
+  ],
 };
 
 test('renders post title and message', () => {

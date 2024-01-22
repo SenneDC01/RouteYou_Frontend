@@ -5,45 +5,45 @@ import SortDropdown from '@/components/molecules/sort-drop-down/SortDropdown';
 import styles from './Participants.module.scss';
 import InviteButton from '@/components/atoms/button/Button';
 import InviteUsersFrame from '@/components/molecules/invite-users-frame/InviteUsersFrame';
+import LoadingSpinner from '@/components/molecules/loading-spinner/LoadingSpinner';
 
-const mockParticipants = [
-  { id: 1, name: 'John Doe', date: '2023-01-01' },
-  { id: 2, name: 'Jane Doe', date: '2023-02-01' },
-  { id: 3, name: 'Senne De Cock', date: '2023-03-01' },
-];
-
-const Participants = () => {
-  const [participants, setParticipants] = useState([]);
+export default function Participants({ event }) {
+  const [participants, setParticipants] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [sortKey, setSortKey] = useState(null);
   const [isInviteFrameOpen, setIsInviteFrameOpen] = useState(false);
 
-  useEffect(() => {
-    const fetchParticipants = async () => {
-      const participantsData = await getParticipants();
-
-      if (participantsData) {
-        setParticipants(participantsData);
-      } else {
-        setParticipants(mockParticipants);
+  const fetchParticipants = async () => {
+    try {
+      setLoading(true);
+      const response = await getParticipants(event.id);
+      if (response && response.code === 200) {
+        setParticipants(response.participants.data || { data: [] });
       }
-    };
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchParticipants();
-  }, []);
+  });
 
   const filteredParticipants = participants
-      .filter((participant) =>
-          participant.name.toLowerCase().includes(searchQuery.toLowerCase())
+    ? participants.filter((participant) =>
+        participant.full_name.toLowerCase().includes(searchQuery.toLowerCase())
       )
-      .sort((a, b) => {
-        if (sortKey === 'name') {
-          return a.name.localeCompare(b.name);
-        } else if (sortKey === 'date') {
-          return new Date(a.date) - new Date(b.date);
-        }
-        return 0;
-      });
+    : [];
+
+  filteredParticipants.sort((a, b) => {
+    if (sortKey === 'name') {
+      return a.full_name.localeCompare(b.full_name);
+    } else if (sortKey === 'date') {
+      return new Date(a.date) - new Date(b.date);
+    }
+    return 0;
+  });
 
   const handleSortChange = (key) => {
     setSortKey(key);
@@ -57,53 +57,58 @@ const Participants = () => {
     setIsInviteFrameOpen(false);
   };
 
-  /* eslint-disable */
-  const handleInviteUser = (userId) => {
-    setIsInviteFrameOpen(false);
-  };
-
   return (
-      <div className={styles.container}>
-        <div className={styles.headerContainer}>
-          <div className={styles.searchContainer}>
-            <div>
-              <p>Search Participants</p>
-              <input
-                  className={styles.searchBar}
-                  type="text"
-                  placeholder="Search by name"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-              />
-            </div>
-            <div>
-              <p>Sort</p>
-              <SortDropdown onSortChange={handleSortChange} />
-            </div>
+    <div className={styles.container}>
+      <div className={styles.headerContainer}>
+        <div className={styles.searchContainer}>
+          <div>
+            <p>Search Participants</p>
+            <input
+              className={styles.searchBar}
+              type="text"
+              placeholder="Search by name"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
           </div>
           <div>
-            <br />
-            <InviteButton className={styles.button} onClick={handleInviteClick}>
-              Invite Users
-            </InviteButton>
+            <p>Sort</p>
+            <SortDropdown onSortChange={handleSortChange} />
           </div>
         </div>
-        <ul>
-          {filteredParticipants.map((participant) => (
-              <li key={participant.id} className={styles.list}>
-                {participant.name}
-                <StatusDropdown />
-              </li>
-          ))}
-        </ul>
-        {isInviteFrameOpen && (
-            <InviteUsersFrame
-                onClose={handleCloseInviteFrame}
-                onInvite={handleInviteUser}
-            />
-        )}
+        <div>
+          <br />
+          <InviteButton className={styles.button} onClick={handleInviteClick}>
+            Invite Users
+          </InviteButton>
+        </div>
       </div>
+      {loading && (
+        <LoadingSpinner
+          isLoading={loading}
+          message="Participants loading"
+          data-testid="loading-spinner"
+        />
+      )}
+      <ul>
+        {filteredParticipants.map((participant) => (
+          <li key={participant.id} className={styles.list}>
+            {participant.full_name}
+            <StatusDropdown
+              status={participant.status}
+              participantId={participant.id}
+              eventId={event.id}
+            />
+          </li>
+        ))}
+      </ul>
+      {isInviteFrameOpen && (
+        <InviteUsersFrame
+          onClose={handleCloseInviteFrame}
+          reloadParticipants={() => fetchParticipants()}
+          eventId={event.id}
+        />
+      )}
+    </div>
   );
-};
-
-export default Participants;
+}

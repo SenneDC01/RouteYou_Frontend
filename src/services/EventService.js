@@ -153,29 +153,112 @@ export const searchPrivateEvents = async (term) => {
   }
 };
 
-export const getParticipants = async () => {
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 10000);
+export const getParticipants = async (eventId) => {
+  const response = await fetch(`${API_URL}/events/${eventId}/participants`, {
+    headers: HEADERS,
+  });
+  const data = await response.json();
 
-  try {
-    const response = await fetch(`${API_URL}/events/1/participants`, {
-      method: 'GET',
-      headers: HEADERS,
-      signal: controller.signal,
-    });
+  return { ...data, code: response.status };
+};
 
-    if (!response.ok) {
-      return null;
-    }
+export const getPictures = async (eventId) => {
+  const response = await fetch(`${API_URL}/events/${eventId}/images`, {
+    headers: HEADERS,
+  });
+  const data = await response.json();
 
-    const data = await response.json();
+  return { ...data, code: response.status };
+};
 
-    return data.events.data;
-  } catch (error) {
-    return null;
-  } finally {
-    clearTimeout(timeoutId);
-  }
+export const postPictures = async (eventId, postData) => {
+  const formData = new FormData(postData);
+  const arr = formData.getAll('images[]');
+
+  arr.forEach((e, i) => {
+    formData.append(`images[${i}]`, e);
+  });
+
+  const response = await fetch(`${API_URL}/events/${eventId}/images`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      Authorization: 'Bearer ' + Cookies.get('token'),
+    },
+    body: formData,
+  });
+
+  const data = await response.json();
+
+  return { ...data, code: response.status };
+};
+
+export const getPosts = async (eventId) => {
+  const response = await fetch(`${API_URL}/events/${eventId}/posts`, {
+    headers: HEADERS,
+  });
+  const data = await response.json();
+  return { ...data, code: response.status };
+};
+
+export const postPosts = async (eventId, postData) => {
+  const formData = new FormData(postData);
+  const arr = formData.getAll('images[]');
+
+  arr.forEach((e, i) => {
+    formData.append(`images[${i}]`, e);
+  });
+
+  const response = await fetch(`${API_URL}/events/${eventId}/posts`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      Authorization: 'Bearer ' + Cookies.get('token'),
+    },
+    body: formData,
+  });
+
+  const data = await response.json();
+
+  return { ...data, code: response.status };
+};
+
+export const InviteUser = async (eventId, user) => {
+  const formData = new FormData(user);
+
+  const response = await fetch(`${API_URL}/events/${eventId}/invite`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      Authorization: 'Bearer ' + Cookies.get('token'),
+    },
+    body: formData,
+  });
+
+  const data = await response.json();
+
+  return { ...data, code: response.status };
+};
+
+export const SetAttendee = async (eventId, participantId) => {
+  const payload = {
+    participant_id: participantId,
+    event_id: eventId,
+  };
+
+  const response = await fetch(`${API_URL}/events/${eventId}/attendee`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: 'Bearer ' + Cookies.get('token'),
+    },
+    body: JSON.stringify(payload),
+  });
+
+  const data = await response.json();
+
+  return { ...data, code: response.status };
 };
 
 export const createEvent = async (body) => {

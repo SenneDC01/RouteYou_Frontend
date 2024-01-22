@@ -4,20 +4,24 @@ import TextArea from '@/components/atoms/text-area/TextArea';
 import FormField from '@/components/atoms/form-field/FormField';
 import styles from './EditCreatePost.module.scss';
 import { isEmpty, isFilled } from '@/helpers/FormValidation/FormValidation';
-import { createEvent } from '@/services/EventService';
+import { postPosts } from '@/services/EventService';
 
-const EditCreatePost = () => {
+export default function EditCreatePost({ eventId, reloadPosts }) {
   const [formValues, setFormValues] = useState({
     name: '',
     description: '',
+    images: [],
   });
   const [errors, setErrors] = useState({});
+  const [isUploading, setIsUploading] = useState(false);
 
   const handleChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
+
   const imageChange = (e) => {
-    setFormValues({ ...formValues, [e.target.name]: e.target.files[0] });
+    const files = e.target.files;
+    setFormValues({ ...formValues, images: files });
   };
 
   const validateForm = () => {
@@ -32,11 +36,11 @@ const EditCreatePost = () => {
 
   const validateEventText = () => {
     const errors = {};
-    if (!isFilled(formValues.name)) {
-      errors.name = 'Please enter a title';
+    if (!isFilled(formValues.title)) {
+      errors.title = 'Please enter a title';
     }
-    if (!isFilled(formValues.description)) {
-      errors.description = 'Please enter a description';
+    if (!isFilled(formValues.message)) {
+      errors.message = 'Please enter a description';
     }
     return errors;
   };
@@ -45,26 +49,22 @@ const EditCreatePost = () => {
     e.preventDefault();
 
     const isValid = validateForm();
-    if (isValid) {
-      try {
-        const response = await createEvent(e.currentTarget);
 
-        if (response.code === 201) {
-          document.querySelector('form').setAttribute('data-submitted', 'true');
-        } else {
-          if (response.errors) {
-            const errors = [];
-            Object.keys(response.errors).forEach((field) => {
-              errors.push(response.errors[field][0]);
-            });
-            setErrors({ formError: errors });
-          } else if (response.message) {
-            setErrors({ formError: [response.message] });
-          }
-        }
-      } catch (error) {
-        setErrors({ formError: ['Something went wrong try again later.'] });
+    if (!isValid) {
+      return;
+    }
+
+    setIsUploading(true);
+
+    try {
+      const uploadResponse = await postPosts(eventId, e.currentTarget);
+
+      if (uploadResponse.code === 200) {
+        reloadPosts();
+        setFormValues({ name: '', description: '', images: [] });
       }
+    } finally {
+      setIsUploading(false);
     }
   };
 
@@ -74,33 +74,34 @@ const EditCreatePost = () => {
       className={styles.form}
       method="post"
       encType="multipart/form-data"
+      data-testid="edit-create-post"
     >
       <div className={styles.fields}>
         <FormField
           label="Title"
-          name="name"
+          name="title"
           type="text"
           onChange={handleChange}
-          errorMessage={errors.name}
+          errorMessage={errors.title}
         />
         <TextArea
           label="Description"
-          name="description"
+          name="message"
           onChange={handleChange}
-          errorMessage={errors.description}
+          errorMessage={errors.message}
         />
+
         <FormField
           label="Event Image"
-          name="event_image"
+          name="images[]"
           type="file"
           onChange={imageChange}
+          multiple={true}
         />
       </div>
-      <Button className={styles.button} type="submit">
-        Add post
+      <Button className={styles.button} type="submit" disabled={isUploading}>
+        {isUploading ? 'Uploading...' : 'Add post'}
       </Button>
     </form>
   );
-};
-
-export default EditCreatePost;
+}

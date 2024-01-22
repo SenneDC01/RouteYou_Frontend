@@ -9,12 +9,12 @@ test('InviteUsersFrame renders correctly and triggers onClose', () => {
 
   render(<InviteUsersFrame onClose={mockOnClose} onInvite={mockOnInvite} />);
 
-  expect(screen.getByPlaceholderText('Search users')).toBeInTheDocument();
+  expect(screen.getByPlaceholderText('User email')).toBeInTheDocument();
 
-  const inviteButton = screen.getByText('Invite User');
-  expect(inviteButton).toBeInTheDocument();
+  const closeButton = screen.getByText('Cancel');
+  expect(closeButton).toBeInTheDocument();
 
-  fireEvent.click(inviteButton);
+  fireEvent.click(closeButton);
 
   expect(mockOnClose).toHaveBeenCalled();
 });

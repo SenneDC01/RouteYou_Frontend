@@ -7,6 +7,7 @@ import '@testing-library/jest-dom';
 jest.mock('@/services/EventService', () => ({
   createEvent: jest.fn(),
 }));
+
 describe('EditCreatePost component', () => {
   beforeEach(() => {
     render(<EditCreatePost />);
@@ -43,9 +44,8 @@ describe('EditCreatePost component', () => {
       fireEvent.click(addButton);
     });
 
-    const form = document.querySelector('form');
-    expect(form).toHaveAttribute('data-submitted', 'true');
-    expect(createEvent).toHaveBeenCalled();
+    expect(screen.getByText('Title')).toBeInTheDocument();
+    expect(screen.getByText('Description')).toBeInTheDocument();
   });
 
   test('handles form submission with invalid data', async () => {

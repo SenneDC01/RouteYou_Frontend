@@ -1,109 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Posts.module.scss';
 import Post from '@/components/molecules/post/Post';
-import Image from '@/utils/images/banner.jpg';
-import Image2 from '@/utils/images/CardImage.png';
-import Image3 from '@/utils/images/logo.png';
 import EditCreatePost from '@/components/molecules/edit-create-post/EditCreatePost';
+import { getPosts } from '@/services/EventService';
+import LoadingSpinner from '@/components/molecules/loading-spinner/LoadingSpinner';
 
-const mockPosts = {
-  message: 'Here are the images of the event',
-  posts: [
-    {
-      current_page: 1,
-      data: {
-        id: 1,
-        event_id: 1,
-        title: 'Ontdek Aalst',
-        message:
-          "Wil je Aalst en haar gebouwen eens vanbinnen zien? Ben je benieuwd naar welke openbare plaatsen, maar ook scholen, café's en private plaatsen we allemaal dit jaar voor jullie in petto hebben? Wil je sportief het weekend inzetten? Dan is de City Light Run & Walk iets voor jou! Schreef je reeds in op een uitgestelde editie? Dan krijg je nog een mailtje van ons!",
-        created_at: '2024-04-22 21:00:00',
-        updated_at: '2024-04-22 21:00:00',
-        images: [
-          {
-            id: 1,
-            event_id: 1,
-            post_id: 1,
-            image_url: Image,
-          },
-          {
-            id: 2,
-            event_id: 1,
-            post_id: 1,
-            image_url: Image2,
-          },
-          {
-            id: 3,
-            event_id: 1,
-            post_id: 1,
-            image_url: Image3,
-          },
-        ],
-      },
-      first_page_url: 'http://localhost:8080/api/events/created?page=1',
-      from: 1,
-      last_page: 1,
-      last_page_url: 'http://localhost:8080/api/events/created?page=1',
-      links: [
-        {
-          '': {
-            url: 'http://localhost:8080/api/events/created?page=1',
-            label: '1',
-            active: true,
-          },
-        },
-      ],
-      next_page_url: 'http://localhost:8080/api/events/created?page=1',
-      path: 'http://localhost:8080/api/events/created',
-      per_page: 10,
-      prev_page_url: 'http://localhost:8080/api/events/created?page=1',
-      to: 1,
-      total: 1,
-    },
-    {
-      current_page: 2,
-      data: {
-        id: 2,
-        event_id: 1,
-        title: 'Ontdek Aalst',
-        message:
-          "Wil je Aalst en haar gebouwen eens vanbinnen zien? Ben je benieuwd naar welke openbare plaatsen, maar ook scholen, café's en private plaatsen we allemaal dit jaar voor jullie in petto hebben? Wil je sportief het weekend inzetten? Dan is de City Light Run & Walk iets voor jou! Schreef je reeds in op een uitgestelde editie? Dan krijg je nog een mailtje van ons!",
-        created_at: '2024-04-22 21:00:00',
-        updated_at: '2024-04-22 21:00:00',
-        images: [],
-      },
-      first_page_url: 'http://localhost:8080/api/events/created?page=1',
-      from: 1,
-      last_page: 1,
-      last_page_url: 'http://localhost:8080/api/events/created?page=1',
-      links: [
-        {
-          '': {
-            url: 'http://localhost:8080/api/events/created?page=1',
-            label: '1',
-            active: true,
-          },
-        },
-      ],
-      next_page_url: 'http://localhost:8080/api/events/created?page=1',
-      path: 'http://localhost:8080/api/events/created',
-      per_page: 10,
-      prev_page_url: 'http://localhost:8080/api/events/created?page=1',
-      to: 1,
-      total: 1,
-    },
-  ],
-};
+export default function Posts({ event }) {
+  const [loading, setLoading] = useState(true);
+  const [posts, setPosts] = useState({ data: [] });
 
-const Posts = () => {
+  const fetchPosts = async () => {
+    try {
+      const response = await getPosts(event.id);
+      if (response.code === 200) {
+        setPosts(response.posts || { data: [] });
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchPosts();
+  });
+
   return (
     <div className={styles.container}>
-      <EditCreatePost></EditCreatePost>
-      {mockPosts.posts.map((post) => (
-        <Post key={post.data.id} post={post} />
-      ))}
+      <EditCreatePost
+        eventId={event.id}
+        reloadPosts={() => fetchPosts()}
+      ></EditCreatePost>
+      {loading ? (
+        <LoadingSpinner
+          isLoading={loading}
+          message="Posts loading"
+          data-testid="loading-spinner"
+        />
+      ) : posts && posts.data ? (
+        posts.data.map((post) => post && <Post key={post.id} post={post} />)
+      ) : (
+        <p>No posts available</p>
+      )}
     </div>
   );
-};
-
-export default Posts;
+}

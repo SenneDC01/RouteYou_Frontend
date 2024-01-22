@@ -4,7 +4,6 @@ import styles from './ManageEventPage.module.scss';
 import Participants from '@/components/organisms/participants/Participants';
 import Posts from '@/components/organisms/posts/Posts';
 import EditEvent from '@/components/organisms/edit-event/EditEvent';
-import ManageEventDropDown from '@/components/molecules/manage-event-drop-down/ManageEventDropDown';
 import ManageEventDrawer from '@/components/molecules/manage-event-drawer/ManageEventDrawer';
 import Image from 'next/image';
 import BigTitle from '@/components/atoms/big-title/BigTitle';
@@ -66,15 +65,15 @@ export default function ManageEventPage({ event }) {
         <ManageEventDrawer title="Edit">
           <EditEvent updateEvent={refreshEvent} event={eventState} />
         </ManageEventDrawer>
-        <ManageEventDropDown
-          title="Participants"
-          comp={Participants}
-        ></ManageEventDropDown>
-        <ManageEventDropDown title="Posts" comp={Posts}></ManageEventDropDown>
-        <ManageEventDropDown
-          title="Pictures"
-          comp={Pictures}
-        ></ManageEventDropDown>
+        <ManageEventDrawer title="Participants">
+          <Participants event={event} />
+        </ManageEventDrawer>
+        <ManageEventDrawer title="Posts">
+          <Posts event={event} />
+        </ManageEventDrawer>
+        <ManageEventDrawer title="Pictures">
+          <Pictures event={event} />
+        </ManageEventDrawer>
       </div>
     </div>
   );

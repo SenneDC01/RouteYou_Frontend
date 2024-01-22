@@ -2,37 +2,44 @@ import React from 'react';
 import styles from './Post.module.scss';
 import Image from 'next/image';
 import BoldText from '@/components/atoms/bold-text/BoldText';
+import TextLink from '@/components/atoms/text-link/TextLink';
 
-const Post = ({ post }) => {
+export default function Post({ post }) {
   return (
-    <div className={styles.postContainer}>
+    <div className={styles.postContainer} data-testid="post">
       <div className={styles.textContainer}>
-        <BoldText>{post.data.title}</BoldText>
-        <p>{post.data.message}</p>
+        <BoldText>{post.title}</BoldText>
+        <p>{post.message}</p>
       </div>
       <div className={styles.imageContainer}>
-        {post.data.images.map(
+        {post.images.map(
           (image, index) =>
             index % 2 === 0 && (
               <div key={index} className={styles.imagePair}>
-                <Image src={image.image_url} alt="" className={styles.image} />
-                {post.data.images[index + 1] && (
+                <Image
+                  src={image.image_url}
+                  alt=""
+                  className={styles.image}
+                  height={1000}
+                  width={1000}
+                />
+                {post.images[index + 1] && (
                   <Image
                     key={index + 1}
-                    src={post.data.images[index + 1].image_url}
+                    src={post.images[index + 1].image_url}
                     alt=""
                     className={styles.image}
+                    height={1000}
+                    width={1000}
                   />
                 )}
               </div>
             )
         )}
       </div>
-      <a href="/events/1/manage-event/edit" className={styles.edit}>
+      <TextLink href="/events/1/manage-event/edit" className={styles.edit}>
         edit
-      </a>
+      </TextLink>
     </div>
   );
-};
-
-export default Post;
+}
