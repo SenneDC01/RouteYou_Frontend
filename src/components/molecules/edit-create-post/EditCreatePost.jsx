@@ -4,14 +4,16 @@ import TextArea from '@/components/atoms/text-area/TextArea';
 import FormField from '@/components/atoms/form-field/FormField';
 import styles from './EditCreatePost.module.scss';
 import { isEmpty, isFilled } from '@/helpers/FormValidation/FormValidation';
-import { createEvent } from '@/services/EventService';
+import { createEvent, postPictures, postPosts } from '@/services/EventService';
 
-const EditCreatePost = () => {
+const EditCreatePost = ({ eventId }) => {
   const [formValues, setFormValues] = useState({
     name: '',
     description: '',
   });
   const [errors, setErrors] = useState({});
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [isUploading, setIsUploading] = useState(false);
 
   const handleChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
@@ -43,28 +45,44 @@ const EditCreatePost = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    document.querySelector('form').setAttribute('data-submitted', 'true');
 
-    const isValid = validateForm();
-    if (isValid) {
-      try {
-        const response = await createEvent(e.currentTarget);
+    // const fileInput = document.querySelector('input[name="event_image"]');
+    // const file = fileInput.files[0];
 
-        if (response.code === 201) {
-          document.querySelector('form').setAttribute('data-submitted', 'true');
-        } else {
-          if (response.errors) {
-            const errors = [];
-            Object.keys(response.errors).forEach((field) => {
-              errors.push(response.errors[field][0]);
-            });
-            setErrors({ formError: errors });
-          } else if (response.message) {
-            setErrors({ formError: [response.message] });
-          }
-        }
-      } catch (error) {
-        setErrors({ formError: ['Something went wrong try again later.'] });
+    const titleInput = document.querySelector('input[name="name"]');
+    const descriptionInput = document.querySelector(
+      'textarea[name="description"]'
+    );
+
+    const title = titleInput.value;
+    const description = descriptionInput.value;
+
+    if (!title || !description) {
+      setErrorMessage('Please enter a title and description.');
+      return;
+    }
+
+    setIsUploading(true);
+    try {
+      const formData = new FormData();
+      // formData.append('image', file);
+      formData.append('name', title);
+      formData.append('description', description);
+
+      const uploadResponse = await postPosts(eventId, formData);
+
+      console.log(formData);
+
+      if (uploadResponse.code === 201) {
+        setErrorMessage(null);
+      } else {
+        setErrorMessage('Error uploading image.');
       }
+    } catch (error) {
+      setErrorMessage('Error uploading image.');
+    } finally {
+      setIsUploading(false);
     }
   };
 
@@ -97,8 +115,8 @@ const EditCreatePost = () => {
           onChange={imageChange}
         />
       </div>
-      <Button className={styles.button} type="submit">
-        Add post
+      <Button className={styles.button} type="submit" disabled={isUploading}>
+        {isUploading ? 'Uploading...' : 'Upload pictures'}
       </Button>
     </form>
   );

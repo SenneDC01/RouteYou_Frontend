@@ -30,7 +30,7 @@ export default function Posts({ event }) {
 
   return (
     <div className={styles.container}>
-      <EditCreatePost></EditCreatePost>
+      <EditCreatePost eventId={event.id}></EditCreatePost>
       {loading ? (
         <LoadingSpinner
           isLoading={loading}
