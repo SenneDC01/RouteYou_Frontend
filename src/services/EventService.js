@@ -228,6 +228,27 @@ export const InviteUser = async (eventId, user) => {
   return { ...data, code: response.status };
 };
 
+export const SetAttendee = async (eventId, userId) => {
+  const payload = {
+    participant_id: userId,
+    event_id: eventId,
+  };
+
+  const response = await fetch(`${API_URL}/events/${eventId}/attendee`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: 'Bearer ' + Cookies.get('token'),
+    },
+    body: JSON.stringify(payload),
+  });
+
+  const data = await response.json();
+
+  return { ...data, code: response.status };
+};
+
 export const createEvent = async (body) => {
   const formData = new FormData(body);
   const arr = formData.getAll('routes_id');

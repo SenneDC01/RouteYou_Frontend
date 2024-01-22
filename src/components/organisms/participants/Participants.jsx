@@ -95,7 +95,11 @@ export default function Participants({ event }) {
         {filteredParticipants.map((participant) => (
           <li key={participant.id} className={styles.list}>
             {participant.full_name}
-            <StatusDropdown status={participant.status} />
+            <StatusDropdown
+              status={participant.status}
+              userId={participant.id}
+              eventId={event.id}
+            />
           </li>
         ))}
       </ul>

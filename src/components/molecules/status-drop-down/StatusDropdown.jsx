@@ -7,10 +7,10 @@ import {
   Button,
 } from '@nextui-org/react';
 import StarSVG from '@/utils/icons/StarSVG';
-import CancelledSVG from '@/utils/icons/CancelledSVG';
 import SignedUpSVG from '@/utils/icons/SignedUpSVG';
 import SmallArrowDownSVG from '@/utils/icons/SmallArrowDownSVG';
 import KlokSVG from '@/utils/icons/KlokSVG';
+import { SetAttendee } from '@/services/EventService';
 
 const statusOptions = [
   {
@@ -35,12 +35,18 @@ const statusOptions = [
   },
 ];
 
-export default function StatusDropdown({ status }) {
+export default function StatusDropdown({ status, userId, eventId }) {
   const [selectedKeys, setSelectedKeys] = React.useState(new Set([status]));
 
   const selectedOption = statusOptions.find(
     (option) => option.key === selectedKeys.values().next().value
   );
+
+  const handleItemClick = async (selectedKey) => {
+    if (selectedKey === 'PRESENT') {
+      await SetAttendee(eventId, userId);
+    }
+  };
 
   return (
     <Dropdown>
@@ -68,6 +74,7 @@ export default function StatusDropdown({ status }) {
             key={option.key}
             textValue={option.label}
             className="flex items-center"
+            onClick={() => handleItemClick(option.key)}
           >
             <div className="flex">
               {option.icon}
