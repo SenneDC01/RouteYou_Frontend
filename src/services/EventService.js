@@ -172,7 +172,7 @@ export const postPictures = async (eventId, formData) => {
       },
       body: formData,
     });
-
+    console.log(formData);
     const data = await response.json();
 
     if (response.status !== 201) {

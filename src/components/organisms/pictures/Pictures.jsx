@@ -51,8 +51,11 @@ export default function Pictures({ event }) {
 
       const uploadResponse = await postPictures(event.id, formData);
 
+      console.log(file);
+      console.log(formData);
+
       if (uploadResponse.code === 201) {
-        // Successfully uploaded, no need to refetch pictures //zeker???
+        setErrorMessage(null);
       } else {
         setErrorMessage('Error uploading image.');
       }
@@ -125,8 +128,8 @@ export default function Pictures({ event }) {
             <LoadingSpinner isLoading={isUploading} message="Uploading image" />
           )}
         </div>
-        <Button className={styles.button} type="submit">
-          Upload pictures
+        <Button className={styles.button} type="submit" disabled={isUploading}>
+          {isUploading ? 'Uploading...' : 'Upload pictures'}
         </Button>
       </form>
     </div>
