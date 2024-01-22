@@ -31,6 +31,15 @@ export const eventDetail = async (eventId) => {
   return { ...data, code: response.status };
 };
 
+export const eventDetailClient = async (eventId) => {
+  const response = await fetch(`${API_URL}/events/${eventId}`, {
+    headers: HEADERS,
+  });
+  const data = await response.json();
+
+  return { ...data, code: response.status };
+};
+
 export const createdEvents = async () => {
   const serverCookies = getCookies();
   HEADERS.Authorization = 'Bearer ' + serverCookies.get('token');
@@ -186,6 +195,9 @@ export const createEvent = async (body) => {
 
   formData.set('start_date', startDate);
   formData.set('end_date', endDate);
+
+  const price = formData.get('price');
+  formData.set('price', Number.parseFloat(price).toFixed(2));
 
   HEADERS['Content-Type'] = undefined;
   const response = await fetch(`${API_URL}/events`, {

@@ -18,7 +18,7 @@ import {
 import styles from './EditEvent.module.scss';
 import RegularText from '@/components/atoms/regular-text/RegularText';
 
-export default function EditEvent({ event }) {
+export default function EditEvent({ event, updateEvent }) {
   const [loading, setLoading] = useState(false);
   const [changes, setChanges] = useState(false);
   const [successful, setSuccessful] = useState('');
@@ -141,6 +141,7 @@ export default function EditEvent({ event }) {
       } finally {
         setLoading(false);
       }
+      updateEvent();
     } else if (isValid) {
       setErrors({
         formError: ['Make some changes before sending the form'],

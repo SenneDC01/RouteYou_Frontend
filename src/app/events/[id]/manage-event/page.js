@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './ManageEventPage.module.scss';
 import Participants from '@/components/organisms/participants/Participants';
 import Posts from '@/components/organisms/posts/Posts';
@@ -15,13 +15,24 @@ import Racefiets from '@/utils/icons/Racefiets';
 import AfstandSVG from '@/utils/icons/AfstandSVG';
 import Pictures from '@/components/organisms/pictures/Pictures';
 import MaxStijgingSVG from '@/utils/icons/MaxStijgingSVG';
+import { eventDetailClient } from '@/services/EventService';
 
 export default function ManageEventPage({ event }) {
+  const [eventState, setEventState] = useState(event);
+
+  const refreshEvent = async () => {
+    const response = await eventDetailClient(event.id);
+    console.log(response);
+    if (response.code === 200) {
+      setEventState(response.event);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.leftColumn}>
         <Image
-          src={event.image_url}
+          src={eventState.image_url}
           alt=""
           className={styles.image}
           height={500}
@@ -29,22 +40,22 @@ export default function ManageEventPage({ event }) {
         />
         <div className={styles.textContainer}>
           <div>
-            <BigTitle>{event.name}</BigTitle>
-            <SmallText>{event.author}</SmallText>
-            <SmallText>{event.start_date}</SmallText>
+            <BigTitle>{eventState.name}</BigTitle>
+            <SmallText>{eventState.author}</SmallText>
+            <SmallText>{eventState.start_date}</SmallText>
           </div>
-          <RegularText>{event.description}</RegularText>
+          <RegularText>{eventState.description}</RegularText>
           <div className={styles.icons}>
             <SVGtext
-              label={event.routes[0].route_data.type}
+              label={eventState.routes[0].route_data.type}
               icon={<Racefiets />}
             ></SVGtext>
             <SVGtext
-              label={event.routes[0].route_data.length}
+              label={eventState.routes[0].route_data.length}
               icon={<AfstandSVG />}
             ></SVGtext>
             <SVGtext
-              label={event.routes[0].route_data.maximum_ascent}
+              label={eventState.routes[0].route_data.maximum_ascent}
               icon={<MaxStijgingSVG />}
             ></SVGtext>
           </div>
@@ -53,7 +64,7 @@ export default function ManageEventPage({ event }) {
       <div className={styles.rightColumn}>
         <BigTitle>Manage your event</BigTitle>
         <ManageEventDrawer title="Edit">
-          <EditEvent event={event} />
+          <EditEvent updateEvent={refreshEvent} event={eventState} />
         </ManageEventDrawer>
         <ManageEventDropDown
           title="Participants"
