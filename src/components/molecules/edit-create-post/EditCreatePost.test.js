@@ -1,11 +1,11 @@
 import React from 'react';
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import EditCreatePost from './EditCreatePost';
-import { createEvent } from '@/services/EventService';
+import { postPosts } from '@/services/EventService';
 import '@testing-library/jest-dom';
 
 jest.mock('@/services/EventService', () => ({
-  createEvent: jest.fn(),
+  postPosts: jest.fn(),
 }));
 
 describe('EditCreatePost component', () => {
@@ -26,7 +26,7 @@ describe('EditCreatePost component', () => {
   });
 
   test('handles form submission with valid data', async () => {
-    createEvent.mockResolvedValue({ code: 201 });
+    postPosts.mockResolvedValue({ code: 201 });
 
     const titleInput = screen.getByLabelText('Title');
     const descriptionInput = screen.getByLabelText('Description');
@@ -49,7 +49,7 @@ describe('EditCreatePost component', () => {
   });
 
   test('handles form submission with invalid data', async () => {
-    createEvent.mockResolvedValue({
+    postPosts.mockResolvedValue({
       code: 422,
       errors: {
         name: ['Please enter a title'],

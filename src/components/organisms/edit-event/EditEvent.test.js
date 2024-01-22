@@ -50,8 +50,14 @@ describe('Create Events Page component', () => {
     mockCreate.mockRestore();
   });
 
+  const updateMock = () => {
+    return {};
+  };
+
   test('Edit with incorrect information.', async () => {
-    const { getByLabelText, getByText } = render(<EditEvent event={event} />);
+    const { getByLabelText, getByText } = render(
+      <EditEvent event={event} updateEvent={updateMock} />
+    );
     const description = '';
     const visibility = 'none';
     const maxParticipants = 2;
@@ -73,7 +79,9 @@ describe('Create Events Page component', () => {
   });
 
   test('Create with correct', async () => {
-    const { getByLabelText, getByText } = render(<EditEvent event={event} />);
+    const { getByLabelText, getByText } = render(
+      <EditEvent event={event} updateEvent={updateMock} />
+    );
     const description = 'Dit is de nieuwe description van het evenement';
     const visibility = 'PUBLIC';
     const maxParticipants = 1200;
