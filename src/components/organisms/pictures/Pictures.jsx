@@ -4,29 +4,34 @@ import Image from 'next/image';
 import FormField from '@/components/atoms/form-field/FormField';
 import Button from '@/components/atoms/button/Button';
 import { getPictures, postPictures } from '@/services/EventService';
-import LoadingSpinner from "@/components/molecules/loading-spinner/LoadingSpinner";
+import LoadingSpinner from '@/components/molecules/loading-spinner/LoadingSpinner';
+import SmallText from '@/components/atoms/small-text/SmallText';
 
 export default function Pictures({ event }) {
   const [loading, setLoading] = useState(true);
   const [pictures, setPictures] = useState({ data: [] });
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [isUploading, setIsUploading] = useState(false);
 
   useEffect(() => {
-    const fetchPictures = async () => {
+    const fetchData = async () => {
       try {
         const response = await getPictures(event.id);
         if (response.code === 200) {
           setPictures(response.images);
         } else {
-          console.error('Non-200 status code received');
+          console.error('Non-200 status code received for pictures:', response);
+          setErrorMessage('Error loading pictures.');
         }
       } catch (error) {
         console.error('Error fetching pictures:', error);
+        setErrorMessage('Error loading pictures.');
       } finally {
         setLoading(false);
       }
     };
 
-    fetchPictures();
+    fetchData();
   }, [event.id]);
 
   const handleSubmit = async (e) => {
@@ -36,79 +41,98 @@ export default function Pictures({ event }) {
     const fileInput = document.querySelector('input[name="event_image"]');
     const file = fileInput.files[0];
 
-    if (file) {
-      try {
-        const formData = new FormData();
-        formData.append('image', file);
+    if (!file) {
+      setErrorMessage('Please select an image to upload.');
+      return;
+    }
 
-        const uploadResponse = await postPictures(event.id, formData);
+    setIsUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append('image', file);
 
-        if (uploadResponse.code === 201) {
-          // fetchPictures();
-        } else {
-          console.error('Upload failed:', uploadResponse);
-        }
-      } catch (error) {
-        console.error('Error uploading image:', error);
+      const uploadResponse = await postPictures(event.id, formData);
+
+      if (uploadResponse.code === 201) {
+        // Successfully uploaded, no need to refetch pictures
+      } else {
+        console.error('Upload failed:', uploadResponse);
+        setErrorMessage('Error uploading image.');
       }
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      setErrorMessage('Error uploading image.');
+    } finally {
+      setIsUploading(false);
     }
   };
 
   return (
-      <div className={styles.container}>
-        {loading ? (
-            <LoadingSpinner
-                isLoading={loading}
-                message="Pictures loading"
-            />
-        ) : (
-            <div className={styles.imageContainer}>
-              {pictures && pictures.data
-                  ? pictures.data
-                      .reduce((pairs, image, index) => {
-                        if (index % 3 === 0) {
-                          const pair = [image];
-                          if (pictures.data[index + 1]) {
-                            pair.push(pictures.data[index + 1]);
-                          }
-                          if (pictures.data[index + 2]) {
-                            pair.push(pictures.data[index + 2]);
-                          }
-                          pairs.push(pair);
-                        }
-                        return pairs;
-                      }, [])
-                      .map((pair, pairIndex) => (
-                          <div key={pairIndex} className={styles.imagePair}>
-                            {pair.map(
-                                (img, imgIndex) =>
-                                    img && (
-                                        <Image
-                                            key={imgIndex}
-                                            src={img.image_url}
-                                            alt=""
-                                            data-testid={`image-${imgIndex}`}
-                                            className={`${styles.image} ${
-                                                pair.length === 2 ? styles.twoImagesInRow : ''
-                                            }`}
-                                            height={1000}
-                                            width={1000}
-                                        />
-                                    )
-                            )}
-                          </div>
-                      ))
-                  : <p>No images available</p>}
-            </div>
-        )}
-        <form onSubmit={handleSubmit} className={styles.form} method="post">
-          <div className={styles.fields}>
-            <FormField name="event_image" type="file" data-testid="event_image" />
-          </div>
-          <Button className={styles.button} type="submit">
-            Upload pictures
-          </Button>
-        </form>
-      </div>
+    <div className={styles.container}>
+      {loading ? (
+        <LoadingSpinner isLoading={loading} message="Pictures loading" />
+      ) : (
+        <div className={styles.imageContainer}>
+          {pictures && pictures.data && pictures.data.length > 0 ? (
+            pictures.data
+              .reduce((pairs, image, index) => {
+                if (index % 3 === 0) {
+                  const pair = [image];
+                  if (pictures.data[index + 1]) {
+                    pair.push(pictures.data[index + 1]);
+                  }
+                  if (pictures.data[index + 2]) {
+                    pair.push(pictures.data[index + 2]);
+                  }
+                  pairs.push(pair);
+                }
+                return pairs;
+              }, [])
+              .map((pair, pairIndex) => (
+                <div key={pairIndex} className={styles.imagePair}>
+                  {pair.map(
+                    (img, imgIndex) =>
+                      img && (
+                        <Image
+                          key={imgIndex}
+                          src={img.image_url}
+                          alt=""
+                          data-testid={`image-${imgIndex}`}
+                          className={`${styles.image} ${
+                            pair.length === 2 ? styles.twoImagesInRow : ''
+                          }`}
+                          height={1000}
+                          width={1000}
+                        />
+                      )
+                  )}
+                </div>
+              ))
+          ) : (
+            <SmallText className={styles.errorMessage}>
+              {pictures.data && pictures.data.length === 0
+                ? 'No images available'
+                : errorMessage}
+            </SmallText>
+          )}
+        </div>
+      )}
+      <form onSubmit={handleSubmit} className={styles.form} method="post">
+        <div className={styles.fields}>
+          <FormField
+            name="event_image"
+            type="file"
+            errorMessage={errorMessage}
+            data-testid="event_image"
+          />
+          {isUploading && (
+            <LoadingSpinner isLoading={isUploading} message="Uploading image" />
+          )}
+        </div>
+        <Button className={styles.button} type="submit">
+          Upload pictures
+        </Button>
+      </form>
+    </div>
   );
 }
