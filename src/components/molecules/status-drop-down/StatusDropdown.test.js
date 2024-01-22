@@ -3,8 +3,8 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import StatusDropdown from './StatusDropdown';
 import '@testing-library/jest-dom';
 
-test('Participants renders correctly and triggers onStatusChange', () => {
-  render(<StatusDropdown />);
+test('StatusDropdown renders correctly and triggers onStatusChange', () => {
+  render(<StatusDropdown status="INTERESTED" />);
 
   expect(screen.getByText('Interested')).toBeInTheDocument();
 
