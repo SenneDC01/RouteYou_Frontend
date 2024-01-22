@@ -76,6 +76,7 @@ export default function Pictures({ event }) {
 
       if (uploadResponse.code === 200) {
         fetchPictures();
+        setLoading(true);
         setFormValues({ images: [] });
         setErrorMessage(null);
       } else {
@@ -85,6 +86,7 @@ export default function Pictures({ event }) {
       setErrorMessage('Error uploading picture.');
     } finally {
       setIsUploading(false);
+      setLoading(false);
     }
   };
 
