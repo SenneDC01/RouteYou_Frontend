@@ -65,22 +65,22 @@ const EditCreatePost = ({ eventId }) => {
 
     setIsUploading(true);
     try {
-      const formData = new FormData();
-      // formData.append('image', file);
-      formData.append('name', title);
-      formData.append('description', description);
+      const postData = {
+        title: title,
+        message: description,
+      };
 
-      const uploadResponse = await postPosts(eventId, formData);
+      const uploadResponse = await postPosts(eventId, postData);
 
-      console.log(formData);
+      console.log(postData);
 
       if (uploadResponse.code === 201) {
         setErrorMessage(null);
       } else {
-        setErrorMessage('Error uploading image.');
+        setErrorMessage('Error creating post.');
       }
     } catch (error) {
-      setErrorMessage('Error uploading image.');
+      setErrorMessage('Error creating post.');
     } finally {
       setIsUploading(false);
     }
@@ -116,7 +116,7 @@ const EditCreatePost = ({ eventId }) => {
         />
       </div>
       <Button className={styles.button} type="submit" disabled={isUploading}>
-        {isUploading ? 'Uploading...' : 'Upload pictures'}
+        {isUploading ? 'Uploading...' : 'Add post'}
       </Button>
     </form>
   );

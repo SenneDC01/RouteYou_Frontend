@@ -197,14 +197,19 @@ export const getPosts = async (eventId) => {
 
 export const postPosts = async (eventId, postData) => {
   try {
+    const formData = new FormData();
+
+    Object.keys(postData).forEach((key) => {
+      formData.append(key, postData[key]);
+    });
+
     const response = await fetch(`${API_URL}/events/${eventId}/posts`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
         Accept: 'application/json',
         Authorization: 'Bearer ' + Cookies.get('token'),
       },
-      body: JSON.stringify(postData),
+      body: formData,
     });
 
     const data = await response.json();
