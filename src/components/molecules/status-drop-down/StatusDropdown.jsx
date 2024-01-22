@@ -35,7 +35,7 @@ const statusOptions = [
   },
 ];
 
-export default function StatusDropdown({ status, userId, eventId }) {
+export default function StatusDropdown({ status, participantId, eventId }) {
   const [selectedKeys, setSelectedKeys] = React.useState(new Set([status]));
 
   const selectedOption = statusOptions.find(
@@ -44,7 +44,7 @@ export default function StatusDropdown({ status, userId, eventId }) {
 
   const handleItemClick = async (selectedKey) => {
     if (selectedKey === 'PRESENT') {
-      await SetAttendee(eventId, userId);
+      await SetAttendee(eventId, participantId);
     }
   };
 

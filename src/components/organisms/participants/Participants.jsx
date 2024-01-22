@@ -18,7 +18,6 @@ export default function Participants({ event }) {
     try {
       setLoading(true);
       const response = await getParticipants(event.id);
-
       if (response && response.code === 200) {
         setParticipants(response.participants.data || { data: [] });
       }
@@ -97,7 +96,7 @@ export default function Participants({ event }) {
             {participant.full_name}
             <StatusDropdown
               status={participant.status}
-              userId={participant.id}
+              participantId={participant.id}
               eventId={event.id}
             />
           </li>

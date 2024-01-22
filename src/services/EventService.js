@@ -228,9 +228,9 @@ export const InviteUser = async (eventId, user) => {
   return { ...data, code: response.status };
 };
 
-export const SetAttendee = async (eventId, userId) => {
+export const SetAttendee = async (eventId, participantId) => {
   const payload = {
-    participant_id: userId,
+    participant_id: participantId,
     event_id: eventId,
   };
 
