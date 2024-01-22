@@ -202,6 +202,15 @@ export const postPictures = async (eventId, formData) => {
   }
 };
 
+export const getPosts = async (eventId) => {
+  const response = await fetch(`${API_URL}/events/${eventId}/posts`, {
+    headers: HEADERS,
+  });
+  const data = await response.json();
+  console.log(data)
+  return { ...data, code: response.status };
+};
+
 export const createEvent = async (body) => {
   const formData = new FormData(body);
   const arr = formData.getAll('routes_id');

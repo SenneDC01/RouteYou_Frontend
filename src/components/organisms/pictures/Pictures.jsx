@@ -22,7 +22,7 @@ export default function Pictures({ event }) {
       } catch (error) {
         console.error('Error fetching pictures:', error);
       } finally {
-        setLoading(false); // Set loading to false regardless of success or failure
+        setLoading(false);
       }
     };
 

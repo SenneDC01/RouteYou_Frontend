@@ -58,7 +58,9 @@ export default function ManageEventPage({ event }) {
         <ManageEventDrawer title="Participants">
           <Participants event={event} />
         </ManageEventDrawer>
-        <ManageEventDropDown title="Posts" comp={Posts}></ManageEventDropDown>
+        <ManageEventDrawer title="Posts">
+          <Posts event={event} />
+        </ManageEventDrawer>
         <ManageEventDrawer title="Pictures">
           <Pictures event={event} />
         </ManageEventDrawer>
