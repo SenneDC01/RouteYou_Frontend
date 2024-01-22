@@ -1,15 +1,11 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import ManageEventDropDown from './ManageEventDropDown';
+import ManageEventDrawer from './ManageEventDrawer';
 import '@testing-library/jest-dom';
 
-const MockComponent = () => (
-  <div data-testid="mock-component">Mock Content</div>
-);
-
-describe('ManageEventDropDown', () => {
+describe('ManageEventDrawer', () => {
   it('renders with default title and closed dropdown', () => {
-    render(<ManageEventDropDown comp={MockComponent} />);
+    render(<ManageEventDrawer>{<p>child</p>}</ManageEventDrawer>);
 
     expect(screen.getByText('title')).toBeInTheDocument();
 
@@ -17,24 +13,26 @@ describe('ManageEventDropDown', () => {
   });
 
   it('renders with custom title and open dropdown on button click', () => {
-    render(<ManageEventDropDown comp={MockComponent} title="Custom Title" />);
+    render(
+      <ManageEventDrawer title="Custom Title">{<p>child</p>}</ManageEventDrawer>
+    );
 
     expect(screen.getByText('Custom Title')).toBeInTheDocument();
 
     fireEvent.click(screen.getByText('Custom Title'));
 
-    expect(screen.getByTestId('mock-component')).toBeInTheDocument();
+    expect(screen.getByText('child')).toBeInTheDocument();
   });
 
   it('toggles the dropdown state on button click', () => {
-    render(<ManageEventDropDown comp={MockComponent} />);
+    render(<ManageEventDrawer>{<p>child</p>}</ManageEventDrawer>);
 
     fireEvent.click(screen.getByText('title'));
 
-    expect(screen.getByTestId('mock-component')).toBeInTheDocument();
+    expect(screen.getByText('child')).toBeInTheDocument();
 
     fireEvent.click(screen.getByText('title'));
 
-    expect(screen.queryByTestId('mock-component')).not.toBeInTheDocument();
+    expect(screen.queryByText('child')).not.toBeInTheDocument();
   });
 });

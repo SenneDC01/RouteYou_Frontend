@@ -214,6 +214,24 @@ export const signedUpEvents = async () => {
   return { ...data, code: response.status };
 };
 
-export const editEvent = async () => {
-  return {};
+export const editEvent = async (id, body) => {
+  const formData = new FormData(body);
+  formData.delete('name');
+  formData.delete('routes_id');
+  formData.delete('start_date');
+  formData.delete('end_date');
+  formData.delete('price');
+
+  HEADERS['Content-Type'] = undefined;
+  const response = await fetch(`${API_URL}/events/${id}`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      Authorization: 'Bearer ' + Cookies.get('token'),
+    },
+    body: formData,
+  });
+  const data = await response.json();
+
+  return { ...data, code: response.status };
 };

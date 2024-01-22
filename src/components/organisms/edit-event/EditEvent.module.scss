@@ -2,15 +2,19 @@
 
 .form {
   flex: 1;
+  margin-top: 1rem;
+  max-width: 40rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  align-items: center;
 
-  .fields {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
+  .greenText {
+    color: vars.$green;
+  }
 
-    .submitButton {
-      margin-top: 1rem;
-    }
+  .submitButton {
+    margin-top: 1rem;
   }
 
   .error {

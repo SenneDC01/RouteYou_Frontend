@@ -28,5 +28,7 @@ export async function generateMetadata({ params }) {
 export default async function ManageEventLayout({ children, params }) {
   const { event } = await getEventInfo(params.id);
 
+  console.log(event);
+  console.log(event.routes);
   return <ManageEventPage event={event}>{children}</ManageEventPage>;
 }

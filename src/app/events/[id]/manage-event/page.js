@@ -13,8 +13,8 @@ import RegularText from '@/components/atoms/regular-text/RegularText';
 import SVGtext from '@/components/atoms/svg-text/SVGtext';
 import Racefiets from '@/utils/icons/Racefiets';
 import AfstandSVG from '@/utils/icons/AfstandSVG';
-import KlokSVG from '@/utils/icons/KlokSVG';
 import Pictures from '@/components/organisms/pictures/Pictures';
+import MaxStijgingSVG from '@/utils/icons/MaxStijgingSVG';
 
 export default function ManageEventPage({ event }) {
   return (
@@ -44,8 +44,8 @@ export default function ManageEventPage({ event }) {
               icon={<AfstandSVG />}
             ></SVGtext>
             <SVGtext
-              label={'Dit is niet aanwezig in de data en moet vervangen worden'}
-              icon={<KlokSVG />}
+              label={event.routes[0].route_data.maximum_ascent}
+              icon={<MaxStijgingSVG />}
             ></SVGtext>
           </div>
         </div>

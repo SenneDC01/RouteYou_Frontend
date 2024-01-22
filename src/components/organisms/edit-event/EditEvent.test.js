@@ -1,4 +1,4 @@
-import { render, fireEvent, getByDisplayValue } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import EditEvent from './EditEvent';
 import * as EventService from '@/services/EventService';
 import { act } from 'react-test-renderer';
@@ -51,7 +51,7 @@ describe('Create Events Page component', () => {
   });
 
   test('Edit with incorrect information.', async () => {
-    const { getByLabelText, getByRole } = render(<EditEvent event={event} />);
+    const { getByLabelText, getByText } = render(<EditEvent event={event} />);
     const description = '';
     const visibility = 'none';
     const maxParticipants = 2;
@@ -66,14 +66,14 @@ describe('Create Events Page component', () => {
       fireEvent.change(getByLabelText('Max Participants'), {
         target: { value: maxParticipants },
       });
-      fireEvent.click(getByDisplayValue('Edit Event'));
+      fireEvent.click(getByText('Edit Event'));
     });
 
     expect(mockCreate).not.toHaveBeenCalled();
   });
 
   test('Create with correct', async () => {
-    const { getByLabelText, getByRole } = render(<EditEvent event={event} />);
+    const { getByLabelText, getByText } = render(<EditEvent event={event} />);
     const description = 'Dit is de nieuwe description van het evenement';
     const visibility = 'PUBLIC';
     const maxParticipants = 1200;
@@ -88,9 +88,9 @@ describe('Create Events Page component', () => {
       fireEvent.change(getByLabelText('Max Participants'), {
         target: { value: maxParticipants },
       });
-      fireEvent.click(getByDisplayValue('Edit Event'));
+      fireEvent.click(getByText('Edit Event'));
     });
 
-    expect(mockCreate).not.toHaveBeenCalled();
+    expect(mockCreate).toHaveBeenCalledTimes(1);
   });
 });
