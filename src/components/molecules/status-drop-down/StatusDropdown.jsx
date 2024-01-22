@@ -13,26 +13,34 @@ import SmallArrowDownSVG from '@/utils/icons/SmallArrowDownSVG';
 
 const statusOptions = [
   {
-    key: 'interested',
-    label: 'Interested',
-    icon: <StarSVG width={20} height={20} fill={'#1a614a'} />,
-  },
-  {
-    key: 'signedUp',
+    key: 'SIGNED_UP',
     label: 'Signed Up',
     icon: <SignedUpSVG width={20} height={20} />,
   },
   {
-    key: 'canceled',
+    key: 'PRESENT',
+    label: 'Present',
+    icon: <SignedUpSVG width={20} height={20} />,
+  },
+  {
+    key: 'INTERESTED',
+    label: 'Interested',
+    icon: <StarSVG width={20} height={20} fill={'#1a614a'} />,
+  },
+  {
+    key: 'INVITED',
+    label: 'Invited',
+    icon: <StarSVG width={20} height={20} fill={'#1a614a'} />,
+  },
+  {
+    key: 'CANCELED',
     label: 'Canceled',
     icon: <CancelledSVG width={20} height={20} />,
   },
 ];
 
-const StatusDropdown = () => {
-  const [selectedKeys, setSelectedKeys] = React.useState(
-    new Set(['interested'])
-  );
+export default function StatusDropdown({ status }) {
+  const [selectedKeys, setSelectedKeys] = React.useState(new Set([status]));
 
   const selectedOption = statusOptions.find(
     (option) => option.key === selectedKeys.values().next().value
@@ -42,9 +50,9 @@ const StatusDropdown = () => {
     <Dropdown>
       <DropdownTrigger className="w-40">
         <Button variant="bordered" className="border-2 rounded">
-          <div className="flex items-center">
+          <div className="flex items-center w-full">
             {selectedOption && selectedOption.icon}
-            <span className="ml-2 flex items-center gap-6">
+            <span className="ml-2 flex items-center justify-between w-full">
               {selectedOption ? selectedOption.label : ''}
               <SmallArrowDownSVG width={10} height={10} />
             </span>
@@ -74,6 +82,4 @@ const StatusDropdown = () => {
       </DropdownMenu>
     </Dropdown>
   );
-};
-
-export default StatusDropdown;
+}
