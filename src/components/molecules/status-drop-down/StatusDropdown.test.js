@@ -1,20 +1,44 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import StatusDropdown from './StatusDropdown';
+import { SetAttendee } from '@/services/EventService';
 import '@testing-library/jest-dom';
 
-test('StatusDropdown renders correctly and triggers onStatusChange', () => {
-  render(<StatusDropdown status="INTERESTED" />);
+jest.mock('@/services/EventService', () => ({
+  SetAttendee: jest.fn(),
+}));
 
-  expect(screen.getByText('Interested')).toBeInTheDocument();
+describe('StatusDropdown component', () => {
+  test('renders dropdown and handles item click', async () => {
+    const participantId = '123';
+    const eventId = '456';
+    const status = 'INTERESTED';
 
-  fireEvent.click(screen.getByText('Interested'));
+    render(
+      <StatusDropdown
+        status={status}
+        participantId={participantId}
+        eventId={eventId}
+      />
+    );
 
-  fireEvent.click(screen.getByText('Signed Up'));
+    const dropdownTrigger = screen.getByRole('button');
+    expect(dropdownTrigger).toBeInTheDocument();
 
-  expect(screen.getByText('Signed Up')).toBeInTheDocument();
+    fireEvent.click(dropdownTrigger);
 
-  fireEvent.click(screen.getByText('Present'));
+    const dropdownMenu = screen.getByRole('menu');
+    expect(dropdownMenu).toBeInTheDocument();
 
-  expect(screen.getByText('Present')).toBeInTheDocument();
+    const interestedOptions = screen.queryAllByText('Interested');
+    expect(interestedOptions.length).toBeGreaterThan(0);
+
+    const presentOption = screen.getByText('Present');
+    fireEvent.click(presentOption);
+
+    expect(SetAttendee).toHaveBeenCalledWith(eventId, participantId);
+
+    const selectedStatus = screen.getByText('Present');
+    expect(selectedStatus).toBeInTheDocument();
+  });
 });

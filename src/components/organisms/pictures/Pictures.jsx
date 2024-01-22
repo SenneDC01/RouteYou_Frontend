@@ -32,7 +32,7 @@ export default function Pictures({ event }) {
       for (let i = 0; i < images.length; i++) {
         if (!isImage(images[i].type)) {
           errors.images = 'Please add a file of type image.';
-          break; // Stop checking if one image is invalid
+          break;
         }
       }
     }
@@ -58,7 +58,7 @@ export default function Pictures({ event }) {
 
   useEffect(() => {
     fetchPictures();
-  }, [event.id]);
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -140,7 +140,12 @@ export default function Pictures({ event }) {
           )}
         </div>
       )}
-      <form onSubmit={handleSubmit} className={styles.form} method="post">
+      <form
+        onSubmit={handleSubmit}
+        className={styles.form}
+        method="post"
+        data-testid="pictures-form"
+      >
         <div className={styles.fields}>
           <FormField
             label="Event Image"

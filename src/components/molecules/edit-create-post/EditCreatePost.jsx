@@ -13,7 +13,6 @@ export default function EditCreatePost({ eventId, reloadPosts }) {
     images: [],
   });
   const [errors, setErrors] = useState({});
-  const [errorMessage, setErrorMessage] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
 
   const handleChange = (e) => {
@@ -63,12 +62,7 @@ export default function EditCreatePost({ eventId, reloadPosts }) {
       if (uploadResponse.code === 200) {
         reloadPosts();
         setFormValues({ name: '', description: '', images: [] });
-        setErrorMessage(null);
-      } else {
-        setErrorMessage('Error creating post.');
       }
-    } catch (error) {
-      setErrorMessage('Error creating post.');
     } finally {
       setIsUploading(false);
     }

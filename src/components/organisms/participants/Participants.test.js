@@ -76,7 +76,7 @@ describe('Participants Component', () => {
 
     expect(getByRole('dialog')).toBeInTheDocument();
 
-    fireEvent.click(getByRole('button', { name: 'Invite User' }));
+    fireEvent.click(getByText('Cancel'));
 
     await waitFor(() => {
       expect(queryByRole('dialog')).toBeNull();

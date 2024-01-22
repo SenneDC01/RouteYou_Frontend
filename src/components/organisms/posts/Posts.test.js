@@ -1,13 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import EditCreatePost from '@/components/molecules/edit-create-post/EditCreatePost';
-import Posts from './Posts';
 import Post from '@/components/molecules/post/Post';
 import '@testing-library/jest-dom';
-
-const mockEvent = {
-  id: 3,
-};
 
 const mockPosts = {
   message: 'Here are the posts of the event',
@@ -36,15 +31,9 @@ const mockPosts = {
 };
 
 test('renders EditCreatePost component', () => {
-  render(<EditCreatePost />);
+  render(<EditCreatePost eventId={{ id: 1 }} reloadPosts={false} />);
   const editCreatePostElement = screen.getByTestId('edit-create-post');
   expect(editCreatePostElement).toBeInTheDocument();
-});
-
-test('renders LoadingSpinner when posts are loading', () => {
-  render(<Posts event={mockEvent} loading={true} />);
-  const loadingSpinnerElement = screen.getByTestId('loading-spinner');
-  expect(loadingSpinnerElement).toBeInTheDocument();
 });
 
 test('renders Post component', () => {

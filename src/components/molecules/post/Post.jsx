@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './Post.module.scss';
 import Image from 'next/image';
 import BoldText from '@/components/atoms/bold-text/BoldText';
+import TextLink from '@/components/atoms/text-link/TextLink';
 
 export default function Post({ post }) {
   return (
@@ -36,9 +37,9 @@ export default function Post({ post }) {
             )
         )}
       </div>
-      <a href="/events/1/manage-event/edit" className={styles.edit}>
+      <TextLink href="/events/1/manage-event/edit" className={styles.edit}>
         edit
-      </a>
+      </TextLink>
     </div>
   );
 }

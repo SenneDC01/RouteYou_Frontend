@@ -55,7 +55,6 @@ export default function InviteUsersFrame({
           errorMessage={errorMessage}
           onChange={() => setErrorMessage(null)}
         />
-
         <Button
           className={styles.button}
           type="submit"

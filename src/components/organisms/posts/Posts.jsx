@@ -22,7 +22,7 @@ export default function Posts({ event }) {
 
   useEffect(() => {
     fetchPosts();
-  }, [event.id]);
+  });
 
   return (
     <div className={styles.container}>

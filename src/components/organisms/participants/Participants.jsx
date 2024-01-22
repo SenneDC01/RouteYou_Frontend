@@ -28,7 +28,7 @@ export default function Participants({ event }) {
 
   useEffect(() => {
     fetchParticipants();
-  }, [event.id]);
+  });
 
   const filteredParticipants = participants
     ? participants.filter((participant) =>
