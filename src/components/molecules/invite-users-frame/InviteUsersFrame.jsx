@@ -34,11 +34,17 @@ const InviteUsersFrame = ({ onClose, eventId }) => {
       <div className={styles.container} role="dialog" aria-label="Invite Users">
         <FormField
           className={styles.searchBar}
-          label="Email"
+          label="Search user"
+          placeholder="User email"
           name="email"
           type="text"
         />
-        <Button className={styles.button} type="submit" disabled={isUploading}>
+        <Button
+          className={styles.button}
+          type="submit"
+          disabled={isUploading}
+          data-testid="InviteButton"
+        >
           {isUploading ? 'Inviting...' : 'Invite user'}
         </Button>
         <Button className={styles.close} onClick={onClose}>
