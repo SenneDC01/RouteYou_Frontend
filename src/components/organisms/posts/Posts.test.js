@@ -5,8 +5,6 @@ import Posts from './Posts';
 import Post from '@/components/molecules/post/Post';
 import '@testing-library/jest-dom';
 
-// jest.mock('@/components/molecules/loading-spinner/LoadingSpinner');
-
 const mockEvent = {
   id: 3,
 };
@@ -37,21 +35,18 @@ const mockPosts = {
   },
 };
 
-// Test if EditCreatePost component is loading
 test('renders EditCreatePost component', () => {
   render(<EditCreatePost />);
   const editCreatePostElement = screen.getByTestId('edit-create-post');
   expect(editCreatePostElement).toBeInTheDocument();
 });
 
-// Test if LoadingSpinner is displayed when posts are loading
 test('renders LoadingSpinner when posts are loading', () => {
   render(<Posts event={mockEvent} loading={true} />);
   const loadingSpinnerElement = screen.getByTestId('loading-spinner');
   expect(loadingSpinnerElement).toBeInTheDocument();
 });
 
-// Test if Post component is loading
 test('renders Post component', () => {
   render(<Post post={mockPosts.posts.data[0]} />);
   const postElement = screen.getByTestId('post');
