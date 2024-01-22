@@ -145,28 +145,12 @@ export const searchPrivateEvents = async (term) => {
 };
 
 export const getParticipants = async (eventId) => {
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 10000);
+  const response = await fetch(`${API_URL}/events/${eventId}/participants`, {
+    headers: HEADERS,
+  });
+  const data = await response.json();
 
-  try {
-    const response = await fetch(`${API_URL}/events/${eventId}/participants`, {
-      method: 'GET',
-      headers: HEADERS,
-      signal: controller.signal,
-    });
-
-    if (!response.ok) {
-      return null;
-    }
-
-    const data = await response.json();
-    console.log(data)
-    return data.events.data;
-  } catch (error) {
-    return null;
-  } finally {
-    clearTimeout(timeoutId);
-  }
+  return { ...data, code: response.status };
 };
 
 export const getPictures = async (eventId) => {
@@ -207,7 +191,7 @@ export const getPosts = async (eventId) => {
     headers: HEADERS,
   });
   const data = await response.json();
-  console.log(data)
+  console.log(data);
   return { ...data, code: response.status };
 };
 
