@@ -16,6 +16,7 @@ export default function Participants({ event }) {
 
   const fetchParticipants = async () => {
     try {
+      setLoading(true);
       const response = await getParticipants(event.id);
 
       if (response && response.code === 200) {
@@ -55,8 +56,6 @@ export default function Participants({ event }) {
 
   const handleCloseInviteFrame = () => {
     setIsInviteFrameOpen(false);
-    setLoading(true);
-    fetchParticipants();
   };
 
   return (
@@ -101,7 +100,11 @@ export default function Participants({ event }) {
         ))}
       </ul>
       {isInviteFrameOpen && (
-        <InviteUsersFrame onClose={handleCloseInviteFrame} eventId={event.id} />
+        <InviteUsersFrame
+          onClose={handleCloseInviteFrame}
+          reloadParticipants={() => fetchParticipants()}
+          eventId={event.id}
+        />
       )}
     </div>
   );

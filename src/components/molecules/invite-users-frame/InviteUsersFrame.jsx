@@ -4,7 +4,11 @@ import Button from '@/components/atoms/button/Button';
 import { InviteUser } from '@/services/EventService';
 import FormField from '@/components/atoms/form-field/FormField';
 
-export default function InviteUsersFrame({ onClose, eventId }) {
+export default function InviteUsersFrame({
+  onClose,
+  eventId,
+  reloadParticipants,
+}) {
   const [isUploading, setIsUploading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
 
@@ -28,6 +32,7 @@ export default function InviteUsersFrame({ onClose, eventId }) {
         setErrorMessage('An error occurred. Please try again.');
       }
     } finally {
+      reloadParticipants();
       setIsUploading(false);
     }
   };
