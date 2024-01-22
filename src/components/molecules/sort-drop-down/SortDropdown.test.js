@@ -6,11 +6,11 @@ import '@testing-library/jest-dom';
 test('SortDropdown renders correctly and triggers onSortChange', () => {
   render(<SortDropdown />);
 
-  expect(screen.getByText('Name')).toBeInTheDocument();
-
-  fireEvent.click(screen.getByText('Name'));
+  expect(screen.getByText('Date')).toBeInTheDocument();
 
   fireEvent.click(screen.getByText('Date'));
 
-  expect(screen.getByText('Date')).toBeInTheDocument();
+  fireEvent.click(screen.getByText('Name'));
+
+  expect(screen.getByText('Name')).toBeInTheDocument();
 });
