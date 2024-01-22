@@ -14,21 +14,19 @@ export default function Participants({ event }) {
   const [sortKey, setSortKey] = useState(null);
   const [isInviteFrameOpen, setIsInviteFrameOpen] = useState(false);
 
-  useEffect(() => {
-    const fetchParticipants = async () => {
-      try {
-        const response = await getParticipants(event.id);
+  const fetchParticipants = async () => {
+    try {
+      const response = await getParticipants(event.id);
 
-        if (response && response.code === 200) {
-          setParticipants(response.participants.data || { data: [] });
-        }
-      } catch (error) {
-        /* empty */
-      } finally {
-        setLoading(false);
+      if (response && response.code === 200) {
+        setParticipants(response.participants.data || { data: [] });
       }
-    };
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchParticipants();
   }, [event.id]);
 
@@ -57,6 +55,8 @@ export default function Participants({ event }) {
 
   const handleCloseInviteFrame = () => {
     setIsInviteFrameOpen(false);
+    setLoading(true);
+    fetchParticipants();
   };
 
   return (

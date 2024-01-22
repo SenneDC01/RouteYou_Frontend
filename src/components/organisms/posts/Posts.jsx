@@ -10,16 +10,11 @@ export default function Posts({ event }) {
   const [posts, setPosts] = useState({ data: [] });
 
   const fetchPosts = async () => {
-    console.log('test');
     try {
       const response = await getPosts(event.id);
       if (response.code === 200) {
         setPosts(response.posts || { data: [] });
-      } else {
-        console.log('Non-200 status code received');
       }
-    } catch (error) {
-      console.log('Error fetching posts:', error);
     } finally {
       setLoading(false);
     }

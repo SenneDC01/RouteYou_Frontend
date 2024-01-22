@@ -172,17 +172,11 @@ export const postPictures = async (eventId, formData) => {
       },
       body: formData,
     });
-    console.log(formData);
     const data = await response.json();
-
-    if (response.status !== 201) {
-      console.error('Non-201 status code received:', response.status, data);
-    }
 
     return { ...data, code: response.status };
   } catch (error) {
-    console.error('Error posting image:', error);
-    throw error;
+    console.error(error);
   }
 };
 
@@ -198,7 +192,6 @@ export const getPosts = async (eventId) => {
 export const postPosts = async (eventId, postData) => {
   const formData = new FormData(postData);
   const arr = formData.getAll('images[]');
-  console.log(arr);
 
   arr.forEach((e, i) => {
     formData.append(`images[${i}]`, e);

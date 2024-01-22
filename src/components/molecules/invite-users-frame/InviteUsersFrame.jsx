@@ -4,20 +4,29 @@ import Button from '@/components/atoms/button/Button';
 import { InviteUser } from '@/services/EventService';
 import FormField from '@/components/atoms/form-field/FormField';
 
-const InviteUsersFrame = ({ onClose, eventId }) => {
+export default function InviteUsersFrame({ onClose, eventId }) {
   const [isUploading, setIsUploading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsUploading(true);
 
-    console.log(e.currentTarget);
-    console.log(eventId);
-
     try {
+      const emailValue = e.currentTarget.email.value.trim();
+      if (!emailValue) {
+        setErrorMessage('Please enter a user email.');
+        return;
+      }
+
       await InviteUser(eventId, e.currentTarget);
+      setErrorMessage(null);
     } catch (error) {
-      /* empty */
+      if (error.response && error.response.status === 422) {
+        setErrorMessage(error.response.data.message || 'User not found.');
+      } else {
+        setErrorMessage('An error occurred. Please try again.');
+      }
     } finally {
       setIsUploading(false);
     }
@@ -38,7 +47,10 @@ const InviteUsersFrame = ({ onClose, eventId }) => {
           placeholder="User email"
           name="email"
           type="text"
+          errorMessage={errorMessage}
+          onChange={() => setErrorMessage(null)}
         />
+
         <Button
           className={styles.button}
           type="submit"
@@ -48,11 +60,9 @@ const InviteUsersFrame = ({ onClose, eventId }) => {
           {isUploading ? 'Inviting...' : 'Invite user'}
         </Button>
         <Button className={styles.close} onClick={onClose}>
-          Close
+          Cancel
         </Button>
       </div>
     </form>
   );
-};
-
-export default InviteUsersFrame;
+}

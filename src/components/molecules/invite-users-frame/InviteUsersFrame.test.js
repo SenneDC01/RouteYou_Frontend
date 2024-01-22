@@ -11,7 +11,7 @@ test('InviteUsersFrame renders correctly and triggers onClose', () => {
 
   expect(screen.getByPlaceholderText('User email')).toBeInTheDocument();
 
-  const closeButton = screen.getByText('Close');
+  const closeButton = screen.getByText('Cancel');
   expect(closeButton).toBeInTheDocument();
 
   fireEvent.click(closeButton);
