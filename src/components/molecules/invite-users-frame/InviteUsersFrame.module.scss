@@ -1,8 +1,8 @@
 @use '@/app/assets/vars.scss' as vars;
 
 .container {
-  width: 18rem;
-  height: 10rem;
+  width: 25rem;
+  height: 15rem;
   border: solid 2px;
   border-radius: 7px;
   display: flex;
@@ -18,15 +18,18 @@
 }
 
 .searchBar {
-  width: 13rem;
-  height: 2.5rem;
-  border: solid 2px lightgray;
-  border-radius: 4px;
-  padding: 0 0.5rem 0 0.5rem;
+  width: 20rem;
 }
 
 .button {
-  width: 13rem;
+  width: 20rem;
   font-size: 0.8rem;
   padding: 1rem;
+}
+
+.close {
+  width: 20rem;
+  font-size: 0.8rem;
+  padding: 1rem;
+  background-color: vars.$red;
 }

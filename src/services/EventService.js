@@ -218,6 +218,23 @@ export const postPosts = async (eventId, postData) => {
   return { ...data, code: response.status };
 };
 
+export const InviteUser = async (eventId, user) => {
+  const formData = new FormData(user);
+
+  const response = await fetch(`${API_URL}/events/${eventId}/invite`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      Authorization: 'Bearer ' + Cookies.get('token'),
+    },
+    body: formData,
+  });
+
+  const data = await response.json();
+
+  return { ...data, code: response.status };
+};
+
 export const createEvent = async (body) => {
   const formData = new FormData(body);
   const arr = formData.getAll('routes_id');

@@ -10,6 +10,7 @@ import StarSVG from '@/utils/icons/StarSVG';
 import CancelledSVG from '@/utils/icons/CancelledSVG';
 import SignedUpSVG from '@/utils/icons/SignedUpSVG';
 import SmallArrowDownSVG from '@/utils/icons/SmallArrowDownSVG';
+import KlokSVG from '@/utils/icons/KlokSVG';
 
 const statusOptions = [
   {
@@ -26,6 +27,11 @@ const statusOptions = [
     key: 'INTERESTED',
     label: 'Interested',
     icon: <StarSVG width={20} height={20} fill={'#1a614a'} />,
+  },
+  {
+    key: 'INVITED',
+    label: 'Invited',
+    icon: <KlokSVG width={20} height={20} />,
   },
 ];
 

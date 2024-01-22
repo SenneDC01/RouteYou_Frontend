@@ -14,8 +14,6 @@ export default function Participants({ event }) {
   const [sortKey, setSortKey] = useState(null);
   const [isInviteFrameOpen, setIsInviteFrameOpen] = useState(false);
 
-  console.log(participants);
-
   useEffect(() => {
     const fetchParticipants = async () => {
       try {
@@ -23,11 +21,9 @@ export default function Participants({ event }) {
 
         if (response && response.code === 200) {
           setParticipants(response.participants.data || { data: [] });
-        } else {
-          console.error('Non-200 status code received or response is null');
         }
       } catch (error) {
-        console.error('Error fetching participants:', error);
+        /* empty */
       } finally {
         setLoading(false);
       }
@@ -60,11 +56,6 @@ export default function Participants({ event }) {
   };
 
   const handleCloseInviteFrame = () => {
-    setIsInviteFrameOpen(false);
-  };
-
-  /* eslint-disable */
-  const handleInviteUser = (userId) => {
     setIsInviteFrameOpen(false);
   };
 
@@ -110,10 +101,7 @@ export default function Participants({ event }) {
         ))}
       </ul>
       {isInviteFrameOpen && (
-        <InviteUsersFrame
-          onClose={handleCloseInviteFrame}
-          onInvite={handleInviteUser}
-        />
+        <InviteUsersFrame onClose={handleCloseInviteFrame} eventId={event.id} />
       )}
     </div>
   );
