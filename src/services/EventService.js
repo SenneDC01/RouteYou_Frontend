@@ -162,22 +162,26 @@ export const getPictures = async (eventId) => {
   return { ...data, code: response.status };
 };
 
-export const postPictures = async (eventId, formData) => {
-  try {
-    const response = await fetch(`${API_URL}/events/${eventId}/images`, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        Authorization: 'Bearer ' + Cookies.get('token'),
-      },
-      body: formData,
-    });
-    const data = await response.json();
+export const postPictures = async (eventId, postData) => {
+  const formData = new FormData(postData);
+  const arr = formData.getAll('images[]');
 
-    return { ...data, code: response.status };
-  } catch (error) {
-    console.error(error);
-  }
+  arr.forEach((e, i) => {
+    formData.append(`images[${i}]`, e);
+  });
+
+  const response = await fetch(`${API_URL}/events/${eventId}/images`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      Authorization: 'Bearer ' + Cookies.get('token'),
+    },
+    body: formData,
+  });
+
+  const data = await response.json();
+
+  return { ...data, code: response.status };
 };
 
 export const getPosts = async (eventId) => {
@@ -185,7 +189,6 @@ export const getPosts = async (eventId) => {
     headers: HEADERS,
   });
   const data = await response.json();
-  console.log(data);
   return { ...data, code: response.status };
 };
 

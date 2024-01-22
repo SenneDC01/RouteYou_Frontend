@@ -6,61 +6,83 @@ import Button from '@/components/atoms/button/Button';
 import { getPictures, postPictures } from '@/services/EventService';
 import LoadingSpinner from '@/components/molecules/loading-spinner/LoadingSpinner';
 import SmallText from '@/components/atoms/small-text/SmallText';
+import { isEmpty, isImage } from '@/helpers/FormValidation/FormValidation';
 
 export default function Pictures({ event }) {
   const [loading, setLoading] = useState(true);
   const [pictures, setPictures] = useState({ data: [] });
   const [errorMessage, setErrorMessage] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
+  const [formValues, setFormValues] = useState({
+    images: [],
+  });
+
+  const imageChange = (e) => {
+    const files = e.target.files;
+    setFormValues({ ...formValues, images: files });
+  };
+
+  const validateImage = () => {
+    const errors = {};
+    const { images } = formValues;
+
+    if (!images || images.length === 0) {
+      errors.images = 'Please add at least one image file.';
+    } else {
+      for (let i = 0; i < images.length; i++) {
+        if (!isImage(images[i].type)) {
+          errors.images = 'Please add a file of type image.';
+          break; // Stop checking if one image is invalid
+        }
+      }
+    }
+
+    return errors;
+  };
+
+  const fetchPictures = async () => {
+    try {
+      const response = await getPictures(event.id);
+      if (response.code === 200) {
+        setPictures(response.images);
+      } else {
+        setErrorMessage('Error loading pictures.');
+      }
+    } catch (error) {
+      setErrorMessage('Error loading pictures.');
+    } finally {
+      setLoading(false);
+      setIsUploading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await getPictures(event.id);
-        if (response.code === 200) {
-          setPictures(response.images);
-        } else {
-          setErrorMessage('Error loading pictures.');
-        }
-      } catch (error) {
-        setErrorMessage('Error loading pictures.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
+    fetchPictures();
   }, [event.id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    document.querySelector('form').setAttribute('data-submitted', 'true');
+    const isValid = validateImage();
 
-    const fileInput = document.querySelector('input[name="event_image"]');
-    const file = fileInput.files[0];
-
-    if (!file) {
-      setErrorMessage('Please select an image to upload.');
+    if (!isEmpty(isValid)) {
+      setErrorMessage(isValid.images);
       return;
     }
 
     setIsUploading(true);
+
     try {
-      const formData = new FormData();
-      formData.append('image', file);
+      const uploadResponse = await postPictures(event.id, e.currentTarget);
 
-      const uploadResponse = await postPictures(event.id, formData);
-
-      console.log(file);
-      console.log(formData);
-
-      if (uploadResponse.code === 201) {
+      if (uploadResponse.code === 200) {
+        fetchPictures();
+        setFormValues({ images: [] });
         setErrorMessage(null);
       } else {
-        setErrorMessage('Error uploading image.');
+        setErrorMessage('Error uploading picture.');
       }
     } catch (error) {
-      setErrorMessage('Error uploading image.');
+      setErrorMessage('Error uploading picture.');
     } finally {
       setIsUploading(false);
     }
@@ -119,10 +141,12 @@ export default function Pictures({ event }) {
       <form onSubmit={handleSubmit} className={styles.form} method="post">
         <div className={styles.fields}>
           <FormField
-            name="event_image"
+            label="Event Image"
+            name="images[]"
             type="file"
+            onChange={imageChange}
+            multiple={true}
             errorMessage={errorMessage}
-            data-testid="event_image"
           />
           {isUploading && (
             <LoadingSpinner isLoading={isUploading} message="Uploading image" />
