@@ -20,11 +20,9 @@ export default function Pictures({ event }) {
         if (response.code === 200) {
           setPictures(response.images);
         } else {
-          console.error('Non-200 status code received for pictures:', response);
           setErrorMessage('Error loading pictures.');
         }
       } catch (error) {
-        console.error('Error fetching pictures:', error);
         setErrorMessage('Error loading pictures.');
       } finally {
         setLoading(false);
@@ -54,13 +52,11 @@ export default function Pictures({ event }) {
       const uploadResponse = await postPictures(event.id, formData);
 
       if (uploadResponse.code === 201) {
-        // Successfully uploaded, no need to refetch pictures
+        // Successfully uploaded, no need to refetch pictures //zeker???
       } else {
-        console.error('Upload failed:', uploadResponse);
         setErrorMessage('Error uploading image.');
       }
     } catch (error) {
-      console.error('Error uploading image:', error);
       setErrorMessage('Error uploading image.');
     } finally {
       setIsUploading(false);
