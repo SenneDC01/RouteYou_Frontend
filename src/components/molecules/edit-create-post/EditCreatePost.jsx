@@ -74,6 +74,7 @@ const EditCreatePost = () => {
       className={styles.form}
       method="post"
       encType="multipart/form-data"
+      data-testid="edit-create-post"
     >
       <div className={styles.fields}>
         <FormField

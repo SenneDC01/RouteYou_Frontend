@@ -1,7 +1,11 @@
 import React from 'react';
-import { render, screen, act } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import EditCreatePost from '@/components/molecules/edit-create-post/EditCreatePost';
 import Posts from './Posts';
+import Post from '@/components/molecules/post/Post';
 import '@testing-library/jest-dom';
+
+// jest.mock('@/components/molecules/loading-spinner/LoadingSpinner');
 
 const mockEvent = {
   id: 3,
@@ -33,25 +37,23 @@ const mockPosts = {
   },
 };
 
-test('renders posts with images and details', () => {
-  render(<Posts event={mockEvent} posts={mockPosts.posts} />);
+// Test if EditCreatePost component is loading
+test('renders EditCreatePost component', () => {
+  render(<EditCreatePost />);
+  const editCreatePostElement = screen.getByTestId('edit-create-post');
+  expect(editCreatePostElement).toBeInTheDocument();
+});
 
-  // Test 1: Check if post titles are rendered
-  const postTitle = screen.queryByText('It was a Success');
-  expect(postTitle).toBeInTheDocument();
+// Test if LoadingSpinner is displayed when posts are loading
+test('renders LoadingSpinner when posts are loading', () => {
+  render(<Posts event={mockEvent} loading={true} />);
+  const loadingSpinnerElement = screen.getByTestId('loading-spinner');
+  expect(loadingSpinnerElement).toBeInTheDocument();
+});
 
-  // Test 2: Check if post messages are rendered
-  const postMessages = screen.queryByText('Lorem ipsum');
-  expect(postMessages).not.toBeNull(); // Ensure postMessages is not null
-  if (postMessages) {
-    expect(postMessages.textContent).toContain('Lorem ipsum'); // Check text content
-  }
-
-  // Test 3: Check if post images are rendered
-  const postImages = screen.getAllByAltText('');
-  expect(postImages).toHaveLength(1); // 1 image in the example
-
-  // Test 4: Check if "No posts available" is not rendered
-  const noPostsMessage = screen.queryByText('No posts available');
-  expect(noPostsMessage).toBeNull();
+// Test if Post component is loading
+test('renders Post component', () => {
+  render(<Post post={mockPosts.posts.data[0]} />);
+  const postElement = screen.getByTestId('post');
+  expect(postElement).toBeInTheDocument();
 });

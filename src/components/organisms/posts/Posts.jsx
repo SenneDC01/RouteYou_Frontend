@@ -32,7 +32,11 @@ export default function Posts({ event }) {
     <div className={styles.container}>
       <EditCreatePost></EditCreatePost>
       {loading ? (
-        <LoadingSpinner isLoading={loading} message="Posts loading" />
+        <LoadingSpinner
+          isLoading={loading}
+          message="Posts loading"
+          data-testid="loading-spinner"
+        />
       ) : posts && posts.data ? (
         posts.data.map((post) => post && <Post key={post.id} post={post} />)
       ) : (

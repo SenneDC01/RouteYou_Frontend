@@ -5,7 +5,7 @@ import BoldText from '@/components/atoms/bold-text/BoldText';
 
 export default function Post({ post }) {
   return (
-    <div className={styles.postContainer}>
+    <div className={styles.postContainer} data-testid="post">
       <div className={styles.textContainer}>
         <BoldText>{post.title}</BoldText>
         <p>{post.message}</p>
