@@ -5,6 +5,7 @@ import SmallText from '../small-text/SmallText';
 export default function TextArea({
   label,
   placeholder,
+  value,
   name,
   onChange,
   errorMessage,
@@ -18,6 +19,7 @@ export default function TextArea({
       <textarea
         id={name}
         name={name}
+        defaultValue={value}
         className={[styles.field, errorMessage ? styles.invalid : ''].join(' ')}
         placeholder={placeholder}
         onChange={onChange}

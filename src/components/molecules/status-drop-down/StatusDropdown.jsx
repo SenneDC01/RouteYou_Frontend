@@ -7,44 +7,54 @@ import {
   Button,
 } from '@nextui-org/react';
 import StarSVG from '@/utils/icons/StarSVG';
-import CancelledSVG from '@/utils/icons/CancelledSVG';
 import SignedUpSVG from '@/utils/icons/SignedUpSVG';
 import SmallArrowDownSVG from '@/utils/icons/SmallArrowDownSVG';
+import KlokSVG from '@/utils/icons/KlokSVG';
+import { SetAttendee } from '@/services/EventService';
 
 const statusOptions = [
   {
-    key: 'interested',
-    label: 'Interested',
-    icon: <StarSVG width={20} height={20} fill={'#1a614a'} />,
-  },
-  {
-    key: 'signedUp',
+    key: 'SIGNED_UP',
     label: 'Signed Up',
     icon: <SignedUpSVG width={20} height={20} />,
   },
   {
-    key: 'canceled',
-    label: 'Canceled',
-    icon: <CancelledSVG width={20} height={20} />,
+    key: 'PRESENT',
+    label: 'Present',
+    icon: <SignedUpSVG width={20} height={20} />,
+  },
+  {
+    key: 'INTERESTED',
+    label: 'Interested',
+    icon: <StarSVG width={20} height={20} fill={'#1a614a'} />,
+  },
+  {
+    key: 'INVITED',
+    label: 'Invited',
+    icon: <KlokSVG width={20} height={20} />,
   },
 ];
 
-const StatusDropdown = () => {
-  const [selectedKeys, setSelectedKeys] = React.useState(
-    new Set(['interested'])
-  );
+export default function StatusDropdown({ status, participantId, eventId }) {
+  const [selectedKeys, setSelectedKeys] = React.useState(new Set([status]));
 
   const selectedOption = statusOptions.find(
     (option) => option.key === selectedKeys.values().next().value
   );
 
+  const handleItemClick = async (selectedKey) => {
+    if (selectedKey === 'PRESENT') {
+      await SetAttendee(eventId, participantId);
+    }
+  };
+
   return (
     <Dropdown>
       <DropdownTrigger className="w-40">
         <Button variant="bordered" className="border-2 rounded">
-          <div className="flex items-center">
+          <div className="flex items-center w-full">
             {selectedOption && selectedOption.icon}
-            <span className="ml-2 flex items-center gap-6">
+            <span className="ml-2 flex items-center justify-between w-full">
               {selectedOption ? selectedOption.label : ''}
               <SmallArrowDownSVG width={10} height={10} />
             </span>
@@ -64,6 +74,7 @@ const StatusDropdown = () => {
             key={option.key}
             textValue={option.label}
             className="flex items-center"
+            onClick={() => handleItemClick(option.key)}
           >
             <div className="flex">
               {option.icon}
@@ -74,6 +85,4 @@ const StatusDropdown = () => {
       </DropdownMenu>
     </Dropdown>
   );
-};
-
-export default StatusDropdown;
+}

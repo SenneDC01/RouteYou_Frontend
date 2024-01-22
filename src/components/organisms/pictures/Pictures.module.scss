@@ -6,6 +6,7 @@
   min-width: 100%;
   overflow: hidden;
   padding: 1rem 0;
+  justify-content: center;
 }
 
 .imageContainer {
@@ -31,6 +32,10 @@
   @media screen and (max-width: 760px) {
     width: 100%;
   }
+}
+
+.image.twoImagesInRow {
+  width: 48%;
 }
 
 .form {

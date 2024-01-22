@@ -27,7 +27,6 @@ describe('Create Events Page component', () => {
     const { getByLabelText, getByRole } = render(<Page />);
     const title = 'ding';
     const description = 'ander ding';
-    const routes = ['not an id'];
     const visibility = 'none';
     const startDate = 'not a date';
     const endDate = 'not a date';
@@ -40,9 +39,6 @@ describe('Create Events Page component', () => {
       });
       fireEvent.change(getByLabelText('Description'), {
         target: { value: description },
-      });
-      fireEvent.change(getByLabelText('Routes'), {
-        target: { value: routes },
       });
       fireEvent.change(getByLabelText('Visibility'), {
         target: { value: visibility },
@@ -70,7 +66,6 @@ describe('Create Events Page component', () => {
     const { getByLabelText, getByRole } = render(<Page />);
     const title = '';
     const description = '';
-    const routes = [];
     const visibility = '';
     const startDate = '';
     const endDate = '';
@@ -83,9 +78,6 @@ describe('Create Events Page component', () => {
       });
       fireEvent.change(getByLabelText('Description'), {
         target: { value: description },
-      });
-      fireEvent.change(getByLabelText('Routes'), {
-        target: { value: routes },
       });
       fireEvent.change(getByLabelText('Visibility'), {
         target: { value: visibility },

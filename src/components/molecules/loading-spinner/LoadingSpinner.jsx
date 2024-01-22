@@ -6,7 +6,7 @@ export default function LoadingSpinner({ isLoading, message }) {
   return (
     <>
       {isLoading && (
-        <div className={styles.loader}>
+        <div className={styles.loader} data-testid="loading-spinner">
           <div className={styles.spinner}></div>
           <RegularText>{message}</RegularText>
         </div>

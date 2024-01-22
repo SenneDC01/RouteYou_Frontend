@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import FormField from '@/components/atoms/form-field/FormField';
 import SelectField from '@/components/atoms/select-field/SelectField';
@@ -13,7 +13,6 @@ import { createEvent } from '@/services/EventService';
 import {
   isEmpty,
   isFilled,
-  arrayEmpty,
   arrayOnlyNumber,
   isValidDateTime,
   isPositiveInteger,
@@ -23,6 +22,8 @@ import styles from './CreateEventPage.module.scss';
 
 export default function Page() {
   const router = useRouter();
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => setIsMounted(true), []);
   const [formValues, setFormValues] = useState({
     name: '',
     description: '',
@@ -44,6 +45,7 @@ export default function Page() {
   const handleChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
+
   const imageChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.files[0] });
   };
@@ -122,7 +124,9 @@ export default function Page() {
 
   const validateRoutes = () => {
     const errors = {};
-    if (arrayEmpty(formValues.routes_id)) {
+    console.log(formValues.routes_id);
+
+    if (!formValues.routes_id.length) {
       errors.routes = 'Please select at least one route';
     }
     if (!arrayOnlyNumber(formValues.routes_id)) {
@@ -160,8 +164,8 @@ export default function Page() {
       try {
         const response = await createEvent(e.currentTarget);
 
-        if (response.code === 201) {
-          router.push('/dashboard/created');
+        if (response.code === 200) {
+          router.push('/dashboard/my-events');
         } else {
           if (response.errors) {
             const errors = [];
@@ -215,13 +219,16 @@ export default function Page() {
             onChange={handleChange}
             errorMessage={errors.description}
           />
-          <RouteSelect
-            label="Routes"
-            name="routes_id"
-            placeholder="Search a route"
-            onChange={handleChange}
-            errorMessage={errors.routes}
-          />
+          {isMounted && (
+            <RouteSelect
+              id={'routes_id'}
+              label="Routes"
+              name="routes_id"
+              placeholder="Search a route"
+              onChange={handleChange}
+              errorMessage={errors.routes}
+            />
+          )}
           <DateTimeField
             label="Start Date"
             name="start_date"
@@ -238,6 +245,7 @@ export default function Page() {
             label="Max Participants"
             name="max_participants"
             type="number"
+            min={0}
             onChange={handleChange}
             errorMessage={errors.max_participants}
           />
@@ -269,7 +277,7 @@ export default function Page() {
           </Button>
         </div>
       </form>
-      {!arrayEmpty(formValues.routes_id) ? (
+      {formValues.routes_id.length ? (
         <iframe
           title="Interactive map with the route of the event"
           className={styles.map}

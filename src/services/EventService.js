@@ -31,7 +31,19 @@ export const eventDetail = async (eventId) => {
   return { ...data, code: response.status };
 };
 
-export const createdEvents = async (query) => {
+export const eventDetailClient = async (eventId) => {
+  const response = await fetch(`${API_URL}/events/${eventId}`, {
+    headers: HEADERS,
+  });
+  const data = await response.json();
+
+  return { ...data, code: response.status };
+};
+
+export const createdEvents = async () => {
+  const serverCookies = getCookies();
+  HEADERS.Authorization = 'Bearer ' + serverCookies.get('token');
+
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), 10000);
 
@@ -141,29 +153,112 @@ export const searchPrivateEvents = async (term) => {
   }
 };
 
-export const getParticipants = async () => {
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 10000);
+export const getParticipants = async (eventId) => {
+  const response = await fetch(`${API_URL}/events/${eventId}/participants`, {
+    headers: HEADERS,
+  });
+  const data = await response.json();
 
-  try {
-    const response = await fetch(`${API_URL}/events/1/participants`, {
-      method: 'GET',
-      headers: HEADERS,
-      signal: controller.signal,
-    });
+  return { ...data, code: response.status };
+};
 
-    if (!response.ok) {
-      return null;
-    }
+export const getPictures = async (eventId) => {
+  const response = await fetch(`${API_URL}/events/${eventId}/images`, {
+    headers: HEADERS,
+  });
+  const data = await response.json();
 
-    const data = await response.json();
+  return { ...data, code: response.status };
+};
 
-    return data.events.data;
-  } catch (error) {
-    return null;
-  } finally {
-    clearTimeout(timeoutId);
-  }
+export const postPictures = async (eventId, postData) => {
+  const formData = new FormData(postData);
+  const arr = formData.getAll('images[]');
+
+  arr.forEach((e, i) => {
+    formData.append(`images[${i}]`, e);
+  });
+
+  const response = await fetch(`${API_URL}/events/${eventId}/images`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      Authorization: 'Bearer ' + Cookies.get('token'),
+    },
+    body: formData,
+  });
+
+  const data = await response.json();
+
+  return { ...data, code: response.status };
+};
+
+export const getPosts = async (eventId) => {
+  const response = await fetch(`${API_URL}/events/${eventId}/posts`, {
+    headers: HEADERS,
+  });
+  const data = await response.json();
+  return { ...data, code: response.status };
+};
+
+export const postPosts = async (eventId, postData) => {
+  const formData = new FormData(postData);
+  const arr = formData.getAll('images[]');
+
+  arr.forEach((e, i) => {
+    formData.append(`images[${i}]`, e);
+  });
+
+  const response = await fetch(`${API_URL}/events/${eventId}/posts`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      Authorization: 'Bearer ' + Cookies.get('token'),
+    },
+    body: formData,
+  });
+
+  const data = await response.json();
+
+  return { ...data, code: response.status };
+};
+
+export const InviteUser = async (eventId, user) => {
+  const formData = new FormData(user);
+
+  const response = await fetch(`${API_URL}/events/${eventId}/invite`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      Authorization: 'Bearer ' + Cookies.get('token'),
+    },
+    body: formData,
+  });
+
+  const data = await response.json();
+
+  return { ...data, code: response.status };
+};
+
+export const SetAttendee = async (eventId, participantId) => {
+  const payload = {
+    participant_id: participantId,
+    event_id: eventId,
+  };
+
+  const response = await fetch(`${API_URL}/events/${eventId}/attendee`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: 'Bearer ' + Cookies.get('token'),
+    },
+    body: JSON.stringify(payload),
+  });
+
+  const data = await response.json();
+
+  return { ...data, code: response.status };
 };
 
 export const createEvent = async (body) => {
@@ -183,6 +278,9 @@ export const createEvent = async (body) => {
 
   formData.set('start_date', startDate);
   formData.set('end_date', endDate);
+
+  const price = formData.get('price');
+  formData.set('price', Number.parseFloat(price).toFixed(2));
 
   HEADERS['Content-Type'] = undefined;
   const response = await fetch(`${API_URL}/events`, {
@@ -217,6 +315,28 @@ export const signedUpEvents = async () => {
   const response = await fetch(`${API_URL}/events/signedup`, {
     method: 'GET',
     headers: HEADERS,
+  });
+  const data = await response.json();
+
+  return { ...data, code: response.status };
+};
+
+export const editEvent = async (id, body) => {
+  const formData = new FormData(body);
+  formData.delete('name');
+  formData.delete('routes_id');
+  formData.delete('start_date');
+  formData.delete('end_date');
+  formData.delete('price');
+
+  HEADERS['Content-Type'] = undefined;
+  const response = await fetch(`${API_URL}/events/${id}`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      Authorization: 'Bearer ' + Cookies.get('token'),
+    },
+    body: formData,
   });
   const data = await response.json();
 

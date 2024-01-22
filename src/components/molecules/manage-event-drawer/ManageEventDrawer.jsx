@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
-import styles from './ManageEventDropDown.module.scss';
+import styles from './ManageEventDrawer.module.scss';
 import ArrowDownSVG from '@/utils/icons/ArrowDownSVG';
 import ArrowUpSVG from '@/utils/icons/ArrowUpSVG';
 
-export default function ManageEventDropDown({
-  comp: Component,
-  title = 'title',
-}) {
+export default function ManageEventDrawer({ children, title = 'title' }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleButtonClick = () => {
@@ -24,11 +21,7 @@ export default function ManageEventDropDown({
         )}
       </button>
 
-      {isDropdownOpen && (
-        <div className={styles.dropdown}>
-          <Component />
-        </div>
-      )}
+      {isDropdownOpen && <div className={styles.dropdown}>{children}</div>}
     </div>
   );
 }

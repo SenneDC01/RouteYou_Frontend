@@ -12,9 +12,8 @@ const sortOptions = [
   { key: 'name', label: 'Name' },
   { key: 'date', label: 'Date' },
 ];
-
-const SortDropdown = ({ onSortChange }) => {
-  const [selectedKeys, setSelectedKeys] = React.useState(new Set(['name']));
+export default function SortDropdown({ onSortChange }) {
+  const [selectedKeys, setSelectedKeys] = React.useState(new Set(['date']));
 
   const selectedOption = sortOptions.find(
     (option) => option.key === selectedKeys.values().next().value
@@ -58,6 +57,4 @@ const SortDropdown = ({ onSortChange }) => {
       </DropdownMenu>
     </Dropdown>
   );
-};
-
-export default SortDropdown;
+}

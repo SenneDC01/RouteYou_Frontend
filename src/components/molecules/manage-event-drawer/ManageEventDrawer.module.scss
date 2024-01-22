@@ -1,0 +1,25 @@
+@use '@/app/assets/vars.scss' as vars;
+
+.container {
+  padding: 1rem;
+  width: 100%;
+}
+
+.button {
+  border-bottom: solid 2px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.1rem;
+
+  font-family: 'Inter', sans-serif;
+  font-size: vars.$text_medium;
+  color: vars.$black;
+  font-weight: 700;
+}
+
+.dropdown {
+  display: flex;
+  justify-content: center;
+}
