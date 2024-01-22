@@ -12,6 +12,10 @@
     font-size: 1.2rem;
     text-transform: uppercase;
   }
+
+  section {
+    width: 100%;
+  }
 }
 
 .bannerContainer {
@@ -40,7 +44,6 @@
 
 .section {
   border-bottom: 2px solid #e5e7eb;
-  width: 100%;
   padding: 0 1rem;
 }
 

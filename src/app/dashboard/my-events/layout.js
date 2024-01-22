@@ -1,6 +1,3 @@
-import Page from './page';
-import { createdEvents } from '@/services/EventService';
-
 export async function generateMetadata() {
   return {
     title: `My Events - RouteYou`,
@@ -9,7 +6,6 @@ export async function generateMetadata() {
   };
 }
 
-export default async function Layout() {
-  const events = await createdEvents();
-  return Page({ events });
+export default async function Layout({ children }) {
+  return children;
 }
