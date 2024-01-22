@@ -14,7 +14,7 @@ const sortOptions = [
 ];
 
 const SortDropdown = ({ onSortChange }) => {
-  const [selectedKeys, setSelectedKeys] = React.useState(new Set(['name']));
+  const [selectedKeys, setSelectedKeys] = React.useState(new Set(['date']));
 
   const selectedOption = sortOptions.find(
     (option) => option.key === selectedKeys.values().next().value
