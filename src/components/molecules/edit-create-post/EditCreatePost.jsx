@@ -4,7 +4,7 @@ import TextArea from '@/components/atoms/text-area/TextArea';
 import FormField from '@/components/atoms/form-field/FormField';
 import styles from './EditCreatePost.module.scss';
 import { isEmpty, isFilled } from '@/helpers/FormValidation/FormValidation';
-import { createEvent, postPictures, postPosts } from '@/services/EventService';
+import { postPosts } from '@/services/EventService';
 
 export default function EditCreatePost({ eventId, reloadPosts }) {
   const [formValues, setFormValues] = useState({
@@ -37,11 +37,11 @@ export default function EditCreatePost({ eventId, reloadPosts }) {
 
   const validateEventText = () => {
     const errors = {};
-    if (!isFilled(formValues.name)) {
-      errors.name = 'Please enter a title';
+    if (!isFilled(formValues.title)) {
+      errors.title = 'Please enter a title';
     }
-    if (!isFilled(formValues.description)) {
-      errors.description = 'Please enter a description';
+    if (!isFilled(formValues.message)) {
+      errors.message = 'Please enter a description';
     }
     return errors;
   };
@@ -88,14 +88,15 @@ export default function EditCreatePost({ eventId, reloadPosts }) {
           name="title"
           type="text"
           onChange={handleChange}
-          errorMessage={errors.name}
+          errorMessage={errors.title}
         />
         <TextArea
           label="Description"
           name="message"
           onChange={handleChange}
-          errorMessage={errors.description}
+          errorMessage={errors.message}
         />
+
         <FormField
           label="Event Image"
           name="images[]"
