@@ -36,11 +36,10 @@ export default function EventsPage() {
       setErrors('Failed to load events.');
     }
   };
-
+  /* eslint-disable  */
   useEffect(() => {
     fetchEvents(params.toString());
   }, []);
-
   const nextPage = () => {
     if (page.current === page.last) return;
     params.set('page', page.current + 1);

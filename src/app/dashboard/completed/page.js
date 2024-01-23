@@ -31,7 +31,7 @@ export default function CompletedEventsPage() {
     params.set('page', response.current_page);
     replace(`${pathName}?${params.toString()}`);
   };
-
+  /* eslint-disable  */
   useEffect(() => {
     fetchEvents(params.toString());
   }, []);

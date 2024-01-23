@@ -40,10 +40,7 @@ export const eventDetailClient = async (eventId) => {
   return { ...data, code: response.status };
 };
 
-export const createdEvents = async () => {
-  const serverCookies = getCookies();
-  HEADERS.Authorization = 'Bearer ' + serverCookies.get('token');
-
+export const createdEvents = async (query) => {
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), 10000);
 

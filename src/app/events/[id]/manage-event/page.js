@@ -21,7 +21,6 @@ export default function ManageEventPage({ event }) {
 
   const refreshEvent = async () => {
     const response = await eventDetailClient(event.id);
-    console.log(response);
     if (response.code === 200) {
       setEventState(response.event);
     }

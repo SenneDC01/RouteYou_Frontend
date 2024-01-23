@@ -124,7 +124,6 @@ export default function Page() {
 
   const validateRoutes = () => {
     const errors = {};
-    console.log(formValues.routes_id);
 
     if (!formValues.routes_id.length) {
       errors.routes = 'Please select at least one route';

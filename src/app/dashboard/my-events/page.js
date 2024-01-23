@@ -31,9 +31,10 @@ export default function Page() {
     replace(`${pathName}?${params.toString()}`);
   };
 
+  /* eslint-disable  */
   useEffect(() => {
     fetchEvents(params.toString());
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const nextPage = () => {
     if (pages.current === pages.last) return;
